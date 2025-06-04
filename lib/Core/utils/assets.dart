@@ -440,6 +440,6 @@ class Assets {
 
   /// Assets for lottieLogo animation
   /// assets/Lottie/Logo animation.json
-  static const String lottieLogoanimation = "assets/Lottie/Logo animation.json";
+  static const String lottieLogoanimation = "Assets/Lottie/Logo animation.json";
 }
 

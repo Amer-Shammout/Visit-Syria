@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/styles/app_theme.dart';
 
 void main() {
@@ -11,10 +12,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       theme: AppTheme.lightTheme,
-      home: Scaffold(),
+      routerConfig: AppRouter.router,
     );
   }
 }
-

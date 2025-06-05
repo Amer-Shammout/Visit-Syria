@@ -79,10 +79,10 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - Assets/Images/
-    - Assets/Icons/
-    - Assets/Illustrations/
-    - Assets/Lottie/
+    - assets/Images/
+    - assets/Icons/
+    - assets/Illustrations/
+    - assets/Lottie/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see
@@ -95,23 +95,23 @@ flutter:
   fonts:
     - family: BC Arabic
       fonts:
-        - asset: Assets/Fonts/Arabic/ArbFONTS-BritishCouncil-Arabic-Light.ttf
+        - asset: assets/Fonts/Arabic/ArbFONTS-BritishCouncil-Arabic-Light.ttf
           weight: 300
-        - asset: Assets/Fonts/Arabic/ArbFONTS-BritishCouncil-Arabic-Regular.ttf
+        - asset: assets/Fonts/Arabic/ArbFONTS-BritishCouncil-Arabic-Regular.ttf
           weight: 400
-        - asset: Assets/Fonts/Arabic/ArbFONTS-BritishCouncil-Arabic-Bold.ttf
+        - asset: assets/Fonts/Arabic/ArbFONTS-BritishCouncil-Arabic-Bold.ttf
           weight: 700
-        - asset: Assets/Fonts/Arabic/ArbFONTS-BritishCouncil-Arabic-Black.ttf
+        - asset: assets/Fonts/Arabic/ArbFONTS-BritishCouncil-Arabic-Black.ttf
           weight: 900
     - family: Open Sans
       fonts:
-        - asset: Assets/Fonts/English/OpenSans-Light.ttf
+        - asset: assets/Fonts/English/OpenSans-Light.ttf
           weight: 300
-        - asset: Assets/Fonts/English/OpenSans-Regular.ttf
+        - asset: assets/Fonts/English/OpenSans-Regular.ttf
           weight: 400
-        - asset: Assets/Fonts/English/OpenSans-Bold.ttf
+        - asset: assets/Fonts/English/OpenSans-Bold.ttf
           weight: 700
-        - asset: Assets/Fonts/English/OpenSans-ExtraBold.ttf
+        - asset: assets/Fonts/English/OpenSans-ExtraBold.ttf
           weight: 900
   #   - family: Trajan Pro
   #     fonts:

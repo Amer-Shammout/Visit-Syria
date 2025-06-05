@@ -78,4 +78,5 @@ class AppColors {
 
   static const bodyTextColor = Color(0xFF444B49);
   static const titleTextColor = Color(0xFF020D0B);
+  static const whiteColor = Color(0xFFFBFEFD);
 }

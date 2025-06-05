@@ -18,7 +18,8 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   Widget build(BuildContext context) {
     return Center(
       child: Lottie.asset(
-        Assets.lottieLogoanimation,
+        repeat: false,
+        Assets.lottieArabicLogoWhite,
         width: 250,
         height: 250,
         fit: BoxFit.contain,
@@ -27,7 +28,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
             if (!_navigated) {
               _navigated = true;
               GoRouter.of(context).pushReplacementNamed(
-                AppRouter.kLoginName,
+                AppRouter.kOnboardingName,
               );
             }
           });

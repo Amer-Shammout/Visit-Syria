@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Views/on_boarding_view.dart';
 import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_view.dart';
 
 abstract class AppRouter {
   static const kSplashView = '/';
   static const kSplashName = 'splash';
+  static const kOnboardingName = 'onBoarding';
+  static const kOnboardingView = '/onBoarding';
   static const kSignupView = '/signupView';
   static const kSignupName = 'signupView';
   static const kLoginView = '/loginView';
@@ -36,21 +39,25 @@ abstract class AppRouter {
   static const kEditOrderView = '/editOrderView';
   static const kEditOrderName = 'editOrderView';
 
-
   static final router = GoRouter(
     // initialLocation: isAuth ? kAppRoot : kLetsGetStartedView,
     routes: [
-    GoRoute(
+      GoRoute(
         name: kSplashName,
         path: '/',
-        pageBuilder: (context, state) =>
-            const MaterialPage(child: SplashView()),
+        pageBuilder:
+            (context, state) => const MaterialPage(child: SplashView()),
       ),
-    GoRoute(
+      GoRoute(
+        name: kOnboardingName,
+        path: kOnboardingView,
+        pageBuilder:
+            (context, state) => const MaterialPage(child: OnboardingView()),
+      ),
+      GoRoute(
         name: kLoginName,
         path: kLoginView,
-        pageBuilder: (context, state) =>
-            const MaterialPage(child: Scaffold()),
+        pageBuilder: (context, state) => const MaterialPage(child: Scaffold()),
       ),
     ],
   );

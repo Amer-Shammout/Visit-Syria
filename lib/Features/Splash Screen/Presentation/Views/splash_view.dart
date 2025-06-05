@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/Widgets/splash_view_body.dart';
 
 class SplashView extends StatelessWidget {
@@ -7,6 +8,7 @@ class SplashView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.primary,
       body: SplashViewBody(),
     );
   }

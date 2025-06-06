@@ -33,7 +33,7 @@ class OnboardingBody extends StatelessWidget {
           onPageChanged: onPageChanged,
         ),
         Positioned(
-          top: 150,
+          top: 115,
           left: 20,
           right: 20,
           child: Center(
@@ -46,10 +46,13 @@ class OnboardingBody extends StatelessWidget {
         ),
         if (currentPage != onboardingData.length - 1)
           Positioned(
-            top: 75,
+            top: 50,
             right: 16,
             child: CustomButton(
-              onPressed: () {},
+              onPressed:
+                  () => GoRouter.of(
+                    context,
+                  ).pushReplacementNamed(AppRouter.kLoginName),
               title: 'تخطي',
               textStyle: AppStyles.fontsBold14(
                 context,

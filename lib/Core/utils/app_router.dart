@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/login_view.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/on_boarding_view.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Views/sign_up_view.dart';
 import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_view.dart';
 
 abstract class AppRouter {
@@ -19,26 +20,7 @@ abstract class AppRouter {
   static const kSettingInfoName = 'settingInfoView';
   static const kHomeView = '/homeView';
   static const kHomeName = 'homeView';
-  static const kAppRoot = '/appRoot';
-  static const kAppRootName = 'appRoot';
-  static const kStoreDetailsView = '/storeDetails';
-  static const kStoreDetailsName = 'storeDetails';
-  static const kProfileView = '/profileView';
-  static const kProfileName = 'profileView';
-  static const kSearchView = '/searchView';
-  static const kSearchName = 'searchView';
-  static const kProductDetailsView = '/productDetailsView';
-  static const kProductDetailsName = 'productDetailsView';
-  static const kCartView = '/CartView';
-  static const kCartName = 'CartView';
-  static const kAllStoresView = '/allStoresView';
-  static const kAllStoresName = 'allStoresView';
-  static const kAllProductsView = '/allProductsView';
-  static const kAllProductsName = 'allProductsView';
-  static const kNotificationsView = '/notificationsView';
-  static const kNotificationsName = 'notificationsView';
-  static const kEditOrderView = '/editOrderView';
-  static const kEditOrderName = 'editOrderView';
+  
 
   static final router = GoRouter(
     // initialLocation: isAuth ? kAppRoot : kLetsGetStartedView,
@@ -59,6 +41,11 @@ abstract class AppRouter {
         name: kLoginName,
         path: kLoginView,
         pageBuilder: (context, state) => const MaterialPage(child: LoginView()),
+      ),
+      GoRoute(
+        name: kSignupName,
+        path: kSignupView,
+        pageBuilder: (context, state) => const MaterialPage(child: SignUpView()),
       ),
     ],
   );

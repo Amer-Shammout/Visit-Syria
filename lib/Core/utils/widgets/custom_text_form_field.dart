@@ -13,6 +13,7 @@ class CustomTextFormField extends StatefulWidget {
   final void Function(String?)? onSaved;
   final int? maxLines;
   final String? Function(String?)? validator;
+  final String? helperText;
 
   const CustomTextFormField({
     super.key,
@@ -25,7 +26,7 @@ class CustomTextFormField extends StatefulWidget {
     this.onChanged,
     this.onSaved,
     this.maxLines,
-    this.validator,
+    this.validator, this.helperText,
   });
 
   @override
@@ -74,6 +75,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      cursorColor: AppColors.primary,
+      cursorErrorColor: AppColors.redSwatch,
       style: AppStyles.fontsRegular16(
         context,
       ).copyWith(color: AppColors.titleTextColor),
@@ -87,6 +90,13 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       obscureText: widget.obscureText,
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(
+        errorStyle: AppStyles.fontsRegular12(
+          context,
+        ).copyWith(color: AppColors.redSwatch),
+        helperText: widget.helperText,
+        helperStyle: AppStyles.fontsRegular12(
+          context,
+        ).copyWith(color: AppColors.graySwatch[500]),
         hintText: widget.hint,
         hintStyle: AppStyles.fontsRegular16(
           context,

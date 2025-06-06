@@ -11,7 +11,14 @@ class CustomTextFieldWithLabel extends StatelessWidget {
     required this.label,
     this.obscureText = false,
     this.suffixIcon,
-    this.keyboardType, this.initialValue, this.maxLength, this.onChanged, this.onSaved, this.maxLines, this.validator,
+    this.keyboardType,
+    this.initialValue,
+    this.maxLength,
+    this.onChanged,
+    this.onSaved,
+    this.maxLines,
+    this.validator,
+    this.helperText,
   });
   final String hint;
   final bool obscureText;
@@ -24,6 +31,7 @@ class CustomTextFieldWithLabel extends StatelessWidget {
   final int? maxLines;
   final String? Function(String?)? validator;
   final String label;
+  final String? helperText;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +56,7 @@ class CustomTextFieldWithLabel extends StatelessWidget {
           keyboardType: keyboardType,
           obscureText: obscureText,
           suffixIcon: suffixIcon,
+          helperText: helperText,
         ),
       ],
     );

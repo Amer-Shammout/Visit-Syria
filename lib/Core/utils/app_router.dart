@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Views/login_view.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/on_boarding_view.dart';
 import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_view.dart';
 
@@ -57,7 +58,7 @@ abstract class AppRouter {
       GoRoute(
         name: kLoginName,
         path: kLoginView,
-        pageBuilder: (context, state) => const MaterialPage(child: Scaffold()),
+        pageBuilder: (context, state) => const MaterialPage(child: LoginView()),
       ),
     ],
   );

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
@@ -59,6 +60,8 @@ class OnboardingBottomSheet extends StatelessWidget {
                 DotsIndicator(currentIndex: currentPage, totalDots: totalPages),
                 const SizedBox(height: AppSpacing.s32),
                 CustomButton(
+                  icon: Assets.iconsArrow,
+                  iconColor: AppColors.whiteColor,
                   width: double.infinity,
                   verPadding: 16,
                   onPressed: onNext,

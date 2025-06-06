@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
+import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
+import 'package:visit_syria/Core/utils/styles/shadows.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -13,6 +16,9 @@ class CustomButton extends StatelessWidget {
     this.horPadding = 16,
     this.fillColor = AppColors.primary,
     this.strokeColor = Colors.transparent,
+    this.icon,
+    this.size = 16,
+    this.iconColor = AppColors.primary, this.shadow = Shadows.buttonShadow1,
   });
 
   final VoidCallback onPressed;
@@ -23,10 +29,15 @@ class CustomButton extends StatelessWidget {
   final double borderRadius;
   final Color fillColor;
   final Color strokeColor;
+  final String? icon;
+  final double size;
+  final Color iconColor;
+  final BoxShadow? shadow;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      decoration: BoxDecoration(boxShadow: shadow != null ? [shadow!] : []),
       width: width,
       child: ElevatedButton(
         onPressed: onPressed,
@@ -42,7 +53,21 @@ class CustomButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(borderRadius),
           ),
         ),
-        child: Text(title, style: textStyle),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(title, style: textStyle),
+            icon != null ? SizedBox(width: AppSpacing.s4) : SizedBox.shrink(),
+            icon != null
+                ? SvgPicture.asset(
+                  icon!,
+                  width: size,
+                  height: size,
+                  colorFilter: ColorFilter.mode(iconColor, BlendMode.srcATop),
+                )
+                : SizedBox.shrink(),
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
@@ -69,21 +71,28 @@ class OnboardingBody extends StatelessWidget {
             title: onboardingData[currentPage]['title']!,
             description: onboardingData[currentPage]['description']!,
             isLastPage: currentPage == onboardingData.length - 1,
-            onNext: buttonAction,
+            onNext:
+                currentPage == onboardingData.length - 1
+                    ? () {
+                      GoRouter.of(
+                        context,
+                      ).pushReplacementNamed(AppRouter.kLoginName);
+                    }
+                    : nextPage,
           ),
         ),
       ],
     );
   }
 
-  void buttonAction() {
+  nextPage() {
     if (currentPage < onboardingData.length - 1) {
       controller.nextPage(
         duration: Duration(milliseconds: 400),
         curve: Curves.easeInOut,
       );
     } else {
-      // ابدأ الرحلة
+      // GoRouter.of(context).pushReplacementNamed(AppRouter.kLoginName);
     }
   }
 }

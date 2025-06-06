@@ -1,7 +1,7 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
+import 'package:visit_syria/Core/utils/functions/validation.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
@@ -26,8 +26,7 @@ class _LoginFormState extends State<LoginForm> {
   void _submit() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      // TODO: handle login logic with email and password
-      print('Email: \$email, Password: \$password');
+      // TODO
     } else {
       setState(() {
         _isAutoValidate = AutovalidateMode.always;
@@ -47,26 +46,12 @@ class _LoginFormState extends State<LoginForm> {
             label: 'البريد الإلكتروني',
             keyboardType: TextInputType.emailAddress,
             onSaved: (val) => email = val,
-            validator: (val) {
-              if (val == null || val.trim().isEmpty) {
-                return 'الرجاء إدخال البريد الإلكتروني';
-              } else if (!EmailValidator.validate(val.trim())) {
-                return 'البريد الإلكتروني غير صالح';
-              }
-              return null;
-            },
+            validator: Validation.validateEmail,
           ),
           const SizedBox(height: AppSpacing.s16),
           CustomTextFieldWithLabel(
             onSaved: (val) => password = val,
-            validator: (val) {
-              if (val == null || val.trim().isEmpty) {
-                return 'الرجاء إدخال كلمة المرور';
-              } else if (val.trim().length < 8) {
-                return 'كلمة المرور يجب أن تكون 8 أحرف على الأقل';
-              }
-              return null;
-            },
+            validator: Validation.validatePasswordSImple,
             maxLines: 1,
             hint: 'Password',
             label: 'كلمة المرور',
@@ -83,11 +68,7 @@ class _LoginFormState extends State<LoginForm> {
                   BlendMode.srcATop,
                 ),
               ),
-              onPressed: () {
-                setState(() {
-                  _obscurePassword = !_obscurePassword;
-                });
-              },
+              onPressed: eyeToggle,
             ),
           ),
           const SizedBox(height: AppSpacing.s8),
@@ -137,5 +118,11 @@ class _LoginFormState extends State<LoginForm> {
         ],
       ),
     );
+  }
+
+  void eyeToggle() {
+    setState(() {
+      _obscurePassword = !_obscurePassword;
+    });
   }
 }

@@ -64,6 +64,13 @@ abstract class AppStyles {
       fontWeight: FontWeight.w400,
     );
   }
+  static TextStyle fontsRegular24(context) {
+    return TextStyle(
+      color: Theme.of(context).colorScheme.primary,
+      fontSize: getResponsiveFontSize(context, baseFontSize: 24),
+      fontWeight: FontWeight.w400,
+    );
+  }
 
   static TextStyle fontsBold18(context) {
     return TextStyle(

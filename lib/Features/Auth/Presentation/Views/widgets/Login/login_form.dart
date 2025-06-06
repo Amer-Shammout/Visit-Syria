@@ -30,10 +30,9 @@ class _LoginFormState extends State<LoginForm> {
   void _submit() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      _authModel = AuthRequestModel(
-      email: email!,
-      password: password!,
-    );
+      _authModel = AuthRequestModel(email: email!, password: password!);
+      GoRouter.of(context).pushReplacementNamed(AppRouter.kVerificationName);
+
       // TODO
     } else {
       setState(() {

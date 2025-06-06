@@ -66,4 +66,12 @@ abstract class Validation {
 
     return null; // valid
   }
+
+  static String? validateEmptyField(String? value) {
+    if (value == null || value.trim().isEmpty || value.length < 4) {
+      return '';
+    }
+
+    return null; // valid
+  }
 }

@@ -83,51 +83,54 @@ class _VerificationFormState extends State<VerificationForm> {
       key: _formKey,
       child: Column(
         children: [
-          PinCodeTextField(
-            errorAnimationController: _errorController,
-            enableActiveFill: true,
-            boxShadows: null,
-            hintCharacter: 'x',
-            hintStyle: AppStyles.fontsRegular24(
-              context,
-            ).copyWith(color: AppColors.graySwatch[500]),
-            validator: Validation.validateEmptyPINField,
-            length: 4,
-            appContext: context,
-            onChanged: (_) {},
-            onCompleted: (val) {
-              _code = val;
-              setState(() {
-                _hasError = false;
-              });
-            },
-            textStyle: AppStyles.fontsRegular24(
-              context,
-            ).copyWith(color: AppColors.titleTextColor),
-            keyboardType: TextInputType.number,
-            cursorColor: AppColors.titleTextColor,
-            pinTheme: PinTheme(
-              activeColor: _hasError ? AppColors.red : AppColors.titleTextColor,
-              inactiveColor:
-                  _hasError ? AppColors.red : AppColors.graySwatch[50]!,
-              selectedColor:
-                  _hasError ? AppColors.red : AppColors.titleTextColor,
-              activeBoxShadow: null,
-              inActiveBoxShadow: null,
-              errorBorderColor: AppColors.red,
-              errorBorderWidth: 1,
-
-              inactiveBorderWidth: 0,
-              inactiveFillColor: AppColors.graySwatch[50]!,
-              shape: PinCodeFieldShape.box,
-              borderRadius: BorderRadius.circular(12),
-              fieldHeight: 72,
-              fieldWidth: 60,
-              activeBorderWidth: 1,
-              activeFillColor: AppColors.graySwatch[50]!,
-              borderWidth: 1,
-              selectedBorderWidth: 1,
-              selectedFillColor: AppColors.graySwatch[50]!,
+          Directionality(
+            textDirection: TextDirection.ltr,
+            child: PinCodeTextField(
+              errorAnimationController: _errorController,
+              enableActiveFill: true,
+              boxShadows: null,
+              hintCharacter: '0',
+              hintStyle: AppStyles.fontsRegular24(
+                context,
+              ).copyWith(color: AppColors.graySwatch[500]),
+              validator: Validation.validateEmptyPINField,
+              length: 4,
+              appContext: context,
+              onChanged: (_) {},
+              onCompleted: (val) {
+                _code = val;
+                setState(() {
+                  _hasError = false;
+                });
+              },
+              textStyle: AppStyles.fontsRegular24(
+                context,
+              ).copyWith(color: AppColors.titleTextColor),
+              keyboardType: TextInputType.number,
+              cursorColor: AppColors.titleTextColor,
+              pinTheme: PinTheme(
+                activeColor: _hasError ? AppColors.red : AppColors.titleTextColor,
+                inactiveColor:
+                    _hasError ? AppColors.red : AppColors.graySwatch[50]!,
+                selectedColor:
+                    _hasError ? AppColors.red : AppColors.titleTextColor,
+                activeBoxShadow: null,
+                inActiveBoxShadow: null,
+                errorBorderColor: AppColors.red,
+                errorBorderWidth: 1,
+            
+                inactiveBorderWidth: 0,
+                inactiveFillColor: AppColors.graySwatch[50]!,
+                shape: PinCodeFieldShape.box,
+                borderRadius: BorderRadius.circular(12),
+                fieldHeight: 72,
+                fieldWidth: 60,
+                activeBorderWidth: 1,
+                activeFillColor: AppColors.graySwatch[50]!,
+                borderWidth: 1,
+                selectedBorderWidth: 1,
+                selectedFillColor: AppColors.graySwatch[50]!,
+              ),
             ),
           ),
           const SizedBox(height: 24),

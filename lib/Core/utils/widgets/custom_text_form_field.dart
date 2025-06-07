@@ -14,7 +14,7 @@ class CustomTextFormField extends StatefulWidget {
   final int? maxLines;
   final String? Function(String?)? validator;
   final String? helperText;
-  final TextAlign? textAlign;
+  final TextDirection textDirection;
 
   const CustomTextFormField({
     super.key,
@@ -29,7 +29,7 @@ class CustomTextFormField extends StatefulWidget {
     this.maxLines,
     this.validator,
     this.helperText,
-    this.textAlign = TextAlign.left,
+    this.textDirection = TextDirection.ltr,
   });
 
   @override
@@ -77,57 +77,59 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      textAlign: widget.textAlign ?? TextAlign.start,
-      cursorColor: AppColors.titleTextColor,
-      cursorErrorColor: AppColors.redSwatch,
-      style: AppStyles.fontsRegular16(
-        context,
-      ).copyWith(color: AppColors.titleTextColor),
-      focusNode: _focusNode,
-      maxLines: widget.maxLines,
-      validator: widget.validator,
-      onSaved: widget.onSaved,
-      onChanged: _handleChanged,
-      maxLength: widget.maxLength,
-      initialValue: widget.initialValue,
-      obscureText: widget.obscureText,
-      keyboardType: widget.keyboardType,
-      decoration: InputDecoration(
-        errorStyle: AppStyles.fontsRegular12(
+    return Directionality(
+      textDirection: widget.textDirection,
+      child: TextFormField(
+        cursorColor: AppColors.titleTextColor,
+        cursorErrorColor: AppColors.redSwatch,
+        style: AppStyles.fontsRegular16(
           context,
-        ).copyWith(color: AppColors.redSwatch),
-        helperText: widget.helperText,
-        helperStyle: AppStyles.fontsRegular12(
-          context,
-        ).copyWith(color: AppColors.graySwatch[500]),
-        hintText: widget.hint,
-        hintStyle: AppStyles.fontsRegular16(
-          context,
-        ).copyWith(color: AppColors.graySwatch[500]),
-        suffixIcon: widget.suffixIcon,
-        filled: true,
-        fillColor: AppColors.graySwatch[50],
-        border: buildBorder(Colors.transparent),
-        enabledBorder: buildBorder(
-          _isValid ? AppColors.primary : Colors.transparent,
-        ),
-        focusedBorder: buildBorder(
-          _isValid ? AppColors.primary : AppColors.primarySwatch[950]!,
-        ),
-        errorBorder: buildBorder(AppColors.redSwatch[500]!),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 14,
+        ).copyWith(color: AppColors.titleTextColor),
+        focusNode: _focusNode,
+        maxLines: widget.maxLines,
+        validator: widget.validator,
+        onSaved: widget.onSaved,
+        onChanged: _handleChanged,
+        maxLength: widget.maxLength,
+        initialValue: widget.initialValue,
+        obscureText: widget.obscureText,
+        keyboardType: widget.keyboardType,
+        decoration: InputDecoration(
+          errorStyle: AppStyles.fontsRegular12(
+            context,
+          ).copyWith(color: AppColors.redSwatch),
+          helperText: widget.helperText,
+          helperStyle: AppStyles.fontsRegular12(
+            context,
+          ).copyWith(color: AppColors.graySwatch[500]),
+          hintText: widget.hint,
+          hintStyle: AppStyles.fontsRegular16(
+            context,
+          ).copyWith(color: AppColors.graySwatch[500]),
+          suffixIcon: widget.suffixIcon,
+          filled: true,
+          fillColor: AppColors.graySwatch[50],
+          border: buildBorder(color: Colors.transparent),
+          enabledBorder: buildBorder(
+            color: _isValid ? AppColors.primary : Colors.transparent,
+          ),
+          focusedBorder: buildBorder(
+            color: _isValid ? AppColors.primary : AppColors.primarySwatch[950]!,
+          ),
+          errorBorder: buildBorder(color: AppColors.redSwatch[500]!, width: 2),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: 14,
+          ),
         ),
       ),
     );
   }
 
-  OutlineInputBorder buildBorder(Color color) {
+  OutlineInputBorder buildBorder({required Color color, double? width}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide(color: color),
+      borderSide: BorderSide(color: color, width: width ?? 1),
     );
   }
 }

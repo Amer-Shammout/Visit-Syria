@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/login_view.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/on_boarding_view.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Views/preferences_view.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/setting_info_view.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/sign_up_view.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/verification_view.dart';
@@ -20,6 +21,8 @@ abstract class AppRouter {
   static const kVerificationName = 'verificationView';
   static const kSettingInfoView = '/settingInfoView';
   static const kSettingInfoName = 'settingInfoView';
+  static const kPreferencesView = '/preferencesView';
+  static const kPreferencesName = 'preferencesView';
   static const kHomeView = '/homeView';
   static const kHomeName = 'homeView';
 
@@ -60,6 +63,12 @@ abstract class AppRouter {
         path: kSettingInfoView,
         pageBuilder:
             (context, state) => const MaterialPage(child: SettingInfoView()),
+      ),
+      GoRoute(
+        name: kPreferencesName,
+        path: kPreferencesView,
+        pageBuilder:
+            (context, state) => const MaterialPage(child: PreferencesView()),
       ),
     ],
   );

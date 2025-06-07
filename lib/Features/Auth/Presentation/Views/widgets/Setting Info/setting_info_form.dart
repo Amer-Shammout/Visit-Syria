@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
+import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
@@ -34,6 +36,7 @@ class _SettingInfoFormState extends State<SettingInfoForm> {
       log(
         "First Name : $firstName  Last Name : $lastName  Selected Country : ${_selectedCountry?.displayName}  File : ${userImage?.path}",
       );
+      GoRouter.of(context).pushReplacementNamed(AppRouter.kPreferencesName);
       // TODO: send data to API
     } else {
       setState(() {

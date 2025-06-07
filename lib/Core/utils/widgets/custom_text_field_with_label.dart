@@ -19,6 +19,7 @@ class CustomTextFieldWithLabel extends StatelessWidget {
     this.maxLines,
     this.validator,
     this.helperText,
+    this.textAlign = TextAlign.left,
   });
   final String hint;
   final bool obscureText;
@@ -32,6 +33,7 @@ class CustomTextFieldWithLabel extends StatelessWidget {
   final String? Function(String?)? validator;
   final String label;
   final String? helperText;
+  final TextAlign? textAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,7 @@ class CustomTextFieldWithLabel extends StatelessWidget {
         ),
         SizedBox(height: AppSpacing.s4),
         CustomTextFormField(
+          textAlign: textAlign,
           initialValue: initialValue,
           maxLength: maxLength,
           maxLines: maxLines,

@@ -49,7 +49,7 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         children: [
           CustomTextFieldWithLabel(
-            hint: 'Email',
+            hint: 'example@gmail.com',
             label: 'البريد الإلكتروني',
             keyboardType: TextInputType.emailAddress,
             onSaved: (val) => email = val,
@@ -60,7 +60,7 @@ class _LoginFormState extends State<LoginForm> {
             onSaved: (val) => password = val,
             validator: Validation.validatePasswordSImple,
             maxLines: 1,
-            hint: 'Password',
+            hint: '1@aAaaaa',
             label: 'كلمة المرور',
             obscureText: _obscurePassword,
             suffixIcon: IconButton(

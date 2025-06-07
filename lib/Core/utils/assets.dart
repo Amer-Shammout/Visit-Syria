@@ -368,6 +368,7 @@ class Assets {
   /// Assets for iconsWhatsup
   /// assets/Icons/Whatsup.svg
   static const String iconsWhatsup = "assets/Icons/Whatsup.svg";
+  static const String iconsArrowDropDown = "assets/Icons/arrow_drop_down.svg";
 
   /// Assets for illustrationsEmptyBlogs
   /// assets/Illustrations/Empty-Blogs.svg

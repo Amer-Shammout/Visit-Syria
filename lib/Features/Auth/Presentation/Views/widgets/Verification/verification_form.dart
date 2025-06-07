@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/functions/validation.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
@@ -55,7 +57,7 @@ class _VerificationFormState extends State<VerificationForm> {
   void _submitCode() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-
+      GoRouter.of(context).pushReplacementNamed(AppRouter.kSettingInfoName);
       // TODO: تحقق من الكود
       print("رمز التحقق: $_code");
     } else {
@@ -89,7 +91,7 @@ class _VerificationFormState extends State<VerificationForm> {
             hintStyle: AppStyles.fontsRegular24(
               context,
             ).copyWith(color: AppColors.graySwatch[500]),
-            validator: Validation.validateEmptyField,
+            validator: Validation.validateEmptyPINField,
             length: 4,
             appContext: context,
             onChanged: (_) {},

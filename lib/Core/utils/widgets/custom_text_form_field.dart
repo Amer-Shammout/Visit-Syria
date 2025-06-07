@@ -14,6 +14,7 @@ class CustomTextFormField extends StatefulWidget {
   final int? maxLines;
   final String? Function(String?)? validator;
   final String? helperText;
+  final TextAlign? textAlign;
 
   const CustomTextFormField({
     super.key,
@@ -26,7 +27,9 @@ class CustomTextFormField extends StatefulWidget {
     this.onChanged,
     this.onSaved,
     this.maxLines,
-    this.validator, this.helperText,
+    this.validator,
+    this.helperText,
+    this.textAlign = TextAlign.left,
   });
 
   @override
@@ -75,7 +78,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      cursorColor: AppColors.primary,
+      textAlign: widget.textAlign ?? TextAlign.start,
+      cursorColor: AppColors.titleTextColor,
       cursorErrorColor: AppColors.redSwatch,
       style: AppStyles.fontsRegular16(
         context,

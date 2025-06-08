@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Features/App%20Root/Presentation/Views/app_root_.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/forget_password_view_1.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/forget_password_view_2.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/forget_password_view_3.dart';
@@ -32,9 +33,10 @@ abstract class AppRouter {
   static const kForgetPassword2Name = 'forgetPassword2View';
   static const kForgetPassword3View = '/forgetPassword3View';
   static const kForgetPassword3Name = 'forgetPassword3View';
+  static const kAppRootName = 'appRoot';
+  static const kAppRootView = '/appRoot';
   static const kHomeView = '/homeView';
   static const kHomeName = 'homeView';
-
 
   static final router = GoRouter(
     // initialLocation: isAuth ? kAppRoot : kLetsGetStartedView,
@@ -84,19 +86,28 @@ abstract class AppRouter {
         name: kForgetPassword1Name,
         path: kForgetPassword1View,
         pageBuilder:
-            (context, state) => const MaterialPage(child: ForgetPasswordView1()),
+            (context, state) =>
+                const MaterialPage(child: ForgetPasswordView1()),
       ),
       GoRoute(
         name: kForgetPassword2Name,
         path: kForgetPassword2View,
         pageBuilder:
-            (context, state) => const MaterialPage(child: ForgetPasswordView2()),
+            (context, state) =>
+                const MaterialPage(child: ForgetPasswordView2()),
       ),
       GoRoute(
         name: kForgetPassword3Name,
         path: kForgetPassword3View,
         pageBuilder:
-            (context, state) => const MaterialPage(child: ForgetPasswordView3()),
+            (context, state) =>
+                const MaterialPage(child: ForgetPasswordView3()),
+      ),
+      GoRoute(
+        name: kAppRootName,
+        path: kAppRootView,
+        pageBuilder:
+            (context, state) => const MaterialPage(child: AppRootView()),
       ),
     ],
   );

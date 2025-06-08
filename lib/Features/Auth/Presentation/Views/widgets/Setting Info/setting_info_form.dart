@@ -12,7 +12,7 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/utils/widgets/custom_button.dart';
 import 'package:visit_syria/Core/utils/widgets/custom_country_picker.dart';
 import 'package:visit_syria/Core/utils/widgets/custom_name_fields.dart';
-import 'package:visit_syria/Core/utils/widgets/profile_avatar.dart';
+import 'package:visit_syria/Core/utils/widgets/profile_avatar_picker.dart';
 
 class SettingInfoForm extends StatefulWidget {
   const SettingInfoForm({super.key});
@@ -53,7 +53,7 @@ class _SettingInfoFormState extends State<SettingInfoForm> {
       key: _formKey,
       child: Column(
         children: [
-          ProfileAvatar(onImageSelected: (file) => userImage = file),
+          ProfileAvatarPicker(onImageSelected: (file) => userImage = file),
           const SizedBox(height: AppSpacing.s24),
           CustomNameFields(
             firstNameOnSaved: (val) => firstName = val,

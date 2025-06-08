@@ -6,7 +6,6 @@ abstract class AppStyles {
       color: Theme.of(context).colorScheme.primary,
       fontSize: getResponsiveFontSize(context, baseFontSize: 32),
       fontWeight: FontWeight.w900,
-      height: 38,
     );
   }
 
@@ -55,7 +54,6 @@ abstract class AppStyles {
       color: Theme.of(context).colorScheme.primary,
       fontSize: getResponsiveFontSize(context, baseFontSize: 20),
       fontWeight: FontWeight.w700,
-      height: 25,
     );
   }
 
@@ -64,7 +62,13 @@ abstract class AppStyles {
       color: Theme.of(context).colorScheme.primary,
       fontSize: getResponsiveFontSize(context, baseFontSize: 20),
       fontWeight: FontWeight.w400,
-      height: 25,
+    );
+  }
+  static TextStyle fontsRegular24(context) {
+    return TextStyle(
+      color: Theme.of(context).colorScheme.primary,
+      fontSize: getResponsiveFontSize(context, baseFontSize: 24),
+      fontWeight: FontWeight.w400,
     );
   }
 
@@ -81,7 +85,6 @@ abstract class AppStyles {
       color: Theme.of(context).colorScheme.primary,
       fontSize: getResponsiveFontSize(context, baseFontSize: 16),
       fontWeight: FontWeight.w700,
-      height: 20,
     );
   }
 
@@ -90,7 +93,6 @@ abstract class AppStyles {
       color: Theme.of(context).colorScheme.primary,
       fontSize: getResponsiveFontSize(context, baseFontSize: 14),
       fontWeight: FontWeight.w700,
-      height: 20,
     );
   }
 
@@ -99,7 +101,6 @@ abstract class AppStyles {
       color: Theme.of(context).colorScheme.primary,
       fontSize: getResponsiveFontSize(context, baseFontSize: 16),
       fontWeight: FontWeight.w400,
-      height: 24,
     );
   }
 
@@ -108,7 +109,6 @@ abstract class AppStyles {
       color: Theme.of(context).colorScheme.primary,
       fontSize: getResponsiveFontSize(context, baseFontSize: 14),
       fontWeight: FontWeight.w400,
-      height: 20,
     );
   }
 
@@ -117,7 +117,6 @@ abstract class AppStyles {
       color: Theme.of(context).colorScheme.primary,
       fontSize: getResponsiveFontSize(context, baseFontSize: 12),
       fontWeight: FontWeight.w700,
-      height: 16,
     );
   }
 
@@ -126,7 +125,6 @@ abstract class AppStyles {
       color: Theme.of(context).colorScheme.primary,
       fontSize: getResponsiveFontSize(context, baseFontSize: 12),
       fontWeight: FontWeight.w400,
-      height: 20,
     );
   }
 
@@ -151,7 +149,6 @@ abstract class AppStyles {
       color: Theme.of(context).colorScheme.primary,
       fontSize: getResponsiveFontSize(context, baseFontSize: 12),
       fontWeight: FontWeight.w300,
-      height: 16,
     );
   }
 
@@ -160,7 +157,6 @@ abstract class AppStyles {
       color: Theme.of(context).colorScheme.primary,
       fontSize: getResponsiveFontSize(context, baseFontSize: 10),
       fontWeight: FontWeight.w300,
-      height: 13,
     );
   }
 

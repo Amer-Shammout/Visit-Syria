@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+// ignore: unused_import
 import 'package:go_router/go_router.dart';
+// ignore: unused_import
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/functions/validation.dart';
@@ -9,30 +11,25 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/utils/widgets/custom_button.dart';
 import 'package:visit_syria/Core/utils/widgets/custom_text_field_with_label.dart';
-import 'package:visit_syria/Features/Auth/Data/Models/auth_request_model.dart';
-import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Common/have_and_dont_have_account.dart';
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+class ForgetPasswordForm3 extends StatefulWidget {
+  const ForgetPasswordForm3({super.key});
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<ForgetPasswordForm3> createState() => _ForgetPasswordForm3State();
 }
 
-class _LoginFormState extends State<LoginForm> {
-  bool _obscurePassword = true;
+class _ForgetPasswordForm3State extends State<ForgetPasswordForm3> {
+  bool _obscurePassword1 = true;
+  bool _obscurePassword2 = true;
   AutovalidateMode _isAutoValidate = AutovalidateMode.disabled;
   final GlobalKey<FormState> _formKey = GlobalKey();
-  // ignore: unused_field
-  AuthRequestModel? _authModel;
-  String? email, password;
+  String? password;
 
   void _submit() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      _authModel = AuthRequestModel(email: email!, password: password!);
-      GoRouter.of(context).pushReplacementNamed(AppRouter.kVerificationName);
-
+      // GoRouter.of(context).pushReplacementNamed(AppRouter.kVerificationName);
       // TODO
     } else {
       setState(() {
@@ -49,23 +46,18 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         children: [
           CustomTextFieldWithLabel(
-            hint: 'example@gmail.com',
-            label: 'البريد الإلكتروني',
-            keyboardType: TextInputType.emailAddress,
-            onSaved: (val) => email = val,
-            validator: Validation.validateEmail,
-          ),
-          const SizedBox(height: AppSpacing.s16),
-          CustomTextFieldWithLabel(
             onSaved: (val) => password = val,
-            validator: Validation.validatePasswordSImple,
+            onChanged: (val) => password = val,
+            validator: Validation.validatePasswordComplex,
             maxLines: 1,
-            hint: '1@aAaaaa',
-            label: 'كلمة المرور',
-            obscureText: _obscurePassword,
+            hint: 'Password',
+            label: 'كلمة المرور الجديدة',
+            helperText:
+                "يجب أن تحتوي كلمة المرور على أحرف كبيرة وصغيرة و رموز مميزة",
+            obscureText: _obscurePassword1,
             suffixIcon: IconButton(
               icon: SvgPicture.asset(
-                _obscurePassword
+                _obscurePassword1
                     ? Assets.iconsEyeClosed
                     : Assets.iconsEyeOpened,
                 width: 20,
@@ -75,20 +67,33 @@ class _LoginFormState extends State<LoginForm> {
                   BlendMode.srcATop,
                 ),
               ),
-              onPressed: eyeToggle,
+              onPressed: eyeToggle1,
             ),
           ),
-          const SizedBox(height: AppSpacing.s8),
-          Align(
-            alignment: AlignmentDirectional(-1, 0),
-            child: TextButton(
-              onPressed: () => GoRouter.of(context).pushReplacementNamed(AppRouter.kForgetPassword1Name),
-              child: Text(
-                "نسيت كلمة المرور؟",
-                style: TextStyle(color: AppColors.primarySwatch),
+          const SizedBox(height: AppSpacing.s16),
+          CustomTextFieldWithLabel(
+            validator:
+                (val) => Validation.validateConfirmPassword(val, password),
+            maxLines: 1,
+            hint: 'Password',
+            label: 'تأكيد كلمة المرور الجديدة',
+            obscureText: _obscurePassword2,
+            suffixIcon: IconButton(
+              icon: SvgPicture.asset(
+                _obscurePassword2
+                    ? Assets.iconsEyeClosed
+                    : Assets.iconsEyeOpened,
+                width: 20,
+                height: 20,
+                colorFilter: ColorFilter.mode(
+                  AppColors.graySwatch[500]!,
+                  BlendMode.srcATop,
+                ),
               ),
+              onPressed: eyeToggle2,
             ),
           ),
+
           const SizedBox(height: AppSpacing.s16),
           CustomButton(
             onPressed: _submit,
@@ -102,23 +107,20 @@ class _LoginFormState extends State<LoginForm> {
             verPadding: 16,
             width: double.infinity,
           ),
-          const SizedBox(height: AppSpacing.s16),
-          HaveandDontHaveAccount(
-            actionStatement: 'أنشئ حساب جديد',
-            statement: 'ليس لديك حساب؟',
-            onPressed:
-                () => GoRouter.of(
-                  context,
-                ).pushReplacementNamed(AppRouter.kSignupName),
-          ),
         ],
       ),
     );
   }
 
-  void eyeToggle() {
+  void eyeToggle1() {
     setState(() {
-      _obscurePassword = !_obscurePassword;
+      _obscurePassword1 = !_obscurePassword1;
+    });
+  }
+
+  void eyeToggle2() {
+    setState(() {
+      _obscurePassword2 = !_obscurePassword2;
     });
   }
 }

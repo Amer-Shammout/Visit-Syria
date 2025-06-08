@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Views/forget_password_view_1.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Views/forget_password_view_2.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Views/forget_password_view_3.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/login_view.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/on_boarding_view.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/preferences_view.dart';
@@ -23,8 +26,15 @@ abstract class AppRouter {
   static const kSettingInfoName = 'settingInfoView';
   static const kPreferencesView = '/preferencesView';
   static const kPreferencesName = 'preferencesView';
+  static const kForgetPassword1View = '/forgetPassword1View';
+  static const kForgetPassword1Name = 'forgetPassword1View';
+  static const kForgetPassword2View = '/forgetPassword2View';
+  static const kForgetPassword2Name = 'forgetPassword2View';
+  static const kForgetPassword3View = '/forgetPassword3View';
+  static const kForgetPassword3Name = 'forgetPassword3View';
   static const kHomeView = '/homeView';
   static const kHomeName = 'homeView';
+
 
   static final router = GoRouter(
     // initialLocation: isAuth ? kAppRoot : kLetsGetStartedView,
@@ -69,6 +79,24 @@ abstract class AppRouter {
         path: kPreferencesView,
         pageBuilder:
             (context, state) => const MaterialPage(child: PreferencesView()),
+      ),
+      GoRoute(
+        name: kForgetPassword1Name,
+        path: kForgetPassword1View,
+        pageBuilder:
+            (context, state) => const MaterialPage(child: ForgetPasswordView1()),
+      ),
+      GoRoute(
+        name: kForgetPassword2Name,
+        path: kForgetPassword2View,
+        pageBuilder:
+            (context, state) => const MaterialPage(child: ForgetPasswordView2()),
+      ),
+      GoRoute(
+        name: kForgetPassword3Name,
+        path: kForgetPassword3View,
+        pageBuilder:
+            (context, state) => const MaterialPage(child: ForgetPasswordView3()),
       ),
     ],
   );

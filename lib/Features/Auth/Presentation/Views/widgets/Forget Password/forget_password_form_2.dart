@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -12,15 +13,16 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/utils/widgets/custom_button.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Common/resend_code_timer_button.dart';
 
-class VerificationForm extends StatefulWidget {
-  const VerificationForm({super.key});
+class ForgetPasswordForm2 extends StatefulWidget {
+  const ForgetPasswordForm2({super.key});
 
   @override
-  State<VerificationForm> createState() => _VerificationFormState();
+  State<ForgetPasswordForm2> createState() => _ForgetPasswordForm2State();
 }
 
-class _VerificationFormState extends State<VerificationForm> {
-  String? _code;
+class _ForgetPasswordForm2State extends State<ForgetPasswordForm2> {
+
+ String? _code;
   AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
   final GlobalKey<FormState> _formKey = GlobalKey();
   final _errorController = StreamController<ErrorAnimationType>();
@@ -37,7 +39,7 @@ class _VerificationFormState extends State<VerificationForm> {
   void _submitCode() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      GoRouter.of(context).pushReplacementNamed(AppRouter.kSettingInfoName);
+      GoRouter.of(context).pushNamed(AppRouter.kForgetPassword3Name);
       // TODO: تحقق من الكود
       print("رمز التحقق: $_code");
     } else {
@@ -49,8 +51,6 @@ class _VerificationFormState extends State<VerificationForm> {
       });
     }
   }
-
-  
 
   @override
   Widget build(BuildContext context) {

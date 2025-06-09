@@ -51,7 +51,7 @@ class EventsCardDetails extends StatelessWidget {
                   ).copyWith(color: AppColors.whiteColor),
                   borderRadius: 16,
                   horPadding: 12,
-                  verPadding: 6,
+                  verPadding: 8,
                   iconColor: AppColors.whiteColor,
                   shadow: Shadows.buttonShadow1,
                   size: 16,

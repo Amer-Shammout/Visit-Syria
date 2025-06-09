@@ -18,7 +18,8 @@ class CustomButton extends StatelessWidget {
     this.strokeColor = Colors.transparent,
     this.icon,
     this.size = 16,
-    this.iconColor = AppColors.primary, this.shadow = Shadows.buttonShadow1,
+    this.iconColor = AppColors.primary,
+    this.shadow = Shadows.buttonShadow1,
   });
 
   final VoidCallback onPressed;
@@ -42,6 +43,7 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
+          minimumSize: Size(0, 0),
           elevation: 0,
           backgroundColor: fillColor,
           padding: EdgeInsets.symmetric(

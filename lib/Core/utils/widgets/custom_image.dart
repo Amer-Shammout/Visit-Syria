@@ -6,7 +6,7 @@ class CustomImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 245,
+      height: MediaQuery.sizeOf(context).height * .28,
       width: double.infinity,
       decoration: BoxDecoration(
         image: DecorationImage(

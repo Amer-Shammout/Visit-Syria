@@ -13,12 +13,12 @@ class EventsCarousel extends StatelessWidget {
         return const EventCard();
       },
       options: CarouselOptions(
-        height: 245,
+        height: MediaQuery.sizeOf(context).height * .28,
         autoPlay: true,
         autoPlayInterval: const Duration(seconds: 4),
         autoPlayAnimationDuration: const Duration(milliseconds: 800),
         enlargeCenterPage: true,
-        viewportFraction: .86,
+        viewportFraction: .87,
         enableInfiniteScroll: true,
         aspectRatio: 354 / 245,
       ),

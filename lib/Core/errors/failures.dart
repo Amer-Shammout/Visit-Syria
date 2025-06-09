@@ -35,6 +35,7 @@ ServerFailure _handleError(DioException dioException) {
       return ServerFailure(errMessage: ResponseMessage.connectionError);
     case DioExceptionType.unknown:
       return ServerFailure(errMessage: ResponseMessage.unknownError);
+    // ignore: unreachable_switch_default
     default:
       return ServerFailure(errMessage: ResponseMessage.unknownError);
   }

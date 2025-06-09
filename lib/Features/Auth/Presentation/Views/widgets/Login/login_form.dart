@@ -82,10 +82,15 @@ class _LoginFormState extends State<LoginForm> {
           Align(
             alignment: AlignmentDirectional(-1, 0),
             child: TextButton(
-              onPressed: () => GoRouter.of(context).pushReplacementNamed(AppRouter.kForgetPassword1Name),
+              onPressed:
+                  () => GoRouter.of(
+                    context,
+                  ).pushReplacementNamed(AppRouter.kForgetPassword1Name),
               child: Text(
                 "نسيت كلمة المرور؟",
-                style: TextStyle(color: AppColors.primarySwatch),
+                style: AppStyles.fontsBold14(
+                  context,
+                ).copyWith(color: AppColors.primary),
               ),
             ),
           ),

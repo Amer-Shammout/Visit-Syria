@@ -16,6 +16,7 @@ class SettingInfoViewBody extends StatelessWidget {
             children: const [
               SizedBox(height: AppSpacing.s32),
               AuthViewsHeader(
+                canPop: false,
                 title: 'أدخل معلوماتك الشخصية',
                 subTitle:
                     'أكمل ملفك الشخصي بإضافة اسمك، بلدك، وصورتك الشخصية\nلنقدم لك تجربة سياحية مخصصة تناسب اهتماماتك و تفضيلاتك',

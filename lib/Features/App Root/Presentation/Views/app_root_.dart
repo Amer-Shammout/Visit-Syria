@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/widgets/custom_app_bar.dart';
 import 'package:visit_syria/Core/utils/widgets/custom_nav_bar.dart';
-import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Forget%20Password/forget_password_body_1.dart';
-import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Forget%20Password/forget_password_body_2.dart';
-import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Forget%20Password/forget_password_body_3.dart';
-import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Login/login_view_body.dart';
-import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Sign%20Up/sing_up_body.dart';
 
 class AppRootView extends StatefulWidget {
   const AppRootView({super.key});
@@ -23,11 +18,6 @@ class _AppRootViewState extends State<AppRootView> {
     Container(),
     Container(),
     Container(),
-    // SignUpViewBody(),
-    // LoginViewBody(),
-    // ForgetPasswordBody1(),
-    // ForgetPasswordBody2(),
-    // ForgetPasswordBody3(),
   ];
 
   @override

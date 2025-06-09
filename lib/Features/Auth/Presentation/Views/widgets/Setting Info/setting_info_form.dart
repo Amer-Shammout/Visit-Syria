@@ -36,7 +36,7 @@ class _SettingInfoFormState extends State<SettingInfoForm> {
       log(
         "First Name : $firstName  Last Name : $lastName  Selected Country : ${_selectedCountry?.displayName}  File : ${userImage?.path}",
       );
-      GoRouter.of(context).pushReplacementNamed(AppRouter.kPreferencesName);
+      GoRouter.of(context).pushNamed(AppRouter.kPreferencesName);
       // TODO: send data to API
     } else {
       setState(() {

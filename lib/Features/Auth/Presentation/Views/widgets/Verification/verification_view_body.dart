@@ -15,6 +15,7 @@ class VerificationViewBody extends StatelessWidget {
           children: const [
             SizedBox(height: AppSpacing.s32),
             AuthViewsHeader(
+              canPop: true,
               title: 'التحقق من الرمز',
               subTitle: 'لقد أرسلنا رمز التحقق إلى بريدك الإلكتروني\nيرجى إدخال الرمز لإكمال العملية بنجاح',
             ),

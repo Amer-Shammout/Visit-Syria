@@ -26,10 +26,6 @@ class _VerificationFormState extends State<VerificationForm> {
   final _errorController = StreamController<ErrorAnimationType>();
   bool _hasError = false;
 
-  
-
-  
-
   void _resendCode() {
     // TODO: استدعاء API لإعادة إرسال الكود
   }
@@ -37,7 +33,7 @@ class _VerificationFormState extends State<VerificationForm> {
   void _submitCode() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      GoRouter.of(context).pushReplacementNamed(AppRouter.kSettingInfoName);
+      GoRouter.of(context).goNamed(AppRouter.kSettingInfoName);
       // TODO: تحقق من الكود
       print("رمز التحقق: $_code");
     } else {
@@ -49,8 +45,6 @@ class _VerificationFormState extends State<VerificationForm> {
       });
     }
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +79,7 @@ class _VerificationFormState extends State<VerificationForm> {
               keyboardType: TextInputType.number,
               cursorColor: AppColors.titleTextColor,
               pinTheme: PinTheme(
+                fieldOuterPadding: EdgeInsets.symmetric(horizontal: 8),
                 activeColor:
                     _hasError ? AppColors.red : AppColors.titleTextColor,
                 inactiveColor:

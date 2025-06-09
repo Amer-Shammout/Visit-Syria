@@ -21,16 +21,11 @@ class ForgetPasswordForm2 extends StatefulWidget {
 }
 
 class _ForgetPasswordForm2State extends State<ForgetPasswordForm2> {
-
- String? _code;
+  String? _code;
   AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
   final GlobalKey<FormState> _formKey = GlobalKey();
   final _errorController = StreamController<ErrorAnimationType>();
   bool _hasError = false;
-
-  
-
-  
 
   void _resendCode() {
     // TODO: استدعاء API لإعادة إرسال الكود
@@ -39,7 +34,7 @@ class _ForgetPasswordForm2State extends State<ForgetPasswordForm2> {
   void _submitCode() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      GoRouter.of(context).pushNamed(AppRouter.kForgetPassword3Name);
+      GoRouter.of(context).goNamed(AppRouter.kForgetPassword3Name);
       // TODO: تحقق من الكود
       print("رمز التحقق: $_code");
     } else {

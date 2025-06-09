@@ -19,6 +19,7 @@ class LoginViewBody extends StatelessWidget {
             children: [
               const SizedBox(height: AppSpacing.s32),
               AuthViewsHeader(
+                canPop: false,
                 title: 'أهلًا بك',
                 subTitle:
                     'ادخل إلى عالمك السياحي الخاص، و تابع رحلاتك، حجوزاتك، و تجاربك بكل سهولة و أمان.',

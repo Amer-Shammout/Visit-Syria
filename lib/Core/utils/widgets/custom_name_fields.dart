@@ -19,7 +19,7 @@ class CustomNameFields extends StatelessWidget {
       children: [
         Expanded(
           child: CustomTextFieldWithLabel(
-            textDirection: null,
+            // textDirection: null,
             hint: 'أحمد',
             label: 'الاسم الأول',
             onSaved: firstNameOnSaved,
@@ -29,7 +29,7 @@ class CustomNameFields extends StatelessWidget {
         const SizedBox(width: AppSpacing.s12),
         Expanded(
           child: CustomTextFieldWithLabel(
-            textDirection: null,
+            // textDirection: null,
             hint: 'محسن',
             label: 'الاسم الأخير',
             onSaved: lastNameOnSaved,

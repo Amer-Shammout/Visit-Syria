@@ -36,7 +36,7 @@ class _SignUpFormState extends State<SignUpForm> {
     if (_formKey.currentState!.validate() && _isCheck!) {
       _formKey.currentState!.save();
       _authModel = AuthRequestModel(email: email!, password: password!);
-      GoRouter.of(context).pushReplacementNamed(AppRouter.kVerificationName);
+      GoRouter.of(context).pushNamed(AppRouter.kVerificationName);
       // TODO
     } else {
       setState(() {

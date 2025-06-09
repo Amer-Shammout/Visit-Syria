@@ -17,6 +17,7 @@ class ForgetPasswordBody3 extends StatelessWidget {
             children: [
               const SizedBox(height: AppSpacing.s32),
               AuthViewsHeader(
+                canPop: false,
                 title: 'إعادة تعيين كلمةالمرور',
                 subTitle:
                     'يرجى إدخال كلمة مرور جديدة لحسابك لتتمكن من تسجيل الدخول مجدداً ومتابعة استخدام خدماتنا بكل سهولة وأمان.',

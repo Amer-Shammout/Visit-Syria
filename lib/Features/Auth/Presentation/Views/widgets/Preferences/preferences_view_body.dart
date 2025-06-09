@@ -48,9 +48,11 @@ class _PreferencesViewBodyState extends State<PreferencesViewBody> {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: AppSpacing.s32),
               const AuthViewsHeader(
+                canPop: true,
                 title: 'اختر تفضيلاتك السياحية',
                 subTitle:
                     'ساعدنا على فهم اهتماماتك لتقديم محتوى، وجهات، وتجارب مخصصة لك',

@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/constants/preferences_constants.dart';
+import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
@@ -27,6 +29,7 @@ class _PreferencesViewBodyState extends State<PreferencesViewBody> {
 
   void _submit() {
     log("$selectedPreferences");
+    GoRouter.of(context).goNamed(AppRouter.kAppRootName);
     // TODO: send to backend or move to next step
   }
 

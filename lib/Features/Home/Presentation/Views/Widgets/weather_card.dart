@@ -43,7 +43,7 @@ class WeatherCard extends StatelessWidget {
                 '29\u00B0 C',
                 style: AppStyles.fontsRegular12(
                   context,
-                ).copyWith(color: AppColors.primary),
+                ).copyWith(color: AppColors.primary, fontSize: 9),
               ),
             ],
           ),

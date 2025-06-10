@@ -16,7 +16,12 @@ class OffersCard extends StatelessWidget {
           clipBehavior: Clip.none,
           children: [
             OffersCardBackground(),
-            Positioned(bottom: 8, right: 8, left: 8, child: OffersDetails()),
+            Positioned(
+              bottom: 8,
+              right: 8,
+              left: 8,
+              child: OffersCardDetails(),
+            ),
 
             Positioned(top: 8, right: 8, left: 8, child: OffersCardImage()),
           ],

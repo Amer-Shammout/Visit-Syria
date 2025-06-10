@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
-import 'package:visit_syria/Core/utils/styles/shadows.dart';
 import 'package:visit_syria/Core/utils/widgets/custom_icon_button.dart';
 import 'package:visit_syria/Core/utils/widgets/custom_image.dart';
+import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/offers_tag.dart';
 
 class OffersCardImage extends StatelessWidget {
   const OffersCardImage({
@@ -52,32 +52,3 @@ class OffersCardImage extends StatelessWidget {
     );
   }
 }
-
-class OffersTag extends StatelessWidget {
-  const OffersTag({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: 6,
-        horizontal: 12,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [Shadows.shadow],
-        color: AppColors.red,
-      ),
-      child: Text(
-        "50%",
-        style: AppStyles.fontsBold12(
-          context,
-        ).copyWith(color: AppColors.whiteColor),
-        textDirection: TextDirection.ltr,
-      ),
-    );
-  }
-}
-

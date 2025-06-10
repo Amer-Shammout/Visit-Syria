@@ -6,8 +6,8 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/utils/widgets/custom_button.dart';
 import 'package:visit_syria/Core/utils/widgets/general_info_item.dart';
 
-class OffersDetails extends StatelessWidget {
-  const OffersDetails({super.key});
+class OffersCardDetails extends StatelessWidget {
+  const OffersCardDetails({super.key});
 
   @override
   Widget build(BuildContext context) {

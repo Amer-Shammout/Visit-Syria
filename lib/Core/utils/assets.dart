@@ -291,12 +291,16 @@ class Assets {
   static const String iconsRainThunder = "assets/Icons/Rain_Thunder.svg";
 
   /// Assets for iconsRank
-  /// assets/Icons/Rank.svg
-  static const String iconsRank = "assets/Icons/Rank.svg";
+  /// assets/Icons/rank.png
+  static const String iconsRank = "assets/Icons/rank.png";
 
   /// Assets for iconsRateStar
   /// assets/Icons/RateStar.svg
   static const String iconsRateStar = "assets/Icons/RateStar.svg";
+
+  /// Assets for iconsRateStarFill
+  /// assets/Icons/rate_star_fill.svg
+  static const String iconsRateStarFill = "assets/Icons/rate_star_fill.svg";
 
   /// Assets for iconsResturants
   /// assets/Icons/Resturants.svg

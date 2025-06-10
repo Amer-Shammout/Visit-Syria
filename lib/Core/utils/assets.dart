@@ -310,6 +310,10 @@ class Assets {
   /// assets/Icons/Search.svg
   static const String iconsSearch = "assets/Icons/Search.svg";
 
+  /// Assets for iconsSeason
+  /// assets/Icons/season.svg
+  static const String iconsSeason = "assets/Icons/season.svg";
+
   /// Assets for iconsSettings
   /// assets/Icons/Settings.svg
   static const String iconsSettings = "assets/Icons/Settings.svg";
@@ -477,6 +481,10 @@ class Assets {
   /// Assets for imagesSplashDark
   /// assets/Images/splash_dark.png
   static const String imagesSplashDark = "assets/Images/splash_dark.png";
+
+  /// Assets for imagesTest
+  /// assets/Images/test.jpg
+  static const String imagesTest = "assets/Images/test.jpg";
 
   /// Assets for lottieAI
   /// assets/Lottie/AI.json

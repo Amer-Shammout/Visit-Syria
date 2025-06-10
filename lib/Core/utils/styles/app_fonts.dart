@@ -144,10 +144,10 @@ abstract class AppStyles {
     );
   }
 
-  static TextStyle fontsLight12(context) {
+  static TextStyle fontsLight12(context , size) {
     return TextStyle(
       color: Theme.of(context).colorScheme.primary,
-      fontSize: getResponsiveFontSize(context, baseFontSize: 12),
+      fontSize: getResponsiveFontSize(context, baseFontSize: size),
       fontWeight: FontWeight.w300,
     );
   }

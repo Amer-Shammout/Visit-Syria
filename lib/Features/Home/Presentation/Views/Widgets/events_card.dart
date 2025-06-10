@@ -31,14 +31,17 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.sizeOf(context).height *.28,
+      height: 235,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(32),
         boxShadow: [Shadows.commonShadow],
       ),
       child: Stack(
         children: [
-          CustomImage(),
+          CustomImage(
+            borderRadius: 32,
+            height: 235,
+          ),
           Positioned(
             right: 16,
             left: 16,

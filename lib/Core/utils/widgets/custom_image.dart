@@ -1,23 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:visit_syria/Core/utils/styles/shadows.dart';
 
 class CustomImage extends StatelessWidget {
-  const CustomImage({super.key});
+  const CustomImage({
+    super.key,
+    required this.height,
+    required this.borderRadius,
+  });
+
+  final double height;
+  final double borderRadius;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.sizeOf(context).height * .28,
-      width: double.infinity,
+      height: height,
       decoration: BoxDecoration(
+        boxShadow: [
+          Shadows.commonShadow
+        ],
         image: DecorationImage(
           image: AssetImage('assets/Images/test.jpg'),
           fit: BoxFit.cover,
         ),
 
-        borderRadius: BorderRadius.circular(32),
+        borderRadius: BorderRadius.circular(borderRadius),
       ),
       foregroundDecoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(32),
+        borderRadius: BorderRadius.circular(borderRadius),
 
         gradient: LinearGradient(
           begin: Alignment(0.50, -0.00),

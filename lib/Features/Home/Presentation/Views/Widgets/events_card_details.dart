@@ -35,11 +35,17 @@ class EventsCardDetails extends StatelessWidget {
                     GeneralInfoItem(
                       title: "15 أيار - 2025",
                       icon: Assets.iconsDate,
+                      color: AppColors.whiteColor,
+                      fontSize: 10,
+                      iconSize: 12,
                     ),
                     SizedBox(width: AppSpacing.s8),
                     GeneralInfoItem(
                       icon: Assets.iconsDuration,
                       title: '5 ساعات',
+                      color: AppColors.whiteColor,
+                      fontSize: 10,
+                      iconSize: 12,
                     ),
                   ],
                 ),

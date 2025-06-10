@@ -8,12 +8,13 @@ class EventsCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider.builder(
-      itemCount: 5, // عدد الأحداث
+      itemCount: 5, 
       itemBuilder: (context, index, realIndex) {
         return const EventCard();
       },
       options: CarouselOptions(
-        height: MediaQuery.sizeOf(context).height * .28,
+        clipBehavior: Clip.none,
+        height: 235,
         autoPlay: true,
         autoPlayInterval: const Duration(seconds: 4),
         autoPlayAnimationDuration: const Duration(milliseconds: 800),

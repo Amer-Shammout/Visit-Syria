@@ -25,6 +25,8 @@ class EventsCardDetails extends StatelessWidget {
               style: AppStyles.fontsBold22(
                 context,
               ).copyWith(color: AppColors.whiteColor),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
             SizedBox(height: AppSpacing.s8),
             Row(

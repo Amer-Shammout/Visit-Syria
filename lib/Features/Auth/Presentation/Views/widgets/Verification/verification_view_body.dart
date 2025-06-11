@@ -11,17 +11,19 @@ class VerificationViewBody extends StatelessWidget {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: const [
-            SizedBox(height: AppSpacing.s32),
-            AuthViewsHeader(
-              canPop: true,
-              title: 'التحقق من الرمز',
-              subTitle: 'لقد أرسلنا رمز التحقق إلى بريدك الإلكتروني\nيرجى إدخال الرمز لإكمال العملية بنجاح',
-            ),
-            SizedBox(height: AppSpacing.s32),
-            VerificationForm(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: const [
+              SizedBox(height: AppSpacing.s32),
+              AuthViewsHeader(
+                canPop: true,
+                title: 'التحقق من الرمز',
+                subTitle: 'لقد أرسلنا رمز التحقق إلى بريدك الإلكتروني\nيرجى إدخال الرمز لإكمال العملية بنجاح',
+              ),
+              SizedBox(height: AppSpacing.s32),
+              VerificationForm(),
+            ],
+          ),
         ),
       ),
     );

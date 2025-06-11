@@ -11,17 +11,19 @@ class ForgetPasswordBody2 extends StatelessWidget {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: const [
-            SizedBox(height: AppSpacing.s32),
-            AuthViewsHeader(
-              canPop: true,
-              title: 'أدخل رمز التحقق',
-              subTitle: 'تحقق من بريدك الإلكتروني وأدخل رمز التحقق لمتابعة عملية إعادة تعيين كلمة المرور.',
-            ),
-            SizedBox(height: AppSpacing.s32),
-            ForgetPasswordForm2(),
-          ],
+        child: SingleChildScrollView (
+          child: Column(
+            children: const [
+              SizedBox(height: AppSpacing.s32),
+              AuthViewsHeader(
+                canPop: true,
+                title: 'أدخل رمز التحقق',
+                subTitle: 'تحقق من بريدك الإلكتروني وأدخل رمز التحقق لمتابعة عملية إعادة تعيين كلمة المرور.',
+              ),
+              SizedBox(height: AppSpacing.s32),
+              ForgetPasswordForm2(),
+            ],
+          ),
         ),
       ),
     );

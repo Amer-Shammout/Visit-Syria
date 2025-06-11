@@ -31,6 +31,9 @@ class _SignUpFormState extends State<SignUpForm> {
   bool? _isError = false;
   // ignore: unused_field
   AuthRequestModel? _authModel;
+  final _emailFocus = FocusNode();
+  final _passwordFocus = FocusNode();
+  final _confirmPassFocus = FocusNode();
 
   void _submit() {
     if (_formKey.currentState!.validate() && _isCheck!) {
@@ -47,6 +50,14 @@ class _SignUpFormState extends State<SignUpForm> {
   }
 
   @override
+  void dispose() {
+    _confirmPassFocus.dispose();
+    _emailFocus.dispose();
+    _passwordFocus.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
@@ -59,6 +70,10 @@ class _SignUpFormState extends State<SignUpForm> {
             keyboardType: TextInputType.emailAddress,
             onSaved: (val) => email = val,
             validator: Validation.validateEmail,
+            focusNode: _emailFocus,
+            textInputAction: TextInputAction.next,
+            onEditingComplete:
+                () => FocusScope.of(context).requestFocus(_passwordFocus),
           ),
           const SizedBox(height: AppSpacing.s16),
           CustomTextFieldWithLabel(
@@ -85,6 +100,10 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
               onPressed: eyeToggle1,
             ),
+            focusNode: _passwordFocus,
+            textInputAction: TextInputAction.next,
+            onEditingComplete:
+                () => FocusScope.of(context).requestFocus(_confirmPassFocus),
           ),
           const SizedBox(height: AppSpacing.s16),
           CustomTextFieldWithLabel(
@@ -108,6 +127,9 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
               onPressed: eyeToggle2,
             ),
+            focusNode: _confirmPassFocus,
+            textInputAction: TextInputAction.done,
+            onEditingComplete: () => FocusScope.of(context).unfocus(),
           ),
           const SizedBox(height: AppSpacing.s16),
           CheckBoxStatement(

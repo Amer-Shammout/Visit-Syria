@@ -17,7 +17,7 @@ class WeatherCard extends StatelessWidget {
         Container(
           alignment: Alignment.center,
           width: 50,
-          height: 64,
+          height: 80,
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
             color: AppColors.whiteColor,
@@ -53,7 +53,7 @@ class WeatherCard extends StatelessWidget {
           'دمشق',
           style: AppStyles.fontsRegular14(
             context,
-          ).copyWith(color: AppColors.primary),
+          ).copyWith(color: AppColors.primary, fontSize: 11),
         ),
       ],
     );

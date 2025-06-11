@@ -10,6 +10,7 @@ class TopPlacesCardsListView extends StatelessWidget {
     return SizedBox(
       height: 220,
       child: ListView.separated(
+        physics: BouncingScrollPhysics(),
         clipBehavior: Clip.none,
         itemBuilder:
             (context, index) => Padding(

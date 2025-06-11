@@ -29,6 +29,8 @@ class _SettingInfoFormState extends State<SettingInfoForm> {
   Country? _selectedCountry;
   File? userImage;
   bool? hasError = false;
+  final _firstNameFocus = FocusNode();
+  final _secondNameFocus = FocusNode();
 
   void _submit() {
     if (_formKey.currentState!.validate() && _selectedCountry != null) {
@@ -47,6 +49,13 @@ class _SettingInfoFormState extends State<SettingInfoForm> {
   }
 
   @override
+  void dispose() {
+    _firstNameFocus.dispose();
+    _secondNameFocus.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       autovalidateMode: _isAutoValidate,
@@ -56,6 +65,8 @@ class _SettingInfoFormState extends State<SettingInfoForm> {
           ProfileAvatarPicker(onImageSelected: (file) => userImage = file),
           const SizedBox(height: AppSpacing.s24),
           CustomNameFields(
+            firstNameFocus: _firstNameFocus,
+            secondNameFocus: _secondNameFocus,
             firstNameOnSaved: (val) => firstName = val,
             lastNameOnSaved: (val) => lastName = val,
           ),

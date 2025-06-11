@@ -8,8 +8,10 @@ class WeatherCardsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 88,
+      height: 100,
       child: ListView.separated(
+        clipBehavior: Clip.none,
+        physics: BouncingScrollPhysics(),
         itemBuilder:
             (context, index) => Padding(
               padding: EdgeInsetsDirectional.only(

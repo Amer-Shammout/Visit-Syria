@@ -14,7 +14,9 @@ class CustomTextFormField extends StatefulWidget {
   final int? maxLines;
   final String? Function(String?)? validator;
   final String? helperText;
-  // final TextDirection textDirection;
+  final TextInputAction? textInputAction;
+  final VoidCallback? onEditingComplete;
+  final FocusNode? focusNode;
 
   const CustomTextFormField({
     super.key,
@@ -29,7 +31,9 @@ class CustomTextFormField extends StatefulWidget {
     this.maxLines,
     this.validator,
     this.helperText,
-    // this.textDirection = TextDirection.ltr,
+    this.textInputAction,
+    this.onEditingComplete,
+    this.focusNode,
   });
 
   @override
@@ -38,15 +42,16 @@ class CustomTextFormField extends StatefulWidget {
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   bool _isValid = false;
-  Color? color;
+  late FocusNode _internalFocusNode;
 
-  late FocusNode _focusNode;
+  FocusNode get _effectiveFocusNode =>
+      widget.focusNode ?? _internalFocusNode;
 
   @override
   void initState() {
     super.initState();
-    _focusNode = FocusNode();
-    _focusNode.addListener(() {
+    _internalFocusNode = FocusNode();
+    _effectiveFocusNode.addListener(() {
       setState(() {});
     });
 
@@ -58,7 +63,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   @override
   void dispose() {
-    _focusNode.dispose();
+    if (widget.focusNode == null) {
+      _internalFocusNode.dispose();
+    }
     super.dispose();
   }
 
@@ -80,10 +87,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return TextFormField(
       cursorColor: AppColors.titleTextColor,
       cursorErrorColor: AppColors.redSwatch,
-      style: AppStyles.fontsRegular16(
-        context,
-      ).copyWith(color: AppColors.titleTextColor),
-      focusNode: _focusNode,
+      focusNode: _effectiveFocusNode,
       maxLines: widget.maxLines,
       validator: widget.validator,
       onSaved: widget.onSaved,
@@ -92,33 +96,23 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       initialValue: widget.initialValue,
       obscureText: widget.obscureText,
       keyboardType: widget.keyboardType,
+      textInputAction: widget.textInputAction,
+      onEditingComplete: widget.onEditingComplete,
+      style: AppStyles.fontsRegular16(context).copyWith(color: AppColors.titleTextColor),
       decoration: InputDecoration(
-        errorStyle: AppStyles.fontsRegular12(
-          context,
-        ).copyWith(color: AppColors.redSwatch),
+        errorStyle: AppStyles.fontsRegular12(context).copyWith(color: AppColors.redSwatch),
         helperText: widget.helperText,
-        helperStyle: AppStyles.fontsRegular12(
-          context,
-        ).copyWith(color: AppColors.graySwatch[500]),
+        helperStyle: AppStyles.fontsRegular12(context).copyWith(color: AppColors.graySwatch[500]),
         hintText: widget.hint,
-        hintStyle: AppStyles.fontsRegular16(
-          context,
-        ).copyWith(color: AppColors.graySwatch[500]),
+        hintStyle: AppStyles.fontsRegular16(context).copyWith(color: AppColors.graySwatch[500]),
         suffixIcon: widget.suffixIcon,
         filled: true,
         fillColor: AppColors.graySwatch[50],
         border: buildBorder(color: Colors.transparent),
-        enabledBorder: buildBorder(
-          color: _isValid ? AppColors.primary : Colors.transparent,
-        ),
-        focusedBorder: buildBorder(
-          color: _isValid ? AppColors.primary : AppColors.primarySwatch[950]!,
-        ),
+        enabledBorder: buildBorder(color: _isValid ? AppColors.primary : Colors.transparent),
+        focusedBorder: buildBorder(color: _isValid ? AppColors.primary : AppColors.primarySwatch[950]!),
         errorBorder: buildBorder(color: AppColors.redSwatch[500]!),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 14,
-        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
       ),
     );
   }

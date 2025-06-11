@@ -21,7 +21,7 @@ class _ForgetPasswordForm1State extends State<ForgetPasswordForm1> {
   AutovalidateMode _isAutoValidate = AutovalidateMode.disabled;
   final GlobalKey<FormState> _formKey = GlobalKey();
   String? email;
-
+  
   void _submit() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();

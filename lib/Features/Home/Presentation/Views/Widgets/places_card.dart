@@ -13,7 +13,7 @@ class PlacesCard extends StatelessWidget {
     return SizedBox(
       height: 220,
       child: AspectRatio(
-        aspectRatio: 177 / 220,
+        aspectRatio: 170 / 220,
         child: Stack(
           clipBehavior: Clip.none,
           children: [

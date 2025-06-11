@@ -8,10 +8,15 @@ class CustomNameFields extends StatelessWidget {
     super.key,
     required this.firstNameOnSaved,
     required this.lastNameOnSaved,
+    this.firstNameFocus,
+    this.secondNameFocus,
   });
 
   final void Function(String?)? firstNameOnSaved;
   final void Function(String?)? lastNameOnSaved;
+
+  final FocusNode? firstNameFocus;
+  final FocusNode? secondNameFocus;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +29,10 @@ class CustomNameFields extends StatelessWidget {
             label: 'الاسم الأول',
             onSaved: firstNameOnSaved,
             validator: Validation.validateEmptyField,
+            focusNode: firstNameFocus,
+            textInputAction: TextInputAction.next,
+            onEditingComplete:
+                () => FocusScope.of(context).requestFocus(secondNameFocus),
           ),
         ),
         const SizedBox(width: AppSpacing.s12),
@@ -34,10 +43,12 @@ class CustomNameFields extends StatelessWidget {
             label: 'الاسم الأخير',
             onSaved: lastNameOnSaved,
             validator: Validation.validateEmptyField,
+            focusNode: secondNameFocus,
+            textInputAction: TextInputAction.done,
+            onEditingComplete: () => FocusScope.of(context).unfocus(),
           ),
         ),
       ],
     );
   }
 }
-

@@ -26,6 +26,8 @@ class _LoginFormState extends State<LoginForm> {
   // ignore: unused_field
   AuthRequestModel? _authModel;
   String? email, password;
+  final _emailFocus = FocusNode();
+  final _passwordFocus = FocusNode();
 
   void _submit() {
     if (_formKey.currentState!.validate()) {
@@ -42,6 +44,13 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   @override
+  void dispose() {
+    _emailFocus.dispose();
+    _passwordFocus.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
@@ -54,11 +63,14 @@ class _LoginFormState extends State<LoginForm> {
             keyboardType: TextInputType.emailAddress,
             onSaved: (val) => email = val,
             validator: Validation.validateEmail,
+            focusNode: _emailFocus,
+          textInputAction: TextInputAction.next,
+          onEditingComplete: () => FocusScope.of(context).requestFocus(_passwordFocus),
           ),
           const SizedBox(height: AppSpacing.s16),
           CustomTextFieldWithLabel(
             onSaved: (val) => password = val,
-            validator: Validation.validatePasswordSImple,
+            validator: Validation.validatePasswordComplex,
             maxLines: 1,
             hint: '1@aAaaaa',
             label: 'كلمة المرور',
@@ -77,6 +89,9 @@ class _LoginFormState extends State<LoginForm> {
               ),
               onPressed: eyeToggle,
             ),
+            focusNode: _passwordFocus,
+          textInputAction: TextInputAction.done,
+          onEditingComplete: () => FocusScope.of(context).unfocus(),
           ),
           const SizedBox(height: AppSpacing.s8),
           Align(

@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
@@ -18,7 +19,7 @@ class CustomTextFieldWithLabel extends StatelessWidget {
     this.onSaved,
     this.maxLines,
     this.validator,
-    this.helperText,
+    this.helperText, this.textInputAction, this.onEditingComplete, this.focusNode,
     // this.textDirection = TextDirection.ltr,
   });
   final String hint;
@@ -33,6 +34,9 @@ class CustomTextFieldWithLabel extends StatelessWidget {
   final String? Function(String?)? validator;
   final String label;
   final String? helperText;
+  final TextInputAction? textInputAction;
+  final VoidCallback? onEditingComplete;
+  final FocusNode? focusNode;
   // final TextDirection? textDirection;
 
   @override
@@ -49,6 +53,9 @@ class CustomTextFieldWithLabel extends StatelessWidget {
         SizedBox(height: AppSpacing.s4),
         CustomTextFormField(
           // textDirection: textDirection ?? TextDirection.rtl,
+          focusNode: focusNode,
+          onEditingComplete: onEditingComplete,
+          textInputAction: textInputAction,
           initialValue: initialValue,
           maxLength: maxLength,
           maxLines: maxLines,

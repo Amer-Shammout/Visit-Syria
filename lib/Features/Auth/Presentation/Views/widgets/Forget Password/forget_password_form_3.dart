@@ -25,6 +25,8 @@ class _ForgetPasswordForm3State extends State<ForgetPasswordForm3> {
   AutovalidateMode _isAutoValidate = AutovalidateMode.disabled;
   final GlobalKey<FormState> _formKey = GlobalKey();
   String? password;
+  final _passwordFocus = FocusNode();
+  final _confirmPasswordFocus = FocusNode();
 
   void _submit() {
     if (_formKey.currentState!.validate()) {
@@ -36,6 +38,13 @@ class _ForgetPasswordForm3State extends State<ForgetPasswordForm3> {
         _isAutoValidate = AutovalidateMode.always;
       });
     }
+  }
+
+  @override
+  void dispose() {
+    _passwordFocus.dispose();
+    _confirmPasswordFocus.dispose();
+    super.dispose();
   }
 
   @override
@@ -69,6 +78,11 @@ class _ForgetPasswordForm3State extends State<ForgetPasswordForm3> {
               ),
               onPressed: eyeToggle1,
             ),
+            focusNode: _passwordFocus,
+            textInputAction: TextInputAction.next,
+            onEditingComplete:
+                () =>
+                    FocusScope.of(context).requestFocus(_confirmPasswordFocus),
           ),
           const SizedBox(height: AppSpacing.s16),
           CustomTextFieldWithLabel(
@@ -92,6 +106,9 @@ class _ForgetPasswordForm3State extends State<ForgetPasswordForm3> {
               ),
               onPressed: eyeToggle2,
             ),
+            focusNode: _confirmPasswordFocus,
+            textInputAction: TextInputAction.done,
+            onEditingComplete: () => FocusScope.of(context).unfocus(),
           ),
 
           const SizedBox(height: AppSpacing.s16),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/widgets/custom_app_bar.dart';
+import 'package:visit_syria/Core/utils/widgets/custom_drawer.dart';
 import 'package:visit_syria/Core/utils/widgets/custom_nav_bar.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/home_view_body.dart';
 
@@ -24,6 +25,7 @@ class _AppRootViewState extends State<AppRootView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: CustomDrawer(),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
         child: CustomAppBar(), // ✅ AppBar الذي أنشأته

@@ -22,7 +22,7 @@ class EventsCardDetails extends StatelessWidget {
           children: [
             Text(
               'الحدث الخارق',
-              style: AppStyles.fontsBold22(
+              style: AppStyles.fontsBold20(
                 context,
               ).copyWith(color: AppColors.whiteColor),
               maxLines: 1,
@@ -38,7 +38,7 @@ class EventsCardDetails extends StatelessWidget {
                       title: "15 أيار - 2025",
                       icon: Assets.iconsDate,
                       color: AppColors.whiteColor,
-                      fontSize: 10,
+                      fontSize: 8,
                       iconSize: 12,
                     ),
                     SizedBox(width: AppSpacing.s8),
@@ -46,7 +46,7 @@ class EventsCardDetails extends StatelessWidget {
                       icon: Assets.iconsDuration,
                       title: '5 ساعات',
                       color: AppColors.whiteColor,
-                      fontSize: 10,
+                      fontSize: 8,
                       iconSize: 12,
                     ),
                   ],

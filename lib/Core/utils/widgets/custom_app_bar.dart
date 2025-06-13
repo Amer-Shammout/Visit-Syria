@@ -19,7 +19,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             IconButton(
               onPressed: () {
-                // TODO: open drawer or menu
+                Scaffold.of(context).openDrawer();
               },
               icon: SvgPicture.asset(
                 Assets.iconsMenu,

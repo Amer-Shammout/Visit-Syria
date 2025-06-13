@@ -64,8 +64,9 @@ class _LoginFormState extends State<LoginForm> {
             onSaved: (val) => email = val,
             validator: Validation.validateEmail,
             focusNode: _emailFocus,
-          textInputAction: TextInputAction.next,
-          onEditingComplete: () => FocusScope.of(context).requestFocus(_passwordFocus),
+            textInputAction: TextInputAction.next,
+            onEditingComplete:
+                () => FocusScope.of(context).requestFocus(_passwordFocus),
           ),
           const SizedBox(height: AppSpacing.s16),
           CustomTextFieldWithLabel(
@@ -90,10 +91,10 @@ class _LoginFormState extends State<LoginForm> {
               onPressed: eyeToggle,
             ),
             focusNode: _passwordFocus,
-          textInputAction: TextInputAction.done,
-          onEditingComplete: () => FocusScope.of(context).unfocus(),
+            textInputAction: TextInputAction.done,
+            onEditingComplete: () => FocusScope.of(context).unfocus(),
           ),
-          const SizedBox(height: AppSpacing.s8),
+          const SizedBox(height: AppSpacing.s4),
           Align(
             alignment: AlignmentDirectional(-1, 0),
             child: TextButton(

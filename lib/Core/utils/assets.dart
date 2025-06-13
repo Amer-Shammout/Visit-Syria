@@ -458,6 +458,10 @@ class Assets {
   /// assets/Illustrations/Success-Payment.svg
   static const String illustrationsSuccessPayment = "assets/Illustrations/Success-Payment.svg";
 
+  /// Assets for imagesBurgerImage
+  /// assets/Images/burger_image.png
+  static const String imagesBurgerImage = "assets/Images/burger_image.png";
+
   /// Assets for imagesLogo
   /// assets/Images/Logo.svg
   static const String imagesLogo = "assets/Images/Logo.svg";

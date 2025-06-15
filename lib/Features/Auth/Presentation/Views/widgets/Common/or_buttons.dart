@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:visit_syria/Core/services/google_sign_in.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
@@ -15,7 +16,7 @@ class OrButtons extends StatelessWidget {
       children: [
         CustomButton(
           shadow: null,
-          onPressed: () {},
+          onPressed: GoogleSignInMethods.signInWithGoogle,
           title: 'تسجيل الدخول عبر غوغل',
           textStyle: AppStyles.fontsBold14(
             context,

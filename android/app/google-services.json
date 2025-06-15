@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "889846115507",
+    "project_id": "visitsyria",
+    "storage_bucket": "visitsyria.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889846115507:android:7f066d5262b4684496d4c6",
+        "android_client_info": {
+          "package_name": "com.example.visit_syria"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2Y1TMi3zOmRY_WvYubOczN38yTD1YAew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

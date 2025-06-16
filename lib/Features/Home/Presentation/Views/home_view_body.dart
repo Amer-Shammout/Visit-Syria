@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/utils/widgets/custom_section.dart';
@@ -24,7 +26,8 @@ class HomeViewBody extends StatelessWidget {
             hasSeeAll: true,
             title: "الأحداث الرائجة",
             icon: Assets.iconsEvents,
-            seaAllAction: () {},
+            seaAllAction:
+                () => GoRouter.of(context).pushNamed(AppRouter.kAllEventsName),
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s24)),

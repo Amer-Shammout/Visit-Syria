@@ -11,6 +11,7 @@ import 'package:visit_syria/Features/Auth/Presentation/Views/setting_info_view.d
 import 'package:visit_syria/Features/Auth/Presentation/Views/sign_up_view.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/verification_view.dart';
 import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_view.dart';
+import 'package:visit_syria/Features/Weather/Presentation/views/weather_view.dart';
 
 abstract class AppRouter {
   static const kSplashView = '/';
@@ -37,6 +38,8 @@ abstract class AppRouter {
   static const kAppRootView = '/appRoot';
   static const kHomeView = '/homeView';
   static const kHomeName = 'homeView';
+  static const kWeatherView = '/weatherView';
+  static const kWeatherName = 'weatherView';
 
   static final router = GoRouter(
     // initialLocation: isAuth ? kAppRoot : kLetsGetStartedView,
@@ -108,6 +111,12 @@ abstract class AppRouter {
         path: kAppRootView,
         pageBuilder:
             (context, state) => const MaterialPage(child: AppRootView()),
+      ),
+      GoRoute(
+        name: kWeatherName,
+        path: kWeatherView,
+        pageBuilder:
+            (context, state) => const MaterialPage(child: WeatherView()),
       ),
     ],
   );

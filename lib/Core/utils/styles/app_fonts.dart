@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 
 abstract class AppStyles {
   static TextStyle fontsBlack32(context) {
@@ -69,6 +70,15 @@ abstract class AppStyles {
       color: Theme.of(context).colorScheme.primary,
       fontSize: getResponsiveFontSize(context, baseFontSize: 24),
       fontWeight: FontWeight.w400,
+    );
+  }
+
+  static TextStyle fontsBold64(context) {
+    return TextStyle(
+      color: AppColors.primarySwatch,
+      fontSize: getResponsiveFontSize(context, baseFontSize: 64),
+      fontWeight: FontWeight.w700,
+
     );
   }
 

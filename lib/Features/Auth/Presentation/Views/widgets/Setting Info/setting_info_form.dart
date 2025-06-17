@@ -9,10 +9,10 @@ import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_button.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_country_picker.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_name_fields.dart';
-import 'package:visit_syria/Core/utils/widgets/profile_avatar_picker.dart';
+import 'package:visit_syria/Core/widgets/custom_button.dart';
+import 'package:visit_syria/Core/widgets/custom_country_picker.dart';
+import 'package:visit_syria/Core/widgets/custom_name_fields.dart';
+import 'package:visit_syria/Core/widgets/profile_avatar_picker.dart';
 
 class SettingInfoForm extends StatefulWidget {
   const SettingInfoForm({super.key});

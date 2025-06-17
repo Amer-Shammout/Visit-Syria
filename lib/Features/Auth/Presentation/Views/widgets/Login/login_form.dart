@@ -7,8 +7,8 @@ import 'package:visit_syria/Core/utils/functions/validation.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_button.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_text_field_with_label.dart';
+import 'package:visit_syria/Core/widgets/custom_button.dart';
+import 'package:visit_syria/Core/widgets/custom_text_field_with_label.dart';
 import 'package:visit_syria/Features/Auth/Data/Models/auth_request_model.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Common/have_and_dont_have_account.dart';
 

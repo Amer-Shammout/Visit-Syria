@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/functions/validation.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_text_field_with_label.dart';
+import 'package:visit_syria/Core/widgets/custom_text_field_with_label.dart';
 
 class CustomNameFields extends StatelessWidget {
   const CustomNameFields({

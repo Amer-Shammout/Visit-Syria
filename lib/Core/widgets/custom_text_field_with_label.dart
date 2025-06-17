@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_text_form_field.dart';
+import 'package:visit_syria/Core/widgets/custom_text_form_field.dart';
 
 class CustomTextFieldWithLabel extends StatelessWidget {
   const CustomTextFieldWithLabel({

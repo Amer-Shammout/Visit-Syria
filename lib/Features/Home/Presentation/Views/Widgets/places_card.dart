@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_icon_button.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_image.dart';
+import 'package:visit_syria/Core/widgets/custom_icon_button.dart';
+import 'package:visit_syria/Core/widgets/custom_image.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_card_details.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/ribbon_label.dart';
 

@@ -6,7 +6,7 @@ import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_button.dart';
+import 'package:visit_syria/Core/widgets/custom_button.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/On%20Boarding/on_boarding_bottom_sheet.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/On%20Boarding/on_boarding_page_view.dart';
 

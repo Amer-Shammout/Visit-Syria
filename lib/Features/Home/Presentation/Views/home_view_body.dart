@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_section.dart';
+import 'package:visit_syria/Core/widgets/custom_section.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/events_carousel.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/offers_cards_list_view.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/top_places_cards_list_view.dart';

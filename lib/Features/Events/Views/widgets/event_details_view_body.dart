@@ -3,11 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_section.dart';
-import 'package:visit_syria/Features/Events/Views/widgets/custom_description.dart';
-import 'package:visit_syria/Features/Events/Views/widgets/custom_map.dart';
+import 'package:visit_syria/Core/widgets/custom_section.dart';
+import 'package:visit_syria/Core/widgets/custom_description.dart';
+import 'package:visit_syria/Core/widgets/custom_map.dart';
 import 'package:visit_syria/Features/Events/Views/widgets/event_general_info.dart';
-import 'package:visit_syria/Features/Events/Views/widgets/image_selector.dart';
+import 'package:visit_syria/Core/widgets/image_selector.dart';
 import 'package:visit_syria/Features/Events/Views/widgets/small_events_cards_list_view.dart';
 
 class EventDetailsViewBody extends StatelessWidget {

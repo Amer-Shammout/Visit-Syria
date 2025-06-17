@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_section.dart';
+import 'package:visit_syria/Core/widgets/custom_section.dart';
 
 class CustomDescription extends StatelessWidget {
   const CustomDescription({super.key, required this.desc});

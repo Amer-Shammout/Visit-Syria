@@ -4,9 +4,9 @@ import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/utils/styles/shadows.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_button.dart';
-import 'package:visit_syria/Core/utils/widgets/general_info_item.dart';
-import 'package:visit_syria/Core/utils/widgets/glass_effect.dart';
+import 'package:visit_syria/Core/widgets/custom_button.dart';
+import 'package:visit_syria/Core/widgets/general_info_item.dart';
+import 'package:visit_syria/Core/widgets/glass_effect.dart';
 
 class EventsCardDetails extends StatelessWidget {
   const EventsCardDetails({super.key, this.isSmall = false});

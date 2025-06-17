@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_section.dart';
+import 'package:visit_syria/Core/widgets/custom_section.dart';
 
 class CustomMap extends StatelessWidget {
   final double latitude;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_text_button.dart';
+import 'package:visit_syria/Core/widgets/custom_text_button.dart';
 
 class HaveandDontHaveAccount extends StatelessWidget {
   const HaveandDontHaveAccount({

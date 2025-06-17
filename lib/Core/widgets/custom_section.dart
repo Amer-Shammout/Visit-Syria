@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_title.dart';
+import 'package:visit_syria/Core/widgets/custom_title.dart';
 
 class CustomSection extends StatelessWidget {
   const CustomSection({

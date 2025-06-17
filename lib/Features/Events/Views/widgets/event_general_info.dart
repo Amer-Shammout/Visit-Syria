@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
-import 'package:visit_syria/Core/utils/widgets/general_info_item.dart';
+import 'package:visit_syria/Core/widgets/general_info_item.dart';
 
 class EventGenerlInfo extends StatelessWidget {
   const EventGenerlInfo({super.key});

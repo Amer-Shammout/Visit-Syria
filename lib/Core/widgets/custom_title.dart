@@ -4,7 +4,7 @@ import 'package:visit_syria/Core/constants/common_constants.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_text_button.dart';
+import 'package:visit_syria/Core/widgets/custom_text_button.dart';
 
 class CustomTitle extends StatelessWidget {
   const CustomTitle({

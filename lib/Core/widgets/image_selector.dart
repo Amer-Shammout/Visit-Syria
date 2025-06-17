@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_image.dart';
-import 'package:visit_syria/Features/Events/Views/widgets/custom_selector_image.dart';
-import 'package:visit_syria/Features/Events/Views/widgets/details_views_header.dart';
-import 'package:visit_syria/Features/Events/Views/widgets/details_views_title.dart';
+import 'package:visit_syria/Core/widgets/custom_image.dart';
+import 'package:visit_syria/Core/widgets/custom_selector_image.dart';
+import 'package:visit_syria/Core/widgets/details_views_header.dart';
+import 'package:visit_syria/Core/widgets/details_views_title.dart';
 
 class ImageSelector extends StatefulWidget {
   const ImageSelector({super.key, required this.images});

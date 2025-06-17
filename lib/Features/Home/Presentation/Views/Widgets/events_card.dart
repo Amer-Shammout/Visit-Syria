@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/shadows.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_icon_button.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_image.dart';
+import 'package:visit_syria/Core/widgets/custom_icon_button.dart';
+import 'package:visit_syria/Core/widgets/custom_image.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/city_tag.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/events_card_details.dart';
 

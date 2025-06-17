@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_icon_button.dart';
-import 'package:visit_syria/Core/utils/widgets/custom_image.dart';
+import 'package:visit_syria/Core/widgets/custom_icon_button.dart';
+import 'package:visit_syria/Core/widgets/custom_image.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/offers_tag.dart';
 
 class OffersCardImage extends StatelessWidget {

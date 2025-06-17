@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
-import 'package:visit_syria/Core/utils/widgets/glass_effect.dart';
+import 'package:visit_syria/Core/widgets/glass_effect.dart';
 
 class CityTag extends StatelessWidget {
   const CityTag({super.key, this.isSmall = false});

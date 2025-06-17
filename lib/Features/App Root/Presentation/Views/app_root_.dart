@@ -3,6 +3,7 @@ import 'package:visit_syria/Core/widgets/custom_app_bar.dart';
 import 'package:visit_syria/Core/widgets/custom_drawer.dart';
 import 'package:visit_syria/Core/widgets/custom_nav_bar.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/home_view_body.dart';
+import 'package:visit_syria/Features/Places/Presentation/Views/cities_view_body.dart';
 
 class AppRootView extends StatefulWidget {
   const AppRootView({super.key});
@@ -16,7 +17,7 @@ class _AppRootViewState extends State<AppRootView> {
 
   final List<Widget> _pages = [
     HomeViewBody(),
-    Container(),
+    CitiesViewBody(),
     Container(),
     Container(),
     Container(),

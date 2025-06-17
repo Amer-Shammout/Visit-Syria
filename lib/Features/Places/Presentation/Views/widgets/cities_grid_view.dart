@@ -1,0 +1,22 @@
+import 'package:flutter/material.dart';
+import 'package:visit_syria/Features/Places/Presentation/Views/widgets/cities_card.dart';
+
+class CitiesGridView extends StatelessWidget {
+  const CitiesGridView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 177 / 220,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+      ),
+      itemBuilder: (context, index) => CitiesCard(),
+      itemCount: 16,
+      padding: EdgeInsets.only(right: 16, left: 16, bottom: 32, top: 16),
+      physics: BouncingScrollPhysics(),
+    );
+  }
+}

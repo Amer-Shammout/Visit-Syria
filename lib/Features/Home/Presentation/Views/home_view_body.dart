@@ -48,7 +48,7 @@ class HomeViewBody extends StatelessWidget {
             section: TopPlacesCardsListView(),
             hasSeeAll: true,
             title: "أفضل الأماكن",
-            seaAllAction: () {},
+            seaAllAction: () => GoRouter.of(context).pushNamed(AppRouter.kAllTopPlacesName),
           ),
         ),
 

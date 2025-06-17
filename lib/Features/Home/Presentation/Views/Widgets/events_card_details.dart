@@ -40,7 +40,7 @@ class EventsCardDetails extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            SizedBox(height: isSmall ? AppSpacing.s4 : AppSpacing.s8),
+            SizedBox(height: isSmall ? AppSpacing.s0 : AppSpacing.s8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -12,61 +12,64 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        child: Row(
-          children: [
-            IconButton(
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              icon: SvgPicture.asset(
-                Assets.iconsMenu,
-                colorFilter: ColorFilter.mode(
-                  AppColors.primary,
-                  BlendMode.srcATop,
+    return Container(
+      color: AppColors.whiteColor,
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                icon: SvgPicture.asset(
+                  Assets.iconsMenu,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.primary,
+                    BlendMode.srcATop,
+                  ),
+                  width: 32,
+                  height: 32,
                 ),
-                width: 32,
-                height: 32,
+                color: AppColors.titleTextColor,
               ),
-              color: AppColors.titleTextColor,
-            ),
-            IconButton(
-              onPressed: () {
-                // TODO: notification action
-              },
-              icon: SvgPicture.asset(
-                Assets.iconsNotifications,
-                colorFilter: ColorFilter.mode(
-                  AppColors.primary,
-                  BlendMode.srcATop,
+              IconButton(
+                onPressed: () {
+                  // TODO: notification action
+                },
+                icon: SvgPicture.asset(
+                  Assets.iconsNotifications,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.primary,
+                    BlendMode.srcATop,
+                  ),
+                  width: 24,
+                  height: 24,
                 ),
-                width: 24,
-                height: 24,
+                color: AppColors.titleTextColor,
               ),
-              color: AppColors.titleTextColor,
-            ),
-            IconButton(
-              onPressed: () {
-                // TODO: search action
-              },
-              icon: SvgPicture.asset(
-                Assets.iconsSearch,
-                colorFilter: ColorFilter.mode(
-                  AppColors.primary,
-                  BlendMode.srcATop,
+              IconButton(
+                onPressed: () {
+                  // TODO: search action
+                },
+                icon: SvgPicture.asset(
+                  Assets.iconsSearch,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.primary,
+                    BlendMode.srcATop,
+                  ),
+                  width: 24,
+                  height: 24,
                 ),
-                width: 24,
-                height: 24,
+                color: AppColors.titleTextColor,
               ),
-              color: AppColors.titleTextColor,
-            ),
 
-            const Spacer(),
+              const Spacer(),
 
-            ProfileAvatar(),
-          ],
+              ProfileAvatar(),
+            ],
+          ),
         ),
       ),
     );

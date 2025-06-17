@@ -37,7 +37,8 @@ class HomeViewBody extends StatelessWidget {
             section: OffersCardsListView(),
             hasSeeAll: true,
             title: "العروض",
-            seaAllAction: () {},
+            seaAllAction:
+                () => GoRouter.of(context).pushNamed(AppRouter.kAllOffersName),
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s24)),

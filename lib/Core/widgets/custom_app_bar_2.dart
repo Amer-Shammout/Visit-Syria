@@ -23,47 +23,50 @@ class CustomAppBar2 extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                IconButton(
-                  iconSize: 32,
-                  padding: EdgeInsets.zero,
-                  onPressed: () {
-                    GoRouter.of(context).pop();
-                  },
-                  icon: Transform.flip(
-                    flipX: true,
-                    child: SvgPicture.asset(
-                      Assets.iconsArrow,
-                      colorFilter: ColorFilter.mode(
-                        AppColors.primary,
-                        BlendMode.srcATop,
+    return Container(
+      color: AppColors.whiteColor,
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                    iconSize: 32,
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      GoRouter.of(context).pop();
+                    },
+                    icon: Transform.flip(
+                      flipX: true,
+                      child: SvgPicture.asset(
+                        Assets.iconsArrow,
+                        colorFilter: ColorFilter.mode(
+                          AppColors.primary,
+                          BlendMode.srcATop,
+                        ),
+                        width: 32,
+                        height: 32,
                       ),
-                      width: 32,
-                      height: 32,
                     ),
                   ),
-                ),
-                SizedBox(width: AppSpacing.s8),
-                Align(
-                  alignment: alignmentDirectional,
-                  child: Text(
-                    title,
-                    style: AppStyles.fontsBold20(
-                      context,
-                    ).copyWith(color: AppColors.primary, fontSize: 20),
+                  SizedBox(width: AppSpacing.s8),
+                  Align(
+                    alignment: alignmentDirectional,
+                    child: Text(
+                      title,
+                      style: AppStyles.fontsBold20(
+                        context,
+                      ).copyWith(color: AppColors.primary, fontSize: 20),
+                    ),
                   ),
-                ),
-              ],
-            ),
-            trailing ?? SizedBox.shrink(),
-          ],
+                ],
+              ),
+              trailing ?? SizedBox.shrink(),
+            ],
+          ),
         ),
       ),
     );

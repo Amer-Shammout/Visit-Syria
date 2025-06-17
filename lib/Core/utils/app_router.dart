@@ -13,6 +13,7 @@ import 'package:visit_syria/Features/Auth/Presentation/Views/verification_view.d
 import 'package:visit_syria/Features/Events/Views/all_events_view.dart';
 import 'package:visit_syria/Features/Events/Views/event_details_view.dart';
 import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_view.dart';
+import 'package:visit_syria/Features/Trips/Presentation/Views/all_offers_view.dart';
 import 'package:visit_syria/Features/Weather/Presentation/views/weather_view.dart';
 
 abstract class AppRouter {
@@ -46,6 +47,8 @@ abstract class AppRouter {
   static const kAllEventsName = 'allEventsView';
   static const kEventDetailsView = '/eventView';
   static const kEventDetailsName = 'eventDetailsView';
+  static const kAllOffersView = '/allOffersView';
+  static const kAllOffersName = 'allOffersView';
 
   static final router = GoRouter(
     // initialLocation: isAuth ? kAppRoot : kLetsGetStartedView,
@@ -135,6 +138,12 @@ abstract class AppRouter {
         path: kEventDetailsView,
         pageBuilder:
             (context, state) => const MaterialPage(child: EventDetailsView()),
+      ),
+      GoRoute(
+        name: kAllOffersName,
+        path: kAllOffersView,
+        pageBuilder:
+            (context, state) => const MaterialPage(child: AllOffersView()),
       ),
     ],
   );

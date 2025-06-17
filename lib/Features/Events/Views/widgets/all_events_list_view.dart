@@ -10,6 +10,7 @@ class AllEventsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      physics: BouncingScrollPhysics(),
       padding: EdgeInsets.symmetric(horizontal: 16),
       separatorBuilder: (context, index) => SizedBox(height: AppSpacing.s16),
       itemBuilder: (context, index) => GestureDetector(

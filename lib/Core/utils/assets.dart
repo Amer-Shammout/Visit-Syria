@@ -474,9 +474,41 @@ class Assets {
   /// assets/Images/burger_image.png
   static const String imagesBurgerImage = "assets/Images/burger_image.png";
 
+  /// Assets for imagesDaraa
+  /// assets/Images/daraa.png
+  static const String imagesDaraa = "assets/Images/daraa.png";
+
+  /// Assets for imagesDeirAlZoor
+  /// assets/Images/deir_al_zoor.png
+  static const String imagesDeirAlZoor = "assets/Images/deir_al_zoor.png";
+
+  /// Assets for imagesDimashq
+  /// assets/Images/dimashq.png
+  static const String imagesDimashq = "assets/Images/dimashq.png";
+
+  /// Assets for imagesHalab
+  /// assets/Images/halab.png
+  static const String imagesHalab = "assets/Images/halab.png";
+
+  /// Assets for imagesHama
+  /// assets/Images/hama.png
+  static const String imagesHama = "assets/Images/hama.png";
+
+  /// Assets for imagesHasaka
+  /// assets/Images/hasaka.png
+  static const String imagesHasaka = "assets/Images/hasaka.png";
+
+  /// Assets for imagesHoms
+  /// assets/Images/homs.png
+  static const String imagesHoms = "assets/Images/homs.png";
+
   /// Assets for imagesIdlib
   /// assets/Images/idlib.jpg
   static const String imagesIdlib = "assets/Images/idlib.jpg";
+
+  /// Assets for imagesLattakia
+  /// assets/Images/lattakia.png
+  static const String imagesLattakia = "assets/Images/lattakia.png";
 
   /// Assets for imagesLogo
   /// assets/Images/Logo.svg
@@ -498,9 +530,21 @@ class Assets {
   /// assets/Images/On-Boarding-3.png
   static const String imagesOnBoarding3 = "assets/Images/On-Boarding-3.png";
 
+  /// Assets for imagesQunaitra
+  /// assets/Images/qunaitra.png
+  static const String imagesQunaitra = "assets/Images/qunaitra.png";
+
+  /// Assets for imagesRaqqa
+  /// assets/Images/raqqa.png
+  static const String imagesRaqqa = "assets/Images/raqqa.png";
+
   /// Assets for imagesRasafe
   /// assets/Images/rasafe.jpg
   static const String imagesRasafe = "assets/Images/rasafe.jpg";
+
+  /// Assets for imagesRifDimashq
+  /// assets/Images/rif_dimashq.png
+  static const String imagesRifDimashq = "assets/Images/rif_dimashq.png";
 
   /// Assets for imagesSplash
   /// assets/Images/splash.png
@@ -509,6 +553,14 @@ class Assets {
   /// Assets for imagesSplashDark
   /// assets/Images/splash_dark.png
   static const String imagesSplashDark = "assets/Images/splash_dark.png";
+
+  /// Assets for imagesSuwida
+  /// assets/Images/suwida.png
+  static const String imagesSuwida = "assets/Images/suwida.png";
+
+  /// Assets for imagesTartous
+  /// assets/Images/tartous.png
+  static const String imagesTartous = "assets/Images/tartous.png";
 
   /// Assets for imagesTest
   /// assets/Images/test.jpg

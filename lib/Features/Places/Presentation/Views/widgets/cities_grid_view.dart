@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:visit_syria/Core/constants/cities_constants.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/cities_card.dart';
 
 class CitiesGridView extends StatelessWidget {
@@ -13,8 +14,8 @@ class CitiesGridView extends StatelessWidget {
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
       ),
-      itemBuilder: (context, index) => CitiesCard(),
-      itemCount: 16,
+      itemBuilder: (context, index) => CitiesCard(cityModel: kCities[index],),
+      itemCount: kCities.length,
       padding: EdgeInsets.only(right: 16, left: 16, bottom: 32, top: 16),
       physics: BouncingScrollPhysics(),
     );

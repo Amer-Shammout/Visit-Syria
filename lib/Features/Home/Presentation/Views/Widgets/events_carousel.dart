@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/events_card.dart';
 
 class EventsCarousel extends StatelessWidget {
@@ -8,9 +10,13 @@ class EventsCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider.builder(
-      itemCount: 5, 
+      itemCount: 5,
       itemBuilder: (context, index, realIndex) {
-        return const EventCard();
+        return GestureDetector(
+          onTap:
+              () => GoRouter.of(context).pushNamed(AppRouter.kEventDetailsName,),
+          child: EventCard(),
+        );
       },
       options: CarouselOptions(
         clipBehavior: Clip.none,

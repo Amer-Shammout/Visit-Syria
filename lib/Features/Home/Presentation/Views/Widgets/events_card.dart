@@ -15,9 +15,11 @@ class EventCard extends StatelessWidget {
   // final VoidCallback? onDetailsTap;
   // final VoidCallback? onSaveTap;
   // final bool? isSaved;
+  final bool isSmall;
 
   const EventCard({
     super.key,
+    this.isSmall = false,
     // this.imageUrl,
     // this.city,
     // this.eventName,
@@ -31,38 +33,39 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 235,
+      height: isSmall ? 173 : 235,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(32),
+        borderRadius: BorderRadius.circular(isSmall ? 22 : 32),
         boxShadow: [Shadows.commonShadow],
       ),
       child: Stack(
         children: [
           CustomImage(
-            borderRadius: 32,
-            height: 235,
+            borderRadius: isSmall ? 22 : 32,
+            height: isSmall ? 173 : 235,
           ),
           Positioned(
-            right: 16,
-            left: 16,
-            top: 16,
+            right: isSmall ? 8 : 16,
+            left: isSmall ? 8 : 16,
+            top: isSmall ? 8 : 16,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CityTag(),
+                CityTag(isSmall: isSmall),
                 CustomIconButton(
                   onTap: () {},
                   inActiveIcon: Assets.iconsBookmarkStroke,
                   isActive: false,
+                  isSmall: isSmall,
                 ),
               ],
             ),
           ),
           Positioned(
-            right: 16,
-            left: 16,
-            bottom: 16,
-            child: EventsCardDetails(),
+            right: isSmall ? 8 : 16,
+            left: isSmall ? 8 : 16,
+            bottom: isSmall ? 8 : 16,
+            child: EventsCardDetails(isSmall: isSmall),
           ),
         ],
       ),

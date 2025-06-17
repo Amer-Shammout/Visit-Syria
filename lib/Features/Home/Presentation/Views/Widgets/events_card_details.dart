@@ -9,26 +9,38 @@ import 'package:visit_syria/Core/utils/widgets/general_info_item.dart';
 import 'package:visit_syria/Core/utils/widgets/glass_effect.dart';
 
 class EventsCardDetails extends StatelessWidget {
-  const EventsCardDetails({super.key});
+  const EventsCardDetails({super.key, this.isSmall = false});
+
+  final bool isSmall;
 
   @override
   Widget build(BuildContext context) {
     return GlassEffect(
-      radius: 32,
+      radius: isSmall ? 22 : 32,
       child: Container(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.only(
+          bottom: isSmall ? 4 : 16,
+          top: isSmall ? 12 : 16,
+          right: isSmall ? 12 : 16,
+          left: isSmall ? 12 : 16,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'الحدث الخارق',
-              style: AppStyles.fontsBold20(
-                context,
-              ).copyWith(color: AppColors.whiteColor),
+              style:
+                  isSmall
+                      ? AppStyles.fontsBold14(
+                        context,
+                      ).copyWith(color: AppColors.whiteColor)
+                      : AppStyles.fontsBold20(
+                        context,
+                      ).copyWith(color: AppColors.whiteColor),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            SizedBox(height: AppSpacing.s8),
+            SizedBox(height: isSmall ? AppSpacing.s4 : AppSpacing.s8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -38,31 +50,36 @@ class EventsCardDetails extends StatelessWidget {
                       title: "15 أيار - 2025",
                       icon: Assets.iconsDate,
                       color: AppColors.whiteColor,
-                      fontSize: 8,
-                      iconSize: 12,
+                      fontSize: isSmall ? 7 : 8,
+                      iconSize: isSmall ? 11 : 12,
                     ),
-                    SizedBox(width: AppSpacing.s8),
+                    SizedBox(width: AppSpacing.s4),
                     GeneralInfoItem(
                       icon: Assets.iconsDuration,
                       title: '5 ساعات',
                       color: AppColors.whiteColor,
-                      fontSize: 8,
-                      iconSize: 12,
+                      fontSize: isSmall ? 7 : 8,
+                      iconSize: isSmall ? 11 : 12,
                     ),
                   ],
                 ),
                 CustomButton(
                   onPressed: () {},
                   title: 'استكشاف',
-                  textStyle: AppStyles.fontsBold14(
-                    context,
-                  ).copyWith(color: AppColors.whiteColor),
-                  borderRadius: 16,
+                  textStyle:
+                      isSmall
+                          ? AppStyles.fontsRegular10(
+                            context,
+                          ).copyWith(color: AppColors.whiteColor)
+                          : AppStyles.fontsBold14(
+                            context,
+                          ).copyWith(color: AppColors.whiteColor),
+                  borderRadius: isSmall ? 10 : 16,
                   horPadding: 12,
-                  verPadding: 8,
+                  verPadding: isSmall ? 5 : 8,
                   iconColor: AppColors.whiteColor,
                   shadow: Shadows.buttonShadow1,
-                  size: 16,
+                  size: isSmall ? 10 : 16,
                   icon: Assets.iconsArrow,
                 ),
               ],

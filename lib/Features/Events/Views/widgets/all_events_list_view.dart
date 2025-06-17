@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/events_card.dart';
 
@@ -10,7 +12,9 @@ class AllEventsListView extends StatelessWidget {
     return ListView.separated(
       padding: EdgeInsets.symmetric(horizontal: 16),
       separatorBuilder: (context, index) => SizedBox(height: AppSpacing.s16),
-      itemBuilder: (context, index) => EventCard(),
+      itemBuilder: (context, index) => GestureDetector(
+        onTap: () => GoRouter.of(context).pushNamed(AppRouter.kEventDetailsName),
+        child: EventCard()),
       clipBehavior: Clip.none,
       itemCount: 10,
     );

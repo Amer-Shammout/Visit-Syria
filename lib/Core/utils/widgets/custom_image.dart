@@ -6,21 +6,23 @@ class CustomImage extends StatelessWidget {
     super.key,
     required this.height,
     required this.borderRadius,
+    this.image,
   });
 
   final double height;
   final double borderRadius;
+  final String? image;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 200),
+      curve: Curves.easeInCubic,
       height: height,
       decoration: BoxDecoration(
-        boxShadow: [
-          Shadows.commonShadow
-        ],
+        boxShadow: [Shadows.commonShadow],
         image: DecorationImage(
-          image: AssetImage('assets/Images/test.jpg'),
+          image: AssetImage(image ?? 'assets/Images/test.jpg'),
           fit: BoxFit.cover,
         ),
 

@@ -34,8 +34,9 @@ class GeneralInfoItem extends StatelessWidget {
         Text(
           title,
           style: AppStyles.fontsLight12(
-            context,fontSize
-          ).copyWith(color: color, fontSize: fontSize),
+            context,
+            fontSize,
+          ).copyWith(color: color),
         ),
       ],
     );

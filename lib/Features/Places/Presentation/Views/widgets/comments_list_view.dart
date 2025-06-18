@@ -5,7 +5,8 @@ import 'package:visit_syria/Features/Places/Presentation/Views/widgets/custom_co
 class CommentsListView extends StatelessWidget {
   const CommentsListView({
     super.key,
-    this.physics = const BouncingScrollPhysics(),  this.shrinkWrap = false,
+    this.physics = const BouncingScrollPhysics(),
+    this.shrinkWrap = false,
   });
 
   final ScrollPhysics physics;
@@ -13,13 +14,24 @@ class CommentsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemBuilder: (context, index) => CustomComment(),
-      separatorBuilder: (context, index) => SizedBox(height: AppSpacing.s12),
-      itemCount: 3,
-      physics: physics,
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      shrinkWrap: shrinkWrap,
-    );
+    return shrinkWrap
+        ? ListView.separated(
+          itemBuilder: (context, index) => CustomComment(),
+          separatorBuilder:
+              (context, index) => SizedBox(height: AppSpacing.s12),
+          itemCount: 3,
+          physics: physics,
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          shrinkWrap: shrinkWrap,
+        )
+        : SliverPadding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          sliver: SliverList.separated(
+            itemBuilder: (context, index) => CustomComment(),
+            separatorBuilder:
+                (context, index) => SizedBox(height: AppSpacing.s12),
+            itemCount: 3,
+          ),
+        );
   }
 }

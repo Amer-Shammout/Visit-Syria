@@ -62,7 +62,7 @@ class PlaceDetailsViewBody extends StatelessWidget {
             child: CustomSection(
               title: "التقييمات و التعليقات",
               hasSeeAll: true,
-              seaAllAction: () {},
+              seaAllAction: () => GoRouter.of(context).pushNamed(AppRouter.kAllCommentsAndRatingName),
               section: CommentsListView(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,

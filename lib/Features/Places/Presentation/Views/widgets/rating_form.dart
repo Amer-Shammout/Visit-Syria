@@ -10,14 +10,16 @@ import 'package:visit_syria/Core/widgets/profile_avatar.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/custom_rating_bar.dart';
 
 class RatingForm extends StatelessWidget {
-  const RatingForm({super.key});
+  const RatingForm({super.key, this.padding = 16});
+
+  final double padding;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: EdgeInsets.symmetric(horizontal: padding),
       child: CustomCardBackground(
-        padding: 12,
+        padding: 16,
         child: Column(
           children: [
             Row(
@@ -28,7 +30,6 @@ class RatingForm extends StatelessWidget {
               ],
             ),
             SizedBox(height: AppSpacing.s12),
-
             CustomTextFormField(
               hint: "اوصف تجربتك (اختياري)",
               maxLines: 3,

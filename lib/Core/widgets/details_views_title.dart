@@ -4,9 +4,9 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/widgets/custom_rating.dart';
 
 class DetailsViewsTitle extends StatelessWidget {
-  const DetailsViewsTitle({
-    super.key,
-  });
+  const DetailsViewsTitle({super.key, required this.title});
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class DetailsViewsTitle extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          "الحدث الخارق",
+          title,
           style: AppStyles.fontsBold32(
             context,
           ).copyWith(color: AppColors.whiteColor),
@@ -24,4 +24,3 @@ class DetailsViewsTitle extends StatelessWidget {
     );
   }
 }
-

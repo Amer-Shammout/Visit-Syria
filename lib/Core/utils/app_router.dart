@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Core/data/models/city_model.dart';
 import 'package:visit_syria/Features/App%20Root/Presentation/Views/app_root_.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/forget_password_view_1.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/forget_password_view_2.dart';
@@ -13,6 +14,7 @@ import 'package:visit_syria/Features/Auth/Presentation/Views/verification_view.d
 import 'package:visit_syria/Features/Events/Views/all_events_view.dart';
 import 'package:visit_syria/Features/Events/Views/event_details_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/all_top_places_view.dart';
+import 'package:visit_syria/Features/Places/Presentation/Views/city_details_view.dart';
 import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_view.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/all_offers_view.dart';
 import 'package:visit_syria/Features/Weather/Presentation/views/weather_view.dart';
@@ -52,6 +54,8 @@ abstract class AppRouter {
   static const kAllOffersName = 'allOffersView';
   static const kAllTopPlacesView = '/allTopPlacesView';
   static const kAllTopPlacesName = 'allTopPlacesView';
+  static const kCityDetailsView = '/cityDetailsView';
+  static const kCityDetailsName = 'cityDetailsView';
 
   static final router = GoRouter(
     // initialLocation: isAuth ? kAppRoot : kLetsGetStartedView,
@@ -153,6 +157,12 @@ abstract class AppRouter {
         path: kAllTopPlacesView,
         pageBuilder:
             (context, state) => const MaterialPage(child: AllTopPlacesView()),
+      ),
+      GoRoute(
+        name: kCityDetailsName,
+        path: kCityDetailsView,        
+        pageBuilder:
+            (context, state) =>  MaterialPage(child: CityDetailsView(cityModel: state.extra as CityModel,),),
       ),
     ],
   );

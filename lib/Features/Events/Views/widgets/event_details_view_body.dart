@@ -23,6 +23,7 @@ class EventDetailsViewBody extends StatelessWidget {
           slivers: [
             SliverToBoxAdapter(
               child: ImageSelector(
+                title: "الحدث الخارق",
                 images: [
                   Assets.imagesTest,
                   Assets.imagesAzemPalace,

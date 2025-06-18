@@ -25,7 +25,6 @@ class CustomImage extends StatelessWidget {
           image: AssetImage(image ?? 'assets/Images/test.jpg'),
           fit: BoxFit.cover,
         ),
-
         borderRadius: BorderRadius.circular(borderRadius),
       ),
       foregroundDecoration: BoxDecoration(

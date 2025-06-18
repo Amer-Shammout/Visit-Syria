@@ -2,18 +2,93 @@ import 'package:visit_syria/Core/data/models/city_model.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 
 const List<CityModel> kCities = [
-  CityModel(title: "دمشق", image: Assets.imagesDimashq),
-  CityModel(title: "ريف دمشق", image: Assets.imagesRifDimashq),
-  CityModel(title: "حمص", image: Assets.imagesHoms),
-  CityModel(title: "حماة", image: Assets.imagesHama),
-  CityModel(title: "حلب", image: Assets.imagesHalab),
-  CityModel(title: "اللاذقية", image: Assets.imagesLattakia),
-  CityModel(title: "طرطوس", image: Assets.imagesTartous),
-  CityModel(title: "السويداء", image: Assets.imagesSuwida),
-  CityModel(title: "القنيطرة", image: Assets.imagesQunaitra),
-  CityModel(title: "درعا", image: Assets.imagesDaraa),
-  CityModel(title: "ادلب", image: Assets.imagesIdlib),
-  CityModel(title: "دير الزور", image: Assets.imagesDeirAlZoor),
-  CityModel(title: "الرقة", image: Assets.imagesRaqqa),
-  CityModel(title: "الحسكة", image: Assets.imagesHasaka),
+  CityModel(
+    title: "دمشق",
+    images: [
+      Assets.imagesDimashq,
+      Assets.imagesDimashq2,
+      Assets.imagesDimashq3,
+      Assets.imagesDimashq4,
+    ],
+    desc:
+        'دمشق هي عاصمة سوريا وأقدم مدينة مأهولة باستمرار في العالم، تتميز بتاريخها العريق وتراثها الثقافي الغني. تشتهر بمعالمها القديمة مثل الجامع الأموي والأسواق التقليدية.',
+  ),
+  CityModel(
+    title: "ريف دمشق",
+    images: [Assets.imagesRifDimashq],
+    desc:
+        'تُحيط بالعاصمة دمشق، وتتميز بتنوع تضاريسها بين الجبال (كجبل قاسيون) والسهول والوديان. تضم مناطق مشهورة مثل الزبداني، معلولا، وصيدنايا، وتشتهر بطبيعتها الجميلة ومواقعها السياحية والدينية.',
+  ),
+  CityModel(
+    title: "حمص",
+    images: [Assets.imagesHoms],
+    desc:
+        'تقع في وسط سوريا، وتعد نقطة وصل بين شمال البلاد وجنوبها. مشهورة بمواقع تاريخية مثل تدمر، وقلعة الحصن، وتحتوي على تنوع ثقافي وطائفي.',
+  ),
+  CityModel(
+    title: "حماة",
+    images: [Assets.imagesHama],
+    desc:
+        'تشتهر بنواعيرها على نهر العاصي، وهي مدينة زراعية بامتياز. تحتوي على مواقع أثرية وتاريخية وتتميز بهدوئها وطابعها المحافظ.',
+  ),
+  CityModel(
+    title: "حلب",
+    images: [Assets.imagesHalab],
+    desc:
+        'أكبر المحافظات من حيث عدد السكان سابقًا، وتعد مركزًا اقتصاديًا وتجاريًا هامًا. مشهورة بقلعتها التاريخية، أسواقها القديمة، وصناعاتها العريقة كالصابون والنسيج.',
+  ),
+  CityModel(
+    title: "اللاذقية",
+    images: [Assets.imagesLattakia],
+    desc:
+        'ميناء سوريا الرئيسي على البحر الأبيض المتوسط. تُعرف بجوّها المعتدل وطبيعتها الساحلية، وتعتبر مركزًا سياحيًا هامًا، خاصة في الصيف.',
+  ),
+  CityModel(
+    title: "طرطوس",
+    images: [Assets.imagesTartous],
+    desc:
+        'ثاني محافظة ساحلية، تضم جزيرة أرواد (الجزيرة المأهولة الوحيدة في سوريا). تشتهر بالزراعة، خاصة الزيتون، وتعتبر منطقة ذات طابع هادئ وطبيعة خلابة.',
+  ),
+  CityModel(
+    title: "السويداء",
+    images: [Assets.imagesSuwida],
+    desc:
+        'ذات غالبية درزية، تقع جنوب شرق دمشق، وتشتهر بجبل العرب وبزراعة العنب والتفاح. لها طابع ثقافي مميز وتاريخ عريق.',
+  ),
+  CityModel(
+    title: "القنيطرة",
+    images: [Assets.imagesQunaitra],
+    desc:
+        'تقع في الجنوب الغربي، وتشمل أجزاء من الجولان المحتل. رغم صغر مساحتها، لها أهمية جغرافية وعسكرية كبرى.',
+  ),
+  CityModel(
+    title: "درعا",
+    images: [Assets.imagesDaraa],
+    desc:
+        'جنوب سوريا، تُعرف بأنها "مهد الثورة السورية". تمتاز بطبيعتها الزراعية وخصوبة أراضيها، وتقع قرب الحدود الأردنية.',
+  ),
+  CityModel(
+    title: "ادلب",
+    images: [Assets.imagesIdlib],
+    desc:
+        'تقع شمال غرب البلاد، وتتميز بطبيعة زراعية وجبلية. كانت من أكبر مراكز إنتاج الزيتون. تحتوي على مواقع أثرية هامة مثل إيبلا.',
+  ),
+  CityModel(
+    title: "دير الزور",
+    images: [Assets.imagesDeirAlZoor],
+    desc:
+        'شرقي سوريا، تقع على نهر الفرات، وتُعرف بمواردها النفطية والزراعية. تحتوي على آثار قديمة وتتميز بطابع عشائري.',
+  ),
+  CityModel(
+    title: "الرقة",
+    images: [Assets.imagesRaqqa],
+    desc:
+        'كانت عاصمة "الخلافة" لداعش سابقًا، تقع على الفرات، وتتميز بأراضٍ زراعية خصبة وتاريخ غني، خاصة في العهد العباسي.',
+  ),
+  CityModel(
+    title: "الحسكة",
+    images: [Assets.imagesHasaka],
+    desc:
+        'تقع في أقصى الشمال الشرقي، ذات تنوع قومي (كردي، عربي، سرياني). غنية بالموارد الزراعية والمياه، وتعد من أهم مناطق إنتاج القمح.',
+  ),
 ];

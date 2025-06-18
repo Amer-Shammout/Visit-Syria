@@ -19,7 +19,8 @@ class CustomSelectorImage extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         AnimatedContainer(
-          height: 86,
+          height: (MediaQuery.sizeOf(context).width - 56) / 4,
+          width: (MediaQuery.sizeOf(context).width - 56) / 4,
           duration: Duration(milliseconds: 150),
           curve: Curves.easeInCubic,
           alignment: Alignment.center,

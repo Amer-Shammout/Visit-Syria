@@ -18,7 +18,11 @@ class CitiesCard extends StatelessWidget {
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-            CustomImage(height: 220, borderRadius: 24, image: cityModel.image),
+            CustomImage(
+              height: 220,
+              borderRadius: 24,
+              image: cityModel.images[0],
+            ),
             Positioned(
               bottom: 12,
               left: 12,

@@ -6,7 +6,7 @@ class AllTopPlacesViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PlacesGridView();
+    return CustomScrollView(slivers:[ PlacesGridView()]);
   }
 }
 

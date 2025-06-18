@@ -29,7 +29,7 @@ class CustomSection extends StatelessWidget {
           icon: icon,
           seaAllAction: seaAllAction,
         ),
-        SizedBox(height: AppSpacing.s8),
+        SizedBox(height: AppSpacing.s12),
         section,
       ],
     );

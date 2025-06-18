@@ -22,6 +22,7 @@ class CustomIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GlassEffect(
+      blur: 40,
       radius: 360,
       child: InkWell(
         onTap: onTap,

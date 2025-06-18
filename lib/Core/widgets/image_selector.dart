@@ -6,8 +6,15 @@ import 'package:visit_syria/Core/widgets/details_views_header.dart';
 import 'package:visit_syria/Core/widgets/details_views_title.dart';
 
 class ImageSelector extends StatefulWidget {
-  const ImageSelector({super.key, required this.images});
+  const ImageSelector({
+    super.key,
+    required this.images,
+    required this.title,
+    this.hasActionButton = true,
+  });
   final List<String> images;
+  final String title;
+  final bool hasActionButton;
 
   @override
   State<ImageSelector> createState() => _ImageSelectorState();
@@ -25,11 +32,7 @@ class _ImageSelectorState extends State<ImageSelector> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        left: 16.0,
-        right: 16,
-        top: 48,
-      ),
+      padding: const EdgeInsets.only(left: 16.0, right: 16, top: 24),
       child: Column(
         children: [
           Stack(
@@ -39,41 +42,41 @@ class _ImageSelectorState extends State<ImageSelector> {
                 right: 16,
                 left: 16,
                 top: 16,
-                child: DetailsViewsHeader(),
+                child: DetailsViewsHeader(hasActionButton: false),
               ),
               Positioned(
                 bottom: 16,
                 right: 16,
                 left: 16,
-                child: DetailsViewsTitle(),
+                child: DetailsViewsTitle(title: widget.title),
               ),
             ],
           ),
           SizedBox(height: AppSpacing.s12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(widget.images.length, (index) {
-              return Expanded(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.only(
-                    end: index != widget.images.length - 1 ? 8 : 0,
-                  ),
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _currentIndex = index;
-                        _currentImage = widget.images[index];
-                      });
-                    },
-                    child: CustomSelectorImage(
-                      isSelected: _currentIndex == index,
-                      image: widget.images[index],
+          widget.images.length == 1
+              ? SizedBox.shrink()
+              : Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: List.generate(widget.images.length, (index) {
+                  return Padding(
+                    padding: EdgeInsetsDirectional.only(
+                      end: index != widget.images.length - 1 ? 8 : 0,
                     ),
-                  ),
-                ),
-              );
-            }),
-          ),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _currentIndex = index;
+                          _currentImage = widget.images[index];
+                        });
+                      },
+                      child: CustomSelectorImage(
+                        isSelected: _currentIndex == index,
+                        image: widget.images[index],
+                      ),
+                    ),
+                  );
+                }),
+              ),
         ],
       ),
     );

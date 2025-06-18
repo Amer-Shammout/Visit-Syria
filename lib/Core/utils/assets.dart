@@ -486,6 +486,18 @@ class Assets {
   /// assets/Images/dimashq.png
   static const String imagesDimashq = "assets/Images/dimashq.png";
 
+  /// Assets for imagesDimashq2
+  /// assets/Images/dimashq_2.jpg
+  static const String imagesDimashq2 = "assets/Images/dimashq_2.jpg";
+
+  /// Assets for imagesDimashq3
+  /// assets/Images/dimashq_3.webp
+  static const String imagesDimashq3 = "assets/Images/dimashq_3.webp";
+
+  /// Assets for imagesDimashq4
+  /// assets/Images/dimashq_4.jpg
+  static const String imagesDimashq4 = "assets/Images/dimashq_4.jpg";
+
   /// Assets for imagesHalab
   /// assets/Images/halab.png
   static const String imagesHalab = "assets/Images/halab.png";

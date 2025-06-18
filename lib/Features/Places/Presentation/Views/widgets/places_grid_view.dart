@@ -6,23 +6,32 @@ import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_card
 class PlacesGridView extends StatelessWidget {
   const PlacesGridView({
     super.key,
+    this.scrollPhysics = const BouncingScrollPhysics(),
   });
+
+  final ScrollPhysics scrollPhysics;
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 177 / 220,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
-      ),
-      itemBuilder: (context, index) => GestureDetector(
-        onTap: () => GoRouter.of(context).pushNamed(AppRouter.kAllTopPlacesName), // TODO
-        child: PlacesCard()),
-      itemCount: 16,
-      physics: BouncingScrollPhysics(),
+    return SliverPadding(
       padding: EdgeInsets.symmetric(horizontal: 16),
+      sliver: SliverGrid.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 177 / 220,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+        ),
+        itemBuilder:
+            (context, index) => GestureDetector(
+              onTap:
+                  () => GoRouter.of(
+                    context,
+                  ).pushNamed(AppRouter.kAllTopPlacesName), // TODO
+              child: PlacesCard(),
+            ),
+        itemCount: 16,
+      ),
     );
   }
 }

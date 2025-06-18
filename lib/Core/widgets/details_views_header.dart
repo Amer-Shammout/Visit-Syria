@@ -4,9 +4,8 @@ import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/widgets/custom_icon_button.dart';
 
 class DetailsViewsHeader extends StatelessWidget {
-  const DetailsViewsHeader({
-    super.key,
-  });
+  const DetailsViewsHeader({super.key, this.hasActionButton = true});
+  final bool hasActionButton;
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +17,15 @@ class DetailsViewsHeader extends StatelessWidget {
           onTap: () => GoRouter.of(context).pop(),
           isActive: false,
         ),
-        CustomIconButton(
-          inActiveIcon: Assets.iconsBookmarkStroke,
-          onTap: () {},
-          isActive: false,
-          activeIcon: Assets.iconsBookmarkFill,
-        ),
+        hasActionButton
+            ? CustomIconButton(
+              inActiveIcon: Assets.iconsBookmarkStroke,
+              onTap: () {},
+              isActive: false,
+              activeIcon: Assets.iconsBookmarkFill,
+            )
+            : SizedBox.shrink(),
       ],
     );
   }
 }
-

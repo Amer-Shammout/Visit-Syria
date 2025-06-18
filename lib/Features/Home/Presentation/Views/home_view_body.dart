@@ -6,7 +6,7 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/events_carousel.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/offers_cards_list_view.dart';
-import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/top_places_cards_list_view.dart';
+import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_cards_hor_list_view.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/weather_cards_list_view.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -45,10 +45,13 @@ class HomeViewBody extends StatelessWidget {
 
         SliverToBoxAdapter(
           child: CustomSection(
-            section: TopPlacesCardsListView(),
+            section: PlacesCardsHorListView(),
             hasSeeAll: true,
             title: "أفضل الأماكن",
-            seaAllAction: () => GoRouter.of(context).pushNamed(AppRouter.kAllTopPlacesName),
+            seaAllAction:
+                () => GoRouter.of(
+                  context,
+                ).pushNamed(AppRouter.kAllPlacesName, extra: "أفضل الأماكن"),
           ),
         ),
 

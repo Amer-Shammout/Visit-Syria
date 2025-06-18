@@ -6,9 +6,9 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 
 class CustomRating extends StatelessWidget {
-  const CustomRating({
-    super.key,
-  });
+  const CustomRating({super.key,  this.textColor = AppColors.whiteColor});
+
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class CustomRating extends StatelessWidget {
           style: AppStyles.fontsLight12(
             context,
             12,
-          ).copyWith(color: AppColors.whiteColor),
+          ).copyWith(color: textColor),
         ),
       ],
     );

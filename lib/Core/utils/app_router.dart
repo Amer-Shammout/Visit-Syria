@@ -13,8 +13,9 @@ import 'package:visit_syria/Features/Auth/Presentation/Views/sign_up_view.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/verification_view.dart';
 import 'package:visit_syria/Features/Events/Views/all_events_view.dart';
 import 'package:visit_syria/Features/Events/Views/event_details_view.dart';
-import 'package:visit_syria/Features/Places/Presentation/Views/all_top_places_view.dart';
+import 'package:visit_syria/Features/Places/Presentation/Views/all_places_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/city_details_view.dart';
+import 'package:visit_syria/Features/Places/Presentation/Views/place_details_view.dart';
 import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_view.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/all_offers_view.dart';
 import 'package:visit_syria/Features/Weather/Presentation/views/weather_view.dart';
@@ -52,10 +53,12 @@ abstract class AppRouter {
   static const kEventDetailsName = 'eventDetailsView';
   static const kAllOffersView = '/allOffersView';
   static const kAllOffersName = 'allOffersView';
-  static const kAllTopPlacesView = '/allTopPlacesView';
-  static const kAllTopPlacesName = 'allTopPlacesView';
+  static const kAllPlacesView = '/allPlacesView';
+  static const kAllPlacesName = 'allPlacesView';
   static const kCityDetailsView = '/cityDetailsView';
   static const kCityDetailsName = 'cityDetailsView';
+  static const kPlaceDetailsView = '/placeDetailsView';
+  static const kPlaceDetailsName = 'placeDetailsView';
 
   static final router = GoRouter(
     // initialLocation: isAuth ? kAppRoot : kLetsGetStartedView,
@@ -153,16 +156,26 @@ abstract class AppRouter {
             (context, state) => const MaterialPage(child: AllOffersView()),
       ),
       GoRoute(
-        name: kAllTopPlacesName,
-        path: kAllTopPlacesView,
+        name: kAllPlacesName,
+        path: kAllPlacesView,
         pageBuilder:
-            (context, state) => const MaterialPage(child: AllTopPlacesView()),
+            (context, state) => MaterialPage(
+              child: AllPlacesView(title: state.extra as String),
+            ),
       ),
       GoRoute(
         name: kCityDetailsName,
-        path: kCityDetailsView,        
+        path: kCityDetailsView,
         pageBuilder:
-            (context, state) =>  MaterialPage(child: CityDetailsView(cityModel: state.extra as CityModel,),),
+            (context, state) => MaterialPage(
+              child: CityDetailsView(cityModel: state.extra as CityModel),
+            ),
+      ),
+      GoRoute(
+        name: kPlaceDetailsName,
+        path: kPlaceDetailsView,
+        pageBuilder:
+            (context, state) => MaterialPage(child: PlaceDetailsView()),
       ),
     ],
   );

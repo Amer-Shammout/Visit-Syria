@@ -118,6 +118,10 @@ class Assets {
   /// assets/Icons/Category-InActive.svg
   static const String iconsCategoryInActive = "assets/Icons/Category-InActive.svg";
 
+  /// Assets for iconsCategoryStroke
+  /// assets/Icons/category_stroke.svg
+  static const String iconsCategoryStroke = "assets/Icons/category_stroke.svg";
+
   /// Assets for iconsChangePassword
   /// assets/Icons/Change-Password.svg
   static const String iconsChangePassword = "assets/Icons/Change-Password.svg";
@@ -302,6 +306,10 @@ class Assets {
   /// assets/Icons/rank.png
   static const String iconsRank = "assets/Icons/rank.png";
 
+  /// Assets for iconsRankVector
+  /// assets/Icons/Rank_vector.svg
+  static const String iconsRankVector = "assets/Icons/Rank_vector.svg";
+
   /// Assets for iconsRateStar
   /// assets/Icons/RateStar.svg
   static const String iconsRateStar = "assets/Icons/RateStar.svg";
@@ -337,6 +345,10 @@ class Assets {
   /// Assets for iconsSnowy
   /// assets/Icons/Snowy.svg
   static const String iconsSnowy = "assets/Icons/Snowy.svg";
+
+  /// Assets for iconsStar
+  /// assets/Icons/Star.svg
+  static const String iconsStar = "assets/Icons/Star.svg";
 
   /// Assets for iconsSuccess
   /// assets/Icons/Success.svg

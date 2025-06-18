@@ -4,8 +4,8 @@ import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_card.dart';
 
-class TopPlacesCardsListView extends StatelessWidget {
-  const TopPlacesCardsListView({super.key});
+class PlacesCardsHorListView extends StatelessWidget {
+  const PlacesCardsHorListView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,12 @@ class TopPlacesCardsListView extends StatelessWidget {
                 end: index == 5 ? 16 : 0,
               ),
               child: GestureDetector(
-                onTap: () => GoRouter.of(context).pushNamed(AppRouter.kAllEventsName), //TODO
-                child: PlacesCard()),
+                onTap:
+                    () => GoRouter.of(
+                      context,
+                    ).pushNamed(AppRouter.kPlaceDetailsName), 
+                child: PlacesCard(),
+              ),
             ),
         separatorBuilder: (context, index) => SizedBox(width: AppSpacing.s16),
         itemCount: 6,

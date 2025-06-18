@@ -27,7 +27,7 @@ class PlacesGridView extends StatelessWidget {
               onTap:
                   () => GoRouter.of(
                     context,
-                  ).pushNamed(AppRouter.kAllTopPlacesName), // TODO
+                  ).pushNamed(AppRouter.kPlaceDetailsName), 
               child: PlacesCard(),
             ),
         itemCount: 16,

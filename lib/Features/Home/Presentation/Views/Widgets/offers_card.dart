@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/offers_card_background.dart';
+import 'package:visit_syria/Core/widgets/custom_card_background.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/offers_card_details.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/offers_card_image.dart';
 
@@ -15,7 +15,7 @@ class OffersCard extends StatelessWidget {
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-            OffersCardBackground(),
+            CustomCardBackground(),
             Positioned(
               bottom: 8,
               right: 8,

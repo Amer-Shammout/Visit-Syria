@@ -29,7 +29,7 @@ class _AppRootViewState extends State<AppRootView> {
       drawer: CustomDrawer(),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
-        child: CustomAppBar(), // ✅ AppBar الذي أنشأته
+        child: CustomAppBar(), 
       ),
       body: _pages[_currentIndex],
       bottomNavigationBar: CustomNavBar(

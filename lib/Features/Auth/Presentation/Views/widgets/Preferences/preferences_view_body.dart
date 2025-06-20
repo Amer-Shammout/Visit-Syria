@@ -61,7 +61,6 @@ class _PreferencesViewBodyState extends State<PreferencesViewBody> {
                     'ساعدنا على فهم اهتماماتك لتقديم محتوى، وجهات، وتجارب مخصصة لك',
               ),
               const SizedBox(height: AppSpacing.s32),
-
               ...kSections.map(
                 (section) => Column(
                   children: [
@@ -76,7 +75,6 @@ class _PreferencesViewBodyState extends State<PreferencesViewBody> {
                   ],
                 ),
               ),
-
               CustomButton(
                 onPressed: _submit,
                 title: 'تأكيد',

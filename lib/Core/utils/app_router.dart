@@ -11,6 +11,7 @@ import 'package:visit_syria/Features/Auth/Presentation/Views/preferences_view.da
 import 'package:visit_syria/Features/Auth/Presentation/Views/setting_info_view.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/sign_up_view.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/verification_view.dart';
+import 'package:visit_syria/Features/Community/Presentation/Views/create_post_view.dart';
 import 'package:visit_syria/Features/Events/Views/all_events_view.dart';
 import 'package:visit_syria/Features/Events/Views/event_details_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/all_comments_and_rating_view.dart';
@@ -60,8 +61,10 @@ abstract class AppRouter {
   static const kCityDetailsName = 'cityDetailsView';
   static const kPlaceDetailsView = '/placeDetailsView';
   static const kPlaceDetailsName = 'placeDetailsView';
-  static const kkAllCommentsAndRatingView = '/allCommentsAndRatingView';
+  static const kAllCommentsAndRatingView = '/allCommentsAndRatingView';
   static const kAllCommentsAndRatingName = 'allCommentsAndRatingView';
+  static const kCreatePostView = '/createPostView';
+  static const kCreatePostName = 'createPostView';
 
   static final router = GoRouter(
     // initialLocation: isAuth ? kAppRoot : kLetsGetStartedView,
@@ -182,9 +185,15 @@ abstract class AppRouter {
       ),
       GoRoute(
         name: kAllCommentsAndRatingName,
-        path: kkAllCommentsAndRatingView,
+        path: kAllCommentsAndRatingView,
         pageBuilder:
             (context, state) => MaterialPage(child: AllCommentsAndRatingView()),
+      ),
+      GoRoute(
+        name: kCreatePostName,
+        path: kCreatePostView,
+        pageBuilder:
+            (context, state) => MaterialPage(child: CreatePostView()),
       ),
     ],
   );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
@@ -17,8 +19,7 @@ class CommunityViewHeader extends StatelessWidget {
           Expanded(
             child: CustomTextFormField(
               isEnabled: false,
-              onTap:
-                  () {},
+              onTap: () => GoRouter.of(context).pushNamed(AppRouter.kCreatePostName),
               hint: "أنشئ منشور",
               prefixIcon: FittedBox(
                 fit: BoxFit.scaleDown,

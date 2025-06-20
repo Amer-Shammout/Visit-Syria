@@ -18,6 +18,7 @@ class _TagsListViewState extends State<TagsListView> {
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * 0.046,
       child: ListView.separated(
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemBuilder:
             (context, index) => Padding(

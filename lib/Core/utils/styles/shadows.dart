@@ -34,8 +34,8 @@ abstract class Shadows {
   );
   static const BoxShadow aiBootContainerShadow = BoxShadow(
     offset: Offset(0, -8),
-    blurRadius: 12,
-    color: Color.fromARGB(10, 0, 0, 0),
+    blurRadius: 15,
+    color: Color.fromARGB(50, 0, 0, 0),
   );
   static const BoxShadow secondaryBarShadow = BoxShadow(
     offset: Offset(0, 4),

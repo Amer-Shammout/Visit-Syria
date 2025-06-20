@@ -8,7 +8,7 @@ class WeatherCardsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100,
+      height: 102,
       child: ListView.separated(
         clipBehavior: Clip.none,
         physics: BouncingScrollPhysics(),

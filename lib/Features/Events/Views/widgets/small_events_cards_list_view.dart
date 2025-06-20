@@ -10,6 +10,7 @@ class SmallEventsCardListView extends StatelessWidget {
     return SizedBox(
       height: 173,
       child: ListView.separated(
+        clipBehavior: Clip.none,
         physics: BouncingScrollPhysics(),
         itemBuilder:
             (context, index) => Padding(

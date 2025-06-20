@@ -19,7 +19,7 @@ class EventsCardDetails extends StatelessWidget {
       radius: isSmall ? 22 : 32,
       child: Container(
         padding: EdgeInsets.only(
-          bottom: isSmall ? 4 : 16,
+          bottom: isSmall ? 4 : 12,
           top: isSmall ? 12 : 16,
           right: isSmall ? 12 : 16,
           left: isSmall ? 12 : 16,
@@ -40,7 +40,7 @@ class EventsCardDetails extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            SizedBox(height: isSmall ? AppSpacing.s0 : AppSpacing.s8),
+            SizedBox(height: AppSpacing.s0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -71,7 +71,7 @@ class EventsCardDetails extends StatelessWidget {
                           ? AppStyles.fontsRegular10(
                             context,
                           ).copyWith(color: AppColors.whiteColor)
-                          : AppStyles.fontsBold14(
+                          : AppStyles.fontsBold12(
                             context,
                           ).copyWith(color: AppColors.whiteColor),
                   borderRadius: isSmall ? 10 : 16,

@@ -5,7 +5,7 @@ import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_description.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
-import 'package:visit_syria/Core/widgets/image_selector.dart';
+import 'package:visit_syria/Features/Places/Presentation/Views/widgets/place_details_view_body.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/places_grid_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/tags_list_view.dart';
 
@@ -20,24 +20,9 @@ class CityDetailsViewBody extends StatelessWidget {
       child: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: [
-          SliverAppBar(
-            expandedHeight: 360 + (MediaQuery.sizeOf(context).width - 56) / 4,
-            pinned: true,
-            floating: true,
-            backgroundColor: AppColors.whiteColor,
-            automaticallyImplyLeading: false,
-            surfaceTintColor: AppColors.whiteColor,
-            toolbarHeight: 0,
+          CustomSliverAppBar(images: cityModel.images, title: cityModel.title),
 
-            flexibleSpace: FlexibleSpaceBar(
-              background: ImageSelector(
-                title: cityModel.title,
-                images: cityModel.images,
-                hasActionButton: false,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
+          SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s16)),
           SliverToBoxAdapter(child: CustomDescription(desc: cityModel.desc)),
           SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s20)),
           PinnedHeaderSliver(
@@ -55,7 +40,6 @@ class CityDetailsViewBody extends StatelessWidget {
           ),
           SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s12)),
           PlacesGridView(),
-          SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
         ],
       ),
     );

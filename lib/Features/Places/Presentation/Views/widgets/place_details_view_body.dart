@@ -22,29 +22,16 @@ class PlaceDetailsViewBody extends StatelessWidget {
       child: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: [
-          SliverAppBar(
-            expandedHeight: 360 + (MediaQuery.sizeOf(context).width - 56) / 4,
-            pinned: true,
-            floating: true,
-            backgroundColor: AppColors.whiteColor,
-            automaticallyImplyLeading: false,
-            surfaceTintColor: AppColors.whiteColor,
-            toolbarHeight: 0,
-
-            flexibleSpace: FlexibleSpaceBar(
-              background: ImageSelector(
-                title: "باب شرقي",
-                images: [
-                  Assets.imagesTest,
-                  Assets.imagesAzemPalace,
-                  Assets.imagesIdlib,
-                  Assets.imagesRasafe,
-                ],
-                hasActionButton: false,
-              ),
-            ),
+          CustomSliverAppBar(
+            images: [
+              Assets.imagesTest,
+              Assets.imagesAzemPalace,
+              Assets.imagesIdlib,
+              Assets.imagesRasafe,
+            ],
+            title: "باب شرقي",
           ),
-          SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
+          SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s16)),
           SliverToBoxAdapter(child: PlaceGeneralInfo()),
           SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
           SliverToBoxAdapter(
@@ -62,7 +49,10 @@ class PlaceDetailsViewBody extends StatelessWidget {
             child: CustomSection(
               title: "التقييمات و التعليقات",
               hasSeeAll: true,
-              seaAllAction: () => GoRouter.of(context).pushNamed(AppRouter.kAllCommentsAndRatingName),
+              seaAllAction:
+                  () => GoRouter.of(
+                    context,
+                  ).pushNamed(AppRouter.kAllCommentsAndRatingName),
               section: CommentsListView(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -91,9 +81,39 @@ class PlaceDetailsViewBody extends StatelessWidget {
                   ),
             ),
           ),
-
-          SliverToBoxAdapter(child: SizedBox(height: 32)),
         ],
+      ),
+    );
+  }
+}
+
+class CustomSliverAppBar extends StatelessWidget {
+  const CustomSliverAppBar({
+    super.key,
+    required this.title,
+    required this.images,
+  });
+
+  final String title;
+  final List<String> images;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      expandedHeight: 360 + (MediaQuery.sizeOf(context).width - 56) / 4 + 16,
+      pinned: true,
+      floating: true,
+      backgroundColor: AppColors.whiteColor,
+      automaticallyImplyLeading: false,
+      surfaceTintColor: AppColors.whiteColor,
+      toolbarHeight: 0,
+
+      flexibleSpace: FlexibleSpaceBar(
+        background: ImageSelector(
+          title: title,
+          images: images,
+          hasActionButton: false,
+        ),
       ),
     );
   }

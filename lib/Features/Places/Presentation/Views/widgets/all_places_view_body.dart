@@ -6,6 +6,8 @@ class AllPlacesViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(slivers: [PlacesGridView()]);
+    return CustomScrollView(
+      physics: BouncingScrollPhysics(),
+      slivers: [PlacesGridView()]);
   }
 }

@@ -23,7 +23,7 @@ class WeatherCard extends StatelessWidget {
           onTap: () => GoRouter.of(context).pushNamed(AppRouter.kWeatherName),
           child: Ink(
             width: 50,
-            height: 80,
+            height: 82,
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
               color: AppColors.whiteColor,

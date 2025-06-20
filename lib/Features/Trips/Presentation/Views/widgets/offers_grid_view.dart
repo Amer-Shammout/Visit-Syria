@@ -16,7 +16,7 @@ class OffersGridView extends StatelessWidget {
       itemBuilder: (context, index) => OffersCard(),
       itemCount: 20,
       physics: BouncingScrollPhysics(),
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.only(left: 16,right: 16,bottom: 32),
     );
   }
 }

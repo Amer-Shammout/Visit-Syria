@@ -10,16 +10,25 @@ import 'package:visit_syria/Core/widgets/profile_avatar.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/custom_rating_bar.dart';
 
 class RatingForm extends StatelessWidget {
-  const RatingForm({super.key, this.padding = 16});
+  const RatingForm({
+    super.key,
+    this.padding = 16,
+    this.boxShadow,
+    this.hasBottomRadius = true,
+  });
 
   final double padding;
+  final BoxShadow? boxShadow;
+  final bool hasBottomRadius;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: padding),
       child: CustomCardBackground(
-        padding: 16,
+        hasBottomRadius: hasBottomRadius,
+        boxShadow: boxShadow,
+        padding: 24,
         child: Column(
           children: [
             Row(

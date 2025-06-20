@@ -7,7 +7,9 @@ import 'package:visit_syria/Core/widgets/custom_card_background.dart';
 import 'package:visit_syria/Core/widgets/custom_rating.dart';
 
 class CustomComment extends StatelessWidget {
-  const CustomComment({super.key});
+  const CustomComment({super.key,  this.hasRate = true});
+
+  final bool hasRate;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,9 @@ class CustomComment extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AvatarandNameandHistory(),
-              CustomRating(textColor: AppColors.titleTextColor),
+              hasRate
+                  ? CustomRating(textColor: AppColors.titleTextColor)
+                  : SizedBox.shrink(),
             ],
           ),
           SizedBox(height: AppSpacing.s8),
@@ -34,4 +38,3 @@ class CustomComment extends StatelessWidget {
     );
   }
 }
-

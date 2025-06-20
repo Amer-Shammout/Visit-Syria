@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_action_button.dart';
@@ -26,7 +28,7 @@ class PostActionButtons extends StatelessWidget {
           child: PostActionButton(
             inActiveIcon: Assets.iconsComment,
             text: "200",
-            onTap: () {},
+            onTap: () => GoRouter.of(context).pushNamed(AppRouter.kAllCommentsName),
           ),
         ),
         SizedBox(width: AppSpacing.s8),

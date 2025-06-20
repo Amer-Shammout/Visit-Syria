@@ -7,10 +7,12 @@ class CommentsListView extends StatelessWidget {
     super.key,
     this.physics = const BouncingScrollPhysics(),
     this.shrinkWrap = false,
+    this.hasRate,
   });
 
   final ScrollPhysics physics;
   final bool shrinkWrap;
+  final bool? hasRate;
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +29,11 @@ class CommentsListView extends StatelessWidget {
         : SliverPadding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           sliver: SliverList.separated(
-            itemBuilder: (context, index) => CustomComment(),
+            itemBuilder:
+                (context, index) => CustomComment(hasRate: hasRate ?? true),
             separatorBuilder:
                 (context, index) => SizedBox(height: AppSpacing.s12),
-            itemCount: 3,
+            itemCount: 10,
           ),
         );
   }

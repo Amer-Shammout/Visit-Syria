@@ -9,9 +9,10 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 
 class CustomImagePicker extends StatefulWidget {
-  const CustomImagePicker({super.key, this.onImageSelected});
+  const CustomImagePicker({super.key, this.onImageSelected, this.image});
 
   final void Function(File?)? onImageSelected;
+  final File? image;
 
   @override
   State<CustomImagePicker> createState() => _CustomImagePickerState();
@@ -42,15 +43,15 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
           borderRadius: BorderRadius.circular(24),
           color: AppColors.graySwatch[50],
           image:
-              _image != null
+              _image != null || widget.image != null
                   ? DecorationImage(
-                    image: FileImage(_image!),
+                    image: FileImage(widget.image ?? _image!),
                     fit: BoxFit.cover,
                   )
                   : null,
         ),
         child:
-            _image == null
+            _image == null && widget.image == null
                 ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

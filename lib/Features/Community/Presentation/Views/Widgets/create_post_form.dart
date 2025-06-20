@@ -9,7 +9,9 @@ import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/custom
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/select_tags_section.dart';
 
 class CreatePostForm extends StatefulWidget {
-  const CreatePostForm({super.key});
+  const CreatePostForm({super.key, this.image});
+
+  final File? image;
 
   @override
   State<CreatePostForm> createState() => CreatePostFormState();
@@ -21,6 +23,12 @@ class CreatePostFormState extends State<CreatePostForm> {
   File? image;
   List<String> selectedTags = [];
   String? postText;
+
+  @override
+  void initState() {
+    image = widget.image;
+    super.initState();
+  }
 
   void toggleSelection(String option) {
     setState(() {
@@ -55,6 +63,7 @@ class CreatePostFormState extends State<CreatePostForm> {
       child: Column(
         children: [
           CustomImagePicker(
+            image: image,
             onImageSelected:
                 (image) => setState(() {
                   this.image = image;

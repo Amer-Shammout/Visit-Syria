@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
@@ -8,12 +10,14 @@ import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/create
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/create_post_view_body.dart';
 
 class CreatePostView extends StatelessWidget {
-  const CreatePostView({super.key});
+  const CreatePostView({super.key, this.image});
+
+  final File? image;
 
   @override
   Widget build(BuildContext context) {
     final GlobalKey<CreatePostFormState> formKey =
-      GlobalKey<CreatePostFormState>();
+        GlobalKey<CreatePostFormState>();
     return Scaffold(
       appBar: CustomAppBar2(
         title: "انشاء منشور",
@@ -31,10 +35,7 @@ class CreatePostView extends StatelessWidget {
           size: 12,
         ),
       ),
-      body: CreatePostViewBody(formKey: formKey),
+      body: CreatePostViewBody(formKey: formKey,image:image),
     );
   }
 }
-
-
-

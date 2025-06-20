@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/data/models/city_model.dart';
@@ -196,13 +198,14 @@ abstract class AppRouter {
         name: kCreatePostName,
         path: kCreatePostView,
         pageBuilder:
-            (context, state) => MaterialPage(child: CreatePostView()),
+            (context, state) => MaterialPage(
+              child: CreatePostView(image: state.extra as File?),
+            ),
       ),
       GoRoute(
         name: kAllCommentsName,
         path: kAllCommentsView,
-        pageBuilder:
-            (context, state) => MaterialPage(child: AllCommentsView()),
+        pageBuilder: (context, state) => MaterialPage(child: AllCommentsView()),
       ),
     ],
   );

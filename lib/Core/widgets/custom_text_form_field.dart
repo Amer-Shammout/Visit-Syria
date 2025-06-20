@@ -6,6 +6,7 @@ class CustomTextFormField extends StatefulWidget {
   final String hint;
   final bool obscureText;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
   final TextInputType? keyboardType;
   final String? initialValue;
   final int? maxLength;
@@ -17,6 +18,8 @@ class CustomTextFormField extends StatefulWidget {
   final TextInputAction? textInputAction;
   final VoidCallback? onEditingComplete;
   final FocusNode? focusNode;
+  final bool isEnabled;
+  final VoidCallback? onTap;
 
   const CustomTextFormField({
     super.key,
@@ -34,6 +37,9 @@ class CustomTextFormField extends StatefulWidget {
     this.textInputAction,
     this.onEditingComplete,
     this.focusNode,
+    this.prefixIcon,
+    this.isEnabled = true,
+    this.onTap,
   });
 
   @override
@@ -44,8 +50,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   bool _isValid = false;
   late FocusNode _internalFocusNode;
 
-  FocusNode get _effectiveFocusNode =>
-      widget.focusNode ?? _internalFocusNode;
+  FocusNode get _effectiveFocusNode => widget.focusNode ?? _internalFocusNode;
 
   @override
   void initState() {
@@ -84,35 +89,62 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      cursorColor: AppColors.titleTextColor,
-      cursorErrorColor: AppColors.redSwatch,
-      focusNode: _effectiveFocusNode,
-      maxLines: widget.maxLines,
-      validator: widget.validator,
-      onSaved: widget.onSaved,
-      onChanged: _handleChanged,
-      maxLength: widget.maxLength,
-      initialValue: widget.initialValue,
-      obscureText: widget.obscureText,
-      keyboardType: widget.keyboardType,
-      textInputAction: widget.textInputAction,
-      onEditingComplete: widget.onEditingComplete,
-      style: AppStyles.fontsRegular16(context).copyWith(color: AppColors.titleTextColor),
-      decoration: InputDecoration(
-        errorStyle: AppStyles.fontsRegular12(context).copyWith(color: AppColors.redSwatch),
-        helperText: widget.helperText,
-        helperStyle: AppStyles.fontsRegular12(context).copyWith(color: AppColors.graySwatch[500]),
-        hintText: widget.hint,
-        hintStyle: AppStyles.fontsRegular16(context).copyWith(color: AppColors.graySwatch[500]),
-        suffixIcon: widget.suffixIcon,
-        filled: true,
-        fillColor: AppColors.graySwatch[50],
-        border: buildBorder(color: Colors.transparent),
-        enabledBorder: buildBorder(color: _isValid ? AppColors.primary : Colors.transparent),
-        focusedBorder: buildBorder(color: _isValid ? AppColors.primary : AppColors.primarySwatch[950]!),
-        errorBorder: buildBorder(color: AppColors.redSwatch[500]!),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+    return InkWell(
+      borderRadius: BorderRadius.circular(12),
+      onTap: widget.onTap,
+      child: Ink(
+        child: TextFormField(
+          cursorColor: AppColors.titleTextColor,
+          cursorErrorColor: AppColors.redSwatch,
+          focusNode: _effectiveFocusNode,
+          maxLines: widget.maxLines,
+          validator: widget.validator,
+          onSaved: widget.onSaved,
+          onChanged: _handleChanged,
+          maxLength: widget.maxLength,
+          initialValue: widget.initialValue,
+          obscureText: widget.obscureText,
+          keyboardType: widget.keyboardType,
+          textInputAction: widget.textInputAction,
+          onEditingComplete: widget.onEditingComplete,
+          style: AppStyles.fontsRegular16(
+            context,
+          ).copyWith(color: AppColors.titleTextColor),
+          decoration: InputDecoration(
+            enabled: widget.isEnabled,
+            prefixIcon: widget.prefixIcon,
+            prefixIconConstraints: BoxConstraints(maxHeight: 32, maxWidth: 32),
+            errorStyle: AppStyles.fontsRegular12(
+              context,
+            ).copyWith(color: AppColors.redSwatch),
+            helperText: widget.helperText,
+            helperStyle: AppStyles.fontsRegular12(
+              context,
+            ).copyWith(color: AppColors.graySwatch[500]),
+            isDense: true,
+            hintText: widget.hint,
+            hintStyle: AppStyles.fontsRegular16(
+              context,
+            ).copyWith(color: AppColors.graySwatch[500]),
+            suffixIcon: widget.suffixIcon,
+            filled: true,
+            fillColor: AppColors.graySwatch[50],
+            border: buildBorder(color: Colors.transparent),
+            enabledBorder: buildBorder(
+              color: _isValid ? AppColors.primary : Colors.transparent,
+            ),
+            focusedBorder: buildBorder(
+              color:
+                  _isValid ? AppColors.primary : AppColors.primarySwatch[950]!,
+            ),
+            errorBorder: buildBorder(color: AppColors.redSwatch[500]!),
+            disabledBorder: buildBorder(color: Colors.transparent),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 14,
+            ),
+          ),
+        ),
       ),
     );
   }

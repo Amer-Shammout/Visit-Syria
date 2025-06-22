@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/widgets/custom_choice_chip.dart';
 
 class TagsListView extends StatefulWidget {
@@ -15,8 +16,9 @@ class _TagsListViewState extends State<TagsListView> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.sizeOf(context).height * 0.046,
+    return Container(
+      height: MediaQuery.sizeOf(context).height * 0.046 + 16,
+      color: AppColors.whiteColor,
       child: ListView.separated(
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,

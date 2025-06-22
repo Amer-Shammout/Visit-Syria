@@ -19,7 +19,7 @@ class CustomButton extends StatelessWidget {
     this.icon,
     this.size = 16,
     this.iconColor = AppColors.primary,
-    this.shadow = Shadows.buttonShadow1,
+    this.shadow = Shadows.buttonShadow1, this.height,
   });
 
   final VoidCallback onPressed;
@@ -34,12 +34,14 @@ class CustomButton extends StatelessWidget {
   final double size;
   final Color iconColor;
   final BoxShadow? shadow;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(boxShadow: shadow != null ? [shadow!] : []),
       width: width,
+      height: height,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 
-class PostTag extends StatelessWidget {
-  const PostTag({super.key, required this.tag});
+class PostandBlogTag extends StatelessWidget {
+  const PostandBlogTag({super.key, required this.tag,  this.textStyle});
 
   final String tag;
+  final TextStyle? textStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class PostTag extends StatelessWidget {
       ),
       child: Text(
         tag,
-        style: AppStyles.fontsRegular12(
+        style: textStyle ?? AppStyles.fontsRegular12(
           context,
         ).copyWith(color: AppColors.primary),
       ),

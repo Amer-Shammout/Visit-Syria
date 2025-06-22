@@ -5,7 +5,7 @@ import 'package:visit_syria/Core/widgets/custom_card_background.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/expandable_text.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_action_buttons.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_image.dart';
-import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_tags_wrap.dart';
+import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_and_blogs_tags_wrap.dart';
 
 class PostCard extends StatelessWidget {
   const PostCard({super.key, required this.hasImage});
@@ -27,7 +27,7 @@ class PostCard extends StatelessWidget {
             "استيقظت على طقس دمشق الدافئ وبدأت رحلتي الساحرة في قلب التاريخ. أول محطة كانت الجامع الأموي، المزيد تحفة معمارية فريدة تأسر الأنفاس بجمالها وروحانيتها. التجول داخل أروقته كان كرحلة عبر الزمن، وهنا شعرت بعمق الحضارة الإسلامية التي خطت بخطوطها مدينة دمـ المزيد.ثم توجهت إلى قصر العظم، ذلك الصرح العثماني الفخم الذي يسرد حكايات من الماضي عبر جدرانه الضخمة وزخارفه الرائعة. المكان ينبض بالحياة ويوفر لمحة حقيقية عن تاريخ سوريا العريق.لم أستطع مقاومة سوق الحميدية، حيث تختلط رائحة التوابل بألوان الحرف اليدوية وصخب الباعة. تجربة التسوق هناك ليست فقط شراءً، بل رحلة في قلب الثقافة الدمشقية.بعد دمشق، أخذت الطريق إلى تدمر، المدينة التي تفخر بأطلالها الرومانية العظيمة. المشهد من الأعمدة الباقية والأبنية القديمة يشعرك بعظمة الحضارة التي مرت من هنا.وأخيرًا، زرت مدرج بصرى الروماني، حيث يحتفظ الحجر وحتى الصوت بصدى الحفلات والعروض التي كانت تقام فيه منذ قرون. الجلوس هناك والتأمل في المكان كان لحظة استثنائية أضافت بعدًا خاصًا لرحلتي.سوريا، بكل ألوانها وتاريخها، أبهرتني وأثرت في قلبي. رحلة لا تُنسى، أعود منها محملاً بذكريات لا تُقدر بثمن.",
           ),
           SizedBox(height: AppSpacing.s12),
-          PostTagsWrap(
+          PostandBlogsTagsWrap(
             tags: [
               "دمشق",
               "حمص",

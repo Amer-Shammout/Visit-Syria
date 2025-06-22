@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/data/models/city_model.dart';
+import 'package:visit_syria/Features/About%20Syria/Presentation/Views/blog_details_view.dart';
 import 'package:visit_syria/Features/App%20Root/Presentation/Views/app_root_.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/forget_password_view_1.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/forget_password_view_2.dart';
@@ -70,6 +71,10 @@ abstract class AppRouter {
   static const kCreatePostName = 'createPostView';
   static const kAllCommentsView = '/allCommentsView';
   static const kAllCommentsName = 'allCommentsView';
+  static const kBlogDetailsView = '/blogDetailsView';
+  static const kBlogDetailsName = 'blogDetailsView';
+  static const kSimilarBlogsView = '/similarBlogsView';
+  static const kSimilarBlogsName = 'similarBlogsView';
 
   static final router = GoRouter(
     // initialLocation: isAuth ? kAppRoot : kLetsGetStartedView,
@@ -205,6 +210,16 @@ abstract class AppRouter {
       GoRoute(
         name: kAllCommentsName,
         path: kAllCommentsView,
+        pageBuilder: (context, state) => MaterialPage(child: AllCommentsView()),
+      ),
+      GoRoute(
+        name: kBlogDetailsName,
+        path: kBlogDetailsView,
+        pageBuilder: (context, state) => MaterialPage(child: BlogDetailsView()),
+      ),
+      GoRoute(
+        name: kSimilarBlogsName,
+        path: kSimilarBlogsView,
         pageBuilder: (context, state) => MaterialPage(child: AllCommentsView()),
       ),
     ],

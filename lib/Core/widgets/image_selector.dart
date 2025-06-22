@@ -42,7 +42,9 @@ class _ImageSelectorState extends State<ImageSelector> {
                 right: 16,
                 left: 16,
                 top: 16,
-                child: DetailsViewsHeader(hasActionButton: false),
+                child: DetailsViewsHeader(
+                  hasActionButton: widget.hasActionButton,
+                ),
               ),
               Positioned(
                 bottom: 16,

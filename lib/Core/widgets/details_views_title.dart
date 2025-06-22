@@ -12,12 +12,15 @@ class DetailsViewsTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text(
-          title,
-          style: AppStyles.fontsBold32(
-            context,
-          ).copyWith(color: AppColors.whiteColor),
+        Expanded(
+          child: Text(
+            title,
+            style: AppStyles.fontsBold32(
+              context,
+            ).copyWith(color: AppColors.whiteColor),
+          ),
         ),
         CustomRating(),
       ],

@@ -5,7 +5,7 @@ import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_description.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
-import 'package:visit_syria/Features/Places/Presentation/Views/widgets/place_details_view_body.dart';
+import 'package:visit_syria/Core/widgets/custom_sliver_app_bar.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/places_grid_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/tags_list_view.dart';
 
@@ -20,7 +20,11 @@ class CityDetailsViewBody extends StatelessWidget {
       child: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: [
-          CustomSliverAppBar(images: cityModel.images, title: cityModel.title),
+          CustomSliverAppBar(
+            images: cityModel.images,
+            title: cityModel.title,
+            hasActionButton: false,
+          ),
 
           SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s16)),
           SliverToBoxAdapter(child: CustomDescription(desc: cityModel.desc)),

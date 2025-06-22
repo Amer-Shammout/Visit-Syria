@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
-import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_description.dart';
 import 'package:visit_syria/Core/widgets/custom_map.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
-import 'package:visit_syria/Core/widgets/image_selector.dart';
+import 'package:visit_syria/Core/widgets/custom_sliver_app_bar.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_cards_hor_list_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/comments_list_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/place_general_info.dart';
@@ -82,38 +81,6 @@ class PlaceDetailsViewBody extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class CustomSliverAppBar extends StatelessWidget {
-  const CustomSliverAppBar({
-    super.key,
-    required this.title,
-    required this.images,
-  });
-
-  final String title;
-  final List<String> images;
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverAppBar(
-      expandedHeight: 360 + (MediaQuery.sizeOf(context).width - 56) / 4 + 16,
-      pinned: true,
-      floating: true,
-      backgroundColor: AppColors.whiteColor,
-      automaticallyImplyLeading: false,
-      surfaceTintColor: AppColors.whiteColor,
-      toolbarHeight: 0,
-
-      flexibleSpace: FlexibleSpaceBar(
-        background: ImageSelector(
-          title: title,
-          images: images,
-          hasActionButton: false,
-        ),
       ),
     );
   }

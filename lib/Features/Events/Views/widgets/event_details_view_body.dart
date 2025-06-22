@@ -6,9 +6,9 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
 import 'package:visit_syria/Core/widgets/custom_description.dart';
 import 'package:visit_syria/Core/widgets/custom_map.dart';
+import 'package:visit_syria/Core/widgets/custom_sliver_app_bar.dart';
 import 'package:visit_syria/Features/Events/Views/widgets/event_general_info.dart';
 import 'package:visit_syria/Features/Events/Views/widgets/small_events_cards_list_view.dart';
-import 'package:visit_syria/Features/Places/Presentation/Views/widgets/place_details_view_body.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/custom_floating_action_button.dart';
 
 class EventDetailsViewBody extends StatelessWidget {

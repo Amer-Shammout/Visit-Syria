@@ -5,9 +5,7 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Features/About%20Syria/Presentation/Views/Widgets/blogs_card.dart';
 
 class BlogsCardsListView extends StatelessWidget {
-  const BlogsCardsListView({
-    super.key,
-  });
+  const BlogsCardsListView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +14,15 @@ class BlogsCardsListView extends StatelessWidget {
       sliver: SliverList.separated(
         itemBuilder:
             (context, index) => GestureDetector(
-              onTap: () => GoRouter.of(context).pushNamed(AppRouter.kBlogDetailsName),
-              child: BlogsCard()),
-        separatorBuilder:
-            (context, index) => SizedBox(height: AppSpacing.s16),
+              onTap:
+                  () => GoRouter.of(
+                    context,
+                  ).pushNamed(AppRouter.kBlogDetailsName),
+              child: BlogsCard(),
+            ),
+        separatorBuilder: (context, index) => SizedBox(height: AppSpacing.s16),
         itemCount: 6,
       ),
     );
   }
 }
-

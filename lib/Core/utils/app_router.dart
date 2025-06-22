@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/data/models/city_model.dart';
+import 'package:visit_syria/Features/About%20Syria/Presentation/Views/all_similar_blogs_view.dart';
 import 'package:visit_syria/Features/About%20Syria/Presentation/Views/blog_details_view.dart';
 import 'package:visit_syria/Features/App%20Root/Presentation/Views/app_root_.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/forget_password_view_1.dart';
@@ -220,7 +221,8 @@ abstract class AppRouter {
       GoRoute(
         name: kSimilarBlogsName,
         path: kSimilarBlogsView,
-        pageBuilder: (context, state) => MaterialPage(child: AllCommentsView()),
+        pageBuilder:
+            (context, state) => MaterialPage(child: AllSimilarBlogsView()),
       ),
     ],
   );

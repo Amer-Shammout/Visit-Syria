@@ -6,13 +6,14 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 
 class CustomRating extends StatelessWidget {
-  const CustomRating({super.key,  this.textColor = AppColors.whiteColor});
+  const CustomRating({super.key, this.textColor = AppColors.whiteColor});
 
   final Color textColor;
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       textDirection: TextDirection.ltr,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -28,10 +29,7 @@ class CustomRating extends StatelessWidget {
         SizedBox(width: AppSpacing.s2),
         Text(
           '4.5',
-          style: AppStyles.fontsLight12(
-            context,
-            12,
-          ).copyWith(color: textColor),
+          style: AppStyles.fontsLight12(context, 12).copyWith(color: textColor),
         ),
       ],
     );

@@ -27,6 +27,8 @@ import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotels_and_resturants_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/similar_hotels_or_resturants_view.dart';
 import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_view.dart';
+import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_companies_view.dart';
+import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_company_details_view.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/all_offers_view.dart';
 import 'package:visit_syria/Features/Weather/Presentation/views/weather_view.dart';
 
@@ -89,6 +91,10 @@ abstract class AppRouter {
       '/simialarHotelsOrResturantsView';
   static const kSimialarHotelsOrResturantsName =
       'simialarHotelsOrResturantsView';
+  static const kTourismCompaniesView = '/tourismCompaniesView';
+  static const kTourismCompanieName = 'tourismCompaniesView';
+  static const kTourismCompanyDetailsView = '/tourismCompanyDetailsView';
+  static const kTourismCompanyDetailsName = 'tourismCompanyDetailsView';
 
   static final router = GoRouter(
     // initialLocation: isAuth ? kAppRoot : kLetsGetStartedView,
@@ -258,6 +264,22 @@ abstract class AppRouter {
               child: SimilarHotelsOrResturantsView(
                 title: state.extra as String,
               ),
+            ),
+      ),
+      GoRoute(
+        name: kTourismCompanieName,
+        path: kTourismCompaniesView,
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: TourismCompaniesView(),
+            ),
+      ),
+      GoRoute(
+        name: kTourismCompanyDetailsName,
+        path: kTourismCompanyDetailsView,
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: TourismCompanyDetailsView(),
             ),
       ),
     ],

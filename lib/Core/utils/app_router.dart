@@ -23,6 +23,9 @@ import 'package:visit_syria/Features/Places/Presentation/Views/all_comments_and_
 import 'package:visit_syria/Features/Places/Presentation/Views/all_places_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/city_details_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/place_details_view.dart';
+import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotel_and_resturants_details_view.dart';
+import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotels_and_resturants_view.dart';
+import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/similar_hotels_or_resturants_view.dart';
 import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_view.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/all_offers_view.dart';
 import 'package:visit_syria/Features/Weather/Presentation/views/weather_view.dart';
@@ -76,6 +79,16 @@ abstract class AppRouter {
   static const kBlogDetailsName = 'blogDetailsView';
   static const kSimilarBlogsView = '/similarBlogsView';
   static const kSimilarBlogsName = 'similarBlogsView';
+  static const kHotelsAndResturantsView = '/hotelsAndResturantsView';
+  static const kHotelsAndResturantsName = 'hotelsAndResturantsView';
+  static const kHotelsAndResturantsDetailsView =
+      '/hotelsAndResturantsDetailsView';
+  static const kHotelsAndResturantsDetailsName =
+      'hotelsAndResturantsDetailsView';
+  static const kSimialarHotelsOrResturantsView =
+      '/simialarHotelsOrResturantsView';
+  static const kSimialarHotelsOrResturantsName =
+      'simialarHotelsOrResturantsView';
 
   static final router = GoRouter(
     // initialLocation: isAuth ? kAppRoot : kLetsGetStartedView,
@@ -223,6 +236,29 @@ abstract class AppRouter {
         path: kSimilarBlogsView,
         pageBuilder:
             (context, state) => MaterialPage(child: AllSimilarBlogsView()),
+      ),
+      GoRoute(
+        name: kHotelsAndResturantsName,
+        path: kHotelsAndResturantsView,
+        pageBuilder:
+            (context, state) => MaterialPage(child: HotelsAndResturantsView()),
+      ),
+      GoRoute(
+        name: kHotelsAndResturantsDetailsName,
+        path: kHotelsAndResturantsDetailsView,
+        pageBuilder:
+            (context, state) =>
+                MaterialPage(child: HotelAndResturantsDetailsView()),
+      ),
+      GoRoute(
+        name: kSimialarHotelsOrResturantsName,
+        path: kSimialarHotelsOrResturantsView,
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: SimilarHotelsOrResturantsView(
+                title: state.extra as String,
+              ),
+            ),
       ),
     ],
   );

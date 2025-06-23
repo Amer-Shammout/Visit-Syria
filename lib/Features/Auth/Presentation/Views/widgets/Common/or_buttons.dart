@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/services/google_sign_in.dart';
+import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
@@ -33,7 +35,7 @@ class OrButtons extends StatelessWidget {
           icon: Assets.iconsUser,
           style: AppStyles.fontsRegular14(context),
           color: AppColors.graySwatch[700]!,
-          onPressed: () {},
+          onPressed: () => GoRouter.of(context).goNamed(AppRouter.kAppRootName),
           size: 16,
         ),
       ],

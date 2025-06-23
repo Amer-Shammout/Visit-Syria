@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/constants/drawer_constants.dart';
+import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
@@ -53,7 +55,18 @@ class CustomDrawer extends StatelessWidget {
                   );
                 },
                 itemBuilder: (BuildContext context, int index) {
-                  return CustomDrawerItem(drawerModel: drawerItems[index]);
+                  return GestureDetector(
+                    child: CustomDrawerItem(
+                      drawerModel: drawerItems[index],
+                      onTap:
+                          () =>
+                              index == 2
+                                  ? GoRouter.of(context).pushNamed(
+                                    AppRouter.kHotelsAndResturantsName,
+                                  )
+                                  : null,
+                    ),
+                  );
                 },
               ),
             ),

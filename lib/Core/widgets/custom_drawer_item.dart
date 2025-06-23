@@ -7,14 +7,15 @@ import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 
 class CustomDrawerItem extends StatelessWidget {
-  const CustomDrawerItem({super.key, required this.drawerModel});
+  const CustomDrawerItem({super.key, required this.drawerModel, this.onTap});
 
   final DrawerModel drawerModel;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {},
+      onTap: onTap,
       leading: SvgPicture.asset(
         drawerModel.icon,
         width: 24,

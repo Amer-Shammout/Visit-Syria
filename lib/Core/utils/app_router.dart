@@ -1,11 +1,21 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/data/models/city_model.dart';
+import 'package:visit_syria/Core/services/service_locator.dart';
 import 'package:visit_syria/Features/About%20Syria/Presentation/Views/all_similar_blogs_view.dart';
 import 'package:visit_syria/Features/About%20Syria/Presentation/Views/blog_details_view.dart';
 import 'package:visit_syria/Features/App%20Root/Presentation/Views/app_root_.dart';
+import 'package:visit_syria/Features/Auth/Data/Repos/auth_repo_impl.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/forget_password_cubit/forget_password_cubit.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/login_cubit/login_cubit.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/register_cubit/register_cubit.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/resend_code_cubit/resend_code_cubit.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/reset_password_cubit/reset_password_cubit.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/verify_code_cubit/verify_code_cubit.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/verify_email_cubit/verify_email_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/forget_password_view_1.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/forget_password_view_2.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/forget_password_view_3.dart';
@@ -114,19 +124,45 @@ abstract class AppRouter {
       GoRoute(
         name: kLoginName,
         path: kLoginView,
-        pageBuilder: (context, state) => const MaterialPage(child: LoginView()),
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create: (context) => LoginCubit(getIt.get<AuthRepoImpl>()),
+                child: LoginView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kSignupName,
         path: kSignupView,
         pageBuilder:
-            (context, state) => const MaterialPage(child: SignUpView()),
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create: (context) => RegisterCubit(getIt.get<AuthRepoImpl>()),
+                child: SignUpView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kVerificationName,
         path: kVerificationView,
         pageBuilder:
-            (context, state) => const MaterialPage(child: VerificationView()),
+            (context, state) => MaterialPage(
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) =>
+                            VerifyEmailCubit(getIt.get<AuthRepoImpl>()),
+                  ),
+                  BlocProvider(
+                    create:
+                        (context) => ResendCodeCubit(getIt.get<AuthRepoImpl>()),
+                  ),
+                ],
+                child: VerificationView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kSettingInfoName,
@@ -144,22 +180,45 @@ abstract class AppRouter {
         name: kForgetPassword1Name,
         path: kForgetPassword1View,
         pageBuilder:
-            (context, state) =>
-                const MaterialPage(child: ForgetPasswordView1()),
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) => ForgetPasswordCubit(getIt.get<AuthRepoImpl>()),
+                child: ForgetPasswordView1(),
+              ),
+            ),
       ),
       GoRoute(
         name: kForgetPassword2Name,
         path: kForgetPassword2View,
         pageBuilder:
-            (context, state) =>
-                const MaterialPage(child: ForgetPasswordView2()),
+            (context, state) => MaterialPage(
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) => VerifyCodeCubit(getIt.get<AuthRepoImpl>()),
+                  ),
+                  BlocProvider(
+                    create:
+                        (context) => ResendCodeCubit(getIt.get<AuthRepoImpl>()),
+                  ),
+                ],
+                child: ForgetPasswordView2(),
+              ),
+            ),
       ),
       GoRoute(
         name: kForgetPassword3Name,
         path: kForgetPassword3View,
         pageBuilder:
-            (context, state) =>
-                const MaterialPage(child: ForgetPasswordView3()),
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) => ResetPasswordCubit(getIt.get<AuthRepoImpl>()),
+                child: ForgetPasswordView3(),
+              ),
+            ),
       ),
       GoRoute(
         name: kAppRootName,
@@ -270,17 +329,14 @@ abstract class AppRouter {
         name: kTourismCompanieName,
         path: kTourismCompaniesView,
         pageBuilder:
-            (context, state) => MaterialPage(
-              child: TourismCompaniesView(),
-            ),
+            (context, state) => MaterialPage(child: TourismCompaniesView()),
       ),
       GoRoute(
         name: kTourismCompanyDetailsName,
         path: kTourismCompanyDetailsView,
         pageBuilder:
-            (context, state) => MaterialPage(
-              child: TourismCompanyDetailsView(),
-            ),
+            (context, state) =>
+                MaterialPage(child: TourismCompanyDetailsView()),
       ),
     ],
   );

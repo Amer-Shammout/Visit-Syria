@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:visit_syria/Core/constants/common_constants.dart';
+import 'package:visit_syria/Core/services/shared_preferences_singleton.dart';
 import 'package:visit_syria/Features/Auth/Data/Models/auth_request_model.dart';
 import 'package:visit_syria/Features/Auth/Data/Models/auth_response_model.dart';
 import 'package:visit_syria/Features/Auth/Data/Repos/auth_repo.dart';
@@ -15,7 +17,10 @@ class LoginCubit extends Cubit<LoginState> {
     final result = await _authRepo.login(loginModel);
     result.fold(
       (failure) => emit(LoginFailure(errMessage: failure.errMessage)),
-      (data) => emit(LoginSuccess(authResponse: data)),
+      (data) {
+        Prefs.setString(kToken, data.token!);
+        emit(LoginSuccess(authResponse: data));
+      },
     );
   }
 }

@@ -7,15 +7,16 @@ class DioClient {
   // final String _baseUrl = "http://127.0.0.1:8000/api/";
   // final String _baseUrl = 'http://192.168.43.241:8000/api/';
   // final String _baseUrl = 'http://192.168.108.141:8000/api/';
-  final String _baseUrl = 'http://192.168.81.141:8000/api/';
+  final String _baseUrl = 'http://192.168.118.141:8000/api/';
   DioClient()
-      : _dio = Dio(
-          BaseOptions(
-              headers: {'Content-Type': 'application/json; charset=UTF-8'},
-              responseType: ResponseType.json,
-              sendTimeout: const Duration(seconds: 20),
-              receiveTimeout: const Duration(seconds: 20)),
-        )..interceptors.addAll([LoggerInterceptor()]);
+    : _dio = Dio(
+        BaseOptions(
+          headers: {'Content-Type': 'application/json; charset=UTF-8'},
+          responseType: ResponseType.json,
+          sendTimeout: const Duration(seconds: 30),
+          receiveTimeout: const Duration(seconds: 30),
+        ),
+      )..interceptors.addAll([LoggerInterceptor()]);
 
   // GET METHOD
   Future<Response> get(

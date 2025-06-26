@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visit_syria/Core/constants/common_constants.dart';
@@ -18,6 +20,7 @@ class LoginCubit extends Cubit<LoginState> {
     result.fold(
       (failure) => emit(LoginFailure(errMessage: failure.errMessage)),
       (data) {
+        log("${data.message} \n ${data.token}");
         Prefs.setString(kToken, data.token!);
         emit(LoginSuccess(authResponse: data));
       },

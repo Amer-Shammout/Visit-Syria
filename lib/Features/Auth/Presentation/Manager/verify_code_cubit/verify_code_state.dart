@@ -9,10 +9,8 @@ abstract class VerifyCodeState extends Equatable {
 class VerifyCodeInitial extends VerifyCodeState {}
 class VerifyCodeLoading extends VerifyCodeState {}
 class VerifyCodeSuccess extends VerifyCodeState {
-  final AuthResponseModel authResponse;
-  const VerifyCodeSuccess({required this.authResponse});
-  @override
-  List<Object?> get props => [authResponse];
+  final VerificationModel verificationModel;
+  const VerifyCodeSuccess({required this.verificationModel});
 }
 class VerifyCodeFailure extends VerifyCodeState {
   final String errMessage;

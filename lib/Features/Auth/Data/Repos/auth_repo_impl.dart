@@ -12,23 +12,29 @@ import 'package:visit_syria/Features/Auth/Data/Repos/auth_repo.dart';
 
 class AuthRepoImpl extends AuthRepo {
   @override
-  Future<Either<Failure, String>> register(AuthRequestModel authRequestModel) async {
+  Future<Either<Failure, String>> register(
+    AuthRequestModel authRequestModel,
+  ) async {
     return await handleRequest<String>(
-      requestFn: () => getIt.get<DioClient>().post(
-        kRegisterUrl,
-        data: authRequestModel.toJson(),
-      ),
+      requestFn:
+          () => getIt.get<DioClient>().post(
+            kRegisterUrl,
+            data: authRequestModel.toJsonRegister(),
+          ),
       parse: (data) => data['message'],
     );
   }
 
   @override
-  Future<Either<Failure, AuthResponseModel>> login(AuthRequestModel authRequestModel) async {
+  Future<Either<Failure, AuthResponseModel>> login(
+    AuthRequestModel authRequestModel,
+  ) async {
     return await handleRequest<AuthResponseModel>(
-      requestFn: () => getIt.get<DioClient>().post(
-        kLoginUrl,
-        data: authRequestModel.toJson(),
-      ),
+      requestFn:
+          () => getIt.get<DioClient>().post(
+            kLoginUrl,
+            data: authRequestModel.toJsonLogin(),
+          ),
       parse: (data) {
         final model = AuthResponseModel.fromJson(data);
         return model;
@@ -37,23 +43,29 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<Either<Failure, bool>> resendCode(AuthRequestModel resendOtpModel) async {
+  Future<Either<Failure, bool>> resendCode(
+    String email,
+  ) async {
     return await handleRequest<bool>(
-      requestFn: () => getIt.get<DioClient>().post(
-        kResendCodeUrl,
-        data: resendOtpModel.toJson(),
-      ),
+      requestFn:
+          () => getIt.get<DioClient>().post(
+            kResendCodeUrl,
+            data: {'email': email},
+          ),
       parse: (_) => true,
     );
   }
 
   @override
-  Future<Either<Failure, AuthResponseModel>> verifyEmail(VerificationModel verificationModel) async {
+  Future<Either<Failure, AuthResponseModel>> verifyEmail(
+    VerificationModel verificationModel,
+  ) async {
     return await handleRequest<AuthResponseModel>(
-      requestFn: () => getIt.get<DioClient>().post(
-        kVerifyEmailUrl,
-        data: verificationModel.toJson(),
-      ),
+      requestFn:
+          () => getIt.get<DioClient>().post(
+            kVerifyEmailUrl,
+            data: verificationModel.toJson(),
+          ),
       parse: (data) {
         final model = AuthResponseModel.fromJson(data);
         return model;
@@ -62,34 +74,41 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<Either<Failure, String>> forgetPassword(AuthRequestModel authRequestModel) async {
+  Future<Either<Failure, String>> forgetPassword(String email) async {
     return await handleRequest<String>(
-      requestFn: () => getIt.get<DioClient>().post(
-        kForgetPasswordUrl,
-        data: authRequestModel.toJson(),
-      ),
+      requestFn:
+          () => getIt.get<DioClient>().post(
+            kForgetPasswordUrl,
+            data: {'email': email},
+          ),
       parse: (data) => data['message'],
     );
   }
 
   @override
-  Future<Either<Failure, AuthResponseModel>> resetPassword(ResetPasswordModel resetPasswordModel) async {
+  Future<Either<Failure, AuthResponseModel>> resetPassword(
+    ResetPasswordModel resetPasswordModel,
+  ) async {
     return await handleRequest<AuthResponseModel>(
-      requestFn: () => getIt.get<DioClient>().post(
-        kResetPasswordUrl,
-        data: resetPasswordModel.toJson(),
-      ),
+      requestFn:
+          () => getIt.get<DioClient>().post(
+            kResetPasswordUrl,
+            data: resetPasswordModel.toJson(),
+          ),
       parse: (data) => AuthResponseModel.fromJson(data),
     );
   }
 
   @override
-  Future<Either<Failure, AuthResponseModel>> verifyCode(VerificationModel verificationModel) async {
+  Future<Either<Failure, AuthResponseModel>> verifyCode(
+    VerificationModel verificationModel,
+  ) async {
     return await handleRequest<AuthResponseModel>(
-      requestFn: () => getIt.get<DioClient>().post(
-        kVerifyCodeUrl,
-        data: verificationModel.toJson(),
-      ),
+      requestFn:
+          () => getIt.get<DioClient>().post(
+            kVerifyCodeUrl,
+            data: verificationModel.toJson(),
+          ),
       parse: (data) => AuthResponseModel.fromJson(data),
     );
   }

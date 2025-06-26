@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 // ignore: unused_import
 import 'package:go_router/go_router.dart';
@@ -11,9 +12,14 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_button.dart';
 import 'package:visit_syria/Core/widgets/custom_text_field_with_label.dart';
+import 'package:visit_syria/Features/Auth/Data/Models/reset_password_model.dart';
+import 'package:visit_syria/Features/Auth/Data/Models/verification_model.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/reset_password_cubit/reset_password_cubit.dart';
 
 class ForgetPasswordForm3 extends StatefulWidget {
-  const ForgetPasswordForm3({super.key});
+  const ForgetPasswordForm3({super.key, required this.verificationModel});
+
+  final VerificationModel verificationModel;
 
   @override
   State<ForgetPasswordForm3> createState() => _ForgetPasswordForm3State();
@@ -28,11 +34,17 @@ class _ForgetPasswordForm3State extends State<ForgetPasswordForm3> {
   final _passwordFocus = FocusNode();
   final _confirmPasswordFocus = FocusNode();
 
-  void _submit() {
+  void _submit() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      // GoRouter.of(context).pushReplacementNamed(AppRouter.kVerificationName);
-      // TODO
+      ResetPasswordModel resetPasswordModel = ResetPasswordModel(
+        code: widget.verificationModel.code,
+        email: widget.verificationModel.email,
+        password: password,
+      );
+      await BlocProvider.of<ResetPasswordCubit>(
+        context,
+      ).resetPassword(resetPasswordModel);
     } else {
       setState(() {
         _isAutoValidate = AutovalidateMode.always;

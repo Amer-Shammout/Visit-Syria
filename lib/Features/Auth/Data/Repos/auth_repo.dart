@@ -11,7 +11,7 @@ abstract class AuthRepo {
     AuthRequestModel authRequestModel,
   );
   Future<Either<Failure, String>> forgetPassword(
-    AuthRequestModel authRequestModel,
+    String email,
   );
   Future<Either<Failure, AuthResponseModel>> verifyEmail(
     VerificationModel verificationModel,
@@ -22,5 +22,5 @@ abstract class AuthRepo {
   Future<Either<Failure, AuthResponseModel>> resetPassword(
     ResetPasswordModel resetPasswordModel,
   );
-  Future<Either<Failure, bool>> resendCode(AuthRequestModel resendOtpModel);
+  Future<Either<Failure, bool>> resendCode(String email);
 }

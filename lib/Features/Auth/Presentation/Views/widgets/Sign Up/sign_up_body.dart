@@ -28,7 +28,6 @@ class SignUpViewBody extends StatelessWidget {
               SignUpForm(),
               SizedBox(height: AppSpacing.s16),
               OrIndicaor(),
-
               const SizedBox(height: AppSpacing.s24),
               OrButtons(),
               const SizedBox(height: AppSpacing.s16),

@@ -8,6 +8,8 @@ import 'package:visit_syria/Core/services/service_locator.dart';
 import 'package:visit_syria/Features/About%20Syria/Presentation/Views/all_similar_blogs_view.dart';
 import 'package:visit_syria/Features/About%20Syria/Presentation/Views/blog_details_view.dart';
 import 'package:visit_syria/Features/App%20Root/Presentation/Views/app_root_.dart';
+import 'package:visit_syria/Features/Auth/Data/Models/auth_request_model.dart';
+import 'package:visit_syria/Features/Auth/Data/Models/verification_model.dart';
 import 'package:visit_syria/Features/Auth/Data/Repos/auth_repo_impl.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Manager/forget_password_cubit/forget_password_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Manager/login_cubit/login_cubit.dart';
@@ -160,7 +162,9 @@ abstract class AppRouter {
                         (context) => ResendCodeCubit(getIt.get<AuthRepoImpl>()),
                   ),
                 ],
-                child: VerificationView(),
+                child: VerificationView(
+                  authRequestModel: state.extra as AuthRequestModel,
+                ),
               ),
             ),
       ),
@@ -204,7 +208,7 @@ abstract class AppRouter {
                         (context) => ResendCodeCubit(getIt.get<AuthRepoImpl>()),
                   ),
                 ],
-                child: ForgetPasswordView2(),
+                child: ForgetPasswordView2(email: state.extra as String),
               ),
             ),
       ),
@@ -216,7 +220,9 @@ abstract class AppRouter {
               child: BlocProvider(
                 create:
                     (context) => ResetPasswordCubit(getIt.get<AuthRepoImpl>()),
-                child: ForgetPasswordView3(),
+                child: ForgetPasswordView3(
+                  verificationModel: state.extra as VerificationModel,
+                ),
               ),
             ),
       ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Login/login_view_body.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Login/login_view_body_consumer.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -11,7 +11,6 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: LoginViewBody());
+    return Scaffold(body: LoginViewBodyConsumer());
   }
 }
-

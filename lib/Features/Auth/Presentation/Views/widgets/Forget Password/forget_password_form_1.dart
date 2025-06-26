@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
@@ -8,6 +9,7 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_button.dart';
 import 'package:visit_syria/Core/widgets/custom_text_field_with_label.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/forget_password_cubit/forget_password_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Common/have_and_dont_have_account.dart';
 
 class ForgetPasswordForm1 extends StatefulWidget {
@@ -21,20 +23,20 @@ class _ForgetPasswordForm1State extends State<ForgetPasswordForm1> {
   AutovalidateMode _isAutoValidate = AutovalidateMode.disabled;
   final GlobalKey<FormState> _formKey = GlobalKey();
   String? email;
-  
-  void _submit() {
+
+  void _submit() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-     
-      GoRouter.of(context).pushNamed(AppRouter.kForgetPassword2Name);
-
-      // TODO
+      await BlocProvider.of<ForgetPasswordCubit>(
+        context,
+      ).forgetPassword(email!);
     } else {
       setState(() {
         _isAutoValidate = AutovalidateMode.always;
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -49,9 +51,9 @@ class _ForgetPasswordForm1State extends State<ForgetPasswordForm1> {
             onSaved: (val) => email = val,
             validator: Validation.validateEmail,
           ),
-          
+
           const SizedBox(height: AppSpacing.s8),
-         
+
           const SizedBox(height: AppSpacing.s16),
           CustomButton(
             onPressed: _submit,
@@ -66,7 +68,7 @@ class _ForgetPasswordForm1State extends State<ForgetPasswordForm1> {
             width: double.infinity,
           ),
           const SizedBox(height: AppSpacing.s16),
-           HaveandDontHaveAccount(
+          HaveandDontHaveAccount(
             actionStatement: 'سجّل دخول',
             statement: 'لديك حساب؟',
             onPressed:

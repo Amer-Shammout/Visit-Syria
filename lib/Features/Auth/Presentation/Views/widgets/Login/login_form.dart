@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
@@ -10,6 +11,7 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_button.dart';
 import 'package:visit_syria/Core/widgets/custom_text_field_with_label.dart';
 import 'package:visit_syria/Features/Auth/Data/Models/auth_request_model.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/login_cubit/login_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Common/have_and_dont_have_account.dart';
 
 class LoginForm extends StatefulWidget {
@@ -29,13 +31,11 @@ class _LoginFormState extends State<LoginForm> {
   final _emailFocus = FocusNode();
   final _passwordFocus = FocusNode();
 
-  void _submit() {
+  void _submit() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      _authModel = AuthRequestModel(email: email!, password: password!);
-      GoRouter.of(context).pushReplacementNamed(AppRouter.kAppRootName);
-
-      // TODO
+      _authModel = AuthRequestModel(email: email!, password: password!,);
+      await BlocProvider.of<LoginCubit>(context).login(_authModel!);
     } else {
       setState(() {
         _isAutoValidate = AutovalidateMode.always;

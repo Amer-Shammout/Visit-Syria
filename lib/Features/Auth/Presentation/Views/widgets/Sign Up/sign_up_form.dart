@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
@@ -10,6 +11,7 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_button.dart';
 import 'package:visit_syria/Core/widgets/custom_text_field_with_label.dart';
 import 'package:visit_syria/Features/Auth/Data/Models/auth_request_model.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/register_cubit/register_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Common/have_and_dont_have_account.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Sign%20Up/check_box_statement.dart';
 
@@ -35,12 +37,11 @@ class _SignUpFormState extends State<SignUpForm> {
   final _passwordFocus = FocusNode();
   final _confirmPassFocus = FocusNode();
 
-  void _submit() {
+  void _submit() async{
     if (_formKey.currentState!.validate() && _isCheck!) {
       _formKey.currentState!.save();
       _authModel = AuthRequestModel(email: email!, password: password!);
-      GoRouter.of(context).pushNamed(AppRouter.kVerificationName);
-      // TODO
+      await BlocProvider.of<RegisterCubit>(context).register(_authModel!);
     } else {
       setState(() {
         _isError = true;

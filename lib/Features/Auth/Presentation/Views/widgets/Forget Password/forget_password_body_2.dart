@@ -4,24 +4,27 @@ import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Common/auth
 import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Forget%20Password/forget_password_form_2.dart';
 
 class ForgetPasswordBody2 extends StatelessWidget {
-  const ForgetPasswordBody2({super.key});
+  const ForgetPasswordBody2({super.key, required this.email});
+
+  final String email;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: SingleChildScrollView (
+        child: SingleChildScrollView(
           child: Column(
-            children: const [
+            children: [
               SizedBox(height: AppSpacing.s32),
               AuthViewsHeader(
                 canPop: true,
                 title: 'أدخل رمز التحقق',
-                subTitle: 'تحقق من بريدك الإلكتروني وأدخل رمز التحقق لمتابعة عملية إعادة تعيين كلمة المرور.',
+                subTitle:
+                    'تحقق من بريدك الإلكتروني وأدخل رمز التحقق لمتابعة عملية إعادة تعيين كلمة المرور.',
               ),
               SizedBox(height: AppSpacing.s32),
-              ForgetPasswordForm2(),
+              ForgetPasswordForm2(email: email),
             ],
           ),
         ),

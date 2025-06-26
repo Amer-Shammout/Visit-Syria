@@ -1,20 +1,23 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/functions/validation.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_button.dart';
+import 'package:visit_syria/Features/Auth/Data/Models/verification_model.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/resend_code_cubit/resend_code_cubit.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/verify_code_cubit/verify_code_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Common/resend_code_timer_button.dart';
 
 class ForgetPasswordForm2 extends StatefulWidget {
-  const ForgetPasswordForm2({super.key});
+  const ForgetPasswordForm2({super.key, required this.email});
+
+  final String email;
 
   @override
   State<ForgetPasswordForm2> createState() => _ForgetPasswordForm2State();
@@ -27,19 +30,22 @@ class _ForgetPasswordForm2State extends State<ForgetPasswordForm2> {
   final _errorController = StreamController<ErrorAnimationType>();
   bool _hasError = false;
 
-  void _resendCode() {
-    // TODO: استدعاء API لإعادة إرسال الكود
+  void _resendCode() async {
+    await BlocProvider.of<ResendCodeCubit>(context).resendCode(widget.email);
   }
 
-  void _submitCode() {
+  void _submitCode() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      GoRouter.of(context).goNamed(AppRouter.kForgetPassword3Name);
-      // TODO: تحقق من الكود
-      print("رمز التحقق: $_code");
+      VerificationModel verificationModel = VerificationModel(
+        code: _code,
+        email: widget.email,
+      );
+      await BlocProvider.of<VerifyCodeCubit>(
+        context,
+      ).verifyCode(verificationModel);
     } else {
       setState(() {
-        log('a');
         _autovalidateMode = AutovalidateMode.always;
         _errorController.add(ErrorAnimationType.shake); // اهتزاز
         _hasError = true;

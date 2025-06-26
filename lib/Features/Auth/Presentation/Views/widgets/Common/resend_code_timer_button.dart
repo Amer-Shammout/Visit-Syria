@@ -1,5 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:visit_syria/Core/utils/functions/show_snack_bar.dart';
+import 'package:visit_syria/Core/widgets/custom_loading_indicator.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/resend_code_cubit/resend_code_cubit.dart';
 
 class ResendCodeTimerButton extends StatefulWidget {
   final int initialSeconds;
@@ -63,16 +67,30 @@ class _ResendCodeTimerButtonState extends State<ResendCodeTimerButton> {
   Widget build(BuildContext context) {
     final isWaiting = _remainingSeconds > 0;
 
-    return TextButton(
-      onPressed: isWaiting ? null : _handleResend,
-      style: TextButton.styleFrom(
-        foregroundColor: isWaiting ? widget.disabledColor : widget.activeColor,
-      ),
-      child: Text(
-        isWaiting
-            ? "${widget.waitingTextPrefix}: 00:${_remainingSeconds.toString().padLeft(2, '0')}"
-            : widget.activeText,
-      ),
+    return BlocConsumer<ResendCodeCubit, ResendCodeState>(
+      listener: (context, state) {
+        if (state is ResendCodeFailure) {
+          showFailureSnackBar(state.errMessage, context);
+        }
+      },
+      builder: (context, state) {
+        if (state is ResendCodeLoading) {
+          return CustomLoadingIndicator();
+        } else {
+          return TextButton(
+            onPressed: isWaiting ? null : _handleResend,
+            style: TextButton.styleFrom(
+              foregroundColor:
+                  isWaiting ? widget.disabledColor : widget.activeColor,
+            ),
+            child: Text(
+              isWaiting
+                  ? "${widget.waitingTextPrefix}: 00:${_remainingSeconds.toString().padLeft(2, '0')}"
+                  : widget.activeText,
+            ),
+          );
+        }
+      },
     );
   }
 }

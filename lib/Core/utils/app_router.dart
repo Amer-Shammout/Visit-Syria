@@ -68,7 +68,7 @@ abstract class AppRouter {
   static const kForgetPassword3View = '/forgetPassword3View';
   static const kForgetPassword3Name = 'forgetPassword3View';
   static const kAppRootName = 'appRoot';
-  static const kAppRootView = '/';
+  static const kAppRootView = '/appRoot';
   static const kHomeView = '/homeView';
   static const kHomeName = 'homeView';
   static const kWeatherView = '/weatherView';
@@ -110,14 +110,14 @@ abstract class AppRouter {
   static const kTourismCompanyDetailsView = '/tourismCompanyDetailsView';
   static const kTourismCompanyDetailsName = 'tourismCompanyDetailsView';
 
-  static bool isAuth = Prefs.getString(kToken) != '';
+static bool get isAuth => Prefs.getString(kToken) != '';
 
   static final router = GoRouter(
-    // initialLocation: isAuth ? kAppRootName : kSplashName,
+    initialLocation: isAuth ? kAppRootView : kSplashView,
     routes: [
       GoRoute(
         name: kSplashName,
-        path: '/splash',
+        path: kSplashView,
         pageBuilder:
             (context, state) => const MaterialPage(child: SplashView()),
       ),

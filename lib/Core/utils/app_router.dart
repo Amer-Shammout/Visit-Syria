@@ -37,6 +37,7 @@ import 'package:visit_syria/Features/Places/Presentation/Views/all_comments_and_
 import 'package:visit_syria/Features/Places/Presentation/Views/all_places_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/city_details_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/place_details_view.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/profile_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotel_and_resturants_details_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotels_and_resturants_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/similar_hotels_or_resturants_view.dart';
@@ -109,6 +110,8 @@ abstract class AppRouter {
   static const kTourismCompanieName = 'tourismCompaniesView';
   static const kTourismCompanyDetailsView = '/tourismCompanyDetailsView';
   static const kTourismCompanyDetailsName = 'tourismCompanyDetailsView';
+  static const kProfileView = '/profileView';
+  static const kProfileName = 'profileView';
 
 static bool get isAuth => Prefs.getString(kToken) != '';
 
@@ -347,6 +350,13 @@ static bool get isAuth => Prefs.getString(kToken) != '';
         pageBuilder:
             (context, state) =>
                 MaterialPage(child: TourismCompanyDetailsView()),
+      ),
+      GoRoute(
+        name: kProfileName,
+        path: kProfileView,
+        pageBuilder:
+            (context, state) =>
+                MaterialPage(child: ProfileView()),
       ),
     ],
   );

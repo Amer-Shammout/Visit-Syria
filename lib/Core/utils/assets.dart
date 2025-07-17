@@ -390,6 +390,10 @@ class Assets {
   /// assets/Icons/Trash.svg
   static const String iconsTrash = "assets/Icons/Trash.svg";
 
+  /// Assets for iconsTrips
+  /// assets/Icons/trips.svg
+  static const String iconsTrips = "assets/Icons/trips.svg";
+
   /// Assets for iconsTripsActive
   /// assets/Icons/Trips-Active.svg
   static const String iconsTripsActive = "assets/Icons/Trips-Active.svg";

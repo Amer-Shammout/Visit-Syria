@@ -9,7 +9,7 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 class CustomDrawerItem extends StatelessWidget {
   const CustomDrawerItem({super.key, required this.drawerModel, this.onTap});
 
-  final DrawerModel drawerModel;
+  final TileModel drawerModel;
   final VoidCallback? onTap;
 
   @override

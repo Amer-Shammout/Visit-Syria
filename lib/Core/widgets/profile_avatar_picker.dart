@@ -8,7 +8,9 @@ import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 class ProfileAvatarPicker extends StatefulWidget {
   final void Function(File?)? onImageSelected;
 
-  const ProfileAvatarPicker({super.key, this.onImageSelected});
+  final String? userImage;
+
+  const ProfileAvatarPicker({super.key, this.onImageSelected, this.userImage});
 
   @override
   State<ProfileAvatarPicker> createState() => _ProfileAvatarPickerState();
@@ -38,9 +40,14 @@ class _ProfileAvatarPickerState extends State<ProfileAvatarPicker> {
           CircleAvatar(
             radius: 60,
             backgroundColor: Colors.grey[200],
-            backgroundImage: _image != null ? FileImage(_image!) : null,
+            backgroundImage:
+                _image != null
+                    ? FileImage(_image!)
+                    : (widget.userImage != null
+                        ? AssetImage(widget.userImage!)
+                        : null),
             child:
-                _image == null
+                _image == null && widget.userImage == null
                     ? SvgPicture.asset(
                       Assets.iconsUser,
                       height: 48,

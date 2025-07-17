@@ -1,5 +1,5 @@
-class DrawerModel {
+class TileModel {
   final String title, icon;
 
-  const DrawerModel({required this.title, required this.icon});
+  const TileModel({required this.title, required this.icon});
 }

@@ -6,21 +6,22 @@ import 'package:visit_syria/Core/widgets/custom_icon_button.dart';
 import 'package:visit_syria/Core/widgets/custom_image.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/offers_tag.dart';
 
-class OffersCardImage extends StatelessWidget {
-  const OffersCardImage({
-    super.key,
-  });
+class TripsCardImage extends StatelessWidget {
+  const TripsCardImage({super.key, required this.imageHeight, required this.positionedVal});
+
+  final double imageHeight;
+  final double positionedVal;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        CustomImage(height: 150, borderRadius: 20),
+        CustomImage(height: imageHeight, borderRadius: 20),
         Positioned(
-          left: 8,
-          right: 8,
-          top: 8,
-          bottom: 8,
+          left: positionedVal,
+          right: positionedVal,
+          top: positionedVal,
+          bottom: positionedVal,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

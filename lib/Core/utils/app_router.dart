@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Core/constants/common_constants.dart';
 import 'package:visit_syria/Core/data/models/city_model.dart';
 import 'package:visit_syria/Core/services/service_locator.dart';
+import 'package:visit_syria/Core/services/shared_preferences_singleton.dart';
 import 'package:visit_syria/Features/About%20Syria/Presentation/Views/all_similar_blogs_view.dart';
 import 'package:visit_syria/Features/About%20Syria/Presentation/Views/blog_details_view.dart';
 import 'package:visit_syria/Features/App%20Root/Presentation/Views/app_root_.dart';
@@ -45,7 +47,7 @@ import 'package:visit_syria/Features/Trips/Presentation/Views/all_offers_view.da
 import 'package:visit_syria/Features/Weather/Presentation/views/weather_view.dart';
 
 abstract class AppRouter {
-  static const kSplashView = '/';
+  static const kSplashView = '/splash';
   static const kSplashName = 'splash';
   static const kOnboardingName = 'onBoarding';
   static const kOnboardingView = '/onBoarding';
@@ -66,7 +68,7 @@ abstract class AppRouter {
   static const kForgetPassword3View = '/forgetPassword3View';
   static const kForgetPassword3Name = 'forgetPassword3View';
   static const kAppRootName = 'appRoot';
-  static const kAppRootView = '/appRoot';
+  static const kAppRootView = '/';
   static const kHomeView = '/homeView';
   static const kHomeName = 'homeView';
   static const kWeatherView = '/weatherView';
@@ -108,12 +110,14 @@ abstract class AppRouter {
   static const kTourismCompanyDetailsView = '/tourismCompanyDetailsView';
   static const kTourismCompanyDetailsName = 'tourismCompanyDetailsView';
 
+  static bool isAuth = Prefs.getString(kToken) != '';
+
   static final router = GoRouter(
-    // initialLocation: isAuth ? kAppRoot : kLetsGetStartedView,
+    // initialLocation: isAuth ? kAppRootName : kSplashName,
     routes: [
       GoRoute(
         name: kSplashName,
-        path: '/',
+        path: '/splash',
         pageBuilder:
             (context, state) => const MaterialPage(child: SplashView()),
       ),

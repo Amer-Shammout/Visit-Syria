@@ -6,6 +6,7 @@ import 'package:visit_syria/Features/About%20Syria/Presentation/Views/about_syri
 import 'package:visit_syria/Features/Community/Presentation/Views/community_view_body.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/home_view_body.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/cities_view_body.dart';
+import 'package:visit_syria/Features/Trips/Presentation/Views/trips_view_body.dart';
 
 class AppRootView extends StatefulWidget {
   const AppRootView({super.key});
@@ -17,10 +18,10 @@ class AppRootView extends StatefulWidget {
 class _AppRootViewState extends State<AppRootView> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = [
+  final List<Widget> _pages = const [
     HomeViewBody(),
     CitiesViewBody(),
-    Container(),
+    TripsViewBody(),
     CommunityViewBody(),
     AboutSyriaViewBody(),
   ];

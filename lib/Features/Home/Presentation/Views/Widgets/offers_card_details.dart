@@ -13,7 +13,6 @@ class OffersCardDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: AppSpacing.s8),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -56,7 +55,7 @@ class OffersCardDetails extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: AppSpacing.s8),
+        SizedBox(height: AppSpacing.s16),
         CustomButton(
           onPressed: () {},
           title: 'استكشاف',

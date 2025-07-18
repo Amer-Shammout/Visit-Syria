@@ -37,6 +37,8 @@ import 'package:visit_syria/Features/Places/Presentation/Views/all_comments_and_
 import 'package:visit_syria/Features/Places/Presentation/Views/all_places_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/city_details_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/place_details_view.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/my_posts_view.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/my_trips_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/personal_info_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/profile_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotel_and_resturants_details_view.dart';
@@ -115,6 +117,10 @@ abstract class AppRouter {
   static const kProfileName = 'profileView';
   static const kPersonalInfoView = '/personalInfoView';
   static const kPersonalInfoName = 'personalInfoView';
+  static const kMyTripsView = '/myTrips';
+  static const kMyTripsName = 'myTrips';
+  static const kMyPostsView = '/myPosts';
+  static const kMyPostsName = 'myPosts';
 
 static bool get isAuth => Prefs.getString(kToken) != '';
 
@@ -367,6 +373,20 @@ static bool get isAuth => Prefs.getString(kToken) != '';
         pageBuilder:
             (context, state) =>
                 MaterialPage(child: PersonalInfoView()),
+      ),
+      GoRoute(
+        name: kMyTripsName,
+        path: kMyTripsView,
+        pageBuilder:
+            (context, state) =>
+                MaterialPage(child: MyTripsView()),
+      ),
+      GoRoute(
+        name: kMyPostsName,
+        path: kMyPostsView,
+        pageBuilder:
+            (context, state) =>
+                MaterialPage(child: MyPostsView()),
       ),
     ],
   );

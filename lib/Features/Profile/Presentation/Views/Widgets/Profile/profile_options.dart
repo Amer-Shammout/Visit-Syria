@@ -30,9 +30,11 @@ class ProfileOptions extends StatelessWidget {
       case 1:
         return null;
       case 2:
-        return null;
+        return GoRouter.of(context).pushNamed(AppRouter.kMyTripsName);
       case 3:
         return null;
+      case 4:
+        return GoRouter.of(context).pushNamed(AppRouter.kMyPostsName);
       default:
         return null;
     }

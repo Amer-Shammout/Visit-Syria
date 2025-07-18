@@ -6,11 +6,13 @@ import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/expand
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_action_buttons.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_image.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_and_blogs_tags_wrap.dart';
+import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_state_tag.dart';
 
 class PostCard extends StatelessWidget {
-  const PostCard({super.key, required this.hasImage});
+  const PostCard({super.key, required this.hasImage, this.state});
 
   final bool hasImage;
+  final String? state;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,13 @@ class PostCard extends StatelessWidget {
         children: [
           hasImage ? PostImage() : SizedBox.shrink(),
           hasImage ? SizedBox(height: AppSpacing.s16) : SizedBox.shrink(),
-          AvatarandNameandHistory(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              AvatarandNameandHistory(),
+              state != null ? PostStateTag(state: state!) : SizedBox.shrink(),
+            ],
+          ),
           SizedBox(height: AppSpacing.s16),
           ExpandableText(
             "استيقظت على طقس دمشق الدافئ وبدأت رحلتي الساحرة في قلب التاريخ. أول محطة كانت الجامع الأموي، المزيد تحفة معمارية فريدة تأسر الأنفاس بجمالها وروحانيتها. التجول داخل أروقته كان كرحلة عبر الزمن، وهنا شعرت بعمق الحضارة الإسلامية التي خطت بخطوطها مدينة دمـ المزيد.ثم توجهت إلى قصر العظم، ذلك الصرح العثماني الفخم الذي يسرد حكايات من الماضي عبر جدرانه الضخمة وزخارفه الرائعة. المكان ينبض بالحياة ويوفر لمحة حقيقية عن تاريخ سوريا العريق.لم أستطع مقاومة سوق الحميدية، حيث تختلط رائحة التوابل بألوان الحرف اليدوية وصخب الباعة. تجربة التسوق هناك ليست فقط شراءً، بل رحلة في قلب الثقافة الدمشقية.بعد دمشق، أخذت الطريق إلى تدمر، المدينة التي تفخر بأطلالها الرومانية العظيمة. المشهد من الأعمدة الباقية والأبنية القديمة يشعرك بعظمة الحضارة التي مرت من هنا.وأخيرًا، زرت مدرج بصرى الروماني، حيث يحتفظ الحجر وحتى الصوت بصدى الحفلات والعروض التي كانت تقام فيه منذ قرون. الجلوس هناك والتأمل في المكان كان لحظة استثنائية أضافت بعدًا خاصًا لرحلتي.سوريا، بكل ألوانها وتاريخها، أبهرتني وأثرت في قلبي. رحلة لا تُنسى، أعود منها محملاً بذكريات لا تُقدر بثمن.",

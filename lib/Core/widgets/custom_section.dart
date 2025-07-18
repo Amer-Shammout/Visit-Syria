@@ -9,14 +9,16 @@ class CustomSection extends StatelessWidget {
     this.icon,
     required this.hasSeeAll,
     this.seaAllAction,
-    required this.section,
+    this.section,
+    this.widgets,
   });
 
   final String title;
   final String? icon;
   final bool hasSeeAll;
   final VoidCallback? seaAllAction;
-  final Widget section;
+  final Widget? section;
+  final List<Widget>? widgets;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,11 @@ class CustomSection extends StatelessWidget {
           seaAllAction: seaAllAction,
         ),
         SizedBox(height: AppSpacing.s12),
-        section,
+        section ??
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: widgets!,
+            ),
       ],
     );
   }

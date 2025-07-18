@@ -20,6 +20,8 @@ class CustomTextFormField extends StatefulWidget {
   final FocusNode? focusNode;
   final bool isEnabled;
   final VoidCallback? onTap;
+  final TextEditingController? controller;
+  final bool readOnly;
 
   const CustomTextFormField({
     super.key,
@@ -40,6 +42,8 @@ class CustomTextFormField extends StatefulWidget {
     this.prefixIcon,
     this.isEnabled = true,
     this.onTap,
+    this.controller,
+    this.readOnly = false,
   });
 
   @override
@@ -94,6 +98,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       onTap: widget.onTap,
       child: Ink(
         child: TextFormField(
+          onTap: widget.onTap,
+          controller: widget.controller,
+          readOnly: widget.readOnly,
           cursorColor: AppColors.titleTextColor,
           cursorErrorColor: AppColors.redSwatch,
           focusNode: _effectiveFocusNode,
@@ -107,9 +114,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           keyboardType: widget.keyboardType,
           textInputAction: widget.textInputAction,
           onEditingComplete: widget.onEditingComplete,
-          style: AppStyles.fontsRegular16(
-            context,
-          ).copyWith(color: AppColors.titleTextColor),
+          style: AppStyles.fontsRegular16(context).copyWith(
+            color:
+                widget.isEnabled
+                    ? AppColors.titleTextColor
+                    : AppColors.graySwatch,
+          ),
           decoration: InputDecoration(
             enabled: widget.isEnabled,
             prefixIcon: widget.prefixIcon,
@@ -122,13 +132,17 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               context,
             ).copyWith(color: AppColors.graySwatch[500]),
             isDense: true,
+
             hintText: widget.hint,
             hintStyle: AppStyles.fontsRegular16(
               context,
             ).copyWith(color: AppColors.graySwatch[500]),
             suffixIcon: widget.suffixIcon,
             filled: true,
-            fillColor: AppColors.graySwatch[50],
+            fillColor:
+                widget.isEnabled
+                    ? AppColors.graySwatch[50]
+                    : AppColors.graySwatch[200],
             border: buildBorder(color: Colors.transparent),
             enabledBorder: buildBorder(
               color: _isValid ? AppColors.primary : Colors.transparent,

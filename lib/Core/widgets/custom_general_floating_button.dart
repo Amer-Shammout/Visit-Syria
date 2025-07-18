@@ -5,8 +5,11 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/shadows.dart';
 import 'package:visit_syria/Core/widgets/custom_button.dart';
 
-class CustomLogoutButton extends StatelessWidget {
-  const CustomLogoutButton({super.key});
+class CustomGeneralFloatingButton extends StatelessWidget {
+  const CustomGeneralFloatingButton({super.key, required this.onPressed, required this.title});
+
+  final void Function() onPressed;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +26,8 @@ class CustomLogoutButton extends StatelessWidget {
         color: AppColors.whiteColor,
       ),
       child: CustomButton(
-        onPressed: () {},
-        title: "تسجيل الخروج",
+        onPressed: onPressed,
+        title: title,
         textStyle: AppStyles.fontsBold14(
           context,
         ).copyWith(color: AppColors.whiteColor),

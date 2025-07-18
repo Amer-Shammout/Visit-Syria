@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/widgets/custom_app_bar_2.dart';
-import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/profile_view_body.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/Profile/profile_view_body.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});

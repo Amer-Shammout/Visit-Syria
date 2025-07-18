@@ -10,6 +10,8 @@ class CustomNameFields extends StatelessWidget {
     required this.lastNameOnSaved,
     this.firstNameFocus,
     this.secondNameFocus,
+    this.firstName,
+    this.lastName,
   });
 
   final void Function(String?)? firstNameOnSaved;
@@ -17,6 +19,7 @@ class CustomNameFields extends StatelessWidget {
 
   final FocusNode? firstNameFocus;
   final FocusNode? secondNameFocus;
+  final String? firstName, lastName;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,8 @@ class CustomNameFields extends StatelessWidget {
         Expanded(
           child: CustomTextFieldWithLabel(
             // textDirection: null,
-            hint: 'أحمد',
+            initialValue: firstName,
+            hint: firstName == null ? 'أحمد' : "",
             label: 'الاسم الأول',
             onSaved: firstNameOnSaved,
             validator: Validation.validateEmptyField,
@@ -39,7 +43,8 @@ class CustomNameFields extends StatelessWidget {
         Expanded(
           child: CustomTextFieldWithLabel(
             // textDirection: null,
-            hint: 'محسن',
+            initialValue: lastName,
+            hint: lastName == null ? 'محسن' : "",
             label: 'الاسم الأخير',
             onSaved: lastNameOnSaved,
             validator: Validation.validateEmptyField,

@@ -22,7 +22,7 @@ class CommunityViewHeader extends StatelessWidget {
         children: [
           Expanded(
             child: CustomTextFormField(
-              isEnabled: false,
+              readOnly: true,
               onTap:
                   () =>
                       GoRouter.of(context).pushNamed(AppRouter.kCreatePostName),

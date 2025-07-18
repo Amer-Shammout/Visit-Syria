@@ -19,7 +19,13 @@ class CustomTextFieldWithLabel extends StatelessWidget {
     this.onSaved,
     this.maxLines,
     this.validator,
-    this.helperText, this.textInputAction, this.onEditingComplete, this.focusNode,
+    this.helperText,
+    this.textInputAction,
+    this.onEditingComplete,
+    this.focusNode,
+    this.controller,
+    this.readOnly = false,
+    this.isEnabled = true, this.onTap,
     // this.textDirection = TextDirection.ltr,
   });
   final String hint;
@@ -37,6 +43,12 @@ class CustomTextFieldWithLabel extends StatelessWidget {
   final TextInputAction? textInputAction;
   final VoidCallback? onEditingComplete;
   final FocusNode? focusNode;
+  final TextEditingController? controller;
+  final bool readOnly;
+  final bool isEnabled;
+    final VoidCallback? onTap;
+
+
   // final TextDirection? textDirection;
 
   @override
@@ -52,7 +64,11 @@ class CustomTextFieldWithLabel extends StatelessWidget {
         ),
         SizedBox(height: AppSpacing.s4),
         CustomTextFormField(
+          onTap: onTap,
+          isEnabled: isEnabled,
           // textDirection: textDirection ?? TextDirection.rtl,
+          controller: controller,
+          readOnly: readOnly,
           focusNode: focusNode,
           onEditingComplete: onEditingComplete,
           textInputAction: textInputAction,

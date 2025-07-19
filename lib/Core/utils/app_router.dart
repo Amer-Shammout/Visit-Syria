@@ -41,6 +41,14 @@ import 'package:visit_syria/Features/Profile/Presentation/Views/my_posts_view.da
 import 'package:visit_syria/Features/Profile/Presentation/Views/my_trips_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/personal_info_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/profile_view.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/saved_blogs_view.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/saved_events_view.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/saved_hotels_view.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/saved_items_view.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/saved_places_view.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/saved_posts_view.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/saved_resturants_view.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/saved_trips_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotel_and_resturants_details_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotels_and_resturants_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/similar_hotels_or_resturants_view.dart';
@@ -121,8 +129,24 @@ abstract class AppRouter {
   static const kMyTripsName = 'myTrips';
   static const kMyPostsView = '/myPosts';
   static const kMyPostsName = 'myPosts';
+  static const kSavedItemsView = '/savedItems';
+  static const kSavedItemsName = 'savedItems';
+  static const kSavedEventsView = '/savedEvents';
+  static const kSavedEventsName = 'savedEvents';
+  static const kSavedTripsView = '/savedTrips';
+  static const kSavedTripsName = 'savedTrips';
+  static const kSavedPlacesView = '/savedPlaces';
+  static const kSavedPlacesName = 'savedPlaces';
+  static const kSavedResturantsView = '/savedResturants';
+  static const kSavedResturantsName = 'savedResturants';
+  static const kSavedHotelsView = '/savedHotels';
+  static const kSavedHotelsName = 'savedHotels';
+  static const kSavedBlogsView = '/savedBlogs';
+  static const kSavedBlogsName = 'savedBlogs';
+  static const kSavedPostsView = '/savedPosts';
+  static const kSavedPostsName = 'savedPosts';
 
-static bool get isAuth => Prefs.getString(kToken) != '';
+  static bool get isAuth => Prefs.getString(kToken) != '';
 
   static final router = GoRouter(
     initialLocation: isAuth ? kAppRootView : kSplashView,
@@ -363,30 +387,64 @@ static bool get isAuth => Prefs.getString(kToken) != '';
       GoRoute(
         name: kProfileName,
         path: kProfileView,
-        pageBuilder:
-            (context, state) =>
-                MaterialPage(child: ProfileView()),
+        pageBuilder: (context, state) => MaterialPage(child: ProfileView()),
       ),
       GoRoute(
         name: kPersonalInfoName,
         path: kPersonalInfoView,
         pageBuilder:
-            (context, state) =>
-                MaterialPage(child: PersonalInfoView()),
+            (context, state) => MaterialPage(child: PersonalInfoView()),
       ),
       GoRoute(
         name: kMyTripsName,
         path: kMyTripsView,
-        pageBuilder:
-            (context, state) =>
-                MaterialPage(child: MyTripsView()),
+        pageBuilder: (context, state) => MaterialPage(child: MyTripsView()),
       ),
       GoRoute(
         name: kMyPostsName,
         path: kMyPostsView,
+        pageBuilder: (context, state) => MaterialPage(child: MyPostsView()),
+      ),
+      GoRoute(
+        name: kSavedItemsName,
+        path: kSavedItemsView,
+        pageBuilder: (context, state) => MaterialPage(child: SavedItemsView()),
+      ),
+      GoRoute(
+        name: kSavedEventsName,
+        path: kSavedEventsView,
+        pageBuilder: (context, state) => MaterialPage(child: SavedEventsView()),
+      ),
+      GoRoute(
+        name: kSavedTripsName,
+        path: kSavedTripsView,
+        pageBuilder: (context, state) => MaterialPage(child: SavedTripsView()),
+      ),
+      GoRoute(
+        name: kSavedPlacesName,
+        path: kSavedPlacesView,
+        pageBuilder: (context, state) => MaterialPage(child: SavedPlacesView()),
+      ),
+      GoRoute(
+        name: kSavedResturantsName,
+        path: kSavedResturantsView,
         pageBuilder:
-            (context, state) =>
-                MaterialPage(child: MyPostsView()),
+            (context, state) => MaterialPage(child: SavedResturantsView()),
+      ),
+      GoRoute(
+        name: kSavedHotelsName,
+        path: kSavedHotelsView,
+        pageBuilder: (context, state) => MaterialPage(child: SavedHotelsView()),
+      ),
+      GoRoute(
+        name: kSavedBlogsName,
+        path: kSavedBlogsView,
+        pageBuilder: (context, state) => MaterialPage(child: SavedBlogsView()),
+      ),
+      GoRoute(
+        name: kSavedPostsName,
+        path: kSavedPostsView,
+        pageBuilder: (context, state) => MaterialPage(child: SavedPostsView()),
       ),
     ],
   );

@@ -2,12 +2,7 @@
 
 import 'package:visit_syria/Features/Auth/Data/Models/preferences_section_data.dart';
 
-const List<String> kSeasonOptions = [
-  "الشتاء",
-  "الربيع",
-  "الصيف",
-  "الخريف",
-];
+const List<String> kSeasonOptions = ["الشتاء", "الربيع", "الصيف", "الخريف"];
 
 const List<String> kTripTypesOptions = [
   "مغامرات ونشاطات",
@@ -43,24 +38,24 @@ const List<String> kGovernoratesOptions = [
 ];
 
 final List<PreferencesSectionData> kSections = const [
-    PreferencesSectionData(
-      title: "ما هي الفصول التي تفضل السياحة فيها؟",
-      key: "seasons",
-      options: kSeasonOptions,
-    ),
-    PreferencesSectionData(
-      title: "ما نوع الرحلات التي تفضلها؟",
-      key: "types",
-      options: kTripTypesOptions,
-    ),
-    PreferencesSectionData(
-      title: "ما المدة التي تفضلها للرحلة؟",
-      key: "durations",
-      options: kTripDurationsOptions,
-    ),
-    PreferencesSectionData(
-      title: "ما هي المحافظات التي تفضل زيارتها؟",
-      key: "governorates",
-      options: kGovernoratesOptions,
-    ),
-  ];
+  PreferencesSectionData(
+    title: "ما هي الفصول التي تفضل السياحة فيها؟",
+    key: "preferredSeason",
+    options: kSeasonOptions,
+  ),
+  PreferencesSectionData(
+    title: "ما نوع الرحلات التي تفضلها؟",
+    key: "preferredActivities",
+    options: kTripTypesOptions,
+  ),
+  PreferencesSectionData(
+    title: "ما المدة التي تفضلها للرحلة؟",
+    key: "duration",
+    options: kTripDurationsOptions,
+  ),
+  PreferencesSectionData(
+    title: "ما هي المحافظات التي تفضل زيارتها؟",
+    key: "cities",
+    options: kGovernoratesOptions,
+  ),
+];

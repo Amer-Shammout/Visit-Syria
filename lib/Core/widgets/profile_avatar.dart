@@ -11,7 +11,8 @@ class ProfileAvatar extends StatelessWidget {
 
   const ProfileAvatar({
     super.key,
-    this.imageUrl, this.onTap,
+    this.imageUrl,
+    this.onTap,
     // this.radius = 60,
     // this.iconSize = 48,
   });

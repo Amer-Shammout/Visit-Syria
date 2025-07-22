@@ -9,6 +9,10 @@ class ForgetPasswordView3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: ForgetPassword3ViewBodyConsumer(verificationModel:verificationModel));
+    return Scaffold(
+      body: ForgetPassword3ViewBodyConsumer(
+        verificationModel: verificationModel,
+      ),
+    );
   }
 }

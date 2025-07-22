@@ -26,7 +26,7 @@ class ForgetPasswordBody3 extends StatelessWidget {
                     'يرجى إدخال كلمة مرور جديدة لحسابك لتتمكن من تسجيل الدخول مجدداً ومتابعة استخدام خدماتنا بكل سهولة وأمان.',
               ),
               const SizedBox(height: AppSpacing.s32),
-              ForgetPasswordForm3(verificationModel:verificationModel),
+              ForgetPasswordForm3(verificationModel: verificationModel),
 
               const SizedBox(height: AppSpacing.s16),
             ],

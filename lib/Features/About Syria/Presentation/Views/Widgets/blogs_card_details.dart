@@ -7,9 +7,7 @@ import 'package:visit_syria/Core/widgets/custom_button.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_and_blogs_tags_wrap.dart';
 
 class BlogsCardDetails extends StatelessWidget {
-  const BlogsCardDetails({
-    super.key,
-  });
+  const BlogsCardDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,4 +56,3 @@ class BlogsCardDetails extends StatelessWidget {
     );
   }
 }
-

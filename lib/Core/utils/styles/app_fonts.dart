@@ -65,6 +65,7 @@ abstract class AppStyles {
       fontWeight: FontWeight.w400,
     );
   }
+
   static TextStyle fontsRegular24(context) {
     return TextStyle(
       color: Theme.of(context).colorScheme.primary,
@@ -78,7 +79,6 @@ abstract class AppStyles {
       color: AppColors.primarySwatch,
       fontSize: getResponsiveFontSize(context, baseFontSize: 64),
       fontWeight: FontWeight.w700,
-
     );
   }
 
@@ -154,7 +154,7 @@ abstract class AppStyles {
     );
   }
 
-  static TextStyle fontsLight12(context , size) {
+  static TextStyle fontsLight12(context, size) {
     return TextStyle(
       color: Theme.of(context).colorScheme.primary,
       fontSize: getResponsiveFontSize(context, baseFontSize: size),

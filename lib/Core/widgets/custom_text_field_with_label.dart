@@ -25,7 +25,8 @@ class CustomTextFieldWithLabel extends StatelessWidget {
     this.focusNode,
     this.controller,
     this.readOnly = false,
-    this.isEnabled = true, this.onTap,
+    this.isEnabled = true,
+    this.onTap,
     // this.textDirection = TextDirection.ltr,
   });
   final String hint;
@@ -46,8 +47,7 @@ class CustomTextFieldWithLabel extends StatelessWidget {
   final TextEditingController? controller;
   final bool readOnly;
   final bool isEnabled;
-    final VoidCallback? onTap;
-
+  final VoidCallback? onTap;
 
   // final TextDirection? textDirection;
 

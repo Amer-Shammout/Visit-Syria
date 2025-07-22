@@ -5,9 +5,7 @@ import 'package:visit_syria/Features/About%20Syria/Presentation/Views/Widgets/bl
 import 'package:visit_syria/Features/About%20Syria/Presentation/Views/Widgets/blogs_card_image.dart';
 
 class BlogsCard extends StatelessWidget {
-  const BlogsCard({
-    super.key,
-  });
+  const BlogsCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,17 +15,12 @@ class BlogsCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Expanded(
-              child: BlogsCardImage(),
-            ),
+            Expanded(child: BlogsCardImage()),
             SizedBox(width: AppSpacing.s8),
-            Expanded(
-              child: BlogsCardDetails(),
-            ),
+            Expanded(child: BlogsCardDetails()),
           ],
         ),
       ),
     );
   }
 }
-

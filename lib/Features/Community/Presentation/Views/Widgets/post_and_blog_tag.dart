@@ -3,7 +3,7 @@ import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 
 class PostandBlogTag extends StatelessWidget {
-  const PostandBlogTag({super.key, required this.tag,  this.textStyle});
+  const PostandBlogTag({super.key, required this.tag, this.textStyle});
 
   final String tag;
   final TextStyle? textStyle;
@@ -18,9 +18,11 @@ class PostandBlogTag extends StatelessWidget {
       ),
       child: Text(
         tag,
-        style: textStyle ?? AppStyles.fontsRegular12(
-          context,
-        ).copyWith(color: AppColors.primary),
+        style:
+            textStyle ??
+            AppStyles.fontsRegular12(
+              context,
+            ).copyWith(color: AppColors.primary),
       ),
     );
   }

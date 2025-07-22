@@ -8,7 +8,7 @@ class SavedResturantsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar2(hasTitle: true,title: "المطاعم المحفوظة",),
+      appBar: CustomAppBar2(hasTitle: true, title: "المطاعم المحفوظة"),
       body: SavedResturantsViewBody(),
     );
   }

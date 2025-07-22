@@ -9,9 +9,7 @@ class SavedPlacesViewBody extends StatelessWidget {
     return CustomScrollView(
       physics: BouncingScrollPhysics(),
       clipBehavior: Clip.none,
-      slivers: [
-        PlacesGridView()
-      ],
+      slivers: [PlacesGridView()],
     );
   }
 }

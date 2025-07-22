@@ -24,7 +24,7 @@ class PlacesCardsHorListView extends StatelessWidget {
                 onTap:
                     () => GoRouter.of(
                       context,
-                    ).pushNamed(AppRouter.kPlaceDetailsName), 
+                    ).pushNamed(AppRouter.kPlaceDetailsName),
                 child: PlacesCard(),
               ),
             ),

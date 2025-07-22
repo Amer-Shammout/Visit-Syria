@@ -34,7 +34,7 @@ class _LoginFormState extends State<LoginForm> {
   void _submit() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      _authModel = AuthRequestModel(email: email!, password: password!,);
+      _authModel = AuthRequestModel(email: email!, password: password!);
       await BlocProvider.of<LoginCubit>(context).login(_authModel!);
     } else {
       setState(() {

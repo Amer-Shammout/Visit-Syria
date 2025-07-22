@@ -8,7 +8,7 @@ class SavedBlogsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar2(hasTitle: true,title: "المقالات المحفوظة",),
+      appBar: CustomAppBar2(hasTitle: true, title: "المقالات المحفوظة"),
       body: SavedBlogsViewBody(),
     );
   }

@@ -8,7 +8,7 @@ class SavedEventsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar2(hasTitle: true,title: "الأحداث المحفوظة",),
+      appBar: CustomAppBar2(hasTitle: true, title: "الأحداث المحفوظة"),
       body: SavedEventsViewBody(),
     );
   }

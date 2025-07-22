@@ -19,7 +19,8 @@ class CustomButton extends StatelessWidget {
     this.icon,
     this.size = 16,
     this.iconColor = AppColors.primary,
-    this.shadow = Shadows.buttonShadow1, this.height,
+    this.shadow = Shadows.buttonShadow1,
+    this.height,
   });
 
   final VoidCallback onPressed;

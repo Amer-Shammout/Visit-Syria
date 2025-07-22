@@ -6,8 +6,6 @@ class EventDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: EventDetailsViewBody(),
-    );
+    return Scaffold(body: EventDetailsViewBody());
   }
 }

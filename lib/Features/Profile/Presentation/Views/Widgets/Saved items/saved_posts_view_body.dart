@@ -9,9 +9,7 @@ class SavedPostsViewBody extends StatelessWidget {
     return CustomScrollView(
       physics: BouncingScrollPhysics(),
       clipBehavior: Clip.none,
-      slivers: [
-        PostsListView()
-      ],
+      slivers: [PostsListView()],
     );
   }
 }

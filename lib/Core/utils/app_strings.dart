@@ -19,18 +19,18 @@ abstract class AppStrings {
   static const strBadCertificateError =
       "Bad Certificate error, try again later";
 
-//Arabic Message
-// static const success= "تم بنجاح";
-// static const bad_request_error= "طلب غير صالح. حاول مرة أخرى لاحقًا";
-// static const no_content= "success with not content";
-// static const forbidden_error= "طلب محظور. حاول مرة أخرى لاحقًا";
-// static const unauthorized_error= "user unauthorized, try again later";
-// static const not_found_error= "url غير موجود , حاول مرة أخرى لاحقًا";
-// static const conflict_error= "تم العثور على تعارض , حاول مرة أخرى لاحقًا";
-// static const internal_server_error= "حدث خطأ ما , حاول مرة أخرى لاحقًا";
-// static const unknown_error= "حدث خطأ ما , حاول مرة أخرى لاحقًا";
-// static const timeout_error= "انتهت المهلة , حاول مرة أخرى متأخرًا";
-// static const default_error= "حدث خطأ ما , حاول مرة أخرى لاحقًا";
-// static const cache_error= "خطأ في ذاكرة التخزين المؤقت , حاول مرة أخرى لاحقًا";
-// static const no_internet_error= "يُرجى التحقق من اتصالك بالإنترنت";
+  //Arabic Message
+  // static const success= "تم بنجاح";
+  // static const bad_request_error= "طلب غير صالح. حاول مرة أخرى لاحقًا";
+  // static const no_content= "success with not content";
+  // static const forbidden_error= "طلب محظور. حاول مرة أخرى لاحقًا";
+  // static const unauthorized_error= "user unauthorized, try again later";
+  // static const not_found_error= "url غير موجود , حاول مرة أخرى لاحقًا";
+  // static const conflict_error= "تم العثور على تعارض , حاول مرة أخرى لاحقًا";
+  // static const internal_server_error= "حدث خطأ ما , حاول مرة أخرى لاحقًا";
+  // static const unknown_error= "حدث خطأ ما , حاول مرة أخرى لاحقًا";
+  // static const timeout_error= "انتهت المهلة , حاول مرة أخرى متأخرًا";
+  // static const default_error= "حدث خطأ ما , حاول مرة أخرى لاحقًا";
+  // static const cache_error= "خطأ في ذاكرة التخزين المؤقت , حاول مرة أخرى لاحقًا";
+  // static const no_internet_error= "يُرجى التحقق من اتصالك بالإنترنت";
 }

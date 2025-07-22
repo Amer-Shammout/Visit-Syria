@@ -1,10 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
-import 'package:go_router/go_router.dart';
-import 'package:visit_syria/Core/utils/app_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
@@ -13,6 +13,8 @@ import 'package:visit_syria/Core/widgets/custom_button.dart';
 import 'package:visit_syria/Core/widgets/custom_country_picker.dart';
 import 'package:visit_syria/Core/widgets/custom_name_fields.dart';
 import 'package:visit_syria/Core/widgets/profile_avatar_picker.dart';
+import 'package:visit_syria/Features/Auth/Data/Models/profile_model.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/set_profile_cubit/set_profile_cubit.dart';
 
 class SettingInfoForm extends StatefulWidget {
   const SettingInfoForm({super.key});
@@ -32,14 +34,30 @@ class _SettingInfoFormState extends State<SettingInfoForm> {
   final _firstNameFocus = FocusNode();
   final _secondNameFocus = FocusNode();
 
-  void _submit() {
+  void _submit() async {
     if (_formKey.currentState!.validate() && _selectedCountry != null) {
       _formKey.currentState!.save();
       log(
         "First Name : $firstName  Last Name : $lastName  Selected Country : ${_selectedCountry?.displayName}  File : ${userImage?.path}",
       );
-      GoRouter.of(context).pushNamed(AppRouter.kPreferencesName);
-      // TODO: send data to API
+      MultipartFile? multipartFile;
+      if (userImage != null) {
+        multipartFile = await MultipartFile.fromFile(
+          userImage!.path,
+          filename: userImage!.path.split('/').last,
+        );
+      }
+
+      log("${multipartFile?.filename}");
+
+      ProfileModel profileModel = ProfileModel(
+        firstName: firstName,
+        lastName: lastName,
+        country: _selectedCountry?.displayName,
+        countryCode: _selectedCountry?.countryCode,
+        uploadPhoto: multipartFile,
+      );
+      await BlocProvider.of<SetProfileCubit>(context).setProfile(profileModel);
     } else {
       setState(() {
         _isAutoValidate = AutovalidateMode.always;

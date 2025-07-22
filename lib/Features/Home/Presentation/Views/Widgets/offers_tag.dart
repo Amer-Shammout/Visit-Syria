@@ -4,17 +4,12 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/shadows.dart';
 
 class OffersTag extends StatelessWidget {
-  const OffersTag({
-    super.key,
-  });
+  const OffersTag({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: 6,
-        horizontal: 12,
-      ),
+      padding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         boxShadow: [Shadows.shadow],
@@ -30,4 +25,3 @@ class OffersTag extends StatelessWidget {
     );
   }
 }
-

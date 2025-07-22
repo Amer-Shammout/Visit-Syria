@@ -5,9 +5,7 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/profile_avatar.dart';
 
 class AvatarandNameandHistory extends StatelessWidget {
-  const AvatarandNameandHistory({
-    super.key,
-  });
+  const AvatarandNameandHistory({super.key});
 
   @override
   Widget build(BuildContext context) {

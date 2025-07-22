@@ -9,6 +9,8 @@ class VerificationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: VerificationViewBodyConsumer(authModel:authRequestModel));
+    return Scaffold(
+      body: VerificationViewBodyConsumer(authModel: authRequestModel),
+    );
   }
 }

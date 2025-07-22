@@ -14,7 +14,7 @@ class PostandBlogsTagsWrap extends StatelessWidget {
       runSpacing: 8,
       children:
           tags.map((tag) {
-            return PostandBlogTag(tag: tag,textStyle: textStyle,);
+            return PostandBlogTag(tag: tag, textStyle: textStyle);
           }).toList(),
     );
   }

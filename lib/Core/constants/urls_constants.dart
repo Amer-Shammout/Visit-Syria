@@ -5,3 +5,5 @@ const kResendCodeUrl = "auth/resendVerificationCode";
 const kForgetPasswordUrl = "auth/forgetPassword";
 const kVerifyCodeUrl = "auth/verifyCode";
 const kResetPasswordUrl = "auth/resetPassword";
+const kSetPreference = "auth/setPreference";
+const kSetProfile = "auth/setProfile";

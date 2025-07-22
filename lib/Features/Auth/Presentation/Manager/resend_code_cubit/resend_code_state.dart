@@ -7,8 +7,11 @@ abstract class ResendCodeState extends Equatable {
 }
 
 class ResendCodeInitial extends ResendCodeState {}
+
 class ResendCodeLoading extends ResendCodeState {}
+
 class ResendCodeSuccess extends ResendCodeState {}
+
 class ResendCodeFailure extends ResendCodeState {
   final String errMessage;
   const ResendCodeFailure({required this.errMessage});

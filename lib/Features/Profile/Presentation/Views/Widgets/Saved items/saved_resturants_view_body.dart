@@ -9,9 +9,7 @@ class SavedResturantsViewBody extends StatelessWidget {
     return CustomScrollView(
       physics: BouncingScrollPhysics(),
       clipBehavior: Clip.none,
-      slivers: [
-        HotelsAndResturantGridView()
-      ],
+      slivers: [HotelsAndResturantGridView()],
     );
   }
 }

@@ -24,7 +24,10 @@ class ProfileViewBody extends StatelessWidget {
             bottom: 0,
             right: 0,
             left: 0,
-            child: CustomGeneralFloatingButton(onPressed: (){},title: "تسجيل الخروج",),
+            child: CustomGeneralFloatingButton(
+              onPressed: () {},
+              title: "تسجيل الخروج",
+            ),
           ),
         ],
       ),

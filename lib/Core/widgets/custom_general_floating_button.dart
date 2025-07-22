@@ -6,7 +6,11 @@ import 'package:visit_syria/Core/utils/styles/shadows.dart';
 import 'package:visit_syria/Core/widgets/custom_button.dart';
 
 class CustomGeneralFloatingButton extends StatelessWidget {
-  const CustomGeneralFloatingButton({super.key, required this.onPressed, required this.title});
+  const CustomGeneralFloatingButton({
+    super.key,
+    required this.onPressed,
+    required this.title,
+  });
 
   final void Function() onPressed;
   final String title;

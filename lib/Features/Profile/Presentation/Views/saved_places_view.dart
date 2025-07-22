@@ -8,7 +8,7 @@ class SavedPlacesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar2(hasTitle: true,title: "المواقع المحفوظة",),
+      appBar: CustomAppBar2(hasTitle: true, title: "المواقع المحفوظة"),
       body: SavedPlacesViewBody(),
     );
   }

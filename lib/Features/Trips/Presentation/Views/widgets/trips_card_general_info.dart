@@ -3,9 +3,7 @@ import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/widgets/general_info_item.dart';
 
 class TripsCardGeneralInfo extends StatelessWidget {
-  const TripsCardGeneralInfo({
-    super.key,
-  });
+  const TripsCardGeneralInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,4 +18,3 @@ class TripsCardGeneralInfo extends StatelessWidget {
     );
   }
 }
-

@@ -9,7 +9,7 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 class CustomAppBar2 extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar2({
     super.key,
-     this.title,
+    this.title,
     this.alignmentDirectional = AlignmentDirectional.centerStart,
     this.trailing,
     this.hasTitle = true,

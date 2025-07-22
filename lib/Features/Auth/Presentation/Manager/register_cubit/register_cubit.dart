@@ -14,10 +14,13 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(RegisterLoading());
     var result = await _authRepo.register(authRequestModel);
 
-    result.fold((failure) {
-      emit(RegisterFailure(errMessage: failure.errMessage));
-    }, (flag) {
-      emit(RegisterSuccess(authRequestModel: authRequestModel));
-    });
+    result.fold(
+      (failure) {
+        emit(RegisterFailure(errMessage: failure.errMessage));
+      },
+      (flag) {
+        emit(RegisterSuccess(authRequestModel: authRequestModel));
+      },
+    );
   }
 }

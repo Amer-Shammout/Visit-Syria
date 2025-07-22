@@ -13,7 +13,8 @@ class PostsListView extends StatelessWidget {
       padding: EdgeInsets.only(left: 16, right: 16, bottom: 32),
       sliver: SliverList.separated(
         itemBuilder:
-            (context, index) => PostCard(hasImage: index.isEven ? false : true,state: state,),
+            (context, index) =>
+                PostCard(hasImage: index.isEven ? false : true, state: state),
         separatorBuilder: (context, index) => SizedBox(height: AppSpacing.s16),
         itemCount: 6,
       ),

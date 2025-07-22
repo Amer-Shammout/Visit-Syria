@@ -8,6 +8,6 @@ class ForgetPasswordView2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: ForgetPassword2ViewBodyConsumer(email: email,));
+    return Scaffold(body: ForgetPassword2ViewBodyConsumer(email: email));
   }
 }

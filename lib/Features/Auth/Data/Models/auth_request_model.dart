@@ -11,10 +11,8 @@ class AuthRequestModel {
       'password_confirmation': password,
     };
   }
+
   Map<String, dynamic> toJsonLogin() {
-    return {
-      'email': email!.trim(),
-      'password': password,
-    };
+    return {'email': email!.trim(), 'password': password};
   }
 }

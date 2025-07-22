@@ -21,7 +21,10 @@ class ForgetPassword2ViewBodyConsumer extends StatelessWidget {
           showFailureSnackBar(state.errMessage, context);
         }
         if (state is VerifyCodeSuccess) {
-          GoRouter.of(context).pushNamed(AppRouter.kForgetPassword3Name,extra: state.verificationModel);
+          GoRouter.of(context).pushNamed(
+            AppRouter.kForgetPassword3Name,
+            extra: state.verificationModel,
+          );
         }
       },
       builder: (context, state) {

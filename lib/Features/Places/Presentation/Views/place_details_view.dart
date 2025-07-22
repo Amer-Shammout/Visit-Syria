@@ -7,15 +7,14 @@ class PlaceDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return 
-     Scaffold(
+    return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.whiteColor,
         automaticallyImplyLeading: false,
         toolbarHeight: 0,
         surfaceTintColor: AppColors.whiteColor,
       ),
-      body: PlaceDetailsViewBody()
-     );
+      body: PlaceDetailsViewBody(),
+    );
   }
 }

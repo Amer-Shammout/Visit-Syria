@@ -35,7 +35,7 @@ class CreatePostView extends StatelessWidget {
           size: 12,
         ),
       ),
-      body: CreatePostViewBody(formKey: formKey,image:image),
+      body: CreatePostViewBody(formKey: formKey, image: image),
     );
   }
 }

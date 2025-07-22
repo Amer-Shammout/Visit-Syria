@@ -37,7 +37,7 @@ class _SignUpFormState extends State<SignUpForm> {
   final _passwordFocus = FocusNode();
   final _confirmPassFocus = FocusNode();
 
-  void _submit() async{
+  void _submit() async {
     if (_formKey.currentState!.validate() && _isCheck!) {
       _formKey.currentState!.save();
       _authModel = AuthRequestModel(email: email!, password: password!);

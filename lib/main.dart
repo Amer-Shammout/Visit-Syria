@@ -13,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Prefs.init();
+  // Prefs.removePref(kToken);
   Bloc.observer = CustomBlocObserver();
 
   setupGetit();

@@ -7,11 +7,14 @@ abstract class VerifyCodeState extends Equatable {
 }
 
 class VerifyCodeInitial extends VerifyCodeState {}
+
 class VerifyCodeLoading extends VerifyCodeState {}
+
 class VerifyCodeSuccess extends VerifyCodeState {
   final VerificationModel verificationModel;
   const VerifyCodeSuccess({required this.verificationModel});
 }
+
 class VerifyCodeFailure extends VerifyCodeState {
   final String errMessage;
   const VerifyCodeFailure({required this.errMessage});

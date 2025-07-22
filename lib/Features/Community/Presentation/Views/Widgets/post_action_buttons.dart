@@ -6,9 +6,7 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_action_button.dart';
 
 class PostActionButtons extends StatelessWidget {
-  const PostActionButtons({
-    super.key,
-  });
+  const PostActionButtons({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +26,9 @@ class PostActionButtons extends StatelessWidget {
           child: PostActionButton(
             inActiveIcon: Assets.iconsComment,
             text: "200",
-            onTap: () => GoRouter.of(context).pushNamed(AppRouter.kAllCommentsName),
+            onTap:
+                () =>
+                    GoRouter.of(context).pushNamed(AppRouter.kAllCommentsName),
           ),
         ),
         SizedBox(width: AppSpacing.s8),

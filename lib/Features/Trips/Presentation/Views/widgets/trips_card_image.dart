@@ -7,7 +7,11 @@ import 'package:visit_syria/Core/widgets/custom_image.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/offers_tag.dart';
 
 class TripsCardImage extends StatelessWidget {
-  const TripsCardImage({super.key, required this.imageHeight, required this.positionedVal});
+  const TripsCardImage({
+    super.key,
+    required this.imageHeight,
+    required this.positionedVal,
+  });
 
   final double imageHeight;
   final double positionedVal;

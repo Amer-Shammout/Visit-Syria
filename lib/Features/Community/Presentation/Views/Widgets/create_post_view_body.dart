@@ -20,7 +20,7 @@ class CreatePostViewBody extends StatelessWidget {
       children: [
         AvatarandNameandHistory(),
         SizedBox(height: AppSpacing.s24),
-        CreatePostForm(key: formKey,image:image),
+        CreatePostForm(key: formKey, image: image),
       ],
     );
   }

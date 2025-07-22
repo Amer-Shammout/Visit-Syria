@@ -27,9 +27,9 @@ class _SplashViewBodyState extends State<SplashViewBody> {
           Future.delayed(composition.duration, () {
             if (!_navigated) {
               _navigated = true;
-              GoRouter.of(context).pushReplacementNamed(
-                AppRouter.kOnboardingName,
-              );
+              GoRouter.of(
+                context,
+              ).pushReplacementNamed(AppRouter.kOnboardingName);
             }
           });
         },

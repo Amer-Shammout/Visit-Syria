@@ -8,9 +8,7 @@ import 'package:visit_syria/Core/widgets/general_info_item.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/widgets/custom_company_logo.dart';
 
 class TourismCompanyDetailsViewHeader extends StatelessWidget {
-  const TourismCompanyDetailsViewHeader({
-    super.key,
-  });
+  const TourismCompanyDetailsViewHeader({super.key});
 
   @override
   Widget build(BuildContext context) {

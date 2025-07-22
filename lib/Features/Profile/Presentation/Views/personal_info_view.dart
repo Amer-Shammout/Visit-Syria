@@ -13,4 +13,3 @@ class PersonalInfoView extends StatelessWidget {
     );
   }
 }
-

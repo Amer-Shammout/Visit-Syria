@@ -7,7 +7,7 @@ import 'package:visit_syria/Core/widgets/custom_card_background.dart';
 import 'package:visit_syria/Core/widgets/custom_rating.dart';
 
 class CustomComment extends StatelessWidget {
-  const CustomComment({super.key,  this.hasRate = true});
+  const CustomComment({super.key, this.hasRate = true});
 
   final bool hasRate;
 

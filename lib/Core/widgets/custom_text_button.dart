@@ -7,7 +7,8 @@ class CustomTextButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.title,
-    this.color = AppColors.primary, required this.textStyle,
+    this.color = AppColors.primary,
+    required this.textStyle,
   });
 
   final VoidCallback onPressed;
@@ -24,10 +25,7 @@ class CustomTextButton extends StatelessWidget {
         elevation: 0,
         overlayColor: Colors.transparent,
       ),
-      child: Text(
-        title,
-        style: textStyle,
-      ),
+      child: Text(title, style: textStyle),
     );
   }
 }

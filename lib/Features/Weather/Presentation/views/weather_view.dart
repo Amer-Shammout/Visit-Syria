@@ -8,7 +8,10 @@ class WeatherView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar2(title: "دمشق",alignmentDirectional: AlignmentDirectional.center,),
+      appBar: CustomAppBar2(
+        title: "دمشق",
+        alignmentDirectional: AlignmentDirectional.center,
+      ),
       body: WeatherViewBody(),
     );
   }

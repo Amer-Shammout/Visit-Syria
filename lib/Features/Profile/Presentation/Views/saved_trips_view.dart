@@ -8,7 +8,7 @@ class SavedTripsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar2(hasTitle: true,title: "الرحلات المحفوظة",),
+      appBar: CustomAppBar2(hasTitle: true, title: "الرحلات المحفوظة"),
       body: SavedTripsViewBody(),
     );
   }

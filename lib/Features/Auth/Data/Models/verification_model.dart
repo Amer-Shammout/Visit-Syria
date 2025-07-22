@@ -5,9 +5,6 @@ class VerificationModel {
   VerificationModel({this.email, this.code});
 
   Map<String, dynamic> toJson() {
-    return {
-      'email': email!.trim(),
-      'code': code,
-    };
+    return {'email': email!.trim(), 'code': code};
   }
 }

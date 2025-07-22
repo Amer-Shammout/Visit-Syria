@@ -7,13 +7,16 @@ abstract class ResetPasswordState extends Equatable {
 }
 
 class ResetPasswordInitial extends ResetPasswordState {}
+
 class ResetPasswordLoading extends ResetPasswordState {}
+
 class ResetPasswordSuccess extends ResetPasswordState {
   final AuthResponseModel authResponse;
   const ResetPasswordSuccess({required this.authResponse});
   @override
   List<Object?> get props => [authResponse];
 }
+
 class ResetPasswordFailure extends ResetPasswordState {
   final String errMessage;
   const ResetPasswordFailure({required this.errMessage});

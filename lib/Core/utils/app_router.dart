@@ -18,6 +18,8 @@ import 'package:visit_syria/Features/Auth/Presentation/Manager/login_cubit/login
 import 'package:visit_syria/Features/Auth/Presentation/Manager/register_cubit/register_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Manager/resend_code_cubit/resend_code_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Manager/reset_password_cubit/reset_password_cubit.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/set_preferences_cubit/set_preferences_cubit.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/set_profile_cubit/set_profile_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Manager/verify_code_cubit/verify_code_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Manager/verify_email_cubit/verify_email_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/forget_password_view_1.dart';
@@ -212,13 +214,24 @@ abstract class AppRouter {
         name: kSettingInfoName,
         path: kSettingInfoView,
         pageBuilder:
-            (context, state) => const MaterialPage(child: SettingInfoView()),
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create: (context) => SetProfileCubit(getIt.get<AuthRepoImpl>()),
+                child: SettingInfoView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kPreferencesName,
         path: kPreferencesView,
         pageBuilder:
-            (context, state) => const MaterialPage(child: PreferencesView()),
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) => SetPreferencesCubit(getIt.get<AuthRepoImpl>()),
+                child: PreferencesView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kForgetPassword1Name,

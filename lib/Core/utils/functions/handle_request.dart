@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:visit_syria/Core/errors/failures.dart';
@@ -9,8 +11,11 @@ Future<Either<Failure, T>> handleRequest<T>({
 }) async {
   try {
     final response = await requestFn();
+    log("$response");
     return right(parse(response.data));
   } on DioException catch (e) {
+    log("${e.response}");
+
     return left(ServerFailure.fromDioError(e));
   } catch (e) {
     return left(ServerFailure(errMessage: AppStrings.strInternalServerError));

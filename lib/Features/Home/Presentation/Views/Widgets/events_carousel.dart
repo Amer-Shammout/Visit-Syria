@@ -14,7 +14,7 @@ class EventsCarousel extends StatelessWidget {
       itemBuilder: (context, index, realIndex) {
         return GestureDetector(
           onTap:
-              () => GoRouter.of(context).pushNamed(AppRouter.kEventDetailsName,),
+              () => GoRouter.of(context).pushNamed(AppRouter.kEventDetailsName),
           child: EventCard(),
         );
       },

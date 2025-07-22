@@ -6,9 +6,7 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/profile_avatar_picker.dart';
 
 class ProfileViewHeader extends StatelessWidget {
-  const ProfileViewHeader({
-    super.key,
-  });
+  const ProfileViewHeader({super.key});
 
   @override
   Widget build(BuildContext context) {

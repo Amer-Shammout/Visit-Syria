@@ -41,7 +41,9 @@ class CustomDrawer extends StatelessWidget {
             ),
             SizedBox(height: AppSpacing.s32),
             Expanded(
+              flex: 2,
               child: ListView.separated(
+                clipBehavior: Clip.none,
                 padding: EdgeInsets.zero,
                 itemCount: drawerItems.length,
                 separatorBuilder: (BuildContext context, int index) {
@@ -93,7 +95,7 @@ class CustomDrawer extends StatelessWidget {
       case 3:
         return null;
       default:
-        return null;
+        return GoRouter.of(context).pushNamed(AppRouter.kSettingsName);
     }
   }
 }

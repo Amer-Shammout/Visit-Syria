@@ -7,3 +7,4 @@ const kVerifyCodeUrl = "auth/verifyCode";
 const kResetPasswordUrl = "auth/resetPassword";
 const kSetPreference = "auth/setPreference";
 const kSetProfile = "auth/setProfile";
+const kGetWeatherTodayURL = "weather/today";

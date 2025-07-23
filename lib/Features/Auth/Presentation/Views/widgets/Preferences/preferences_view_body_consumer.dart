@@ -13,7 +13,7 @@ class PreferencesViewBodyConsumer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-return BlocConsumer<SetPreferencesCubit, SetPreferencesState>(
+    return BlocConsumer<SetPreferencesCubit, SetPreferencesState>(
       listener: (context, state) {
         if (state is SetPreferencesFailure) {
           showFailureSnackBar(state.errMessage, context);
@@ -29,5 +29,6 @@ return BlocConsumer<SetPreferencesCubit, SetPreferencesState>(
           child: PreferencesViewBody(),
         );
       },
-    );  }
+    );
+  }
 }

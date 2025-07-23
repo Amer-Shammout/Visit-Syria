@@ -4,10 +4,11 @@ import 'interceptors.dart';
 
 class DioClient {
   late final Dio _dio;
-  // final String _baseUrl = "http://127.0.0.1:8000/api/";
-  // final String _baseUrl = 'http://192.168.43.241:8000/api/';
-  // final String _baseUrl = 'http://192.168.108.141:8000/api/';
-  final String _baseUrl = 'http://192.168.11.141:8000/api/';
+
+  //Amer's URL:
+  // final String _baseUrl = 'http://192.168.11.141:8000/api/';
+
+  final String _baseUrl = 'http:// 192.168.139.241:8000/api/';
   DioClient()
     : _dio = Dio(
         BaseOptions(

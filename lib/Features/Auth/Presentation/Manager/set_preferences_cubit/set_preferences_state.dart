@@ -17,5 +17,4 @@ final class SetPreferencesFailure extends SetPreferencesState {
   const SetPreferencesFailure({required this.errMessage});
 }
 
-final class SetPreferencesSuccess extends SetPreferencesState {
-}
+final class SetPreferencesSuccess extends SetPreferencesState {}

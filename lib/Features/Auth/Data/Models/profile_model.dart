@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
@@ -64,7 +63,6 @@ class ProfileModel extends Equatable {
   );
 
   Map<String, dynamic> toJson() => {
-   
     'first_name': firstName,
     'last_name': lastName,
     // 'date_of_birth': dateOfBirth,

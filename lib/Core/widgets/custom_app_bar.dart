@@ -53,7 +53,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               IconButton(
                 onPressed: () {
-                  // TODO: search action
+                  GoRouter.of(context).pushNamed(AppRouter.kSearchName);
                 },
                 icon: SvgPicture.asset(
                   Assets.iconsSearch,

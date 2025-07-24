@@ -54,6 +54,7 @@ import 'package:visit_syria/Features/Profile/Presentation/Views/saved_trips_view
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotel_and_resturants_details_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotels_and_resturants_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/similar_hotels_or_resturants_view.dart';
+import 'package:visit_syria/Features/Search/Presentation/Views/search_view.dart';
 import 'package:visit_syria/Features/Settings/Presentation/Views/settings_view.dart';
 import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_view.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_companies_view.dart';
@@ -150,6 +151,8 @@ abstract class AppRouter {
   static const kSavedPostsName = 'savedPosts';
   static const kSettingsView = '/settings';
   static const kSettingsName = 'settings';
+  static const kSearchView = '/search';
+  static const kSearchName = 'search';
 
   static bool get isAuth => Prefs.getString(kToken) != '';
 
@@ -466,6 +469,11 @@ abstract class AppRouter {
         name: kSettingsName,
         path: kSettingsView,
         pageBuilder: (context, state) => MaterialPage(child: SettingsView()),
+      ),
+      GoRoute(
+        name: kSearchName,
+        path: kSearchView,
+        pageBuilder: (context, state) => MaterialPage(child: SearchView()),
       ),
     ],
   );

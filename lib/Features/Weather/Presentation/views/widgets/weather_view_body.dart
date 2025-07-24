@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
+import 'package:visit_syria/Features/Home/Data/Models/weather_model.dart';
+import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/weather_card.dart';
 import 'package:visit_syria/Features/Weather/Presentation/views/widgets/today_weather_cards_grid_view.dart';
 
-class WeatherViewBody extends StatelessWidget {
-  const WeatherViewBody({super.key});
+class WeatherViewBody extends StatefulWidget {
+  const WeatherViewBody({super.key, required this.weatherForWeek});
+  final List<WeatherModel> weatherForWeek;
 
+  @override
+  State<WeatherViewBody> createState() => _WeatherViewBodyState();
+}
+
+class _WeatherViewBodyState extends State<WeatherViewBody> {
+  int selectDayIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,7 +31,12 @@ class WeatherViewBody extends StatelessWidget {
                 flex: 2,
                 child: AspectRatio(
                   aspectRatio: 1,
-                  child: SvgPicture.asset(Assets.iconsSunny, fit: BoxFit.fill),
+                  child: SvgPicture.asset(
+                    getWeatherState(
+                      widget.weatherForWeek[selectDayIndex].conditionType!,
+                    ),
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
               Flexible(child: SizedBox(width: 100)),
@@ -32,7 +45,7 @@ class WeatherViewBody extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      'مشمس',
+                      widget.weatherForWeek[selectDayIndex].conditionType!,
                       style: AppStyles.fontsRegular20(
                         context,
                       ).copyWith(color: AppColors.graySwatch[800]),
@@ -40,12 +53,12 @@ class WeatherViewBody extends StatelessWidget {
                     SizedBox(height: AppSpacing.s16),
                     Text(
                       textDirection: TextDirection.ltr,
-                      '29\u00B0',
+                      '${widget.weatherForWeek[selectDayIndex].tempC}\u00B0',
                       style: AppStyles.fontsBold64(context),
                     ),
                     SizedBox(height: AppSpacing.s12),
                     Text(
-                      'الخميس',
+                      widget.weatherForWeek[selectDayIndex].dayName!,
                       style: AppStyles.fontsBold14(
                         context,
                       ).copyWith(color: AppColors.titleTextColor),
@@ -56,7 +69,17 @@ class WeatherViewBody extends StatelessWidget {
             ],
           ),
         ),
-        Expanded(child: TodayWeatherCardsGridView()),
+        Expanded(
+          child: TodayWeatherCardsGridView(
+            weatherForWeek: widget.weatherForWeek,
+            selectedIndex: selectDayIndex,
+            onDaySelected: (index) {
+              setState(() {
+                selectDayIndex = index;
+              });
+            },
+          ),
+        ),
       ],
     );
   }

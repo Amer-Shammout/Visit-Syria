@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:visit_syria/Core/constants/common_constants.dart';
-import 'package:visit_syria/Core/services/shared_preferences_singleton.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/utils/styles/shadows.dart';
+import 'package:visit_syria/Features/Home/Data/Models/weather_model.dart';
 
 class WeatherCard extends StatelessWidget {
-  const WeatherCard({super.key});
-
+  const WeatherCard({super.key, required this.weatherModel});
+  final WeatherModel weatherModel;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,7 +23,9 @@ class WeatherCard extends StatelessWidget {
           splashColor: AppColors.graySwatch[50],
           onTap: () {
             // Prefs.removePref(kToken);
-            GoRouter.of(context).pushNamed(AppRouter.kWeatherName);
+            GoRouter.of(
+              context,
+            ).pushNamed(AppRouter.kWeatherName, extra: weatherModel.location);
           },
           child: Ink(
             width: 50,
@@ -41,7 +42,7 @@ class WeatherCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SvgPicture.asset(
-                  Assets.iconsSunny,
+                  getWeatherState(weatherModel.conditionType!),
                   height: 20,
                   width: 20,
                   colorFilter: ColorFilter.mode(
@@ -52,7 +53,7 @@ class WeatherCard extends StatelessWidget {
                 SizedBox(height: AppSpacing.s4),
                 Text(
                   textDirection: TextDirection.ltr,
-                  '29\u00B0 C',
+                  '${weatherModel.tempC}\u00B0 C',
                   style: AppStyles.fontsRegular12(
                     context,
                   ).copyWith(color: AppColors.primary, fontSize: 9),
@@ -63,7 +64,7 @@ class WeatherCard extends StatelessWidget {
         ),
         SizedBox(height: AppSpacing.s4),
         Text(
-          'دمشق',
+          weatherModel.location!,
           style: AppStyles.fontsRegular14(
             context,
           ).copyWith(color: AppColors.primary, fontSize: 11),
@@ -71,4 +72,16 @@ class WeatherCard extends StatelessWidget {
       ],
     );
   }
+}
+
+String getWeatherState(String conditionType) {
+  if (conditionType == 'sun') return Assets.iconsSunny;
+  if (conditionType == 'cloud') return Assets.iconsCloudy;
+  if (conditionType == 'tornado') return Assets.iconsTornado;
+  if (conditionType == 'thunder') return Assets.iconsThunder;
+  if (conditionType == 'rain') return Assets.iconsRain;
+  if (conditionType == 'snow') return Assets.iconsSnowy;
+  if (conditionType == 'sleet') return Assets.iconsRainThunder;
+
+  return Assets.iconsSunny;
 }

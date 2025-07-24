@@ -35,6 +35,9 @@ import 'package:visit_syria/Features/Community/Presentation/Views/all_comments_v
 import 'package:visit_syria/Features/Community/Presentation/Views/create_post_view.dart';
 import 'package:visit_syria/Features/Events/Views/all_events_view.dart';
 import 'package:visit_syria/Features/Events/Views/event_details_view.dart';
+import 'package:visit_syria/Features/Home/Data/Repos/home_repo_impl.dart';
+import 'package:visit_syria/Features/Home/Presentation/Manager/weather/get_weather_for_week_cubit/get_weather_for_week_cubit.dart';
+import 'package:visit_syria/Features/Home/Presentation/Manager/weather/get_weather_today_cubit/get_weather_today_cubit.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/all_comments_and_rating_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/all_places_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/city_details_view.dart';
@@ -59,7 +62,7 @@ import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_v
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_companies_view.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_company_details_view.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/all_offers_view.dart';
-import 'package:visit_syria/Features/Weather/Presentation/views/weather_view.dart';
+import 'package:visit_syria/Features/Weather/Presentation/views/weather_view_builder.dart';
 
 abstract class AppRouter {
   static const kSplashView = '/splash';
@@ -286,13 +289,28 @@ abstract class AppRouter {
         name: kAppRootName,
         path: kAppRootView,
         pageBuilder:
-            (context, state) => const MaterialPage(child: AppRootView()),
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        GetWeatherTodayCubit(getIt.get<HomeRepoImpl>())
+                          ..getWeatherToday(),
+                child: AppRootView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kWeatherName,
         path: kWeatherView,
         pageBuilder:
-            (context, state) => const MaterialPage(child: WeatherView()),
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        GetWeatherForWeekCubit(getIt.get<HomeRepoImpl>()),
+                child: WeatherView(cityName: state.extra as String),
+              ),
+            ),
       ),
       GoRoute(
         name: kAllEventsName,

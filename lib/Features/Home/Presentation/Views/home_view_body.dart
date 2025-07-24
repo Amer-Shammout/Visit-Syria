@@ -7,7 +7,7 @@ import 'package:visit_syria/Core/widgets/custom_section.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/events_carousel.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/offers_cards_list_view.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_cards_hor_list_view.dart';
-import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/weather_cards_list_view.dart';
+import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/weather_cards_builder.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -18,7 +18,7 @@ class HomeViewBody extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       slivers: [
         SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s16)),
-        SliverToBoxAdapter(child: WeatherCardsListView()),
+        SliverToBoxAdapter(child: WeatherCardsBuilder()),
         SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s24)),
         SliverToBoxAdapter(
           child: CustomSection(

@@ -28,7 +28,7 @@ class WeatherCard extends StatelessWidget {
             ).pushNamed(AppRouter.kWeatherName, extra: weatherModel.location);
           },
           child: Ink(
-            width: 50,
+            // width: 50,
             height: 82,
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(

@@ -33,8 +33,11 @@ import 'package:visit_syria/Features/Auth/Presentation/Views/sign_up_view.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/verification_view.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/all_comments_view.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/create_post_view.dart';
-import 'package:visit_syria/Features/Events/Views/all_events_view.dart';
-import 'package:visit_syria/Features/Events/Views/event_details_view.dart';
+import 'package:visit_syria/Features/Events/Presentation/Views/all_events_view.dart';
+import 'package:visit_syria/Features/Events/Presentation/Views/event_details_view.dart';
+import 'package:visit_syria/Features/Events/Presentation/manager/get_all_events_cubit/get_all_events_cubit.dart';
+import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
+import 'package:visit_syria/Features/Events/data/Repos/events_repo_impl.dart';
 import 'package:visit_syria/Features/Home/Data/Repos/home_repo_impl.dart';
 import 'package:visit_syria/Features/Home/Presentation/Manager/weather/get_weather_for_week_cubit/get_weather_for_week_cubit.dart';
 import 'package:visit_syria/Features/Home/Presentation/Manager/weather/get_weather_today_cubit/get_weather_today_cubit.dart';
@@ -319,13 +322,23 @@ abstract class AppRouter {
         name: kAllEventsName,
         path: kAllEventsView,
         pageBuilder:
-            (context, state) => const MaterialPage(child: AllEventsView()),
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        GetAllEventsCubit(getIt.get<EventsRepoImpl>())
+                          ..getAllEvents(),
+                child: AllEventsView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kEventDetailsName,
         path: kEventDetailsView,
         pageBuilder:
-            (context, state) => const MaterialPage(child: EventDetailsView()),
+            (context, state) => MaterialPage(
+              child: EventDetailsView(event: state.extra as EventModel),
+            ),
       ),
       GoRoute(
         name: kAllOffersName,

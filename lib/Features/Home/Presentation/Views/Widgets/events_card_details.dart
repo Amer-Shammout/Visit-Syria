@@ -7,11 +7,17 @@ import 'package:visit_syria/Core/utils/styles/shadows.dart';
 import 'package:visit_syria/Core/widgets/custom_button.dart';
 import 'package:visit_syria/Core/widgets/general_info_item.dart';
 import 'package:visit_syria/Core/widgets/glass_effect.dart';
+import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
 
 class EventsCardDetails extends StatelessWidget {
-  const EventsCardDetails({super.key, this.isSmall = false});
+  const EventsCardDetails({
+    super.key,
+    this.isSmall = false,
+    required this.event,
+  });
 
   final bool isSmall;
+  final EventModel event;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +34,7 @@ class EventsCardDetails extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'الحدث الخارق',
+              event.name ?? "",
               style:
                   isSmall
                       ? AppStyles.fontsBold14(
@@ -47,7 +53,7 @@ class EventsCardDetails extends StatelessWidget {
                 Row(
                   children: [
                     GeneralInfoItem(
-                      title: "15 أيار - 2025",
+                      title: event.date ?? "",
                       icon: Assets.iconsDate,
                       color: AppColors.whiteColor,
                       fontSize: isSmall ? 7 : 8,
@@ -56,7 +62,10 @@ class EventsCardDetails extends StatelessWidget {
                     SizedBox(width: AppSpacing.s4),
                     GeneralInfoItem(
                       icon: Assets.iconsDuration,
-                      title: '5 ساعات',
+                      title: setDurationVal(
+                        event.durationDays,
+                        event.durationHours,
+                      ),
                       color: AppColors.whiteColor,
                       fontSize: isSmall ? 7 : 8,
                       iconSize: isSmall ? 11 : 12,
@@ -88,5 +97,13 @@ class EventsCardDetails extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String setDurationVal(int? durationDays, int? durationHours) {
+    if (durationDays != null) {
+      return "$durationDays يوم";
+    } else {
+      return "$durationDays ساعة";
+    }
   }
 }

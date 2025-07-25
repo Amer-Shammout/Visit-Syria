@@ -10,9 +10,9 @@ class OffersCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 272,
+      height: 280,
       child: AspectRatio(
-        aspectRatio: 200 / 272,
+        aspectRatio: 0.7,
         child: CustomCardBackground(
           padding: 8,
           child: Column(

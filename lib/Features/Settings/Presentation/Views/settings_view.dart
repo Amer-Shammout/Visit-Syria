@@ -8,7 +8,7 @@ class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar2(hasTitle: true,title: "الاعدادات",),
+      appBar: CustomAppBar2(hasTitle: true, title: "الاعدادات"),
       body: SettingsViewBody(),
     );
   }

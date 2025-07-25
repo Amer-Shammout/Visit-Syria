@@ -7,12 +7,15 @@ import 'package:visit_syria/Core/widgets/custom_section.dart';
 import 'package:visit_syria/Core/widgets/custom_description.dart';
 import 'package:visit_syria/Core/widgets/custom_map.dart';
 import 'package:visit_syria/Core/widgets/custom_sliver_app_bar.dart';
-import 'package:visit_syria/Features/Events/Views/widgets/event_general_info.dart';
-import 'package:visit_syria/Features/Events/Views/widgets/small_events_cards_list_view.dart';
+import 'package:visit_syria/Features/Events/Presentation/Views/widgets/event_general_info.dart';
+import 'package:visit_syria/Features/Events/Presentation/Views/widgets/small_events_cards_list_view.dart';
+import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/custom_floating_action_button.dart';
 
 class EventDetailsViewBody extends StatelessWidget {
-  const EventDetailsViewBody({super.key});
+  const EventDetailsViewBody({super.key, required this.event});
+
+  final EventModel event;
 
   @override
   Widget build(BuildContext context) {
@@ -23,26 +26,27 @@ class EventDetailsViewBody extends StatelessWidget {
             physics: BouncingScrollPhysics(),
             slivers: [
               CustomSliverAppBar(
+                
                 images: [
                   Assets.imagesTest,
                   Assets.imagesAzemPalace,
                   Assets.imagesIdlib,
                   Assets.imagesRasafe,
                 ],
-                title: "الحدث الخارق",
+                title: event.name ?? "",
               ),
               SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s16)),
-              SliverToBoxAdapter(child: EventGenerlInfo()),
+              SliverToBoxAdapter(child: EventGenerlInfo(event: event)),
               SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
               SliverToBoxAdapter(
-                child: CustomDescription(
-                  desc:
-                      ' في منطقة مرمريتا بسوريا. يشتهر المهرجان بتنظيم فعاليات متنوعة تشمل عروض موسيقية، فنية، ومسرحية، بالإضافة إلى أنشطة ثقافية تهدف إلى تعزيز التراث المحلي والتقاليد السورية.',
-                ),
+                child: CustomDescription(desc: event.description ?? ""),
               ),
               SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
               SliverToBoxAdapter(
-                child: CustomMap(latitude: 33.5138, longitude: 36.2765),
+                child: CustomMap(
+                  latitude: double.parse(event.latitude!),
+                  longitude: double.parse(event.longitude!),
+                ),
               ),
               SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
               SliverToBoxAdapter(

@@ -8,7 +8,7 @@ class OffersCardsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 272,
+      height: 280,
       child: ListView.separated(
         physics: BouncingScrollPhysics(),
         clipBehavior: Clip.none,

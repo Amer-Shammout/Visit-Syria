@@ -4,8 +4,9 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/widgets/glass_effect.dart';
 
 class CityTag extends StatelessWidget {
-  const CityTag({super.key, this.isSmall = false});
+  const CityTag({super.key, this.isSmall = false, this.city});
   final bool isSmall;
+  final String? city;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class CityTag extends StatelessWidget {
           color: AppColors.primary.withValues(alpha: .2),
         ),
         child: Text(
-          'دمشق',
+          city ?? "دمشق",
           style:
               isSmall
                   ? AppStyles.fontsRegular10(

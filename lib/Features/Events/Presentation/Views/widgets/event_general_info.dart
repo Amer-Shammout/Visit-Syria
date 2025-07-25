@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/general_info_item.dart';
+import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
 
 class EventGenerlInfo extends StatelessWidget {
-  const EventGenerlInfo({super.key});
+  const EventGenerlInfo({super.key, required this.event});
+
+  final EventModel event;
 
   @override
   Widget build(BuildContext context) {
@@ -16,25 +19,35 @@ class EventGenerlInfo extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              GeneralInfoItem(icon: Assets.iconsDate, title: '15 أيار - 2025'),
+              GeneralInfoItem(icon: Assets.iconsDate, title: event.date ??''),
               SizedBox(height: AppSpacing.s8),
               GeneralInfoItem(
                 icon: Assets.iconsLocaionStroke,
-                title: 'حمص، وادي النصارى',
+                title: event.place ??'',
               ),
             ],
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              GeneralInfoItem(icon: Assets.iconsDuration, title: '5 ساعات'),
+              GeneralInfoItem(icon: Assets.iconsDuration, title:setDurationVal(
+                        event.durationDays,
+                        event.durationHours,
+                      )),
               SizedBox(height: AppSpacing.s8),
 
-              GeneralInfoItem(icon: Assets.iconsTicket, title: 'غير محدود'),
+              GeneralInfoItem(icon: Assets.iconsTicket, title: event.eventType ?? ""),
             ],
           ),
         ],
       ),
     );
+  }
+  String setDurationVal(int? durationDays, int? durationHours) {
+    if (durationDays != null) {
+      return "$durationDays يوم";
+    } else {
+      return "$durationDays ساعة";
+    }
   }
 }

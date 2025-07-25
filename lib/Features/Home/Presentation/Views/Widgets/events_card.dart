@@ -3,31 +3,18 @@ import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/shadows.dart';
 import 'package:visit_syria/Core/widgets/custom_icon_button.dart';
 import 'package:visit_syria/Core/widgets/custom_image.dart';
+import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/city_tag.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/events_card_details.dart';
 
 class EventCard extends StatelessWidget {
-  // final String? imageUrl;
-  // final String? city;
-  // final String? eventName;
-  // final String? date;
-  // final String? duration;
-  // final VoidCallback? onDetailsTap;
-  // final VoidCallback? onSaveTap;
-  // final bool? isSaved;
+
   final bool isSmall;
+  final EventModel event;
 
   const EventCard({
     super.key,
-    this.isSmall = false,
-    // this.imageUrl,
-    // this.city,
-    // this.eventName,
-    // this.date,
-    // this.duration,
-    // this.onDetailsTap,
-    // this.onSaveTap,
-    // this.isSaved = false,
+    this.isSmall = false, required this.event,
   });
 
   @override
@@ -51,7 +38,7 @@ class EventCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CityTag(isSmall: isSmall),
+                CityTag(isSmall: isSmall,city:event.place),
                 CustomIconButton(
                   onTap: () {},
                   inActiveIcon: Assets.iconsBookmarkStroke,
@@ -65,7 +52,7 @@ class EventCard extends StatelessWidget {
             right: isSmall ? 8 : 16,
             left: isSmall ? 8 : 16,
             bottom: isSmall ? 8 : 16,
-            child: EventsCardDetails(isSmall: isSmall),
+            child: EventsCardDetails(isSmall: isSmall,event:event),
           ),
         ],
       ),

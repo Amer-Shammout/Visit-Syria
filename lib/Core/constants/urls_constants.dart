@@ -8,3 +8,4 @@ const kResetPasswordUrl = "auth/resetPassword";
 const kSetPreference = "auth/setPreference";
 const kSetProfile = "auth/setProfile";
 const kGetWeatherTodayURL = "weather/today";
+const kGetWeatherForWeekURL = "weather";

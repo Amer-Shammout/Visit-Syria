@@ -8,7 +8,7 @@ class DioClient {
   //Amer's URL:
   // final String _baseUrl = 'http://192.168.11.141:8000/api/';
 
-  final String _baseUrl = 'http:// 192.168.139.241:8000/api/';
+  final String _baseUrl = 'http://192.168.139.241:8000/api/';
   DioClient()
     : _dio = Dio(
         BaseOptions(

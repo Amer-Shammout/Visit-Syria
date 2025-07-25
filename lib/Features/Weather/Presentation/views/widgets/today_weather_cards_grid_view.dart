@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
+import 'package:visit_syria/Features/Home/Data/Models/weather_model.dart';
 import 'package:visit_syria/Features/Weather/Presentation/views/widgets/today_weather_card.dart';
 
-class TodayWeatherCardsGridView extends StatefulWidget {
-  const TodayWeatherCardsGridView({super.key});
-
-  @override
-  State<TodayWeatherCardsGridView> createState() =>
-      _TodayWeatherCardsGridViewState();
-}
-
-class _TodayWeatherCardsGridViewState extends State<TodayWeatherCardsGridView> {
-  int _currentIndex = 0;
-
+class TodayWeatherCardsGridView extends StatelessWidget {
+  const TodayWeatherCardsGridView({
+    super.key,
+    required this.weatherForWeek,
+    required this.selectedIndex,
+    required this.onDaySelected,
+  });
+  final List<WeatherModel> weatherForWeek;
+  final int selectedIndex;
+  final void Function(int) onDaySelected;
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -30,11 +30,12 @@ class _TodayWeatherCardsGridViewState extends State<TodayWeatherCardsGridView> {
 
       itemBuilder:
           (context, index) => GestureDetector(
-            onTap:
-                () => setState(() {
-                  _currentIndex = index;
-                }),
-            child: TodayWeatherCard(isSelected: _currentIndex == index),
+            onTap: () => onDaySelected(index),
+
+            child: TodayWeatherCard(
+              isSelected: selectedIndex == index,
+              weather: weatherForWeek[index],
+            ),
           ),
     );
   }

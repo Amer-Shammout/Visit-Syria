@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
+import 'package:visit_syria/Features/Home/Data/Models/weather_model.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/weather_card.dart';
 
 class WeatherCardsListView extends StatelessWidget {
-  const WeatherCardsListView({super.key});
-
+  const WeatherCardsListView({super.key, required this.weatherCards});
+  final List<WeatherModel> weatherCards;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -18,7 +19,7 @@ class WeatherCardsListView extends StatelessWidget {
                 start: index == 0 ? 16 : 0,
                 end: index == 13 ? 16 : 0,
               ),
-              child: WeatherCard(),
+              child: WeatherCard(weatherModel: weatherCards[index]),
             ),
         scrollDirection: Axis.horizontal,
         itemCount: 14,

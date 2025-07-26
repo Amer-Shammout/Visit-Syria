@@ -7,6 +7,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/functions/show_snack_bar.dart';
 import 'package:visit_syria/Core/widgets/custom_loading_indicator.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/google_sign_in_cubit/google_sign_in_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Manager/register_cubit/register_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Sign%20Up/sign_up_body.dart';
 
@@ -15,26 +16,44 @@ class SignUpViewBodyConsumer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RegisterCubit, RegisterState>(
-      listener: (context, state) {
-        if (state is RegisterFailure) {
-          showFailureSnackBar(state.errMessage, context);
-        }
-        if (state is RegisterSuccess) {
-          log(state.authRequestModel.email ?? "");
-          GoRouter.of(context).pushNamed(
-            AppRouter.kVerificationName,
-            extra: state.authRequestModel,
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<RegisterCubit, RegisterState>(
+          listener: (context, state) {
+            if (state is RegisterFailure) {
+              showFailureSnackBar(state.errMessage, context);
+            }
+            if (state is RegisterSuccess) {
+              log(state.authRequestModel.email ?? "");
+              GoRouter.of(context).pushNamed(
+                AppRouter.kVerificationName,
+                extra: state.authRequestModel,
+              );
+            }
+          },
+        ),
+        BlocListener<GoogleSignInCubit, GoogleSignInState>(
+          listener: (context, state) {
+            if (state is GoogleSignInFailure) {
+              showFailureSnackBar(state.errMessage, context);
+            }
+            if (state is GoogleSignInSuccess) {
+              GoRouter.of(context).pushNamed(AppRouter.kAppRootName);
+            }
+          },
+        ),
+      ],
+      child: BlocBuilder<RegisterCubit, RegisterState>(
+        builder: (context, state) {
+          return ModalProgressHUD(
+            progressIndicator: CustomLoadingIndicator(),
+            inAsyncCall: state is RegisterLoading ||
+                context.watch<GoogleSignInCubit>().state
+                    is GoogleSignInLoading,
+            child: SignUpViewBody(),
           );
-        }
-      },
-      builder: (context, state) {
-        return ModalProgressHUD(
-          progressIndicator: CustomLoadingIndicator(),
-          inAsyncCall: state is RegisterLoading,
-          child: SignUpViewBody(),
-        );
-      },
+        },
+      ),
     );
   }
 }

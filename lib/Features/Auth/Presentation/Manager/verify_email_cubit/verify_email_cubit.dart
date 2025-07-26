@@ -19,6 +19,7 @@ class VerifyEmailCubit extends Cubit<VerifyEmailState> {
       (failure) => emit(VerifyEmailFailure(errMessage: failure.errMessage)),
       (data) {
         Prefs.setString(kToken, data.token!);
+        Prefs.setString(kLoginMethod, kEmailMethod);
         emit(VerifyEmailSuccess(authResponse: data));
       },
     );

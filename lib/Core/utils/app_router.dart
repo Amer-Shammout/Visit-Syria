@@ -14,6 +14,7 @@ import 'package:visit_syria/Features/Auth/Data/Models/auth_request_model.dart';
 import 'package:visit_syria/Features/Auth/Data/Models/verification_model.dart';
 import 'package:visit_syria/Features/Auth/Data/Repos/auth_repo_impl.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Manager/forget_password_cubit/forget_password_cubit.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/google_sign_in_cubit/google_sign_in_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Manager/login_cubit/login_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Manager/register_cubit/register_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Manager/resend_code_cubit/resend_code_cubit.dart';
@@ -182,8 +183,18 @@ abstract class AppRouter {
         path: kLoginView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: BlocProvider(
-                create: (context) => LoginCubit(getIt.get<AuthRepoImpl>()),
+              child: MultiBlocProvider(
+                providers: [
+                   BlocProvider(
+                    create:
+                        (context) => LoginCubit(getIt.get<AuthRepoImpl>()),
+                  ),
+                   BlocProvider(
+                    create:
+                        (context) =>
+                            GoogleSignInCubit(getIt.get<AuthRepoImpl>()),
+                  ),
+                ],
                 child: LoginView(),
               ),
             ),
@@ -193,8 +204,18 @@ abstract class AppRouter {
         path: kSignupView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: BlocProvider(
-                create: (context) => RegisterCubit(getIt.get<AuthRepoImpl>()),
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) => RegisterCubit(getIt.get<AuthRepoImpl>()),
+                  ),
+                   BlocProvider(
+                    create:
+                        (context) =>
+                            GoogleSignInCubit(getIt.get<AuthRepoImpl>()),
+                  ),
+                ],
                 child: SignUpView(),
               ),
             ),
@@ -250,9 +271,19 @@ abstract class AppRouter {
         path: kForgetPassword1View,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: BlocProvider(
-                create:
-                    (context) => ForgetPasswordCubit(getIt.get<AuthRepoImpl>()),
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) =>
+                            ForgetPasswordCubit(getIt.get<AuthRepoImpl>()),
+                  ),
+                  BlocProvider(
+                    create:
+                        (context) =>
+                            GoogleSignInCubit(getIt.get<AuthRepoImpl>()),
+                  ),
+                ],
                 child: ForgetPasswordView1(),
               ),
             ),

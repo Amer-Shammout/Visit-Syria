@@ -7,6 +7,7 @@ const kVerifyCodeUrl = "auth/verifyCode";
 const kResetPasswordUrl = "auth/resetPassword";
 const kSetPreference = "auth/setPreference";
 const kSetProfile = "auth/setProfile";
+const kGoogleSignInUrl = "auth/loginWithGoogle";
 const kGetWeatherTodayURL = "weather/today";
 const kGetWeatherForWeekURL = "weather";
 const kGetAllEventsURL = "events";

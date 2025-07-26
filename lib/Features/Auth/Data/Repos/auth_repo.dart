@@ -25,4 +25,5 @@ abstract class AuthRepo {
   Future<Either<Failure, bool>> resendCode(String email);
   Future<Either<Failure, ProfileModel>> setProfile(ProfileModel profile);
   Future<Either<Failure, String>> setPreferences(PreferencesModel profile);
+  Future<Either<Failure, AuthResponseModel>> signInWithGoogle();
 }

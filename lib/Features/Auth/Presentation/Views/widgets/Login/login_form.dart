@@ -70,6 +70,7 @@ class _LoginFormState extends State<LoginForm> {
           ),
           const SizedBox(height: AppSpacing.s16),
           CustomTextFieldWithLabel(
+            enableInteractiveSelection: false,
             onSaved: (val) => password = val,
             validator: Validation.validatePasswordComplex,
             maxLines: 1,

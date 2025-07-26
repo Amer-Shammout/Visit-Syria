@@ -78,6 +78,7 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           const SizedBox(height: AppSpacing.s16),
           CustomTextFieldWithLabel(
+            enableInteractiveSelection: false,
             onSaved: (val) => password = val,
             onChanged: (val) => password = val,
             validator: Validation.validatePasswordComplex,
@@ -108,6 +109,7 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           const SizedBox(height: AppSpacing.s16),
           CustomTextFieldWithLabel(
+            enableInteractiveSelection: false,
             validator:
                 (val) => Validation.validateConfirmPassword(val, password),
             maxLines: 1,

@@ -67,6 +67,7 @@ class _ForgetPasswordForm3State extends State<ForgetPasswordForm3> {
       child: Column(
         children: [
           CustomTextFieldWithLabel(
+            enableInteractiveSelection: false,
             onSaved: (val) => password = val,
             onChanged: (val) => password = val,
             validator: Validation.validatePasswordComplex,
@@ -98,6 +99,7 @@ class _ForgetPasswordForm3State extends State<ForgetPasswordForm3> {
           ),
           const SizedBox(height: AppSpacing.s16),
           CustomTextFieldWithLabel(
+            enableInteractiveSelection: false,
             validator:
                 (val) => Validation.validateConfirmPassword(val, password),
             maxLines: 1,

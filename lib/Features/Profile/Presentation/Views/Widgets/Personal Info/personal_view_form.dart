@@ -2,9 +2,8 @@ import 'dart:developer';
 
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
-import 'package:visit_syria/Core/utils/styles/app_colors.dart';
+import 'package:visit_syria/Core/utils/functions/pick_date.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/profile_avatar_picker.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/Personal%20Info/preferences_form.dart';
@@ -35,7 +34,7 @@ class PersonalViewFormState extends State<PersonalViewForm> {
 
   bool validateAndSave() {
     preferences = _preferencesWidgetKey.currentState!.selectedPreferences;
-    log("$preferences");
+    log("$birthDate");
     final isValid =
         _formKey.currentState!.validate() && _selectedCountry != null;
     if (isValid) {
@@ -47,36 +46,6 @@ class PersonalViewFormState extends State<PersonalViewForm> {
         hasError = true;
       });
       return false;
-    }
-  }
-
-  void _pickDate() async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime(2000),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-      locale: const Locale('ar'),
-      builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: AppColors.primary,
-              onPrimary: AppColors.whiteColor,
-              onSurface: AppColors.titleTextColor,
-            ),
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(foregroundColor: AppColors.primary),
-            ),
-          ),
-          child: child!,
-        );
-      },
-    );
-
-    if (picked != null) {
-      birthDate = DateFormat('yyyy / MM / dd').format(picked);
-      setState(() => _dateController.text = birthDate!);
     }
   }
 
@@ -104,12 +73,30 @@ class PersonalViewFormState extends State<PersonalViewForm> {
           ),
           SizedBox(height: AppSpacing.s32),
           SecondaryInfoForm(
+            onDateSelected:
+                (date) => setState(() {
+                  birthDate = date;
+                }),
             onGenderChanged:
                 (gender) => setState(() {
                   _gender = gender;
                 }),
             dateController: _dateController,
-            onTap: _pickDate,
+            onTap: () async {
+              final birthDate = await pickDate(
+                context: context,
+                initialDate: DateTime(2000),
+                firstDate: DateTime(1900),
+                lastDate: DateTime.now(),
+                dateFormat: 'yyyy / MM / dd',
+              );
+
+              if (birthDate != null) {
+                setState(() {
+                  _dateController.text = birthDate;
+                });
+              }
+            },
             onPhoneNumberSaved: (phoneNumber) {
               phoneNum = phoneNumber?.completeNumber;
             },

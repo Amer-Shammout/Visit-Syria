@@ -39,6 +39,8 @@ import 'package:visit_syria/Features/Events/Presentation/Views/event_details_vie
 import 'package:visit_syria/Features/Events/Presentation/manager/get_all_events_cubit/get_all_events_cubit.dart';
 import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
 import 'package:visit_syria/Features/Events/data/Repos/events_repo_impl.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/airport_search_view.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/flights_reservation_view.dart';
 import 'package:visit_syria/Features/Home/Data/Repos/home_repo_impl.dart';
 import 'package:visit_syria/Features/Home/Presentation/Manager/weather/get_weather_for_week_cubit/get_weather_for_week_cubit.dart';
 import 'package:visit_syria/Features/Home/Presentation/Manager/weather/get_weather_today_cubit/get_weather_today_cubit.dart';
@@ -160,6 +162,10 @@ abstract class AppRouter {
   static const kSettingsName = 'settings';
   static const kSearchView = '/search';
   static const kSearchName = 'search';
+  static const kFlightsReservationView = '/flightsReservation';
+  static const kFlightsReservationName = 'flightsReservation';
+  static const kAirportSearchView = '/airportSearch';
+  static const kAirportSearchName = 'airportSearch';
 
   static bool get isAuth => Prefs.getString(kToken) != '';
 
@@ -536,6 +542,16 @@ abstract class AppRouter {
         name: kSearchName,
         path: kSearchView,
         pageBuilder: (context, state) => MaterialPage(child: SearchView()),
+      ),
+      GoRoute(
+        name: kFlightsReservationName,
+        path: kFlightsReservationView,
+        pageBuilder: (context, state) => MaterialPage(child: FlightsReservationView()),
+      ),
+      GoRoute(
+        name: kAirportSearchName,
+        path: kAirportSearchView,
+        pageBuilder: (context, state) => MaterialPage(child: AirportSearchView(title: state.extra as String,)),
       ),
     ],
   );

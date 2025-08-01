@@ -7,31 +7,27 @@ import 'package:visit_syria/Features/Events/Presentation/Views/widgets/all_event
 import 'package:visit_syria/Features/Events/Presentation/manager/get_all_events_cubit/get_all_events_cubit.dart';
 
 class AllEventsViewBodyBuilder extends StatelessWidget {
-  const AllEventsViewBodyBuilder({
-    super.key,
-  });
+  const AllEventsViewBodyBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GetAllEventsCubit, GetAllEventsState>(
       builder: (context, state) {
         if (state is GetAllEventsFailure) {
-          return Center(
-            child: CustomErrorAndEmptyStateBody(
-              illustration: Assets.illustrationsFailure,
-              text: state.errMessage,
-              buttonText: "إعادة المحاولة",
-              onTap:
-                  () =>
-                      BlocProvider.of<GetAllEventsCubit>(
-                        context,
-                      ).getAllEvents(),
-            ),
+          return CustomErrorAndEmptyStateBody(
+            illustration: Assets.illustrationsFailure,
+            text: state.errMessage,
+            buttonText: "إعادة المحاولة",
+            onTap:
+                () =>
+                    BlocProvider.of<GetAllEventsCubit>(
+                      context,
+                    ).getAllEvents(),
           );
         } else if (state is GetAllEventsSuccess) {
-          return AllEventsListView(events:state.events);
+          return AllEventsListView(events: state.events);
         } else {
-          return CustomLoadingIndicator();
+          return Center(child: CustomLoadingIndicator());
         }
       },
     );

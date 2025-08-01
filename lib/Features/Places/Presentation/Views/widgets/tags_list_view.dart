@@ -3,9 +3,16 @@ import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/widgets/custom_choice_chip.dart';
 
 class TagsListView extends StatefulWidget {
-  const TagsListView({super.key, required this.data});
+  const TagsListView({
+    super.key,
+    required this.data,
+    this.icons,
+    this.onTagSelected,
+  });
 
   final List<String> data;
+  final List<String>? icons;
+  final void Function(String value, int index)? onTagSelected;
 
   @override
   State<TagsListView> createState() => _TagsListViewState();
@@ -31,8 +38,12 @@ class _TagsListViewState extends State<TagsListView> {
               child: SizedBox(
                 height: MediaQuery.sizeOf(context).height * 0.046,
                 child: CustomChoiceChip(
+                  icon: widget.icons?[index],
                   isSelected: _currentIndex == index,
                   onOptionToggle: (value) {
+                    if (widget.onTagSelected != null) {
+                      widget.onTagSelected!(value, index);
+                    }
                     setState(() {
                       _currentIndex = index;
                     });

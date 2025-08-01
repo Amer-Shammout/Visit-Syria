@@ -10,6 +10,7 @@ class CustomDropdownFormField<T> extends StatelessWidget {
   final String? Function(T?)? validator;
   final Widget? prefixIcon;
   final bool isEnabled;
+  final void Function(T?)? onSaved;
 
   const CustomDropdownFormField({
     super.key,
@@ -20,11 +21,13 @@ class CustomDropdownFormField<T> extends StatelessWidget {
     this.validator,
     this.prefixIcon,
     this.isEnabled = true,
+    this.onSaved,
   });
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<T>(
+      onSaved: onSaved,
       dropdownColor: AppColors.graySwatch[50],
       elevation: 1,
       value: value,

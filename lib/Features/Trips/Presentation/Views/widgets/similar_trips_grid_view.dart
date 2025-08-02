@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/mini_trip_card.dart';
 
-class OffersGridView extends StatelessWidget {
-  const OffersGridView({super.key});
+class SimilarTripsGridView extends StatelessWidget {
+  const SimilarTripsGridView({super.key});
 
   @override
   Widget build(BuildContext context) {

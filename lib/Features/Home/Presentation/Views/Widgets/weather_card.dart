@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
@@ -8,6 +9,7 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/utils/styles/shadows.dart';
 import 'package:visit_syria/Features/Home/Data/Models/weather_model.dart';
+import 'package:visit_syria/Features/Home/Presentation/Manager/weather/get_weather_for_week_cubit/get_weather_for_week_cubit.dart';
 
 class WeatherCard extends StatelessWidget {
   const WeatherCard({super.key, required this.weatherModel});
@@ -21,11 +23,13 @@ class WeatherCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           highlightColor: AppColors.graySwatch[100],
           splashColor: AppColors.graySwatch[50],
-          onTap: () {
-            // Prefs.removePref(kToken);
+          onTap: () async {
             GoRouter.of(
               context,
             ).pushNamed(AppRouter.kWeatherName, extra: weatherModel.location);
+            await BlocProvider.of<GetWeatherForWeekCubit>(
+              context,
+            ).getWeatherForWeek(weatherModel.location!);
           },
           child: Ink(
             // width: 50,

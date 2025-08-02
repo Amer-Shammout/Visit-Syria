@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
@@ -22,7 +24,7 @@ class TripsCard extends StatelessWidget {
         children: [
           TripsCardImage(imageHeight: 200, positionedVal: 12),
           SizedBox(height: AppSpacing.s16),
-          TripsCardHeader(),
+          CustomTourismCompanyRow(),
           SizedBox(height: AppSpacing.s16),
           Text(
             "انضم إلينا في رحلة لا تُنسى إلى السواحل السورية، حيث تمتد الرمال الذهبية على طول البحر، وتحتضن المدن الساحلية كـ اللاذقية وطرطوس عبق التاريخ وروعة الطبيعة.",
@@ -37,10 +39,12 @@ class TripsCard extends StatelessWidget {
             tags: ["ترفيهي", "طبيعي", "اللاذقية", "طرطوس", "بانياس"],
           ),
           SizedBox(height: AppSpacing.s16),
-          TripsCardGeneralInfo(),
+          TripsCardGeneralInfo.TripGeneralInfo(),
           SizedBox(height: AppSpacing.s16),
           CustomButton(
-            onPressed: () {},
+            onPressed: () {
+              GoRouter.of(context).pushNamed(AppRouter.kTripDetailsName);
+            },
             title: "استكشاف",
             textStyle: AppStyles.fontsBold14(
               context,

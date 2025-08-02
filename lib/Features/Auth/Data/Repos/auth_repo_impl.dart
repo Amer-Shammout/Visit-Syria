@@ -6,6 +6,7 @@ import 'package:visit_syria/Core/constants/common_constants.dart';
 import 'package:visit_syria/Core/constants/urls_constants.dart';
 import 'package:visit_syria/Core/errors/failures.dart';
 import 'package:visit_syria/Core/network/dio_client.dart';
+import 'package:visit_syria/Core/services/google_sign_in.dart';
 import 'package:visit_syria/Core/services/service_locator.dart';
 import 'package:visit_syria/Core/services/shared_preferences_singleton.dart';
 import 'package:visit_syria/Core/utils/functions/handle_request.dart';
@@ -163,6 +164,27 @@ class AuthRepoImpl extends AuthRepo {
         );
       },
       parse: (data) => data['message'],
+    );
+  }
+
+  @override
+  Future<Either<Failure, AuthResponseModel>> signInWithGoogle() async {
+    final idToken = await GoogleSignInMethods.signInWithGoogle();
+    if (idToken == null) {
+      return left(
+        ServerFailure(errMessage: "لم يتم استرجاع رمز Google ID Token"),
+      );
+    }
+
+    log("ID Token: $idToken");
+
+    return await handleRequest<AuthResponseModel>(
+      requestFn:
+          () => getIt.get<DioClient>().post(
+            kGoogleSignInUrl,
+            data: {'id_token': idToken},
+          ),
+      parse: (data) => AuthResponseModel.fromJson(data),
     );
   }
 }

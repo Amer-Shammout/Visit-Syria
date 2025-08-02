@@ -22,6 +22,7 @@ class LoginCubit extends Cubit<LoginState> {
       (data) {
         log("${data.message} \n ${data.token}");
         Prefs.setString(kToken, data.token!);
+        Prefs.setString(kLoginMethod, kEmailMethod);
         emit(LoginSuccess(authResponse: data));
       },
     );

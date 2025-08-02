@@ -22,6 +22,7 @@ class CustomTextFormField extends StatefulWidget {
   final VoidCallback? onTap;
   final TextEditingController? controller;
   final bool readOnly;
+  final bool enableInteractiveSelection;
 
   const CustomTextFormField({
     super.key,
@@ -44,6 +45,7 @@ class CustomTextFormField extends StatefulWidget {
     this.onTap,
     this.controller,
     this.readOnly = false,
+    this.enableInteractiveSelection = true,
   });
 
   @override
@@ -98,6 +100,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       onTap: widget.onTap,
       child: Ink(
         child: TextFormField(
+          enableInteractiveSelection: widget.enableInteractiveSelection,
           onTap: widget.onTap,
           controller: widget.controller,
           readOnly: widget.readOnly,
@@ -120,6 +123,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                     ? AppColors.titleTextColor
                     : AppColors.graySwatch,
           ),
+
           decoration: InputDecoration(
             enabled: widget.isEnabled,
             prefixIcon: widget.prefixIcon,
@@ -132,11 +136,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               context,
             ).copyWith(color: AppColors.graySwatch[500]),
             isDense: true,
-
             hintText: widget.hint,
             hintStyle: AppStyles.fontsRegular16(
               context,
             ).copyWith(color: AppColors.graySwatch[500]),
+            hintMaxLines: 1,
             suffixIcon: widget.suffixIcon,
             filled: true,
             fillColor:

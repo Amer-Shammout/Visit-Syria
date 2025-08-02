@@ -1,8 +1,8 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/widgets/history_and_search_tile.dart';
 
-class HistorySearchViewBody extends StatelessWidget {
-  const HistorySearchViewBody({super.key});
+class HistoryAirportSearchViewBody extends StatelessWidget {
+  const HistoryAirportSearchViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {

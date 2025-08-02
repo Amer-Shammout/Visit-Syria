@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:visit_syria/Core/services/custom_bloc_observer.dart';
+import 'package:visit_syria/Core/services/firebase_notification.dart';
 import 'package:visit_syria/Core/services/service_locator.dart';
 import 'package:visit_syria/Core/services/shared_preferences_singleton.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
@@ -15,6 +16,8 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Prefs.init();
   // Prefs.removePref(kToken);
+    await FirebaseNotification.getFCMToken();
+
   Bloc.observer = CustomBlocObserver();
 
   setupGetit();

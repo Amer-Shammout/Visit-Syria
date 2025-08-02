@@ -14,6 +14,7 @@ import 'package:visit_syria/Features/Auth/Data/Models/auth_request_model.dart';
 import 'package:visit_syria/Features/Auth/Data/Models/verification_model.dart';
 import 'package:visit_syria/Features/Auth/Data/Repos/auth_repo_impl.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Manager/forget_password_cubit/forget_password_cubit.dart';
+import 'package:visit_syria/Features/Auth/Presentation/Manager/google_sign_in_cubit/google_sign_in_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Manager/login_cubit/login_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Manager/register_cubit/register_cubit.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Manager/resend_code_cubit/resend_code_cubit.dart';
@@ -38,6 +39,8 @@ import 'package:visit_syria/Features/Events/Presentation/Views/event_details_vie
 import 'package:visit_syria/Features/Events/Presentation/manager/get_all_events_cubit/get_all_events_cubit.dart';
 import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
 import 'package:visit_syria/Features/Events/data/Repos/events_repo_impl.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/airport_search_view.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/flights_reservation_view.dart';
 import 'package:visit_syria/Features/Home/Data/Repos/home_repo_impl.dart';
 import 'package:visit_syria/Features/Home/Presentation/Manager/weather/get_weather_for_week_cubit/get_weather_for_week_cubit.dart';
 import 'package:visit_syria/Features/Home/Presentation/Manager/weather/get_weather_today_cubit/get_weather_today_cubit.dart';
@@ -66,6 +69,7 @@ import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_v
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_companies_view.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_company_details_view.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/all_offers_view.dart';
+import 'package:visit_syria/Features/Trips/Presentation/Views/all_similar_trips_view.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/trip_details_view.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trip_details_view_body.dart';
 import 'package:visit_syria/Features/Weather/Presentation/views/weather_view_builder.dart';
@@ -165,6 +169,10 @@ abstract class AppRouter {
   static const kTripDetailsName = 'tripDetails';
   static const kAllSimilarTripsView = '/allSimilarTripsView';
   static const kAllSimilarTripsName = 'allSimilarTripsView';
+  static const kFlightsReservationView = '/flightsReservation';
+  static const kFlightsReservationName = 'flightsReservation';
+  static const kAirportSearchView = '/airportSearch';
+  static const kAirportSearchName = 'airportSearch';
 
   static bool get isAuth => Prefs.getString(kToken) != '';
 
@@ -188,8 +196,17 @@ abstract class AppRouter {
         path: kLoginView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: BlocProvider(
-                create: (context) => LoginCubit(getIt.get<AuthRepoImpl>()),
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (context) => LoginCubit(getIt.get<AuthRepoImpl>()),
+                  ),
+                  BlocProvider(
+                    create:
+                        (context) =>
+                            GoogleSignInCubit(getIt.get<AuthRepoImpl>()),
+                  ),
+                ],
                 child: LoginView(),
               ),
             ),
@@ -199,8 +216,18 @@ abstract class AppRouter {
         path: kSignupView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: BlocProvider(
-                create: (context) => RegisterCubit(getIt.get<AuthRepoImpl>()),
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) => RegisterCubit(getIt.get<AuthRepoImpl>()),
+                  ),
+                  BlocProvider(
+                    create:
+                        (context) =>
+                            GoogleSignInCubit(getIt.get<AuthRepoImpl>()),
+                  ),
+                ],
                 child: SignUpView(),
               ),
             ),
@@ -256,9 +283,19 @@ abstract class AppRouter {
         path: kForgetPassword1View,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: BlocProvider(
-                create:
-                    (context) => ForgetPasswordCubit(getIt.get<AuthRepoImpl>()),
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) =>
+                            ForgetPasswordCubit(getIt.get<AuthRepoImpl>()),
+                  ),
+                  BlocProvider(
+                    create:
+                        (context) =>
+                            GoogleSignInCubit(getIt.get<AuthRepoImpl>()),
+                  ),
+                ],
                 child: ForgetPasswordView1(),
               ),
             ),
@@ -523,6 +560,20 @@ abstract class AppRouter {
         pageBuilder:
             (context, state) =>
                 const MaterialPage(child: AllSimilarTripsView()),
+      ),
+      GoRoute(
+        name: kFlightsReservationName,
+        path: kFlightsReservationView,
+        pageBuilder:
+            (context, state) => MaterialPage(child: FlightsReservationView()),
+      ),
+      GoRoute(
+        name: kAirportSearchName,
+        path: kAirportSearchView,
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: AirportSearchView(title: state.extra as String),
+            ),
       ),
     ],
   );

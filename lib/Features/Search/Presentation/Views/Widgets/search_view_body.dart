@@ -1,8 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:visit_syria/Features/Search/Presentation/Views/Widgets/common_search_view_body.dart';
-import 'package:visit_syria/Features/Search/Presentation/Views/Widgets/error_search_view_body.dart';
 import 'package:visit_syria/Features/Search/Presentation/Views/Widgets/history_search_view_body.dart';
-import 'package:visit_syria/Features/Search/Presentation/Views/Widgets/initial_search_view_body.dart';
 
 class SearchViewBody extends StatelessWidget {
   const SearchViewBody({super.key});

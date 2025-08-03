@@ -71,6 +71,9 @@ import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_v
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_companies_view.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_company_details_view.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/all_offers_view.dart';
+import 'package:visit_syria/Features/Trips/Presentation/Views/all_similar_trips_view.dart';
+import 'package:visit_syria/Features/Trips/Presentation/Views/trip_details_view.dart';
+import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trip_details_view_body.dart';
 import 'package:visit_syria/Features/Weather/Presentation/views/weather_view_builder.dart';
 
 abstract class AppRouter {
@@ -164,6 +167,10 @@ abstract class AppRouter {
   static const kSettingsName = 'settings';
   static const kSearchView = '/search';
   static const kSearchName = 'search';
+  static const kTripDetailsView = '/tripDetails';
+  static const kTripDetailsName = 'tripDetails';
+  static const kAllSimilarTripsView = '/allSimilarTripsView';
+  static const kAllSimilarTripsName = 'allSimilarTripsView';
   static const kFlightsReservationView = '/flightsReservation';
   static const kFlightsReservationName = 'flightsReservation';
   static const kAirportSearchView = '/airportSearch';
@@ -195,11 +202,10 @@ abstract class AppRouter {
             (context, state) => MaterialPage(
               child: MultiBlocProvider(
                 providers: [
-                   BlocProvider(
-                    create:
-                        (context) => LoginCubit(getIt.get<AuthRepoImpl>()),
+                  BlocProvider(
+                    create: (context) => LoginCubit(getIt.get<AuthRepoImpl>()),
                   ),
-                   BlocProvider(
+                  BlocProvider(
                     create:
                         (context) =>
                             GoogleSignInCubit(getIt.get<AuthRepoImpl>()),
@@ -220,7 +226,7 @@ abstract class AppRouter {
                     create:
                         (context) => RegisterCubit(getIt.get<AuthRepoImpl>()),
                   ),
-                   BlocProvider(
+                  BlocProvider(
                     create:
                         (context) =>
                             GoogleSignInCubit(getIt.get<AuthRepoImpl>()),
@@ -548,14 +554,30 @@ abstract class AppRouter {
         pageBuilder: (context, state) => MaterialPage(child: SearchView()),
       ),
       GoRoute(
+        name: kTripDetailsName,
+        path: kTripDetailsView,
+        pageBuilder: (context, state) => MaterialPage(child: TripDetailsView()),
+      ),
+      GoRoute(
+        name: kAllSimilarTripsName,
+        path: kAllSimilarTripsView,
+        pageBuilder:
+            (context, state) =>
+                const MaterialPage(child: AllSimilarTripsView()),
+      ),
+      GoRoute(
         name: kFlightsReservationName,
         path: kFlightsReservationView,
-        pageBuilder: (context, state) => MaterialPage(child: FlightsReservationView()),
+        pageBuilder:
+            (context, state) => MaterialPage(child: FlightsReservationView()),
       ),
       GoRoute(
         name: kAirportSearchName,
         path: kAirportSearchView,
-        pageBuilder: (context, state) => MaterialPage(child: AirportSearchView(title: state.extra as String,)),
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: AirportSearchView(title: state.extra as String),
+            ),
       ),
       GoRoute(
         name: kPassangersName,

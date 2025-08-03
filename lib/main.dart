@@ -8,6 +8,7 @@ import 'package:visit_syria/Core/services/service_locator.dart';
 import 'package:visit_syria/Core/services/shared_preferences_singleton.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/styles/app_theme.dart';
+import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trip_details_view_body.dart';
 import 'package:visit_syria/firebase_options.dart';
 
 void main() async {
@@ -21,7 +22,7 @@ void main() async {
 
   setupGetit();
 
-  runApp(const VisitSyriaApp());
+  runApp(VisitSyriaApp());
 }
 
 class VisitSyriaApp extends StatelessWidget {

@@ -22,7 +22,7 @@ class CustomSliverAppBar extends StatelessWidget {
               ? 360
               : 360 + (MediaQuery.sizeOf(context).width - 56) / 4 + 16,
       pinned: true,
-      floating: true,
+      floating: false,
       backgroundColor: AppColors.whiteColor,
       automaticallyImplyLeading: false,
       surfaceTintColor: AppColors.whiteColor,

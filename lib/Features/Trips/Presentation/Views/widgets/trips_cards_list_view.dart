@@ -17,7 +17,7 @@ class TripsCardsListView extends StatelessWidget {
               onTap:
                   () => GoRouter.of(
                     context,
-                  ).pushNamed(AppRouter.kBlogDetailsName),
+                  ).pushNamed(AppRouter.kTripDetailsName),
               child: TripsCard(),
             ),
         separatorBuilder: (context, index) => SizedBox(height: AppSpacing.s16),

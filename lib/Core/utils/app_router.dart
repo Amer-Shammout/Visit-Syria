@@ -70,8 +70,7 @@ import 'package:visit_syria/Features/Settings/Presentation/Views/settings_view.d
 import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_view.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_companies_view.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_company_details_view.dart';
-import 'package:visit_syria/Features/Trips/Presentation/Views/all_offers_view.dart';
-import 'package:visit_syria/Features/Trips/Presentation/Views/all_similar_trips_view.dart';
+import 'package:visit_syria/Features/Trips/Presentation/Views/all_mini_trip_cards_view.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/trip_details_view.dart';
 import 'package:visit_syria/Features/Weather/Presentation/views/weather_view_builder.dart';
 
@@ -106,8 +105,8 @@ abstract class AppRouter {
   static const kAllEventsName = 'allEventsView';
   static const kEventDetailsView = '/eventView';
   static const kEventDetailsName = 'eventDetailsView';
-  static const kAllOffersView = '/allOffersView';
-  static const kAllOffersName = 'allOffersView';
+  static const kAllMiniTripCardsView = '/allMiniTripCardsView';
+  static const kAllMiniTripCardsName = 'allMiniTripCardsView';
   static const kAllPlacesView = '/allPlacesView';
   static const kAllPlacesName = 'allPlacesView';
   static const kCityDetailsView = '/cityDetailsView';
@@ -168,8 +167,6 @@ abstract class AppRouter {
   static const kSearchName = 'search';
   static const kTripDetailsView = '/tripDetails';
   static const kTripDetailsName = 'tripDetails';
-  static const kAllSimilarTripsView = '/allSimilarTripsView';
-  static const kAllSimilarTripsName = 'allSimilarTripsView';
   static const kFlightsReservationView = '/flightsReservation';
   static const kFlightsReservationName = 'flightsReservation';
   static const kAirportSearchView = '/airportSearch';
@@ -387,10 +384,12 @@ abstract class AppRouter {
             ),
       ),
       GoRoute(
-        name: kAllOffersName,
-        path: kAllOffersView,
+        name: kAllMiniTripCardsName,
+        path: kAllMiniTripCardsView,
         pageBuilder:
-            (context, state) => const MaterialPage(child: AllOffersView()),
+            (context, state) => MaterialPage(
+              child: AllMiniTripCardsView(title: state.extra as String),
+            ),
       ),
       GoRoute(
         name: kAllPlacesName,
@@ -558,13 +557,6 @@ abstract class AppRouter {
         pageBuilder: (context, state) => MaterialPage(child: TripDetailsView()),
       ),
       GoRoute(
-        name: kAllSimilarTripsName,
-        path: kAllSimilarTripsView,
-        pageBuilder:
-            (context, state) =>
-                const MaterialPage(child: AllSimilarTripsView()),
-      ),
-      GoRoute(
         name: kFlightsReservationName,
         path: kFlightsReservationView,
         pageBuilder:
@@ -581,7 +573,12 @@ abstract class AppRouter {
       GoRoute(
         name: kPassangersName,
         path: kPassangersView,
-        pageBuilder: (context, state) => MaterialPage(child: PassangersView(passengerCountModel: state.extra as PassengerCountModel,)),
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: PassangersView(
+                passengerCountModel: state.extra as PassengerCountModel,
+              ),
+            ),
       ),
     ],
   );

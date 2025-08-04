@@ -71,7 +71,6 @@ import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tour
 import 'package:visit_syria/Features/Trips/Presentation/Views/all_offers_view.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/all_similar_trips_view.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/trip_details_view.dart';
-import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trip_details_view_body.dart';
 import 'package:visit_syria/Features/Weather/Presentation/views/weather_view_builder.dart';
 
 abstract class AppRouter {

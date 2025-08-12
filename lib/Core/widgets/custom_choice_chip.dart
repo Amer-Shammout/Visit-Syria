@@ -15,7 +15,7 @@ class CustomChoiceChip extends StatelessWidget {
 
   final bool isSelected;
   final String option;
-  final Function(String p1) onOptionToggle;
+  final Function(dynamic p1) onOptionToggle;
   final String? icon;
 
   @override
@@ -28,6 +28,7 @@ class CustomChoiceChip extends StatelessWidget {
         ),
       ),
       label: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           icon != null
               ? SvgPicture.asset(

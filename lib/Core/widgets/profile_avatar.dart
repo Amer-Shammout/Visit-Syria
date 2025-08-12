@@ -36,7 +36,7 @@ class ProfileAvatar extends StatelessWidget {
           radius: 24,
 
           backgroundColor: AppColors.whiteColor,
-          backgroundImage: imageUrl != null ? AssetImage(imageUrl!) : null,
+          backgroundImage: imageUrl != null ? NetworkImage(imageUrl!) : null,
           child:
               imageUrl == null
                   ? SvgPicture.asset(

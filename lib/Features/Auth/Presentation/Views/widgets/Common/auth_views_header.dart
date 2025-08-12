@@ -21,7 +21,7 @@ class AuthViewsHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        canPop
+        canPop && GoRouter.of(context).canPop()
             ? Align(
               alignment: AlignmentDirectional.centerStart,
               child: IconButton(

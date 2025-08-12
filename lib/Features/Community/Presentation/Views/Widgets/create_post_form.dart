@@ -30,7 +30,7 @@ class CreatePostFormState extends State<CreatePostForm> {
     super.initState();
   }
 
-  void toggleSelection(String option) {
+  void toggleSelection(dynamic option) {
     setState(() {
       if (selectedTags.contains(option)) {
         selectedTags.remove(option);

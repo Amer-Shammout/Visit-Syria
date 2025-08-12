@@ -21,8 +21,8 @@ class LoginViewBodyConsumer extends StatelessWidget {
             if (state is LoginFailure) {
               showFailureSnackBar(state.errMessage, context);
             }
-            if (state is LoginSuccess) {
-              GoRouter.of(context).pushNamed(AppRouter.kAppRootName);
+            if (state is LoginSuccess && context.mounted) {
+              GoRouter.of(context).goNamed(AppRouter.kAppRootName);
             }
           },
         ),
@@ -32,7 +32,7 @@ class LoginViewBodyConsumer extends StatelessWidget {
               showFailureSnackBar(state.errMessage, context);
             }
             if (state is GoogleSignInSuccess) {
-              GoRouter.of(context).pushNamed(AppRouter.kAppRootName);
+              GoRouter.of(context).goNamed(AppRouter.kAppRootName);
             }
           },
         ),

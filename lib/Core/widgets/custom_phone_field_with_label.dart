@@ -18,12 +18,13 @@ class CustomPhoneFieldWithLabel extends StatefulWidget {
     this.focusNode,
     this.textInputAction,
     this.onEditingComplete,
-    this.isEnabled = true,
+    this.isEnabled = true, this.initialCountyCode,
   });
 
   final String label;
   final String hint;
   final PhoneNumber? initialValue;
+  final String? initialCountyCode;
   final TextEditingController? controller;
   final void Function(PhoneNumber)? onChanged;
   final void Function(PhoneNumber?)? onSaved;
@@ -78,6 +79,7 @@ class _CustomPhoneFieldWithLabelState extends State<CustomPhoneFieldWithLabel> {
         Directionality(
           textDirection: TextDirection.ltr,
           child: IntlPhoneField(
+            initialCountryCode: widget.initialCountyCode,
             focusNode: widget.focusNode,
             controller: widget.controller,
             initialValue: widget.initialValue?.number,

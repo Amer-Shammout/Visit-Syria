@@ -102,7 +102,7 @@ class _LoginFormState extends State<LoginForm> {
               onPressed:
                   () => GoRouter.of(
                     context,
-                  ).pushReplacementNamed(AppRouter.kForgetPassword1Name),
+                  ).pushNamed(AppRouter.kForgetPassword1Name),
               child: Text(
                 "نسيت كلمة المرور؟",
                 style: AppStyles.fontsBold14(
@@ -129,9 +129,7 @@ class _LoginFormState extends State<LoginForm> {
             actionStatement: 'أنشئ حساب جديد',
             statement: 'ليس لديك حساب؟',
             onPressed:
-                () => GoRouter.of(
-                  context,
-                ).pushReplacementNamed(AppRouter.kSignupName),
+                () => GoRouter.of(context).pushNamed(AppRouter.kSignupName),
           ),
         ],
       ),

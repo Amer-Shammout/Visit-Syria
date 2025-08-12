@@ -13,7 +13,7 @@ class SelectTagsSection extends StatelessWidget {
   });
 
   final List<String> selectedTags;
-  final Function(String) onOptionToggle;
+  final Function(dynamic) onOptionToggle;
 
   @override
   Widget build(BuildContext context) {

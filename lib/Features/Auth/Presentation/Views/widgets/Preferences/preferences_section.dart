@@ -6,9 +6,9 @@ import 'package:visit_syria/Core/widgets/custom_choice_chip.dart';
 
 class PreferencesSection extends StatelessWidget {
   final String title;
-  final List<String> options;
-  final List<String> selectedOptions;
-  final Function(String) onOptionToggle;
+  final List<dynamic> options;
+  final List<dynamic> selectedOptions;
+  final Function(dynamic) onOptionToggle;
 
   const PreferencesSection({
     required this.title,

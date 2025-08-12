@@ -38,7 +38,7 @@ class _SettingInfoFormState extends State<SettingInfoForm> {
     if (_formKey.currentState!.validate() && _selectedCountry != null) {
       _formKey.currentState!.save();
       log(
-        "First Name : $firstName  Last Name : $lastName  Selected Country : ${_selectedCountry?.displayName}  File : ${userImage?.path}",
+        "First Name : $firstName  Last Name : $lastName  Selected Country : ${_selectedCountry?.name}  File : ${userImage?.path}",
       );
       MultipartFile? multipartFile;
       if (userImage != null) {
@@ -53,7 +53,7 @@ class _SettingInfoFormState extends State<SettingInfoForm> {
       ProfileModel profileModel = ProfileModel(
         firstName: firstName,
         lastName: lastName,
-        country: _selectedCountry?.displayName,
+        country: "${_selectedCountry?.flagEmoji} ${_selectedCountry?.name}",
         countryCode: _selectedCountry?.countryCode,
         uploadPhoto: multipartFile,
       );

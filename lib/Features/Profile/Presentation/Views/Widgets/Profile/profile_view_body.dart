@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Core/utils/app_router.dart';
+import 'package:visit_syria/Core/utils/functions/show_snack_bar.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_general_floating_button.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/logout_cubit/logout_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/Profile/profile_options.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/Profile/profile_view_header.dart';
 
@@ -9,7 +14,15 @@ class ProfileViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return BlocListener<LogoutCubit, LogoutState>(
+      listener: (context, state) {
+        if (state is LogoutSuccess && context.mounted) {
+          GoRouter.of(context).goNamed(AppRouter.kLoginName);
+        }
+        if (state is LogoutFailure) {
+          showFailureSnackBar(state.errMessage, context);
+        }
+      },
       child: Stack(
         children: [
           CustomScrollView(
@@ -25,7 +38,7 @@ class ProfileViewBody extends StatelessWidget {
             right: 0,
             left: 0,
             child: CustomGeneralFloatingButton(
-              onPressed: () {},
+              onPressed: () => BlocProvider.of<LogoutCubit>(context).logout(),
               title: "تسجيل الخروج",
             ),
           ),

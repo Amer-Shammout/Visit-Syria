@@ -50,6 +50,10 @@ import 'package:visit_syria/Features/Places/Presentation/Views/all_comments_and_
 import 'package:visit_syria/Features/Places/Presentation/Views/all_places_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/city_details_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/place_details_view.dart';
+import 'package:visit_syria/Features/Profile/Data/Repos/profile_repo_impl.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/logout_cubit/logout_cubit.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/update_profile_cubit/update_profile_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/my_posts_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/my_trips_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/personal_info_view.dart';
@@ -342,11 +346,21 @@ abstract class AppRouter {
         path: kAppRootView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: BlocProvider(
-                create:
-                    (context) =>
-                        GetWeatherTodayCubit(getIt.get<HomeRepoImpl>())
-                          ..getWeatherToday(),
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) =>
+                            GetWeatherTodayCubit(getIt.get<HomeRepoImpl>())
+                              ..getWeatherToday(),
+                  ),
+                  BlocProvider(
+                    create:
+                        (context) =>
+                            GetProfileCubit(getIt.get<ProfileRepoImpl>())
+                              ..getProfile(),
+                  ),
+                ],
                 child: AppRootView(),
               ),
             ),
@@ -491,13 +505,24 @@ abstract class AppRouter {
       GoRoute(
         name: kProfileName,
         path: kProfileView,
-        pageBuilder: (context, state) => MaterialPage(child: ProfileView()),
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create: (context) => LogoutCubit(getIt.get<ProfileRepoImpl>()),
+                child: ProfileView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kPersonalInfoName,
         path: kPersonalInfoView,
         pageBuilder:
-            (context, state) => MaterialPage(child: PersonalInfoView()),
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create: (context) => UpdateProfileCubit(getIt.get<ProfileRepoImpl>()),
+                child: PersonalInfoView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kMyTripsName,

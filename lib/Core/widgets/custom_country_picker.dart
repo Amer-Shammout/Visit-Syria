@@ -5,6 +5,7 @@ import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
 
 class CustomCountryPicker extends StatelessWidget {
   const CustomCountryPicker({
@@ -62,8 +63,11 @@ class CustomCountryPicker extends StatelessWidget {
                         : SizedBox.shrink(),
                     SizedBox(width: AppSpacing.s4),
                     Text(
-                      _selectedCountry != null
-                          ? _selectedCountry.name
+                      _selectedCountry != null ||
+                              GetProfileCubit.userModel?.me?.profile?.country !=
+                                  null
+                          ? _selectedCountry?.name ??
+                              GetProfileCubit.userModel!.me!.profile!.country!
                           : 'اختر البلد',
                       style: AppStyles.fontsRegular16(
                         context,

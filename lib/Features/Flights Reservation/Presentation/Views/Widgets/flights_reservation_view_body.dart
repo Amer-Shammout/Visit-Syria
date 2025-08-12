@@ -62,11 +62,13 @@ class FlightsReservationViewBody extends StatefulWidget {
   const FlightsReservationViewBody({super.key});
 
   @override
-  State<FlightsReservationViewBody> createState() => _FlightsReservationViewBodyState();
+  State<FlightsReservationViewBody> createState() =>
+      _FlightsReservationViewBodyState();
 }
 
-class _FlightsReservationViewBodyState extends State<FlightsReservationViewBody> {
-  FlightType _selectedType = FlightType.fromSyria; 
+class _FlightsReservationViewBodyState
+    extends State<FlightsReservationViewBody> {
+  FlightType _selectedType = FlightType.fromSyria;
 
   @override
   Widget build(BuildContext context) {
@@ -97,11 +99,8 @@ class _FlightsReservationViewBodyState extends State<FlightsReservationViewBody>
         ),
         const SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
 
-        SliverToBoxAdapter(
-          child: FlightSearchForm(type: _selectedType),
-        ),
+        SliverToBoxAdapter(child: FlightSearchForm(type: _selectedType)),
       ],
     );
   }
 }
-

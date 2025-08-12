@@ -11,3 +11,6 @@ const kGoogleSignInUrl = "auth/loginWithGoogle";
 const kGetWeatherTodayURL = "weather/today";
 const kGetWeatherForWeekURL = "weather";
 const kGetAllEventsURL = "events";
+const kGetTripsByCategoryUrl = "trips";
+const kGetTripsCompanyUrl = "trip/company/";
+const kGetSimilarTripsUrl = "trips/similar/";

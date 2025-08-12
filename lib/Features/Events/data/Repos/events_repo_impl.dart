@@ -11,9 +11,10 @@ class EventsRepoImpl extends EventsRepo {
   @override
   Future<Either<Failure, List<EventModel>>> getAllEvents() async {
     return await handleRequest<List<EventModel>>(
-      requestFn: () => getIt.get<DioClient>().get(kGetAllEventsURL),
-     parse: (events) =>
-        (events as List).map((e) => EventModel.fromJson(e)).toList(),
+      requestFn: () => getIt.get<DioClient>().get(kGetTripsCompanyUrl),
+      parse:
+          (events) =>
+              (events as List).map((e) => EventModel.fromJson(e)).toList(),
     );
   }
 }

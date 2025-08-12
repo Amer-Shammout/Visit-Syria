@@ -4,5 +4,4 @@ import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.
 
 abstract class EventsRepo {
   Future<Either<Failure, List<EventModel>>> getAllEvents();
- 
 }

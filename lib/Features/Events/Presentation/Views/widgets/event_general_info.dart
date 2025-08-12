@@ -19,30 +19,34 @@ class EventGenerlInfo extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              GeneralInfoItem(icon: Assets.iconsDate, title: event.date ??''),
+              GeneralInfoItem(icon: Assets.iconsDate, title: event.date ?? ''),
               SizedBox(height: AppSpacing.s8),
               GeneralInfoItem(
                 icon: Assets.iconsLocaionStroke,
-                title: event.place ??'',
+                title: event.place ?? '',
               ),
             ],
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              GeneralInfoItem(icon: Assets.iconsDuration, title:setDurationVal(
-                        event.durationDays,
-                        event.durationHours,
-                      )),
+              GeneralInfoItem(
+                icon: Assets.iconsDuration,
+                title: setDurationVal(event.durationDays, event.durationHours),
+              ),
               SizedBox(height: AppSpacing.s8),
 
-              GeneralInfoItem(icon: Assets.iconsTicket, title: event.eventType ?? ""),
+              GeneralInfoItem(
+                icon: Assets.iconsTicket,
+                title: event.eventType ?? "",
+              ),
             ],
           ),
         ],
       ),
     );
   }
+
   String setDurationVal(int? durationDays, int? durationHours) {
     if (durationDays != null) {
       return "$durationDays يوم";

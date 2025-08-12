@@ -14,7 +14,8 @@ class CustomDropDownFormFieldWithLabel<T> extends StatelessWidget {
     this.validator,
     this.prefixIcon,
     this.isEnabled = true,
-    required this.label, this.onSaved,
+    required this.label,
+    this.onSaved,
   });
   final String hint;
   final String label;
@@ -24,8 +25,7 @@ class CustomDropDownFormFieldWithLabel<T> extends StatelessWidget {
   final String? Function(T?)? validator;
   final Widget? prefixIcon;
   final bool isEnabled;
-    final void Function(T?)? onSaved;
-
+  final void Function(T?)? onSaved;
 
   @override
   Widget build(BuildContext context) {

@@ -20,9 +20,7 @@ class AllEventsViewBodyBuilder extends StatelessWidget {
             buttonText: "إعادة المحاولة",
             onTap:
                 () =>
-                    BlocProvider.of<GetAllEventsCubit>(
-                      context,
-                    ).getAllEvents(),
+                    BlocProvider.of<GetAllEventsCubit>(context).getAllEvents(),
           );
         } else if (state is GetAllEventsSuccess) {
           return AllEventsListView(events: state.events);

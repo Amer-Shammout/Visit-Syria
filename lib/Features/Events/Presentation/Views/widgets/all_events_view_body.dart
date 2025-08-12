@@ -9,4 +9,3 @@ class AllEventsViewBody extends StatelessWidget {
     return AllEventsViewBodyBuilder();
   }
 }
-

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
-import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/mini_trip_card.dart';
+import 'package:visit_syria/Core/widgets/mini_trip_card.dart';
 
-class SimilarTripsGridView extends StatelessWidget {
-  const SimilarTripsGridView({super.key});
+class AllMiniTripCardsViewBody extends StatelessWidget {
+  const AllMiniTripCardsViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {

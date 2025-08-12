@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
-import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/mini_trip_card.dart';
+import 'package:visit_syria/Core/widgets/mini_trip_card.dart';
 
 class OffersCardsListView extends StatelessWidget {
   const OffersCardsListView({super.key});

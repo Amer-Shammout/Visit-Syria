@@ -13,7 +13,10 @@ class CustomSimilarTrips extends StatelessWidget {
       title: "الرحلات المشابهة",
       hasSeeAll: true,
       seaAllAction:
-          () => GoRouter.of(context).pushNamed(AppRouter.kAllSimilarTripsName),
+          () => GoRouter.of(context).pushNamed(
+            AppRouter.kAllMiniTripCardsName,
+            extra: 'الرحلات المشابهة',
+          ),
       section: SimilarTripsCardsListView(),
     );
   }

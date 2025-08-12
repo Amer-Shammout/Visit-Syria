@@ -27,13 +27,14 @@ class CustomDatePickerField extends StatelessWidget {
     this.lastDate,
     this.dateFormat = 'yyyy / MM / dd',
     this.onDateSelected,
-    this.validator, this.initialValue,
+    this.validator,
+    this.initialValue,
   });
 
   @override
   Widget build(BuildContext context) {
     return CustomTextFieldWithLabel(
-    initialValue: initialValue,
+      initialValue: initialValue,
       maxLines: 1,
       validator: validator,
       label: label,

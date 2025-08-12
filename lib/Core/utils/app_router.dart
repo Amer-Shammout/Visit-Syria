@@ -36,18 +36,20 @@ import 'package:visit_syria/Features/Community/Presentation/Views/all_comments_v
 import 'package:visit_syria/Features/Community/Presentation/Views/create_post_view.dart';
 import 'package:visit_syria/Features/Events/Presentation/Views/all_events_view.dart';
 import 'package:visit_syria/Features/Events/Presentation/Views/event_details_view.dart';
-import 'package:visit_syria/Features/Events/Presentation/manager/get_all_events_cubit/get_all_events_cubit.dart';
 import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
-import 'package:visit_syria/Features/Events/data/Repos/events_repo_impl.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Data/Models/passenger_count_model.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/airport_search_view.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/flights_reservation_view.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/passangers_view.dart';
 import 'package:visit_syria/Features/Home/Data/Repos/home_repo_impl.dart';
+import 'package:visit_syria/Features/Home/Presentation/Manager/home_cubit/home_cubit.dart';
 import 'package:visit_syria/Features/Home/Presentation/Manager/weather/get_weather_for_week_cubit/get_weather_for_week_cubit.dart';
-import 'package:visit_syria/Features/Home/Presentation/Manager/weather/get_weather_today_cubit/get_weather_today_cubit.dart';
+import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
+import 'package:visit_syria/Features/Places/Data/Repos/places_repo_impl.dart';
+import 'package:visit_syria/Features/Places/Presentation/Manager/get_hotels_by_city_cubit/get_hotels_by_city_cubit.dart';
+import 'package:visit_syria/Features/Places/Presentation/Manager/get_places_by_classification_and_city_cubit/get_places_by_classification_and_city_cubit.dart';
+import 'package:visit_syria/Features/Places/Presentation/Manager/get_resturants_by_city_cubit/get_restruants_by_city_cubit.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/all_comments_and_rating_view.dart';
-import 'package:visit_syria/Features/Places/Presentation/Views/all_places_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/city_details_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/place_details_view.dart';
 import 'package:visit_syria/Features/Profile/Data/Repos/profile_repo_impl.dart';
@@ -348,8 +350,8 @@ abstract class AppRouter {
                   BlocProvider(
                     create:
                         (context) =>
-                            GetWeatherTodayCubit(getIt.get<HomeRepoImpl>())
-                              ..getWeatherToday(),
+                            HomeCubit(getIt.get<HomeRepoImpl>())
+                              ..fetchHomeData(),
                   ),
                   BlocProvider(
                     create:
@@ -380,13 +382,7 @@ abstract class AppRouter {
         path: kAllEventsView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: BlocProvider(
-                create:
-                    (context) =>
-                        GetAllEventsCubit(getIt.get<EventsRepoImpl>())
-                          ..getAllEvents(),
-                child: AllEventsView(),
-              ),
+              child: AllEventsView(events: state.extra as List<EventModel>),
             ),
       ),
       GoRoute(
@@ -406,26 +402,26 @@ abstract class AppRouter {
             ),
       ),
       GoRoute(
-        name: kAllPlacesName,
-        path: kAllPlacesView,
-        pageBuilder:
-            (context, state) => MaterialPage(
-              child: AllPlacesView(title: state.extra as String),
-            ),
-      ),
-      GoRoute(
         name: kCityDetailsName,
         path: kCityDetailsView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: CityDetailsView(cityModel: state.extra as CityModel),
+              child: BlocProvider(
+                create:
+                    (context) => GetPlacesByClassificationAndCityCubit(
+                      getIt.get<PlacesRepoImpl>(),
+                    ),
+                child: CityDetailsView(cityModel: state.extra as CityModel),
+              ),
             ),
       ),
       GoRoute(
         name: kPlaceDetailsName,
         path: kPlaceDetailsView,
         pageBuilder:
-            (context, state) => MaterialPage(child: PlaceDetailsView()),
+            (context, state) => MaterialPage(
+              child: PlaceDetailsView(placeModel: state.extra as PlaceModel),
+            ),
       ),
       GoRoute(
         name: kAllCommentsAndRatingName,
@@ -461,14 +457,31 @@ abstract class AppRouter {
         name: kHotelsAndResturantsName,
         path: kHotelsAndResturantsView,
         pageBuilder:
-            (context, state) => MaterialPage(child: HotelsAndResturantsView()),
+            (context, state) => MaterialPage(
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) => GetRestaurantsByCityCubit(
+                          getIt.get<PlacesRepoImpl>(),
+                        ),
+                  ),
+                  BlocProvider(
+                    create:
+                        (context) =>
+                            GetHotelsByCityCubit(getIt.get<PlacesRepoImpl>()),
+                  ),
+                ],
+                child: HotelsAndResturantsView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kHotelsAndResturantsDetailsName,
         path: kHotelsAndResturantsDetailsView,
         pageBuilder:
             (context, state) =>
-                MaterialPage(child: HotelAndResturantsDetailsView()),
+                MaterialPage(child: HotelAndResturantsDetailsView(place: state.extra as PlaceModel,)),
       ),
       GoRoute(
         name: kSimialarHotelsOrResturantsName,
@@ -510,7 +523,9 @@ abstract class AppRouter {
         pageBuilder:
             (context, state) => MaterialPage(
               child: BlocProvider(
-                create: (context) => UpdateProfileCubit(getIt.get<ProfileRepoImpl>()),
+                create:
+                    (context) =>
+                        UpdateProfileCubit(getIt.get<ProfileRepoImpl>()),
                 child: PersonalInfoView(),
               ),
             ),

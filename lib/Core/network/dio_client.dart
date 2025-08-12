@@ -6,7 +6,7 @@ class DioClient {
   late final Dio _dio;
 
   //Amer's URL:
-  final String _baseUrl = 'http://192.168.131.141:8000/api/';
+  final String _baseUrl = 'http://10.107.142.141:8000/api/';
 
   // final String _baseUrl = 'http://192.168.139.241:8000/api/';
   DioClient()

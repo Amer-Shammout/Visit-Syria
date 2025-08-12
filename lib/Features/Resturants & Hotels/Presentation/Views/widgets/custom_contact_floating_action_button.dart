@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
@@ -7,7 +8,13 @@ import 'package:visit_syria/Core/utils/styles/shadows.dart';
 import 'package:visit_syria/Core/widgets/custom_button.dart';
 
 class CustomContactFloatingActionButton extends StatelessWidget {
-  const CustomContactFloatingActionButton({super.key});
+  const CustomContactFloatingActionButton({
+    super.key,
+    required this.phone,
+    required this.countryCode,
+  });
+
+  final String phone, countryCode;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +35,7 @@ class CustomContactFloatingActionButton extends StatelessWidget {
           Expanded(
             flex: 2,
             child: CustomButton(
-              onPressed: () {},
+              onPressed: () => callNumber("0$phone"),
               title: "اتصل الآن",
               textStyle: AppStyles.fontsBold14(
                 context,
@@ -44,8 +51,8 @@ class CustomContactFloatingActionButton extends StatelessWidget {
           Expanded(
             flex: 2,
             child: CustomButton(
-              onPressed: () {},
-              title: "اتصل الآن",
+              onPressed: () => openWhatsApp(phone, "مرحباً"),
+              title: "تواصل واتساب",
               textStyle: AppStyles.fontsBold14(
                 context,
               ).copyWith(color: AppColors.primary),
@@ -61,5 +68,21 @@ class CustomContactFloatingActionButton extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> openWhatsApp(String phone, String message) async {
+    final Uri uri = Uri.parse(
+      "https://wa.me/$phone?text=${Uri.encodeComponent(message)}",
+    );
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw Exception('لا يمكن فتح واتساب');
+    }
+  }
+
+  Future<void> callNumber(String phone) async {
+    final Uri uri = Uri(scheme: 'tel', path: phone);
+    if (!await launchUrl(uri)) {
+      throw Exception('لا يمكن إجراء الاتصال');
+    }
   }
 }

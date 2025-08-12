@@ -4,9 +4,12 @@ import 'package:visit_syria/Core/widgets/custom_icon_button.dart';
 import 'package:visit_syria/Core/widgets/custom_image.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_card_details.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/ribbon_label.dart';
+import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
 
 class PlacesCard extends StatelessWidget {
-  const PlacesCard({super.key});
+  const PlacesCard({super.key, this.place});
+
+  final PlaceModel? place;
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +31,18 @@ class PlacesCard extends StatelessWidget {
                 activeIcon: Assets.iconsBookmarkFill,
               ),
             ),
-            PositionedDirectional(
-              top: 0,
-              start: 24,
-              child: RibbonLabel(text: '#1'),
-            ),
+            place?.rank != null
+                ? PositionedDirectional(
+                  top: 0,
+                  start: 24,
+                  child: RibbonLabel(text: "# ${place?.rank}"),
+                )
+                : SizedBox.shrink(),
             Positioned(
               bottom: 12,
               left: 12,
               right: 12,
-              child: PlacesCardDetails(),
+              child: PlacesCardDetails(place: place),
             ),
           ],
         ),

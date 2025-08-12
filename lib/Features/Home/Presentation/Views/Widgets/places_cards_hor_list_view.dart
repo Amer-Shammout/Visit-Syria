@@ -3,9 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_card.dart';
+import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
 
 class PlacesCardsHorListView extends StatelessWidget {
-  const PlacesCardsHorListView({super.key});
+  const PlacesCardsHorListView({super.key, required this.places});
+
+  final List<PlaceModel> places;
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +25,15 @@ class PlacesCardsHorListView extends StatelessWidget {
               ),
               child: GestureDetector(
                 onTap:
-                    () => GoRouter.of(
-                      context,
-                    ).pushNamed(AppRouter.kPlaceDetailsName),
-                child: PlacesCard(),
+                    () => GoRouter.of(context).pushNamed(
+                      AppRouter.kPlaceDetailsName,
+                      extra: places[index],
+                    ),
+                child: PlacesCard(place: places[index]),
               ),
             ),
         separatorBuilder: (context, index) => SizedBox(width: AppSpacing.s16),
-        itemCount: 6,
+        itemCount: places.length,
         scrollDirection: Axis.horizontal,
       ),
     );

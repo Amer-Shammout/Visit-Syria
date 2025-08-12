@@ -12,10 +12,10 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
-       progressIndicator: CustomLoadingIndicator(),
-          inAsyncCall: context.select(
-            (LogoutCubit cubit) => cubit.state is LogoutLoading,
-          ),
+      progressIndicator: CustomLoadingIndicator(),
+      inAsyncCall: context.select(
+        (LogoutCubit cubit) => cubit.state is LogoutLoading,
+      ),
       child: Scaffold(
         appBar: CustomAppBar2(hasTitle: true, title: "الملف الشخصي"),
         body: ProfileViewBody(),

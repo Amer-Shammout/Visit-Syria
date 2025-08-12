@@ -18,7 +18,8 @@ class CustomPhoneFieldWithLabel extends StatefulWidget {
     this.focusNode,
     this.textInputAction,
     this.onEditingComplete,
-    this.isEnabled = true, this.initialCountyCode,
+    this.isEnabled = true,
+    this.initialCountyCode,
   });
 
   final String label;

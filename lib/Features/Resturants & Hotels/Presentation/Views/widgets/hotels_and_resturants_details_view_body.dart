@@ -2,24 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
+import 'package:visit_syria/Core/utils/styles/app_colors.dart';
+import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_description.dart';
 import 'package:visit_syria/Core/widgets/custom_map.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
 import 'package:visit_syria/Core/widgets/custom_sliver_app_bar.dart';
+import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/comments_list_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/rating_form.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/widgets/custom_contact_floating_action_button.dart';
-import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/widgets/hotels_and_resturants_hor_list_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/widgets/resturants_and_hotels_general_info.dart';
 
 class HotelAndResturantsDetailsViewBody extends StatelessWidget {
   const HotelAndResturantsDetailsViewBody({
     super.key,
     required this.isResturant,
+    this.place,
   });
 
   final bool isResturant;
+  final PlaceModel? place;
 
   @override
   Widget build(BuildContext context) {
@@ -36,20 +40,26 @@ class HotelAndResturantsDetailsViewBody extends StatelessWidget {
                   Assets.imagesIdlib,
                   Assets.imagesRasafe,
                 ],
-                title: "مطعم نانرج",
+                title: place?.name ?? "مطعم نانرج",
               ),
               SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s16)),
-              SliverToBoxAdapter(child: ResturantsAndHotelsGeneralInfo()),
+              SliverToBoxAdapter(
+                child: ResturantsAndHotelsGeneralInfo(place: place),
+              ),
               SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
               SliverToBoxAdapter(
                 child: CustomDescription(
                   desc:
+                      place?.description ??
                       ' مطعم أم شريف في دمشق معروف بجوه العائلي الدافئ وأطباقه السورية التقليدية الأصيلة. يتميز المطعم بتقديم مأكولات مثل المشاوي، الفروج المشوي، الكبة بأنواعها، والفتوش والتبولة الطازجة. الأسعار معقولة والخدمة لطيفة، مما يجعله مكانًا مفضلًا للعائلات والأصدقاء الذين يرغبون بتجربة الأطعمة السورية الأصيلة في أجواء مريحة وحميمة داخل العاصمة. إذا تحب الأكلات السورية التقليدية بنكهات بيتيّة، مطعم أم شريف خيار رائع.',
                 ),
               ),
               SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
               SliverToBoxAdapter(
-                child: CustomMap(latitude: 33.5138, longitude: 36.2765),
+                child: CustomMap(
+                  latitude: double.parse(place!.latitude!),
+                  longitude: double.parse(place!.longitude!),
+                ),
               ),
               SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
               SliverToBoxAdapter(
@@ -60,45 +70,51 @@ class HotelAndResturantsDetailsViewBody extends StatelessWidget {
                       () => GoRouter.of(
                         context,
                       ).pushNamed(AppRouter.kAllCommentsAndRatingName),
-                  section: CommentsListView(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                  ),
+                  section:
+                      place!.recentComments!.isNotEmpty
+                          ? CommentsListView(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            hasRate: true,
+                            comments: place?.recentComments,
+                          )
+                          : Center(
+                            child: Text(
+                              "لا يوجد تعليقات حالياً",
+                              style: AppStyles.fontsRegular14(
+                                context,
+                              ).copyWith(color: AppColors.titleTextColor),
+                            ),
+                          ),
                 ),
               ),
               SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
-              SliverToBoxAdapter(
-                child: CustomSection(
-                  title: "تقييم المكان",
-                  hasSeeAll: false,
-                  seaAllAction: () {},
-                  section: RatingForm(),
-                ),
-              ),
-              SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
-              SliverToBoxAdapter(
-                child: CustomSection(
-                  section: HotelAndResturantsHorListView(),
-                  title: isResturant ? "المطاعم المشابهة" : "الفنادق المشابهة",
-                  hasSeeAll: true,
-                  seaAllAction:
-                      () => GoRouter.of(context).pushNamed(
-                        AppRouter.kSimialarHotelsOrResturantsName,
-                        extra:
-                            isResturant
-                                ? "المطاعم المشابهة"
-                                : "الفنادق المشابهة",
+              place?.userRating == "guest"
+                  ? SliverToBoxAdapter(child: SizedBox.shrink())
+                  : SliverToBoxAdapter(
+                    child: CustomSection(
+                      title: "تقييم المكان",
+                      hasSeeAll: false,
+                      seaAllAction: () {},
+                      section: RatingForm(
+                        userComment: place?.userComment,
+                        userRate: place?.userRating,
                       ),
-                ),
-              ),
-              SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
+                    ),
+                  ),
+              place?.userRating == "guest"
+                  ? SliverToBoxAdapter(child: SizedBox.shrink())
+                  : SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
             ],
           ),
           Positioned(
             bottom: 0,
             right: 0,
             left: 0,
-            child: CustomContactFloatingActionButton(),
+            child: CustomContactFloatingActionButton(
+              countryCode: place?.countryCode,
+              phone: place?.phone,
+            ),
           ),
         ],
       ),

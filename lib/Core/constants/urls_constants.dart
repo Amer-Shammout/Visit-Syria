@@ -14,3 +14,10 @@ const kGetWeatherForWeekURL = "weather";
 const kGetAllEventsURL = "events";
 const kGetProfileURL = "auth/profile";
 const kUpdateProfileURL = "auth/updateProfile";
+const kGetPlacesByClassificationAndCityUrl = "places/tourist/";
+const kGetTopRatedTouristPlacesUrl = "places/top-rated-tourist";
+const kGetHotelsByCityUrl = "places/hotels/byCity";
+const kGetResturantsByCityUrl = "places/restaurants/byCity";
+
+
+

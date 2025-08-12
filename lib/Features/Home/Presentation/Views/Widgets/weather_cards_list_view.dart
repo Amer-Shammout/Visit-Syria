@@ -22,7 +22,7 @@ class WeatherCardsListView extends StatelessWidget {
               child: WeatherCard(weatherModel: weatherCards[index]),
             ),
         scrollDirection: Axis.horizontal,
-        itemCount: 14,
+        itemCount: weatherCards.length,
         separatorBuilder: (context, index) => SizedBox(width: AppSpacing.s16),
       ),
     );

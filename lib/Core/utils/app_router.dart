@@ -76,8 +76,11 @@ import 'package:visit_syria/Features/Settings/Presentation/Views/settings_view.d
 import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_view.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_companies_view.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_company_details_view.dart';
+import 'package:visit_syria/Features/Trips/Data/Repos/trip_repo_impl.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/all_mini_trip_cards_view.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/trip_details_view.dart';
+import 'package:visit_syria/Features/Trips/Presentation/manager/get_company_trips_cubit/get_company_trips_cubit.dart';
+import 'package:visit_syria/Features/Trips/Presentation/manager/get_similar_trips_cubit/get_similar_trips_cubit.dart';
 import 'package:visit_syria/Features/Weather/Presentation/views/weather_view_builder.dart';
 
 abstract class AppRouter {
@@ -503,8 +506,14 @@ abstract class AppRouter {
         name: kTourismCompanyDetailsName,
         path: kTourismCompanyDetailsView,
         pageBuilder:
-            (context, state) =>
-                MaterialPage(child: TourismCompanyDetailsView()),
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        GetCompanyTripsCubit(getIt.get<TripRepoImpl>()),
+                child: TourismCompanyDetailsView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kProfileName,
@@ -594,7 +603,15 @@ abstract class AppRouter {
       GoRoute(
         name: kTripDetailsName,
         path: kTripDetailsView,
-        pageBuilder: (context, state) => MaterialPage(child: TripDetailsView()),
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        GetSimilarTripsCubit(getIt.get<TripRepoImpl>()),
+                child: TripDetailsView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kFlightsReservationName,

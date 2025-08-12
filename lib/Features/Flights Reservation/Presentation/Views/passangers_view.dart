@@ -6,14 +6,13 @@ import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/Wi
 class PassangersView extends StatelessWidget {
   const PassangersView({super.key, required this.passengerCountModel});
 
-    final PassengerCountModel passengerCountModel;
-
+  final PassengerCountModel passengerCountModel;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar2(title: "المسافرين",),
-      body: PassangersViewBody(passengerCountModel: passengerCountModel,),
+      appBar: CustomAppBar2(title: "المسافرين"),
+      body: PassangersViewBody(passengerCountModel: passengerCountModel),
     );
   }
 }

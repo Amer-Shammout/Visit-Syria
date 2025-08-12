@@ -17,5 +17,7 @@ class FlightSearchData {
     PassengerCountModel? passengers,
     this.airlineClass,
     this.nonStop = false,
-  }) : passengers = passengers ?? PassengerCountModel(adults: 1, children: 0, infants: 0);
+  }) : passengers =
+           passengers ??
+           PassengerCountModel(adults: 1, children: 0, infants: 0);
 }

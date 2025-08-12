@@ -1,7 +1,7 @@
 class PreferencesSectionData {
   final String title;
   final String key;
-  final List<String> options;
+  final List<dynamic> options;
 
   const PreferencesSectionData({
     required this.title,

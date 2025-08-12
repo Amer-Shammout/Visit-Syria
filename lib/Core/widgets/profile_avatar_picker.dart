@@ -44,7 +44,7 @@ class _ProfileAvatarPickerState extends State<ProfileAvatarPicker> {
                 _image != null
                     ? FileImage(_image!)
                     : (widget.userImage != null
-                        ? AssetImage(widget.userImage!)
+                        ? NetworkImage(widget.userImage!)
                         : null),
             child:
                 _image == null && widget.userImage == null

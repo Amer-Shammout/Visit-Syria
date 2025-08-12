@@ -15,6 +15,7 @@ class CustomDatePickerField extends StatelessWidget {
   final String dateFormat;
   final ValueChanged<String>? onDateSelected;
   final String? Function(String?)? validator;
+  final String? initialValue;
 
   const CustomDatePickerField({
     super.key,
@@ -26,12 +27,13 @@ class CustomDatePickerField extends StatelessWidget {
     this.lastDate,
     this.dateFormat = 'yyyy / MM / dd',
     this.onDateSelected,
-    this.validator,
+    this.validator, this.initialValue,
   });
 
   @override
   Widget build(BuildContext context) {
     return CustomTextFieldWithLabel(
+    initialValue: initialValue,
       maxLines: 1,
       validator: validator,
       label: label,

@@ -8,14 +8,10 @@ import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/city_tag.da
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/events_card_details.dart';
 
 class EventCard extends StatelessWidget {
-
   final bool isSmall;
   final EventModel event;
 
-  const EventCard({
-    super.key,
-    this.isSmall = false, required this.event,
-  });
+  const EventCard({super.key, this.isSmall = false, required this.event});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +34,7 @@ class EventCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CityTag(isSmall: isSmall,city:event.place),
+                CityTag(isSmall: isSmall, city: event.place),
                 CustomIconButton(
                   onTap: () {},
                   inActiveIcon: Assets.iconsBookmarkStroke,
@@ -52,7 +48,7 @@ class EventCard extends StatelessWidget {
             right: isSmall ? 8 : 16,
             left: isSmall ? 8 : 16,
             bottom: isSmall ? 8 : 16,
-            child: EventsCardDetails(isSmall: isSmall,event:event),
+            child: EventsCardDetails(isSmall: isSmall, event: event),
           ),
         ],
       ),

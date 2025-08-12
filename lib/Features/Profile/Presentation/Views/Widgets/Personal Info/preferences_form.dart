@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/constants/preferences_constants.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Preferences/preferences_section.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
 
 class PreferencesForm extends StatefulWidget {
   const PreferencesForm({super.key});
@@ -12,20 +15,33 @@ class PreferencesForm extends StatefulWidget {
 }
 
 class PreferencesFormState extends State<PreferencesForm> {
-  final Map<String, List<String>> selectedPreferences = {
-    "seasons": [],
-    "types": [],
-    "durations": [],
-    "governorates": [],
-  };
+  late final Map<String, List<dynamic>> selectedPreferences;
+
+  @override
+  void initState() {
+    selectedPreferences = {
+      "seasons":
+          GetProfileCubit.userModel?.me?.preference?.preferredSeason ?? [],
+      "types":
+          GetProfileCubit.userModel?.me?.preference?.preferredActivities ?? [],
+      "durations": GetProfileCubit.userModel?.me?.preference?.duration ?? [],
+      "governorates": GetProfileCubit.userModel?.me?.preference?.cities ?? [],
+    };
+    log("$selectedPreferences");
+    super.initState();
+  }
 
   void toggleSelection(String key, String option) {
     setState(() {
       final list = selectedPreferences[key]!;
       if (list.contains(option)) {
         list.remove(option);
+        log("$list");
+        log("$selectedPreferences");
       } else {
         list.add(option);
+        log("$selectedPreferences");
+        log("$list");
       }
     });
   }

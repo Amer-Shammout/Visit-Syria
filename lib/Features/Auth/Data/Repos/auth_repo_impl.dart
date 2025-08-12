@@ -130,7 +130,7 @@ class AuthRepoImpl extends AuthRepo {
             'first_name': profile.firstName,
             'last_name': profile.lastName,
             'country': profile.country,
-            // 'country_code': profile.countryCode,
+            'country_code': profile.countryCode,
             'photo': profile.uploadPhoto,
           }),
 

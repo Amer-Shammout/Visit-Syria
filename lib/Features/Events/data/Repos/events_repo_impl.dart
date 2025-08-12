@@ -12,8 +12,9 @@ class EventsRepoImpl extends EventsRepo {
   Future<Either<Failure, List<EventModel>>> getAllEvents() async {
     return await handleRequest<List<EventModel>>(
       requestFn: () => getIt.get<DioClient>().get(kGetAllEventsURL),
-     parse: (events) =>
-        (events as List).map((e) => EventModel.fromJson(e)).toList(),
+      parse:
+          (events) =>
+              (events as List).map((e) => EventModel.fromJson(e)).toList(),
     );
   }
 }

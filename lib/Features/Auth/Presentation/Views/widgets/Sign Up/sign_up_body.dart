@@ -19,7 +19,7 @@ class SignUpViewBody extends StatelessWidget {
             children: [
               const SizedBox(height: AppSpacing.s32),
               AuthViewsHeader(
-                canPop: false,
+                canPop: true,
                 title: 'أنشئ حساب جديد',
                 subTitle:
                     'حطوتك الأولى نحو تجربة سياحية مميزة! لتبدأ بالتخطيط، الحجز، ومشاركة رحلاتك مع مجتمع محب للسفر.',

@@ -22,10 +22,9 @@ class ForgetPassword1ViewBodyConsumer extends StatelessWidget {
               showFailureSnackBar(state.errMessage, context);
             }
             if (state is ForgetPasswordSuccess) {
-              GoRouter.of(context).pushNamed(
-                AppRouter.kForgetPassword2Name,
-                extra: state.email,
-              );
+              GoRouter.of(
+                context,
+              ).pushNamed(AppRouter.kForgetPassword2Name, extra: state.email);
             }
           },
         ),
@@ -44,9 +43,9 @@ class ForgetPassword1ViewBodyConsumer extends StatelessWidget {
         builder: (context, state) {
           return ModalProgressHUD(
             progressIndicator: CustomLoadingIndicator(),
-            inAsyncCall: state is ForgetPasswordLoading ||
-                context.watch<GoogleSignInCubit>().state
-                    is GoogleSignInLoading,
+            inAsyncCall:
+                state is ForgetPasswordLoading ||
+                context.watch<GoogleSignInCubit>().state is GoogleSignInLoading,
             child: ForgetPasswordBody1(),
           );
         },

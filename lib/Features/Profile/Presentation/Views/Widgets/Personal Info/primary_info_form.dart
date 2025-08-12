@@ -5,6 +5,7 @@ import 'package:visit_syria/Core/widgets/custom_country_picker.dart';
 import 'package:visit_syria/Core/widgets/custom_name_fields.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
 import 'package:visit_syria/Core/widgets/custom_text_field_with_label.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
 
 class PrimaryInfoForm extends StatelessWidget {
   const PrimaryInfoForm({
@@ -33,8 +34,8 @@ class PrimaryInfoForm extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomNameFields(
-              firstName: "أحمد",
-              lastName: "محسن",
+              firstName: GetProfileCubit.userModel!.me!.profile!.firstName,
+              lastName: GetProfileCubit.userModel!.me!.profile!.lastName,
               firstNameOnSaved: firstNameOnSaved,
               lastNameOnSaved: secondNameOnSaved,
             ),

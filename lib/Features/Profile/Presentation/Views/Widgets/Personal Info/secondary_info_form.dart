@@ -6,6 +6,7 @@ import 'package:visit_syria/Core/widgets/custom_date_picker_field.dart';
 import 'package:visit_syria/Core/widgets/custom_drop_down_form_field_with_label.dart';
 import 'package:visit_syria/Core/widgets/custom_phone_field_with_label.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
 
 class SecondaryInfoForm extends StatelessWidget {
   const SecondaryInfoForm({
@@ -38,7 +39,7 @@ class SecondaryInfoForm extends StatelessWidget {
             CustomDropDownFormFieldWithLabel<String>(
               label: "الجنس",
               value: gender,
-              hint: "ذكر",
+              hint: "اختر الجنس",
               items: kGenderDropdownItems,
               onChanged: onGenderChanged,
             ),
@@ -48,9 +49,21 @@ class SecondaryInfoForm extends StatelessWidget {
               hint: 'العام / الشهر / اليوم',
               label: "تاريخ الولادة",
               onDateSelected: onDateSelected,
+              dateFormat: 'yyyy-MM-dd',
             ),
             SizedBox(height: AppSpacing.s16),
             CustomPhoneFieldWithLabel(
+              initialValue:
+                  GetProfileCubit.userModel != null
+                      ? PhoneNumber(
+                        countryISOCode:
+                            GetProfileCubit.userModel!.me!.profile!.countryCode,
+                        countryCode:
+                            GetProfileCubit.userModel!.me!.profile!.countryCode,
+                        number:
+                            GetProfileCubit.userModel!.me!.profile!.country!,
+                      )
+                      : null,
               label: "رقم الهاتف",
               hint: "00000000",
               onSaved: onPhoneNumberSaved,

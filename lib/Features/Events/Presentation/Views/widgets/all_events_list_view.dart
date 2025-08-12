@@ -19,8 +19,9 @@ class AllEventsListView extends StatelessWidget {
       itemBuilder:
           (context, index) => GestureDetector(
             onTap:
-                () =>
-                    GoRouter.of(context).pushNamed(AppRouter.kEventDetailsName,extra: events[index]),
+                () => GoRouter.of(
+                  context,
+                ).pushNamed(AppRouter.kEventDetailsName, extra: events[index]),
             child: EventCard(event: events[index]),
           ),
       clipBehavior: Clip.none,

@@ -47,9 +47,9 @@ class SignUpViewBodyConsumer extends StatelessWidget {
         builder: (context, state) {
           return ModalProgressHUD(
             progressIndicator: CustomLoadingIndicator(),
-            inAsyncCall: state is RegisterLoading ||
-                context.watch<GoogleSignInCubit>().state
-                    is GoogleSignInLoading,
+            inAsyncCall:
+                state is RegisterLoading ||
+                context.watch<GoogleSignInCubit>().state is GoogleSignInLoading,
             child: SignUpViewBody(),
           );
         },

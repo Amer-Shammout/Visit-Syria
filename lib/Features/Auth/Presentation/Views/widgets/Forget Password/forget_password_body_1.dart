@@ -19,7 +19,7 @@ class ForgetPasswordBody1 extends StatelessWidget {
             children: [
               const SizedBox(height: AppSpacing.s32),
               AuthViewsHeader(
-                canPop: false,
+                canPop: true,
                 title: 'هل نسيت كلمة المرور؟',
                 subTitle:
                     'أدخل بريدك الإلكتوني المرتبط بحسابك،  وسنرسل لك رمز التحقق لإعادة تعيين كلمة المرور.',

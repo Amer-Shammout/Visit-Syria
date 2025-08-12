@@ -8,11 +8,10 @@ part 'get_all_events_state.dart';
 class GetAllEventsCubit extends Cubit<GetAllEventsState> {
   GetAllEventsCubit(this._eventsRepo) : super(GetAllEventsInitial());
 
-    final EventsRepo _eventsRepo;
-
+  final EventsRepo _eventsRepo;
 
   Future<void> getAllEvents() async {
-     emit(GetAllEventsLoading());
+    emit(GetAllEventsLoading());
     var result = await _eventsRepo.getAllEvents();
 
     result.fold(

@@ -72,9 +72,7 @@ class _ForgetPasswordForm1State extends State<ForgetPasswordForm1> {
             actionStatement: 'سجّل دخول',
             statement: 'لديك حساب؟',
             onPressed:
-                () => GoRouter.of(
-                  context,
-                ).pushReplacementNamed(AppRouter.kLoginName),
+                () => GoRouter.of(context).pushNamed(AppRouter.kLoginName),
           ),
         ],
       ),

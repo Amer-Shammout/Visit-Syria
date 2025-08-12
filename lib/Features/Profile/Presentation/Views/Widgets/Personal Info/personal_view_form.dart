@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/functions/pick_date.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/profile_avatar_picker.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/Personal%20Info/preferences_form.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/Personal%20Info/primary_info_form.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/Personal%20Info/secondary_info_form.dart';
@@ -20,23 +22,24 @@ class PersonalViewForm extends StatefulWidget {
 class PersonalViewFormState extends State<PersonalViewForm> {
   AutovalidateMode _isAutoValidate = AutovalidateMode.disabled;
   final GlobalKey<FormState> _formKey = GlobalKey();
-  Country? _selectedCountry;
+  Country? selectedCountry;
   bool? hasError = false;
   // ignore: unused_field
-  String? _gender;
+  String? selectedGender;
   final TextEditingController _dateController = TextEditingController();
   String? birthDate;
   String? phoneNum;
   String? firstName, lastName;
-  Map<String, List<String>>? preferences;
+  File? userImage;
+  Map<String, List<dynamic>>? preferences;
   final GlobalKey<PreferencesFormState> _preferencesWidgetKey =
       GlobalKey<PreferencesFormState>();
 
   bool validateAndSave() {
     preferences = _preferencesWidgetKey.currentState!.selectedPreferences;
-    log("$birthDate");
+    // log("$birthDate");
     final isValid =
-        _formKey.currentState!.validate() && _selectedCountry != null;
+        _formKey.currentState!.validate() && selectedCountry != null;
     if (isValid) {
       _formKey.currentState!.save();
       return true;
@@ -50,6 +53,15 @@ class PersonalViewFormState extends State<PersonalViewForm> {
   }
 
   @override
+  void initState() {
+    if (GetProfileCubit.userModel?.me?.profile?.dateOfBirth != null) {
+      _dateController.text =
+          GetProfileCubit.userModel?.me?.profile?.dateOfBirth;
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       autovalidateMode: _isAutoValidate,
@@ -57,15 +69,18 @@ class PersonalViewFormState extends State<PersonalViewForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ProfileAvatarPicker(userImage: Assets.imagesHama),
+          ProfileAvatarPicker(
+            userImage: GetProfileCubit.userModel?.me?.profile?.photo,
+            onImageSelected: (file) => userImage = file,
+          ),
           SizedBox(height: AppSpacing.s32),
           PrimaryInfoForm(
-            selectedCountry: _selectedCountry,
+            selectedCountry: selectedCountry,
             hasError: hasError!,
             onSelect: (Country country) {
               setState(() {
                 hasError = false;
-                _selectedCountry = country;
+                selectedCountry = country;
               });
             },
             firstNameOnSaved: (val) => firstName = val,
@@ -73,13 +88,17 @@ class PersonalViewFormState extends State<PersonalViewForm> {
           ),
           SizedBox(height: AppSpacing.s32),
           SecondaryInfoForm(
+            gender:
+                GetProfileCubit.userModel?.me?.profile?.gender != "other"
+                    ? GetProfileCubit.userModel?.me?.profile?.gender
+                    : null,
             onDateSelected:
                 (date) => setState(() {
                   birthDate = date;
                 }),
             onGenderChanged:
                 (gender) => setState(() {
-                  _gender = gender;
+                  selectedGender = gender;
                 }),
             dateController: _dateController,
             onTap: () async {
@@ -88,7 +107,7 @@ class PersonalViewFormState extends State<PersonalViewForm> {
                 initialDate: DateTime(2000),
                 firstDate: DateTime(1900),
                 lastDate: DateTime.now(),
-                dateFormat: 'yyyy / MM / dd',
+                dateFormat: 'yyyy-MM-dd',
               );
 
               if (birthDate != null) {

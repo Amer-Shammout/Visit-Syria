@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/widgets/profile_avatar.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -69,10 +71,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
               const Spacer(),
 
-              ProfileAvatar(
-                onTap:
-                    () =>
-                        GoRouter.of(context).pushNamed(AppRouter.kProfileName),
+              BlocBuilder<GetProfileCubit, GetProfileState>(
+                builder: (context, state) {
+                  return ProfileAvatar(
+                    onTap:
+                        () => GoRouter.of(
+                          context,
+                        ).pushNamed(AppRouter.kProfileName),
+                        imageUrl: state is GetProfileSuccess ? GetProfileCubit.userModel!.me!.profile!.photo : null,
+                  );
+                },
               ),
             ],
           ),

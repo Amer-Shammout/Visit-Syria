@@ -14,7 +14,7 @@ Future<Either<Failure, T>> handleRequest<T>({
     log("$response");
     return right(parse(response.data));
   } on DioException catch (e) {
-    log("${e.response}");
+    log("${e.message}");
 
     return left(ServerFailure.fromDioError(e));
   } catch (e) {

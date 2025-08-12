@@ -162,9 +162,7 @@ class _SignUpFormState extends State<SignUpForm> {
             actionStatement: 'سجّل دخول',
             statement: 'لديك حساب؟',
             onPressed:
-                () => GoRouter.of(
-                  context,
-                ).pushReplacementNamed(AppRouter.kLoginName),
+                () => GoRouter.of(context).pushNamed(AppRouter.kLoginName),
           ),
         ],
       ),

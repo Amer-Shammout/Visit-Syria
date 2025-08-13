@@ -6,6 +6,7 @@ import 'package:visit_syria/Core/constants/common_constants.dart';
 import 'package:visit_syria/Core/constants/urls_constants.dart';
 import 'package:visit_syria/Core/errors/failures.dart';
 import 'package:visit_syria/Core/network/dio_client.dart';
+import 'package:visit_syria/Core/services/firebase_notification.dart';
 import 'package:visit_syria/Core/services/google_sign_in.dart';
 import 'package:visit_syria/Core/services/service_locator.dart';
 import 'package:visit_syria/Core/services/shared_preferences_singleton.dart';
@@ -41,7 +42,11 @@ class AuthRepoImpl extends AuthRepo {
       requestFn:
           () => getIt.get<DioClient>().post(
             kLoginUrl,
-            data: authRequestModel.toJsonLogin(),
+            data: {
+              'email': authRequestModel.email!.trim(),
+              'password': authRequestModel.password,
+              'fcm_token': FirebaseNotification.fcmToken,
+            },
           ),
       parse: (data) {
         final model = AuthResponseModel.fromJson(data);
@@ -70,7 +75,11 @@ class AuthRepoImpl extends AuthRepo {
       requestFn:
           () => getIt.get<DioClient>().post(
             kVerifyEmailUrl,
-            data: verificationModel.toJson(),
+            data: {
+              'email': verificationModel.email!.trim(),
+              'code': verificationModel.code,
+              'fcm_token': FirebaseNotification.fcmToken,
+            },
           ),
       parse: (data) {
         final model = AuthResponseModel.fromJson(data);

@@ -44,6 +44,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  flutter_dash: ^1.0.0
   flutter_email_sender: ^7.0.0
   flutter_localizations:
     sdk: flutter

@@ -120,7 +120,8 @@ class _FlightSearchFormState extends State<FlightSearchForm> {
 
             const SizedBox(height: AppSpacing.s16),
 
-            if (widget.type == FlightType.toSyria)
+            if (widget.type == FlightType.toSyria ||
+                widget.type == FlightType.roundTrip)
               CustomDropDownFormFieldWithLabel(
                 label: 'إلى',
                 value: data.toAirport,
@@ -233,6 +234,7 @@ class _FlightSearchFormState extends State<FlightSearchForm> {
               ).copyWith(color: Colors.white),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
+                  GoRouter.of(context).pushNamed(AppRouter.kFlightsOffersName);
                 } else {
                   setState(() => _autoValidate = AutovalidateMode.always);
                 }

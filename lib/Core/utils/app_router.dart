@@ -39,6 +39,7 @@ import 'package:visit_syria/Features/Events/Presentation/Views/event_details_vie
 import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Data/Models/passenger_count_model.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/airport_search_view.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/flights_offers_view.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/flights_reservation_view.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/passangers_view.dart';
 import 'package:visit_syria/Features/Home/Data/Repos/home_repo_impl.dart';
@@ -178,6 +179,8 @@ abstract class AppRouter {
   static const kTripDetailsName = 'tripDetails';
   static const kFlightsReservationView = '/flightsReservation';
   static const kFlightsReservationName = 'flightsReservation';
+  static const kFlightsOffersView = '/flightsOffers';
+  static const kFlightsOffersName = 'lightsOffers';
   static const kAirportSearchView = '/airportSearch';
   static const kAirportSearchName = 'airportSearch';
   static const kPassangersView = '/passangers';
@@ -635,6 +638,14 @@ abstract class AppRouter {
               child: PassangersView(
                 passengerCountModel: state.extra as PassengerCountModel,
               ),
+            ),
+      ),
+      GoRoute(
+        name: kFlightsOffersName,
+        path: kFlightsOffersView,
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: FlightsOffersView(),
             ),
       ),
     ],

@@ -53,6 +53,8 @@ class SecondaryInfoForm extends StatelessWidget {
             ),
             SizedBox(height: AppSpacing.s16),
             CustomPhoneFieldWithLabel(
+              initialCountyCode:
+                  GetProfileCubit.userModel!.me!.profile!.countryCode,
               initialValue:
                   GetProfileCubit.userModel != null
                       ? PhoneNumber(
@@ -60,8 +62,7 @@ class SecondaryInfoForm extends StatelessWidget {
                             GetProfileCubit.userModel!.me!.profile!.countryCode,
                         countryCode:
                             GetProfileCubit.userModel!.me!.profile!.countryCode,
-                        number:
-                            GetProfileCubit.userModel!.me!.profile!.country!,
+                        number: GetProfileCubit.userModel!.me!.profile!.phone,
                       )
                       : null,
               label: "رقم الهاتف",

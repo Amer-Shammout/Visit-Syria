@@ -6,7 +6,7 @@ class GetSettingsByTypeCubit extends Cubit<GetSettingsByTypeState> {
   final SettingsRepo _settingsRepo;
   GetSettingsByTypeCubit(this._settingsRepo) : super(GetSettingsByTypeInitial());
 
-  Future<void> fetchSettings(String type, String category) async {
+  Future<void> fetchSettings({required String type, String category = "app"}) async {
     emit(GetSettingsByTypeLoading());
     final result = await _settingsRepo.getSettingsByType(
       type: type,

@@ -77,6 +77,11 @@ import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotels_and_resturants_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/similar_hotels_or_resturants_view.dart';
 import 'package:visit_syria/Features/Search/Presentation/Views/search_view.dart';
+import 'package:visit_syria/Features/Settings/Data/Repos/settings_repo_impl.dart';
+import 'package:visit_syria/Features/Settings/Presentation/Manager/get_settings_by_type_cubit/get_settings_by_type_cubit.dart';
+import 'package:visit_syria/Features/Settings/Presentation/Views/about_app_view.dart';
+import 'package:visit_syria/Features/Settings/Presentation/Views/common_questions_view.dart';
+import 'package:visit_syria/Features/Settings/Presentation/Views/privacy_policy_view.dart';
 import 'package:visit_syria/Features/Settings/Presentation/Views/settings_view.dart';
 import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_view.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_companies_view.dart';
@@ -189,6 +194,12 @@ abstract class AppRouter {
   static const kAirportSearchName = 'airportSearch';
   static const kPassangersView = '/passangers';
   static const kPassangersName = 'passangers';
+  static const kAboutAppView = '/aboutApp';
+  static const kAboutAppName = 'aboutApp';
+  static const kPrivacyPolicyView = '/privacyPolicy';
+  static const kPrivacyPolicyName = 'privacyPolicy';
+  static const kCommonQuestionsView = '/commonQuestions';
+  static const kCommonQuestionsName = 'commonQuestions';
 
   static bool get isAuth => Prefs.getString(kToken) != '';
 
@@ -673,6 +684,48 @@ abstract class AppRouter {
         path: kFlightsOffersView,
         pageBuilder:
             (context, state) => MaterialPage(child: FlightsOffersView()),
+      ),
+      GoRoute(
+        name: kAboutAppName,
+        path: kAboutAppView,
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        GetSettingsByTypeCubit(getIt.get<SettingsRepoImpl>())
+                          ..fetchSettings(type: "about_app"),
+                child: AboutAppView(),
+              ),
+            ),
+      ),
+      GoRoute(
+        name: kPrivacyPolicyName,
+        path: kPrivacyPolicyView,
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        GetSettingsByTypeCubit(getIt.get<SettingsRepoImpl>())
+                          ..fetchSettings(type: "privacy_policy"),
+                child: PrivacyPolicyView(),
+              ),
+            ),
+      ),
+      GoRoute(
+        name: kCommonQuestionsName,
+        path: kCommonQuestionsView,
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        GetSettingsByTypeCubit(getIt.get<SettingsRepoImpl>())
+                          ..fetchSettings(type: "common_question"),
+                child: CommonQuestionsView(),
+              ),
+            ),
       ),
     ],
   );

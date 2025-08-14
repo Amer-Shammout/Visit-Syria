@@ -4,7 +4,7 @@ import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_a
 class PostandBlogsTagsWrap extends StatelessWidget {
   const PostandBlogsTagsWrap({super.key, required this.tags, this.textStyle});
 
-  final List<String> tags;
+  final List<dynamic> tags;
   final TextStyle? textStyle;
 
   @override

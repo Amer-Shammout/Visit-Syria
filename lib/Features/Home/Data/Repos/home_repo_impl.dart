@@ -72,9 +72,13 @@ class HomeRepoImpl extends HomeRepo {
   @override
   Future<Either<Failure, List<EventModel>>> getAllEvents() async {
     return await handleRequest<List<EventModel>>(
-      requestFn: () => getIt.get<DioClient>().get(kGetAllEventsURL, options: Options(
+      requestFn:
+          () => getIt.get<DioClient>().get(
+            kGetAllEventsURL,
+            options: Options(
               headers: {"Authorization": "Bearer ${Prefs.getString(kToken)}"},
-            ),),
+            ),
+          ),
       parse:
           (events) =>
               (events as List).map((e) => EventModel.fromJson(e)).toList(),

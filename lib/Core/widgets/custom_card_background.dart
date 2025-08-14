@@ -9,7 +9,8 @@ class CustomCardBackground extends StatelessWidget {
     this.child,
     this.boxShadow,
     this.hasBottomRadius = true,
-    this.image, this.color,
+    this.image,
+    this.color,
   });
 
   final double padding;

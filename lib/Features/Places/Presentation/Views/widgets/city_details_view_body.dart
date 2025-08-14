@@ -40,6 +40,7 @@ class _CityDetailsViewBodyState extends State<CityDetailsViewBody> {
             images: widget.cityModel.images,
             title: widget.cityModel.title,
             hasActionButton: false,
+            hasRate: false,
           ),
 
           SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s16)),
@@ -65,7 +66,10 @@ class _CityDetailsViewBodyState extends State<CityDetailsViewBody> {
             ),
           ),
           SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s12)),
-          PlacesGridViewBuilder(),
+          PlacesGridViewBuilder(
+            tag: currentClassification!,
+            city: widget.cityModel.title,
+          ),
         ],
       ),
     );

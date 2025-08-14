@@ -6,7 +6,7 @@ import 'package:visit_syria/Core/widgets/profile_avatar.dart';
 import 'package:visit_syria/Features/Places/Data/Models/place_model/recent_comment.dart';
 
 class AvatarandNameandHistory extends StatelessWidget {
-  const AvatarandNameandHistory({super.key,  this.comment});
+  const AvatarandNameandHistory({super.key, this.comment});
 
   final RecentComment? comment;
 

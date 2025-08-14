@@ -8,7 +8,8 @@ class CommentsListView extends StatelessWidget {
     super.key,
     this.physics = const BouncingScrollPhysics(),
     this.shrinkWrap = false,
-    this.hasRate,  this.comments,
+    this.hasRate,
+    this.comments,
   });
 
   final ScrollPhysics physics;
@@ -20,7 +21,8 @@ class CommentsListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return shrinkWrap
         ? ListView.separated(
-          itemBuilder: (context, index) => CustomComment(comment: comments?[index],),
+          itemBuilder:
+              (context, index) => CustomComment(comment: comments?[index]),
           separatorBuilder:
               (context, index) => SizedBox(height: AppSpacing.s12),
           itemCount: comments!.length > 3 ? 3 : comments!.length,
@@ -32,7 +34,10 @@ class CommentsListView extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           sliver: SliverList.separated(
             itemBuilder:
-                (context, index) => CustomComment(hasRate: hasRate ?? true,comment: comments?[index]),
+                (context, index) => CustomComment(
+                  hasRate: hasRate ?? true,
+                  comment: comments?[index],
+                ),
             separatorBuilder:
                 (context, index) => SizedBox(height: AppSpacing.s12),
             itemCount: comments?.length ?? 10,

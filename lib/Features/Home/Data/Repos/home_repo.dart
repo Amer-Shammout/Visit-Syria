@@ -9,7 +9,6 @@ abstract class HomeRepo {
   Future<Either<Failure, List<WeatherModel>>> getWeatherForWeek(
     String cityName,
   );
-    Future<Either<Failure, List<PlaceModel>>> getTopRatedPlaces();
+  Future<Either<Failure, List<PlaceModel>>> getTopRatedPlaces();
   Future<Either<Failure, List<EventModel>>> getAllEvents();
-
 }

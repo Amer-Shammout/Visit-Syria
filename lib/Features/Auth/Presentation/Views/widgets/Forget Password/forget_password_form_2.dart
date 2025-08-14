@@ -40,7 +40,6 @@ class _ForgetPasswordForm2State extends State<ForgetPasswordForm2> {
       VerificationModel verificationModel = VerificationModel(
         code: _code,
         email: widget.email,
-        
       );
       await BlocProvider.of<VerifyCodeCubit>(
         context,

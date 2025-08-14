@@ -8,7 +8,10 @@ import 'package:visit_syria/Features/Places/Presentation/Manager/get_places_by_c
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/places_grid_view.dart';
 
 class PlacesGridViewBuilder extends StatelessWidget {
-  const PlacesGridViewBuilder({super.key});
+  const PlacesGridViewBuilder({super.key, this.tag, this.city});
+
+  final String? tag;
+  final String? city;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +25,11 @@ class PlacesGridViewBuilder extends StatelessWidget {
             child: CustomErrorAndEmptyStateBody(
               illustration: Assets.illustrationsFailure,
               text: state.message,
+              buttonText: "إعادة المحاولة",
+              onTap:
+                  () => BlocProvider.of<GetPlacesByClassificationAndCityCubit>(
+                    context,
+                  ).fetchPlaces(tag ?? "أثرية", city ?? "دمشق"),
             ),
           );
         } else if (state is GetPlacesByClassificationAndCitySuccess) {

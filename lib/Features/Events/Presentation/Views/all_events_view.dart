@@ -12,7 +12,7 @@ class AllEventsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar2(title: 'الأحداث الرائجة'),
-      body: AllEventsViewBody(events:events),
+      body: AllEventsViewBody(events: events),
     );
   }
 }

@@ -17,47 +17,47 @@ class HomeCubit extends Cubit<HomeState> {
     emit(state.copyWith(isLoading: true, errorMessage: null));
 
     // try {
-      final results = await Future.wait([
-        homeRepo.getTopRatedPlaces(),
-        // homeRepo.getWeatherToday(),
-        homeRepo.getAllEvents(),
-      ]);
+    final results = await Future.wait([
+      homeRepo.getTopRatedPlaces(),
+      // homeRepo.getWeatherToday(),
+      homeRepo.getAllEvents(),
+    ]);
 
-      // كاست للأنواع الصحيحة
-      final topRatedResult = results[0] as Either<Failure, List<PlaceModel>>;
-      // final weatherResult  = results[1] as Either<Failure, List<WeatherModel>>;
-      final eventsResult = results[1] as Either<Failure, List<EventModel>>;
+    // كاست للأنواع الصحيحة
+    final topRatedResult = results[0] as Either<Failure, List<PlaceModel>>;
+    // final weatherResult  = results[1] as Either<Failure, List<WeatherModel>>;
+    final eventsResult = results[1] as Either<Failure, List<EventModel>>;
 
-      // جمع كل النتائج في لائحة
-      final allResults = [
-        topRatedResult,
-        // weatherResult,
-        eventsResult,
-      ];
+    // جمع كل النتائج في لائحة
+    final allResults = [
+      topRatedResult,
+      // weatherResult,
+      eventsResult,
+    ];
 
-      // التحقق من وجود أي فشل
-      for (final result in allResults) {
-        if (result.isLeft()) {
-          final failure = result.swap().getOrElse(
-            () => ServerFailure(errMessage: 'حدث خطأ غير متوقع'),
-          );
-          emit(
-            state.copyWith(isLoading: false, errorMessage: failure.errMessage),
-          );
-          return; // إيقاف التنفيذ عند أول خطأ
-        }
+    // التحقق من وجود أي فشل
+    for (final result in allResults) {
+      if (result.isLeft()) {
+        final failure = result.swap().getOrElse(
+          () => ServerFailure(errMessage: 'حدث خطأ غير متوقع'),
+        );
+        emit(
+          state.copyWith(isLoading: false, errorMessage: failure.errMessage),
+        );
+        return; // إيقاف التنفيذ عند أول خطأ
       }
+    }
 
-      // إذا نجحوا الكل
-      emit(
-        state.copyWith(
-          isLoading: false,
-          errorMessage: null,
-          topRatedPlaces: topRatedResult.getOrElse(() => <PlaceModel>[]),
-          // weathers: weatherResult.getOrElse(() => <WeatherModel>[]),
-          events: eventsResult.getOrElse(() => <EventModel>[]),
-        ),
-      );
+    // إذا نجحوا الكل
+    emit(
+      state.copyWith(
+        isLoading: false,
+        errorMessage: null,
+        topRatedPlaces: topRatedResult.getOrElse(() => <PlaceModel>[]),
+        // weathers: weatherResult.getOrElse(() => <WeatherModel>[]),
+        events: eventsResult.getOrElse(() => <EventModel>[]),
+      ),
+    );
     // } catch (e) {
     //   emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     // }

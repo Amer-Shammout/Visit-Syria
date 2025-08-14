@@ -21,6 +21,7 @@ const kGetPlacesByClassificationAndCityUrl = "places/tourist/";
 const kGetTopRatedTouristPlacesUrl = "places/top-rated-tourist";
 const kGetHotelsByCityUrl = "places/hotels/byCity";
 const kGetResturantsByCityUrl = "places/restaurants/byCity";
-
-
-
+const kGetSettingsByTypeUrl = "settings/type/";
+const kGetArticlesByTagUrl = "articles/by-tag/";
+const kGetSimialarArticlesByIDUrl = "articles/";
+const kGetSimialarArticlesByIDUrl2 = "similar";

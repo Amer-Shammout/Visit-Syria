@@ -23,6 +23,7 @@ class PlaceModel extends Equatable {
   final List<RecentComment>? recentComments;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final bool? isSaved;
 
   const PlaceModel({
     this.id,
@@ -45,6 +46,7 @@ class PlaceModel extends Equatable {
     this.recentComments,
     this.createdAt,
     this.updatedAt,
+    this.isSaved,
   });
 
   factory PlaceModel.fromJson(Map<String, dynamic> json) => PlaceModel(
@@ -65,6 +67,7 @@ class PlaceModel extends Equatable {
     rank: json['rank'] as int?,
     userRating: json['user_rating'] as dynamic,
     userComment: json['user_comment'] as dynamic,
+    isSaved: json['is_saved'] as bool,
     recentComments:
         (json['recent_comments'] as List<dynamic>?)
             ?.map((e) => RecentComment.fromJson(e as Map<String, dynamic>))

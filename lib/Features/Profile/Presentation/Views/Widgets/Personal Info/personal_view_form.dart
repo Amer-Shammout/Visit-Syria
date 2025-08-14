@@ -117,7 +117,6 @@ class PersonalViewFormState extends State<PersonalViewForm> {
             onPhoneNumberSaved: (phoneNumber) {
               phoneNum = phoneNumber?.completeNumber;
             },
-            
           ),
           SizedBox(height: AppSpacing.s32),
           PreferencesForm(key: _preferencesWidgetKey),

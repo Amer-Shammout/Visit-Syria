@@ -14,7 +14,9 @@ class RatingForm extends StatelessWidget {
     super.key,
     this.padding = 16,
     this.boxShadow,
-    this.hasBottomRadius = true,  this.userRate,  this.userComment, 
+    this.hasBottomRadius = true,
+    this.userRate,
+    this.userComment,
   });
 
   final double padding;
@@ -37,7 +39,7 @@ class RatingForm extends StatelessWidget {
               children: [
                 ProfileAvatar(),
                 SizedBox(width: AppSpacing.s8),
-                CustomRatingBar(initialRating: userRate?.toDouble() ?? 1,),
+                CustomRatingBar(initialRating: userRate?.toDouble() ?? 1),
               ],
             ),
             SizedBox(height: AppSpacing.s12),

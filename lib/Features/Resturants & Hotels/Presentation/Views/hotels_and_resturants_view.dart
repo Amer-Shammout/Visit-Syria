@@ -10,7 +10,7 @@ import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/widgets/resturants_grid_view_builder.dart';
 
 class HotelsAndResturantsView extends StatefulWidget {
-  const HotelsAndResturantsView({super.key,});
+  const HotelsAndResturantsView({super.key});
 
   @override
   State<HotelsAndResturantsView> createState() =>

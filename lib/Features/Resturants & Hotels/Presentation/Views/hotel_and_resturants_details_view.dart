@@ -6,10 +6,11 @@ class HotelAndResturantsDetailsView extends StatelessWidget {
   const HotelAndResturantsDetailsView({super.key, this.place});
 
   final PlaceModel? place;
-  
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: HotelAndResturantsDetailsViewBody(isResturant: true,place: place,));
+    return Scaffold(
+      body: HotelAndResturantsDetailsViewBody(isResturant: true, place: place),
+    );
   }
 }

@@ -11,10 +11,14 @@ class ImageSelector extends StatefulWidget {
     required this.images,
     required this.title,
     this.hasActionButton = true,
+    this.hasRate = true,
+    this.rate,
   });
   final List<String> images;
   final String title;
   final bool hasActionButton;
+  final bool hasRate;
+  final dynamic rate;
 
   @override
   State<ImageSelector> createState() => _ImageSelectorState();
@@ -50,7 +54,11 @@ class _ImageSelectorState extends State<ImageSelector> {
                 bottom: 16,
                 right: 16,
                 left: 16,
-                child: DetailsViewsTitle(title: widget.title),
+                child: DetailsViewsTitle(
+                  title: widget.title,
+                  hasRate: widget.hasRate,
+                  rate: widget.rate,
+                ),
               ),
             ],
           ),

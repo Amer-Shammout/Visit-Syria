@@ -58,7 +58,7 @@ class HomeViewBody extends StatelessWidget {
 
         SliverToBoxAdapter(
           child: CustomSection(
-            section: PlacesCardsHorListView(places:places!),
+            section: PlacesCardsHorListView(places: places!),
             hasSeeAll: true,
             title: "أفضل الأماكن",
             seaAllAction:
@@ -73,4 +73,3 @@ class HomeViewBody extends StatelessWidget {
     );
   }
 }
-

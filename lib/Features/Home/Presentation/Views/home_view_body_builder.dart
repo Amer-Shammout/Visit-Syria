@@ -26,7 +26,11 @@ class HomeViewBodyBuilder extends StatelessWidget {
             buttonText: "أعادة المحاولة",
           );
         }
-        return HomeViewBody(events: state.events,places: state.topRatedPlaces,weathers: state.weathers,);
+        return HomeViewBody(
+          events: state.events,
+          places: state.topRatedPlaces,
+          weathers: state.weathers,
+        );
       },
     );
   }

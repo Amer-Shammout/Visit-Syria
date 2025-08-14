@@ -5,8 +5,7 @@ import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.
 class AllEventsViewBody extends StatelessWidget {
   const AllEventsViewBody({super.key, required this.events});
 
-    final List<EventModel> events;
-
+  final List<EventModel> events;
 
   @override
   Widget build(BuildContext context) {

@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:visit_syria/Core/constants/common_constants.dart';
 import 'package:visit_syria/Core/services/custom_bloc_observer.dart';
 import 'package:visit_syria/Core/services/firebase_notification.dart';
 import 'package:visit_syria/Core/services/service_locator.dart';
@@ -15,6 +16,10 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Prefs.init();
   // Prefs.removePref(kToken);
+  Prefs.setString(
+    kToken,
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvdmVyaWZ5RW1haWwiLCJpYXQiOjE3NTUxNjU2NDUsIm5iZiI6MTc1NTE2NTY0NSwianRpIjoiaU9CVlloaDhPaEFrU1U5MSIsInN1YiI6IjYiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.OBKIAUkRRnp-9atj06KH7oqpQsjD0bCgkn3abqx8fw8",
+  );
   await FirebaseNotification.getFCMToken();
 
   Bloc.observer = CustomBlocObserver();

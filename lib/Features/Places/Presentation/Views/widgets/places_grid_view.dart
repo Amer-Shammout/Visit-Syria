@@ -7,7 +7,8 @@ import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.
 class PlacesGridView extends StatelessWidget {
   const PlacesGridView({
     super.key,
-    this.scrollPhysics = const BouncingScrollPhysics(),  this.places,
+    this.scrollPhysics = const BouncingScrollPhysics(),
+    this.places,
   });
 
   final ScrollPhysics scrollPhysics;
@@ -27,10 +28,11 @@ class PlacesGridView extends StatelessWidget {
         itemBuilder:
             (context, index) => GestureDetector(
               onTap:
-                  () => GoRouter.of(
-                    context,
-                  ).pushNamed(AppRouter.kPlaceDetailsName,extra: places?[index]),
-              child: PlacesCard(place: places?[index],),
+                  () => GoRouter.of(context).pushNamed(
+                    AppRouter.kPlaceDetailsName,
+                    extra: places?[index],
+                  ),
+              child: PlacesCard(place: places?[index]),
             ),
         itemCount: places?.length ?? 16,
       ),

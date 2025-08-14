@@ -17,7 +17,7 @@ class PlaceDetailsView extends StatelessWidget {
         toolbarHeight: 0,
         surfaceTintColor: AppColors.whiteColor,
       ),
-      body: PlaceDetailsViewBody(place:placeModel),
+      body: PlaceDetailsViewBody(place: placeModel),
     );
   }
 }

@@ -8,9 +8,8 @@ class FlightsOffersView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar2(hasTitle: true,title: "رحلات الطيران",),
+      appBar: CustomAppBar2(hasTitle: true, title: "رحلات الطيران"),
       body: FlightsOffersViewBody(),
     );
   }
 }
-

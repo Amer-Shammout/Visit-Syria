@@ -8,13 +8,17 @@ abstract class GetPlacesByClassificationAndCityState extends Equatable {
   List<Object?> get props => [];
 }
 
-class GetPlacesByClassificationAndCityInitial extends GetPlacesByClassificationAndCityState {}
+class GetPlacesByClassificationAndCityInitial
+    extends GetPlacesByClassificationAndCityState {}
 
-class GetPlacesByClassificationAndCityLoading extends GetPlacesByClassificationAndCityState {}
+class GetPlacesByClassificationAndCityLoading
+    extends GetPlacesByClassificationAndCityState {}
 
-class GetPlacesByClassificationAndCityEmpty extends GetPlacesByClassificationAndCityState {}
+class GetPlacesByClassificationAndCityEmpty
+    extends GetPlacesByClassificationAndCityState {}
 
-class GetPlacesByClassificationAndCitySuccess extends GetPlacesByClassificationAndCityState {
+class GetPlacesByClassificationAndCitySuccess
+    extends GetPlacesByClassificationAndCityState {
   final List<PlaceModel> places;
   const GetPlacesByClassificationAndCitySuccess(this.places);
 
@@ -22,7 +26,8 @@ class GetPlacesByClassificationAndCitySuccess extends GetPlacesByClassificationA
   List<Object?> get props => [places];
 }
 
-class GetPlacesByClassificationAndCityFailure extends GetPlacesByClassificationAndCityState {
+class GetPlacesByClassificationAndCityFailure
+    extends GetPlacesByClassificationAndCityState {
   final String message;
   const GetPlacesByClassificationAndCityFailure(this.message);
 

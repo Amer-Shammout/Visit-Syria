@@ -3,7 +3,6 @@ import 'package:visit_syria/Core/errors/failures.dart';
 import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
 
 abstract class PlacesRepo {
-
   Future<Either<Failure, List<PlaceModel>>> getPlacesByClassificationAndCity({
     required String classification,
     required String city,

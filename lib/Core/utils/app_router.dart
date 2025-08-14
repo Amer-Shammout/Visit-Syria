@@ -7,6 +7,10 @@ import 'package:visit_syria/Core/constants/common_constants.dart';
 import 'package:visit_syria/Core/data/models/city_model.dart';
 import 'package:visit_syria/Core/services/service_locator.dart';
 import 'package:visit_syria/Core/services/shared_preferences_singleton.dart';
+import 'package:visit_syria/Features/About%20Syria/Data/Models/article_model.dart';
+import 'package:visit_syria/Features/About%20Syria/Data/Repos/about_syria_repo_impl.dart';
+import 'package:visit_syria/Features/About%20Syria/Presentation/Manager/get_articles_by_tag_cubit/get_articles_by_tag_cubit.dart';
+import 'package:visit_syria/Features/About%20Syria/Presentation/Manager/get_similar_articles_by_id_cubit/get_similar_articles_by_id_cubit.dart';
 import 'package:visit_syria/Features/About%20Syria/Presentation/Views/all_similar_blogs_view.dart';
 import 'package:visit_syria/Features/About%20Syria/Presentation/Views/blog_details_view.dart';
 import 'package:visit_syria/Features/App%20Root/Presentation/Views/app_root_.dart';
@@ -365,6 +369,12 @@ abstract class AppRouter {
                             GetProfileCubit(getIt.get<ProfileRepoImpl>())
                               ..getProfile(),
                   ),
+                  BlocProvider(
+                    create:
+                        (context) => GetArticlesByTagCubit(
+                          getIt.get<AboutSyriaRepoImpl>(),
+                        )..fetchArticles("الكل"),
+                  ),
                 ],
                 child: AppRootView(),
               ),
@@ -451,13 +461,28 @@ abstract class AppRouter {
       GoRoute(
         name: kBlogDetailsName,
         path: kBlogDetailsView,
-        pageBuilder: (context, state) => MaterialPage(child: BlogDetailsView()),
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) => GetSimilarArticlesByIdCubit(
+                      getIt.get<AboutSyriaRepoImpl>(),
+                    ),
+                child: BlogDetailsView(
+                  articleModel: state.extra as ArticleModel?,
+                ),
+              ),
+            ),
       ),
       GoRoute(
         name: kSimilarBlogsName,
         path: kSimilarBlogsView,
         pageBuilder:
-            (context, state) => MaterialPage(child: AllSimilarBlogsView()),
+            (context, state) => MaterialPage(
+              child: AllSimilarBlogsView(
+                articles: state.extra as List<ArticleModel>?,
+              ),
+            ),
       ),
       GoRoute(
         name: kHotelsAndResturantsName,
@@ -486,8 +511,11 @@ abstract class AppRouter {
         name: kHotelsAndResturantsDetailsName,
         path: kHotelsAndResturantsDetailsView,
         pageBuilder:
-            (context, state) =>
-                MaterialPage(child: HotelAndResturantsDetailsView(place: state.extra as PlaceModel,)),
+            (context, state) => MaterialPage(
+              child: HotelAndResturantsDetailsView(
+                place: state.extra as PlaceModel,
+              ),
+            ),
       ),
       GoRoute(
         name: kSimialarHotelsOrResturantsName,
@@ -644,9 +672,7 @@ abstract class AppRouter {
         name: kFlightsOffersName,
         path: kFlightsOffersView,
         pageBuilder:
-            (context, state) => MaterialPage(
-              child: FlightsOffersView(),
-            ),
+            (context, state) => MaterialPage(child: FlightsOffersView()),
       ),
     ],
   );

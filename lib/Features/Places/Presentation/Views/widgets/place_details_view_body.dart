@@ -33,6 +33,7 @@ class PlaceDetailsViewBody extends StatelessWidget {
               Assets.imagesRasafe,
             ],
             title: place.name != null ? place.name! : "باب شرقي",
+            rate: place.rating,
           ),
           SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s16)),
           SliverToBoxAdapter(child: PlaceGeneralInfo(place: place)),

@@ -25,7 +25,7 @@ class PlacesCardDetails extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        CustomRating(rating: place?.rating,),
+        CustomRating(rating: place?.rating),
       ],
     );
   }

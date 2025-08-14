@@ -4,7 +4,8 @@ import 'package:visit_syria/Features/Places/Presentation/Manager/get_resturants_
 
 class GetRestaurantsByCityCubit extends Cubit<GetRestaurantsByCityState> {
   final PlacesRepo placesRepo;
-  GetRestaurantsByCityCubit(this.placesRepo) : super(GetRestaurantsByCityInitial());
+  GetRestaurantsByCityCubit(this.placesRepo)
+    : super(GetRestaurantsByCityInitial());
 
   Future<void> fetchRestaurants(String city) async {
     emit(GetRestaurantsByCityLoading());

@@ -19,7 +19,7 @@ class ProfileRepoImpl extends ProfileRepo {
       requestFn:
           () => getIt.get<DioClient>().post(
             kLogoutUrl,
-            data: {'fcm_token':FirebaseNotification.fcmToken},
+            data: {'fcm_token': FirebaseNotification.fcmToken},
             options: Options(
               headers: {"Authorization": "Bearer ${Prefs.getString(kToken)}"},
             ),

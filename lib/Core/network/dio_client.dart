@@ -6,16 +6,16 @@ class DioClient {
   late final Dio _dio;
 
   //Amer's URL:
-  final String _baseUrl = 'http://192.168.131.141:8000/api/';
+  // final String _baseUrl = 'http://192.168.131.141:8000/api/';
 
-  // final String _baseUrl = 'http://192.168.139.241:8000/api/';
+  final String _baseUrl = 'http://192.168.127.241:8000/api/';
   DioClient()
     : _dio = Dio(
         BaseOptions(
           headers: {'Content-Type': 'application/json; charset=UTF-8'},
           responseType: ResponseType.json,
           sendTimeout: const Duration(seconds: 60),
-          receiveTimeout: const Duration(seconds: 60),
+          receiveTimeout: const Duration(seconds: 120),
         ),
       )..interceptors.addAll([LoggerInterceptor()]);
 

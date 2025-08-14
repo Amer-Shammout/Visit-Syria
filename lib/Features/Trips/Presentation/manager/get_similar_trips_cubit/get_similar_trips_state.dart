@@ -22,5 +22,5 @@ final class GetSimilarTripsEmpty extends GetSimilarTripsState {}
 final class GetSimilarTripsFailure extends GetSimilarTripsState {
   final String errMessage;
 
- const GetSimilarTripsFailure({required this.errMessage});
+  const GetSimilarTripsFailure({required this.errMessage});
 }

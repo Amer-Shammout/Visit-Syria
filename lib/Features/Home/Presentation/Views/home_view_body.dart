@@ -34,7 +34,7 @@ class HomeViewBody extends StatelessWidget {
 
         SliverToBoxAdapter(
           child: CustomSection(
-            section: OffersCardsListView(),
+            section: OffersCardsListView(trips: []),
             hasSeeAll: true,
             title: "العروض",
             seaAllAction:

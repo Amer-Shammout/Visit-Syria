@@ -3,10 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/mini_trip_card.dart';
+import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_model.dart';
 
 class OffersCardsListView extends StatelessWidget {
-  const OffersCardsListView({super.key});
-
+  const OffersCardsListView({super.key, required this.trips});
+  final List<TripModel> trips;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -25,11 +26,11 @@ class OffersCardsListView extends StatelessWidget {
                     () => GoRouter.of(
                       context,
                     ).pushNamed(AppRouter.kTripDetailsName),
-                child: MiniTripCard(),
+                child: MiniTripCard(tripModel: trips[index]),
               ),
             ),
         separatorBuilder: (context, index) => SizedBox(width: AppSpacing.s16),
-        itemCount: 6,
+        itemCount: trips.length,
         scrollDirection: Axis.horizontal,
       ),
     );

@@ -78,7 +78,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         () => GoRouter.of(
                           context,
                         ).pushNamed(AppRouter.kProfileName),
-                        imageUrl: state is GetProfileSuccess ? GetProfileCubit.userModel!.me!.profile!.photo : null,
+                    imageUrl:
+                        state is GetProfileSuccess
+                            ? GetProfileCubit.userModel!.me!.profile!.photo
+                            : null,
                   );
                 },
               ),

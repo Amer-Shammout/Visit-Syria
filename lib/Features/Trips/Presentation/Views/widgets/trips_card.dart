@@ -8,13 +8,14 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_button.dart';
 import 'package:visit_syria/Core/widgets/custom_card_background.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_and_blogs_tags_wrap.dart';
+import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_model.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trips_card_general_info.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trips_card_header.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trips_card_image.dart';
 
 class TripsCard extends StatelessWidget {
-  const TripsCard({super.key});
-
+  const TripsCard({super.key, required this.tripModel});
+  final TripModel tripModel;
   @override
   Widget build(BuildContext context) {
     return CustomCardBackground(
@@ -22,12 +23,18 @@ class TripsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TripsCardImage(imageHeight: 200, positionedVal: 12),
+          TripsCardImage(
+            imageHeight: 200,
+            positionedVal: 12,
+            discount: tripModel.discount!,
+            title: tripModel.name,
+          ),
           SizedBox(height: AppSpacing.s16),
-          CustomTourismCompanyRow(),
+          CustomTourismCompanyRow(company: tripModel.company),
           SizedBox(height: AppSpacing.s16),
           Text(
-            "انضم إلينا في رحلة لا تُنسى إلى السواحل السورية، حيث تمتد الرمال الذهبية على طول البحر، وتحتضن المدن الساحلية كـ اللاذقية وطرطوس عبق التاريخ وروعة الطبيعة.",
+            tripModel.description ??
+                "انضم إلينا في رحلة لا تُنسى إلى السواحل السورية، حيث تمتد الرمال الذهبية على طول البحر، وتحتضن المدن الساحلية كـ اللاذقية وطرطوس عبق التاريخ وروعة الطبيعة.",
             style: AppStyles.fontsRegular14(
               context,
             ).copyWith(color: AppColors.bodyTextColor),
@@ -36,14 +43,18 @@ class TripsCard extends StatelessWidget {
           ),
           SizedBox(height: AppSpacing.s16),
           PostandBlogsTagsWrap(
-            tags: ["ترفيهي", "طبيعي", "اللاذقية", "طرطوس", "بانياس"],
+            tags:
+                convertFromDynamicToStringAsList(tripModel.tags) ??
+                ["ششش", "ععع", "ضضض"],
           ),
           SizedBox(height: AppSpacing.s16),
-          TripsCardGeneralInfo.TripGeneralInfo(),
+          TripsCardGeneralInfo.tripGeneralInfo(tripModel: tripModel),
           SizedBox(height: AppSpacing.s16),
           CustomButton(
             onPressed: () {
-              GoRouter.of(context).pushNamed(AppRouter.kTripDetailsName);
+              GoRouter.of(
+                context,
+              ).pushNamed(AppRouter.kTripDetailsName, extra: tripModel);
             },
             title: "استكشاف",
             textStyle: AppStyles.fontsBold14(
@@ -59,4 +70,15 @@ class TripsCard extends StatelessWidget {
       ),
     );
   }
+}
+
+List<String>? convertFromDynamicToStringAsList(List<dynamic>? dynamicList) {
+  if (dynamicList != null) {
+    List<String> stringList = [];
+    for (var tag in dynamicList) {
+      stringList.add(tag.toString());
+    }
+    return stringList;
+  }
+  return null;
 }

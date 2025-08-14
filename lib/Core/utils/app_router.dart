@@ -74,11 +74,13 @@ import 'package:visit_syria/Features/Settings/Presentation/Views/settings_view.d
 import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_view.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_companies_view.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_company_details_view.dart';
+import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_model.dart';
 import 'package:visit_syria/Features/Trips/Data/Repos/trip_repo_impl.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/all_mini_trip_cards_view.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/trip_details_view.dart';
 import 'package:visit_syria/Features/Trips/Presentation/manager/get_company_trips_cubit/get_company_trips_cubit.dart';
 import 'package:visit_syria/Features/Trips/Presentation/manager/get_similar_trips_cubit/get_similar_trips_cubit.dart';
+import 'package:visit_syria/Features/Trips/Presentation/manager/get_trips_by_category_cubit/get_trips_by_category_cubit.dart';
 import 'package:visit_syria/Features/Weather/Presentation/views/weather_view_builder.dart';
 
 abstract class AppRouter {
@@ -360,6 +362,12 @@ abstract class AppRouter {
                             GetProfileCubit(getIt.get<ProfileRepoImpl>())
                               ..getProfile(),
                   ),
+                  BlocProvider(
+                    create:
+                        (context) =>
+                            GetTripsByCategoryCubit(getIt.get<TripRepoImpl>())
+                              ..getTripsByCategory("الكل"),
+                  ),
                 ],
                 child: AppRootView(),
               ),
@@ -405,7 +413,9 @@ abstract class AppRouter {
         path: kAllMiniTripCardsView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: AllMiniTripCardsView(title: state.extra as String),
+              child: AllMiniTripCardsView(
+                data: state.extra as Map<String, dynamic>,
+              ),
             ),
       ),
       GoRoute(
@@ -519,7 +529,9 @@ abstract class AppRouter {
         pageBuilder:
             (context, state) => MaterialPage(
               child: BlocProvider(
-                create: (context) => UpdateProfileCubit(getIt.get<ProfileRepoImpl>()),
+                create:
+                    (context) =>
+                        UpdateProfileCubit(getIt.get<ProfileRepoImpl>()),
                 child: PersonalInfoView(),
               ),
             ),
@@ -594,7 +606,7 @@ abstract class AppRouter {
                 create:
                     (context) =>
                         GetSimilarTripsCubit(getIt.get<TripRepoImpl>()),
-                child: TripDetailsView(),
+                child: TripDetailsView(tripModel: state.extra as TripModel),
               ),
             ),
       ),

@@ -30,6 +30,7 @@ class HomeViewBodyBuilder extends StatelessWidget {
           events: state.events,
           places: state.topRatedPlaces,
           weathers: state.weathers,
+          offersTrips: state.offersTrips,
         );
       },
     );

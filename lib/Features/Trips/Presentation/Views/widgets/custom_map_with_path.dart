@@ -4,11 +4,12 @@ import 'package:latlong2/latlong.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
+import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_path.dart';
 
 class CustomMapWithPath extends StatelessWidget {
-  final List<LatLng> routePoints;
+  final TripPath tripPath;
 
-  const CustomMapWithPath({super.key, required this.routePoints});
+  const CustomMapWithPath({super.key, required this.tripPath});
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +27,8 @@ class CustomMapWithPath extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           child: FlutterMap(
             options: MapOptions(
-              initialCenter: getCenterOfMap(routePoints),
-              initialZoom: 6.0,
+              initialCenter: getCenterOfMap(tripPath.markers!),
+              initialZoom: 14.0,
             ),
             children: [
               TileLayer(
@@ -38,7 +39,7 @@ class CustomMapWithPath extends StatelessWidget {
               PolylineLayer(
                 polylines: [
                   Polyline(
-                    points: routePoints,
+                    points: tripPath.route!,
                     color: AppColors.primary,
                     strokeWidth: 4.0,
                   ),
@@ -46,8 +47,8 @@ class CustomMapWithPath extends StatelessWidget {
               ),
 
               MarkerLayer(
-                markers: List.generate(routePoints.length, (index) {
-                  final point = routePoints[index];
+                markers: List.generate(tripPath.markers!.length, (index) {
+                  final point = tripPath.markers![index];
                   return Marker(
                     width: 20,
                     height: 20,

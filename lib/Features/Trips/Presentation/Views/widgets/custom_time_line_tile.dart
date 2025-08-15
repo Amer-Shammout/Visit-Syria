@@ -3,23 +3,20 @@ import 'package:timeline_tile_plus/timeline_tile_plus.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
+import 'package:visit_syria/Features/Trips/Data/Model/trip_model/section.dart';
 
 class CustomTimeLineTile extends StatelessWidget {
   const CustomTimeLineTile({
     super.key,
     required this.isFirst,
     required this.isLast,
+    required this.timeline,
   });
   final bool isFirst;
   final bool isLast;
+  final Section timeline;
   @override
   Widget build(BuildContext context) {
-    List<String> details = [
-      "التجمع فيكراج العباسيين",
-      "حزم الامتعة",
-      "اخذ الموافقات",
-      "الركوب بالباصات",
-    ];
     return TimelineTile(
       alignment: TimelineAlign.manual,
       lineXY: 0.21,
@@ -38,7 +35,7 @@ class CustomTimeLineTile extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(top: 2),
           child: Text(
-            "10:00 AM",
+            getTimeBased12(timeline.time!.substring(0, 5)),
             style: AppStyles.fontsBold14(context).copyWith(
               color: AppColors.titleTextColor,
               fontWeight: FontWeight.w600,
@@ -50,7 +47,7 @@ class CustomTimeLineTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "الذهاب الى كراج العباسيين",
+            timeline.title ?? "",
             style: AppStyles.fontsBold16(context).copyWith(
               color: AppColors.titleTextColor,
               fontWeight: FontWeight.w600,
@@ -62,7 +59,7 @@ class CustomTimeLineTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ...details.map(
+                ...(timeline.description ?? []).map(
                   (detail) => Text(
                     "- $detail",
                     style: AppStyles.fontsRegular14(
@@ -77,5 +74,22 @@ class CustomTimeLineTile extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+String getTimeBased12(String time) {
+  String am = "AM";
+  String pm = "PM";
+  int timeNo = int.parse(time.substring(0, 2));
+  if (timeNo < 12) {
+    return "$time $am";
+  } else if (timeNo >= 20) {
+    timeNo = timeNo - 12;
+    return "$timeNo${time.substring(2, 5)} $pm";
+  } else if (timeNo == 12) {
+    return "$time $pm";
+  } else {
+    timeNo = timeNo - 12;
+    return "0$timeNo${time.substring(2, 5)} $pm";
   }
 }

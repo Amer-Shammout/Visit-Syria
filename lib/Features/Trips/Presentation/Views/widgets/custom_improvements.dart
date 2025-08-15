@@ -3,8 +3,8 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
 
 class CustomImprovements extends StatelessWidget {
-  const CustomImprovements({super.key});
-
+  const CustomImprovements({super.key, required this.improvements});
+  final List<dynamic> improvements;
   @override
   Widget build(BuildContext context) {
     return CustomSection(
@@ -15,10 +15,9 @@ class CustomImprovements extends StatelessWidget {
         child: ListView.separated(
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemBuilder:
-              (context, index) => Text("تم تغيير المشرف على الرحلة السابقة."),
+          itemBuilder: (context, index) => Text("${improvements[index]}"),
           separatorBuilder: (context, index) => SizedBox(height: AppSpacing.s8),
-          itemCount: 4,
+          itemCount: improvements.length,
         ),
       ),
     );

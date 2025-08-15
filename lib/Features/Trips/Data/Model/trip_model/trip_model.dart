@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
+import 'package:visit_syria/Features/Trips/Data/Model/trip_model/timeline.dart';
+import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_path.dart';
 
 import 'company.dart';
-import 'timeline.dart';
 
 class TripModel extends Equatable {
   final int? id;
@@ -15,11 +16,11 @@ class TripModel extends Equatable {
   final String? price;
   final String? discount;
   final String? newPrice;
-  final List<String>? improvements;
+  final List<dynamic>? improvements;
   final String? status;
-  final List<String>? tags;
-  final List<String>? images;
-  final List<dynamic>? tripPath;
+  final List<dynamic>? tags;
+  final List<dynamic>? images;
+  final TripPath? tripPath;
   final List<Timeline>? timelines;
   final Company? company;
   final bool? isSaved;
@@ -59,14 +60,17 @@ class TripModel extends Equatable {
       price: json['price'] as String?,
       discount: json['discount'] as String?,
       newPrice: json['new_price'] as String?,
-      improvements: json['improvements'] as List<String>?,
+      improvements: json['improvements'] as List<dynamic>?,
       status: json['status'] as String?,
-      tags: json['tags'] as List<String>?,
-      images: json['images'] as List<String>?,
-      tripPath: json['trip_path'] as List<dynamic>?,
+      tags: json['tags'] as List<dynamic>?,
+      images: json['images'] as List<dynamic>?,
+      tripPath:
+          json['trip_path'] == null
+              ? null
+              : TripPath.fromJson(json['trip_path'] as Map<String, dynamic>),
       timelines:
-          (json['timelines'] as List<dynamic>?)
-              ?.map((e) => Timeline.fromJson(e as Map<String, dynamic>))
+          (json['timelines'] as List<dynamic>)
+              .map((e) => Timeline.fromJson(e as Map<String, dynamic>))
               .toList(),
       company:
           json['company'] == null

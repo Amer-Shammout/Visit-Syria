@@ -11,10 +11,14 @@ class TripsCardImage extends StatelessWidget {
     super.key,
     required this.imageHeight,
     required this.positionedVal,
+    required this.discount,
+    required this.title,
   });
 
   final double imageHeight;
   final double positionedVal;
+  final String discount;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +37,11 @@ class TripsCardImage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  OffersTag(),
+                  double.parse(discount) != 0
+                      ? OffersTag(
+                        discount: double.parse(discount).round().toString(),
+                      )
+                      : SizedBox(),
                   CustomIconButton(
                     inActiveIcon: Assets.iconsBookmarkStroke,
                     onTap: () {},
@@ -43,7 +51,7 @@ class TripsCardImage extends StatelessWidget {
                 ],
               ),
               Text(
-                ' رحلة إلى سواحل سوريا',
+                title ?? ' رحلة إلى سواحل سوريا',
                 style: AppStyles.fontsBold16(
                   context,
                 ).copyWith(color: AppColors.whiteColor),

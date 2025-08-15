@@ -29,7 +29,7 @@ class TourismCompanyDetailsViewBody extends StatelessWidget {
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s12)),
-        TripsCardsListView(),
+        TripsCardsListView(trips: []),
       ],
     );
   }

@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/general_info_item.dart';
+import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_model.dart';
 
 class MiniTripCardGeneralInfo extends StatelessWidget {
-  const MiniTripCardGeneralInfo({super.key, this.mainAxisAlignment});
+  const MiniTripCardGeneralInfo({
+    super.key,
+    this.mainAxisAlignment,
+    required this.tripModel,
+  });
   final MainAxisAlignment? mainAxisAlignment;
+  final TripModel tripModel;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -16,14 +22,14 @@ class MiniTripCardGeneralInfo extends StatelessWidget {
           children: [
             GeneralInfoItem(
               icon: Assets.iconsDate,
-              title: '15 تموز - 2025',
+              title: tripModel.startDate ?? '15 تموز - 2025',
               fontSize: 10,
               iconSize: 12,
             ),
             SizedBox(height: AppSpacing.s8),
             GeneralInfoItem(
               icon: Assets.iconsTicket,
-              title: '100 تذكرة',
+              title: tripModel.remainingTickets?.toString() ?? '100 تذكرة',
               fontSize: 10,
               iconSize: 12,
             ),
@@ -35,14 +41,14 @@ class MiniTripCardGeneralInfo extends StatelessWidget {
           children: [
             GeneralInfoItem(
               icon: Assets.iconsDuration,
-              title: '5 ساعات',
+              title: tripModel.days ?? '5 ساعات',
               fontSize: 10,
               iconSize: 12,
             ),
             SizedBox(height: AppSpacing.s8),
             GeneralInfoItem(
               icon: Assets.iconsSeason,
-              title: 'صيف',
+              title: tripModel.season ?? 'صيف',
               fontSize: 10,
               iconSize: 12,
             ),

@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
 import 'package:visit_syria/Features/Home/Data/Models/weather_model.dart';
 import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
+import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_model.dart';
 
 class HomeState extends Equatable {
   final bool isLoading;
@@ -9,6 +10,7 @@ class HomeState extends Equatable {
   final List<PlaceModel> topRatedPlaces;
   final List<WeatherModel> weathers;
   final List<EventModel> events;
+  final List<TripModel> offersTrips;
 
   const HomeState({
     this.isLoading = false,
@@ -16,6 +18,7 @@ class HomeState extends Equatable {
     this.topRatedPlaces = const [],
     this.weathers = const [],
     this.events = const [],
+    this.offersTrips = const [],
   });
 
   HomeState copyWith({
@@ -24,6 +27,7 @@ class HomeState extends Equatable {
     List<PlaceModel>? topRatedPlaces,
     List<WeatherModel>? weathers,
     List<EventModel>? events,
+    List<TripModel>? offersTrips,
   }) {
     return HomeState(
       isLoading: isLoading ?? this.isLoading,
@@ -31,6 +35,7 @@ class HomeState extends Equatable {
       topRatedPlaces: topRatedPlaces ?? this.topRatedPlaces,
       events: events ?? this.events,
       weathers: weathers ?? this.weathers,
+      offersTrips: offersTrips ?? this.offersTrips,
     );
   }
 
@@ -41,5 +46,6 @@ class HomeState extends Equatable {
     topRatedPlaces,
     events,
     weathers,
+    offersTrips,
   ];
 }

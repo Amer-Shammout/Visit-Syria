@@ -12,7 +12,7 @@ class AllSimilarBlogsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar2(title: 'المقالات المشابهة'),
-      body: AllSimilarBlogsViewBody(articles:articles),
+      body: AllSimilarBlogsViewBody(articles: articles),
     );
   }
 }

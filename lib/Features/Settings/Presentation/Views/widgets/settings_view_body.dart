@@ -12,8 +12,10 @@ class SettingsViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemBuilder:
-          (context, index) =>
-              CustomTile(tileModel: kSettingsItems[index], onTap: () =>  routingSettingItem(index,context)),
+          (context, index) => CustomTile(
+            tileModel: kSettingsItems[index],
+            onTap: () => routingSettingItem(index, context),
+          ),
       separatorBuilder: (context, index) => SizedBox(height: AppSpacing.s12),
       itemCount: kSettingsItems.length,
       physics: BouncingScrollPhysics(),

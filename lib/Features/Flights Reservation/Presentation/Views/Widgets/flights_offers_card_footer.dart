@@ -5,9 +5,12 @@ import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Data/Models/flight_model/flight_model.dart';
 
 class FlightsOffersCardFooter extends StatelessWidget {
-  const FlightsOffersCardFooter({super.key});
+  const FlightsOffersCardFooter({super.key, required this.flightOffer});
+
+  final FlightModel flightOffer;
 
   @override
   Widget build(BuildContext context) {
@@ -42,18 +45,31 @@ class FlightsOffersCardFooter extends StatelessWidget {
                 ),
                 SizedBox(width: AppSpacing.s4),
                 Text(
-                  "10 تذاكر متبقية",
+                  "${flightOffer.seatsRemaining} تذاكر متبقية",
                   style: AppStyles.fontsLight10(
                     context,
                   ).copyWith(color: AppColors.bodyTextColor),
                 ),
               ],
             ),
-            Text(
-              "1000\$",
-              style: AppStyles.fontsBold18(
-                context,
-              ).copyWith(color: AppColors.primary),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${flightOffer.priceTotal}\$",
+                  style: AppStyles.fontsBold18(
+                    context,
+                  ).copyWith(color: AppColors.primary),
+                ),
+                SizedBox(height: AppSpacing.s2),
+                Text(
+                  "${flightOffer.pricePerPassenger}\$ للشخص الواحد",
+                  style: AppStyles.fontsLight12(
+                    context,
+                    12,
+                  ).copyWith(color: AppColors.bodyTextColor),
+                ),
+              ],
             ),
           ],
         ),

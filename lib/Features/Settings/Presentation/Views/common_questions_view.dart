@@ -8,7 +8,7 @@ class CommonQuestionsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar2(title: "الأسئلة الشائعة",hasTitle: true,),
+      appBar: CustomAppBar2(title: "الأسئلة الشائعة", hasTitle: true),
       body: CommonQuestionsViewBody(),
     );
   }

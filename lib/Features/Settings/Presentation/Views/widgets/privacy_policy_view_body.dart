@@ -6,6 +6,6 @@ class PrivacyPolicyViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  AboutAppAndPrivacyPolicyItemsListViewBuilder(type: "privacy_policy");
+    return AboutAppAndPrivacyPolicyItemsListViewBuilder(type: "privacy_policy");
   }
 }

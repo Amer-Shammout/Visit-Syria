@@ -25,3 +25,5 @@ const kGetSettingsByTypeUrl = "settings/type/";
 const kGetArticlesByTagUrl = "articles/by-tag/";
 const kGetSimialarArticlesByIDUrl = "articles/";
 const kGetSimialarArticlesByIDUrl2 = "similar";
+const kGetFlightOffersUrl = "flights/search";
+const kGetAirportsUrl = "locations/search";

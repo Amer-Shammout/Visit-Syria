@@ -9,6 +9,6 @@ class BlogDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: BlogDetailsViewBody(articleModel:articleModel));
+    return Scaffold(body: BlogDetailsViewBody(articleModel: articleModel));
   }
 }

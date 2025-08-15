@@ -19,7 +19,7 @@ class ResultsAirportSearchViewBody extends StatelessWidget {
             onTap: () {
               GoRouter.of(context).pop(airports[index]);
             },
-            title: "(${airports[index].code}) ${airports[index].city}",
+            title: "(${airports[index].iataCode}) ${airports[index].name}",
             icon: Assets.iconsAirplaneUp,
             country: airports[index].country,
           ),

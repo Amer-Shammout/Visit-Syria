@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/constants/airline_class_constants.dart';
@@ -31,7 +33,7 @@ class FlightSearchForm extends StatefulWidget {
 class _FlightSearchFormState extends State<FlightSearchForm> {
   final _formKey = GlobalKey<FormState>();
   AutovalidateMode _autoValidate = AutovalidateMode.disabled;
-  final data = FlightSearchData();
+  final searchData = FlightSearchData();
 
   final _fromController = TextEditingController();
   final _toController = TextEditingController();
@@ -42,12 +44,16 @@ class _FlightSearchFormState extends State<FlightSearchForm> {
   @override
   void initState() {
     super.initState();
-    _passengerController.text = buildPassengerText(data.passengers);
-
+    _passengerController.text = buildPassengerText(searchData.passengers);
     if (widget.type == FlightType.fromSyria) {
-      data.fromAirport = kAirports[0].value;
+      searchData.fromAirport = kAirports[0].value;
+      searchData.direction = 'from_syria';
     } else if (widget.type == FlightType.toSyria) {
-      data.toAirport = kAirports[0].value;
+      searchData.toAirport = kAirports[0].value;
+      searchData.direction = 'to_syria';
+    } else {
+      searchData.toAirport = kAirports[0].value;
+      searchData.direction = 'both';
     }
   }
 
@@ -56,12 +62,12 @@ class _FlightSearchFormState extends State<FlightSearchForm> {
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.type != widget.type) {
-      data.fromAirport = null;
-      data.toAirport = null;
-      data.departureDate = null;
-      data.returnDate = null;
-      data.airlineClass = kAirlineClasses[0].value;
-      data.nonStop = false;
+      searchData.fromAirport = null;
+      searchData.toAirport = null;
+      searchData.departureDate = null;
+      searchData.returnDate = null;
+      searchData.airlineClass = kAirlineClasses[0].value;
+      searchData.nonStop = false;
 
       _fromController.clear();
       _toController.clear();
@@ -69,13 +75,22 @@ class _FlightSearchFormState extends State<FlightSearchForm> {
       _returnController.clear();
 
       if (widget.type == FlightType.fromSyria) {
-        data.fromAirport = kAirports[0].value;
+        searchData.fromAirport = kAirports[0].value;
+        searchData.direction = 'from_syria';
       } else if (widget.type == FlightType.toSyria) {
-        data.toAirport = kAirports[0].value;
+        searchData.toAirport = kAirports[0].value;
+        searchData.direction = 'to_syria';
+      } else {
+        searchData.toAirport = kAirports[0].value;
+        searchData.direction = 'both';
       }
 
-      data.passengers = PassengerCountModel(adults: 1, children: 0, infants: 0);
-      _passengerController.text = buildPassengerText(data.passengers);
+      searchData.passengers = PassengerCountModel(
+        adults: 1,
+        children: 0,
+        infants: 0,
+      );
+      _passengerController.text = buildPassengerText(searchData.passengers);
 
       setState(() {});
     }
@@ -93,9 +108,9 @@ class _FlightSearchFormState extends State<FlightSearchForm> {
             if (widget.type == FlightType.fromSyria)
               CustomDropDownFormFieldWithLabel(
                 label: 'من',
-                value: data.fromAirport,
+                value: searchData.fromAirport,
                 items: kAirports,
-                onChanged: (val) => data.fromAirport = val,
+                onChanged: (val) => searchData.fromAirport = val,
                 validator: Validation.validateEmptyField,
                 hint: '',
               )
@@ -111,8 +126,9 @@ class _FlightSearchFormState extends State<FlightSearchForm> {
                     "ما هي نقطة المغادرة",
                   );
                   if (result != null) {
-                    data.fromAirport = result.code;
-                    _fromController.text = "(${result.code}) ${result.city}";
+                    searchData.fromAirport = result.iataCode;
+                    _fromController.text =
+                        "(${result.iataCode}) ${result.name}";
                   }
                 },
                 hint: 'كود المطار',
@@ -124,9 +140,9 @@ class _FlightSearchFormState extends State<FlightSearchForm> {
                 widget.type == FlightType.roundTrip)
               CustomDropDownFormFieldWithLabel(
                 label: 'إلى',
-                value: data.toAirport,
+                value: searchData.toAirport,
                 items: kAirports,
-                onChanged: (val) => data.toAirport = val,
+                onChanged: (val) => searchData.toAirport = val,
                 validator: Validation.validateEmptyField,
                 hint: '',
               )
@@ -142,8 +158,8 @@ class _FlightSearchFormState extends State<FlightSearchForm> {
                     "ما هي وجهة السفر",
                   );
                   if (result != null) {
-                    data.toAirport = result.code;
-                    _toController.text = "(${result.code}) ${result.city}";
+                    searchData.toAirport = result.iataCode;
+                    _toController.text = "(${result.iataCode}) ${result.name}";
                   }
                 },
                 hint: 'كود المطار',
@@ -160,8 +176,9 @@ class _FlightSearchFormState extends State<FlightSearchForm> {
                     validator: Validation.validateEmptyField,
                     firstDate: DateTime.now(),
                     lastDate: DateTime(DateTime.now().year + 1),
-                    onDateSelected: (date) => data.departureDate = date,
+                    onDateSelected: (date) => searchData.departureDate = date,
                     hint: 'العام / الشهر / اليوم',
+                    dateFormat: 'yyyy-MM-dd',
                   ),
                 ),
                 if (widget.type == FlightType.roundTrip) ...[
@@ -174,7 +191,8 @@ class _FlightSearchFormState extends State<FlightSearchForm> {
                       validator: Validation.validateEmptyField,
                       firstDate: DateTime.now(),
                       lastDate: DateTime(DateTime.now().year + 1),
-                      onDateSelected: (date) => data.returnDate = date,
+                      onDateSelected: (date) => searchData.returnDate = date,
+                      dateFormat: 'yyyy-MM-dd',
                     ),
                   ),
                 ],
@@ -194,13 +212,14 @@ class _FlightSearchFormState extends State<FlightSearchForm> {
                     onTap: () async {
                       final result = await selectPassengers(
                         context,
-                        data.passengers,
+                        searchData.passengers,
                       );
                       if (result != null) {
-                        data.passengers = result;
+                        searchData.passengers = result;
                         _passengerController.text = buildPassengerText(result);
                       }
                     },
+                    maxLines: 1,
                   ),
                 ),
                 const SizedBox(width: AppSpacing.s12),
@@ -210,7 +229,7 @@ class _FlightSearchFormState extends State<FlightSearchForm> {
                     label: "الفئة",
                     value: kAirlineClasses[0].value,
                     items: kAirlineClasses,
-                    onChanged: (val) => data.airlineClass = val,
+                    onChanged: (val) => searchData.airlineClass = val,
                   ),
                 ),
               ],
@@ -219,8 +238,8 @@ class _FlightSearchFormState extends State<FlightSearchForm> {
             const SizedBox(height: AppSpacing.s16),
 
             NonStopSwitch(
-              nonStop: data.nonStop,
-              onChanged: (val) => setState(() => data.nonStop = val),
+              nonStop: searchData.nonStop,
+              onChanged: (val) => setState(() => searchData.nonStop = val),
             ),
 
             const SizedBox(height: AppSpacing.s32),
@@ -234,7 +253,12 @@ class _FlightSearchFormState extends State<FlightSearchForm> {
               ).copyWith(color: Colors.white),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  GoRouter.of(context).pushNamed(AppRouter.kFlightsOffersName);
+                  log(
+                    "${searchData.airlineClass} , ${searchData.departureDate} , ${searchData.direction},${searchData.fromAirport} , ${searchData.max} , ${searchData.nonStop} , ${searchData.passengers.adults} ${searchData.returnDate} , ${searchData.toAirport}",
+                  );
+                  GoRouter.of(
+                    context,
+                  ).pushNamed(AppRouter.kFlightsOffersName, extra: searchData);
                 } else {
                   setState(() => _autoValidate = AutovalidateMode.always);
                 }

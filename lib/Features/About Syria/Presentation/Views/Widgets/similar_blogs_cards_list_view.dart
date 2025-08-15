@@ -25,10 +25,11 @@ class SimilarBlogsCardsListView extends StatelessWidget {
               ),
               child: GestureDetector(
                 onTap:
-                    () => GoRouter.of(
-                      context,
-                    ).pushNamed(AppRouter.kBlogDetailsName,extra: articles?[index]),
-                child: SimilarBlogsCard(articleModel:articles?[index]),
+                    () => GoRouter.of(context).pushNamed(
+                      AppRouter.kBlogDetailsName,
+                      extra: articles?[index],
+                    ),
+                child: SimilarBlogsCard(articleModel: articles?[index]),
               ),
             ),
         separatorBuilder: (context, index) => SizedBox(width: AppSpacing.s16),

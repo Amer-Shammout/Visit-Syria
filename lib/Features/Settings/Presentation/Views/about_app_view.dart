@@ -8,7 +8,7 @@ class AboutAppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar2(title: "عن التطبيق",hasTitle: true,),
+      appBar: CustomAppBar2(title: "عن التطبيق", hasTitle: true),
       body: AboutAppViewBody(),
     );
   }

@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_card_background.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Data/Models/flight_model/flight_model.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/Widgets/flights_offer_card_header.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/Widgets/flights_offers_card_details.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/Widgets/flights_offers_card_footer.dart';
 
 class FlightsOffersCard extends StatelessWidget {
-  const FlightsOffersCard({super.key});
+  const FlightsOffersCard({super.key, required this.flightOffer});
+
+  final FlightModel flightOffer;
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +21,11 @@ class FlightsOffersCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FlightsOfferCardHeader(),
+          FlightsOfferCardHeader(flightOffer:flightOffer),
           SizedBox(height: AppSpacing.s24),
-          FlightsOfferCardDetails(),
+          FlightsOfferCardDetails(flightOffer:flightOffer),
           SizedBox(height: AppSpacing.s24),
-          FlightsOffersCardFooter(),
+          FlightsOffersCardFooter(flightOffer:flightOffer),
         ],
       ),
     );

@@ -7,7 +7,8 @@ class DetailsViewsTitle extends StatelessWidget {
   const DetailsViewsTitle({
     super.key,
     required this.title,
-    required this.hasRate, this.rate,
+    required this.hasRate,
+    this.rate,
   });
 
   final String title;
@@ -28,7 +29,7 @@ class DetailsViewsTitle extends StatelessWidget {
             ).copyWith(color: AppColors.whiteColor),
           ),
         ),
-        hasRate ? CustomRating(rating: rate,) : SizedBox.shrink(),
+        hasRate ? CustomRating(rating: rate) : SizedBox.shrink(),
       ],
     );
   }

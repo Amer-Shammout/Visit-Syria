@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:visit_syria/Core/constants/common_constants.dart';
+import 'package:visit_syria/Core/services/shared_preferences_singleton.dart';
 import 'package:visit_syria/Features/Auth/Data/Models/verification_model.dart';
 import 'package:visit_syria/Features/Auth/Data/Repos/auth_repo.dart';
 
@@ -14,7 +16,11 @@ class VerifyCodeCubit extends Cubit<VerifyCodeState> {
     final result = await _authRepo.verifyCode(model);
     result.fold(
       (failure) => emit(VerifyCodeFailure(errMessage: failure.errMessage)),
-      (data) => emit(VerifyCodeSuccess(verificationModel: model)),
+      (data) {
+        Prefs.setString(kToken, data.token!);
+
+        emit(VerifyCodeSuccess(verificationModel: model));
+      },
     );
   }
 }

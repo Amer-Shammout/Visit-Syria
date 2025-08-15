@@ -20,7 +20,7 @@ class BlogsCard extends StatelessWidget {
           children: [
             Expanded(child: BlogsCardImage()),
             SizedBox(width: AppSpacing.s8),
-            Expanded(child: BlogsCardDetails(articleModel: articleModel,)),
+            Expanded(child: BlogsCardDetails(articleModel: articleModel)),
           ],
         ),
       ),

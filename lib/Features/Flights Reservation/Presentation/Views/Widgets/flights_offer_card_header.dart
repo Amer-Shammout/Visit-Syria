@@ -5,9 +5,12 @@ import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_and_blog_tag.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Data/Models/flight_model/flight_model.dart';
 
 class FlightsOfferCardHeader extends StatelessWidget {
-  const FlightsOfferCardHeader({super.key});
+  const FlightsOfferCardHeader({super.key, required this.flightOffer});
+
+  final FlightModel flightOffer;
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +25,17 @@ class FlightsOfferCardHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "الخطوط الجوية القطرية",
+                  flightOffer.departureModel!.airline!,
                   style: AppStyles.fontsRegular14(
                     context,
                   ).copyWith(color: AppColors.titleTextColor),
                 ),
                 SizedBox(height: AppSpacing.s2),
                 Text(
-                  "2-2-2025",
-                  style: AppStyles.fontsLight8(
+                  flightOffer.isRoundTrip!
+                      ? "${flightOffer.departureModel!.departureDate} / ${flightOffer.flightModelReturn!.departureDate}"
+                      : "${flightOffer.departureModel!.departureDate}",
+                  style: AppStyles.fontsLight10(
                     context,
                   ).copyWith(color: AppColors.bodyTextColor),
                 ),

@@ -18,9 +18,10 @@ class BlogsCardsListView extends StatelessWidget {
         itemBuilder:
             (context, index) => GestureDetector(
               onTap:
-                  () => GoRouter.of(
-                    context,
-                  ).pushNamed(AppRouter.kBlogDetailsName,extra: articles?[index]),
+                  () => GoRouter.of(context).pushNamed(
+                    AppRouter.kBlogDetailsName,
+                    extra: articles?[index],
+                  ),
               child: BlogsCard(articleModel: articles?[index]),
             ),
         separatorBuilder: (context, index) => SizedBox(height: AppSpacing.s16),

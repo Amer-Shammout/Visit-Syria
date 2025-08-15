@@ -4,7 +4,8 @@ import 'package:visit_syria/Features/About%20Syria/Presentation/Manager/get_arti
 
 class GetArticlesByTagCubit extends Cubit<GetArticlesByTagState> {
   final AboutSyriaRepo _aboutSyriaRepo;
-  GetArticlesByTagCubit(this._aboutSyriaRepo) : super(GetArticlesByTagInitial());
+  GetArticlesByTagCubit(this._aboutSyriaRepo)
+    : super(GetArticlesByTagInitial());
 
   Future<void> fetchArticles(String tag) async {
     emit(GetArticlesByTagLoading());

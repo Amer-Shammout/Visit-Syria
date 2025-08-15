@@ -12,12 +12,10 @@ class CommonQuestionsItemsListViewBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     return BlocBuilder<GetSettingsByTypeCubit, GetSettingsByTypeState>(
+    return BlocBuilder<GetSettingsByTypeCubit, GetSettingsByTypeState>(
       builder: (context, state) {
         if (state is GetSettingsByTypeSuccess) {
-          return CommonQuestionsItemsListView(
-            settings: state.settings,
-          );
+          return CommonQuestionsItemsListView(settings: state.settings);
         } else if (state is GetSettingsByTypeFailure) {
           return CustomErrorAndEmptyStateBody(
             illustration: Assets.illustrationsFailure,

@@ -10,3 +10,8 @@ const List<String> kFlightsReservationIcons = [
   Assets.iconsToSyria,
   Assets.iconsToandFromSyria,
 ];
+
+const kArrivalDate = "arrival_date";
+const kArrivalTime = "arrival_time";
+const kDepartureDate = "departure_date";
+const kDepartureTime = "departure_time";

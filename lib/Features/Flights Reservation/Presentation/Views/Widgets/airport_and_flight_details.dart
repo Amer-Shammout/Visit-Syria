@@ -4,8 +4,9 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 
 class AirportAndFlightDetails extends StatelessWidget {
-  const AirportAndFlightDetails({super.key, this.test = "DXB"});
-  final String test;
+  const AirportAndFlightDetails({super.key, required this.airportCode, required this.airportName, required this.time});
+
+  final String airportCode, airportName, time;
 
   @override
   Widget build(BuildContext context) {
@@ -13,21 +14,21 @@ class AirportAndFlightDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          test,
+          airportCode,
           style: AppStyles.fontsBold18(
             context,
           ).copyWith(color: AppColors.titleTextColor),
         ),
         SizedBox(height: AppSpacing.s2),
         Text(
-          "دبي، الإمارات",
+          airportName,
           style: AppStyles.fontsLight10(
             context,
           ).copyWith(color: AppColors.bodyTextColor),
         ),
         SizedBox(height: AppSpacing.s2),
         Text(
-          "10:00 م",
+          time,
           style: AppStyles.fontsRegular12(
             context,
           ).copyWith(color: AppColors.titleTextColor),

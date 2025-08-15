@@ -8,7 +8,7 @@ class PrivacyPolicyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar2(title: "سياسة الخصوصية",hasTitle: true,),
+      appBar: CustomAppBar2(title: "سياسة الخصوصية", hasTitle: true),
       body: PrivacyPolicyViewBody(),
     );
   }

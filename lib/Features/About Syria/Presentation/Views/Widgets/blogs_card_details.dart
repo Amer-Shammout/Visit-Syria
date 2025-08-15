@@ -18,7 +18,7 @@ class BlogsCardDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-         articleModel?.title ?? "دمشق: أقدم مدينة مأهولة في التاريخ",
+          articleModel?.title ?? "دمشق: أقدم مدينة مأهولة في التاريخ",
           style: AppStyles.fontsBold18(
             context,
           ).copyWith(color: AppColors.titleTextColor),
@@ -27,7 +27,8 @@ class BlogsCardDetails extends StatelessWidget {
         ),
         SizedBox(height: AppSpacing.s8),
         Text(
-         articleModel?.body ?? "تُعد دمشق، عاصمة سوريا، واحدة من أقدم المدن المأهولة باستمرار في العالم، وتتميز بتراثها المعماري والثقافي العريق. تتزين المدينة القديمة بأزقتها الضيقة، وبيوتها الدمشقية ذات النوافذ الخشبية المشغولة، وساحاتها التي تفوح منها رائحة الياسمين. من أبرز معالمها الجامع الأموي، أحد أقدم المساجد في العالم الإسلامي. دمشق ليست مجرد مدينة، بل هي سجل حي لتاريخ الإنسانية.",
+          articleModel?.body ??
+              "تُعد دمشق، عاصمة سوريا، واحدة من أقدم المدن المأهولة باستمرار في العالم، وتتميز بتراثها المعماري والثقافي العريق. تتزين المدينة القديمة بأزقتها الضيقة، وبيوتها الدمشقية ذات النوافذ الخشبية المشغولة، وساحاتها التي تفوح منها رائحة الياسمين. من أبرز معالمها الجامع الأموي، أحد أقدم المساجد في العالم الإسلامي. دمشق ليست مجرد مدينة، بل هي سجل حي لتاريخ الإنسانية.",
           style: AppStyles.fontsRegular12(
             context,
           ).copyWith(color: AppColors.bodyTextColor),

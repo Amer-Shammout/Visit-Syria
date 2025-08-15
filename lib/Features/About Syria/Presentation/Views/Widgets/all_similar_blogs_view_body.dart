@@ -10,7 +10,7 @@ class AllSimilarBlogsViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       physics: BouncingScrollPhysics(),
-      slivers: [BlogsCardsListView(articles: articles,)],
+      slivers: [BlogsCardsListView(articles: articles)],
     );
   }
 }

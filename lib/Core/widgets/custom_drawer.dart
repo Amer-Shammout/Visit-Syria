@@ -85,9 +85,7 @@ class CustomDrawer extends StatelessWidget {
   Future<Object?>? routingDrawerItem(int index, BuildContext context) {
     switch (index) {
       case 0:
-        return GoRouter.of(
-          context,
-        ).pushNamed(AppRouter.kFlightsReservationName);
+        return GoRouter.of(context).pushNamed(AppRouter.kFlightsSearchName);
       case 1:
         return GoRouter.of(context).pushNamed(AppRouter.kTourismCompanieName);
       case 2:

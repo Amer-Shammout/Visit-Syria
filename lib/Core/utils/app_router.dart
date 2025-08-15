@@ -41,10 +41,16 @@ import 'package:visit_syria/Features/Community/Presentation/Views/create_post_vi
 import 'package:visit_syria/Features/Events/Presentation/Views/all_events_view.dart';
 import 'package:visit_syria/Features/Events/Presentation/Views/event_details_view.dart';
 import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Data/Models/flight_model/flight_model.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Data/Models/flight_search_data.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Data/Models/passenger_count_model.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Data/Repos/flights_repo_impl.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Manager/search_airports_cubit/search_airports_cubit.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Manager/search_flight_offers_cubit/search_flight_offers_cubit.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/airport_search_view.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/flight_offer_details_view.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/flights_offers_view.dart';
-import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/flights_reservation_view.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/flights_search_view.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/passangers_view.dart';
 import 'package:visit_syria/Features/Home/Data/Repos/home_repo_impl.dart';
 import 'package:visit_syria/Features/Home/Presentation/Manager/home_cubit/home_cubit.dart';
@@ -186,10 +192,12 @@ abstract class AppRouter {
   static const kSearchName = 'search';
   static const kTripDetailsView = '/tripDetails';
   static const kTripDetailsName = 'tripDetails';
-  static const kFlightsReservationView = '/flightsReservation';
-  static const kFlightsReservationName = 'flightsReservation';
+  static const kFlightsSearchView = '/flightsSearch';
+  static const kFlightsSearchName = 'flightsSearch';
   static const kFlightsOffersView = '/flightsOffers';
-  static const kFlightsOffersName = 'lightsOffers';
+  static const kFlightsOffersName = 'flightsOffers';
+  static const kFlightsOfferDetailsView = '/flightOfferDetails';
+  static const kFlightsOffeDetailssName = 'flightOfferDetails';
   static const kAirportSearchView = '/airportSearch';
   static const kAirportSearchName = 'airportSearch';
   static const kPassangersView = '/passangers';
@@ -656,17 +664,22 @@ abstract class AppRouter {
             ),
       ),
       GoRoute(
-        name: kFlightsReservationName,
-        path: kFlightsReservationView,
+        name: kFlightsSearchName,
+        path: kFlightsSearchView,
         pageBuilder:
-            (context, state) => MaterialPage(child: FlightsReservationView()),
+            (context, state) => MaterialPage(child: FlightsSearchView()),
       ),
       GoRoute(
         name: kAirportSearchName,
         path: kAirportSearchView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: AirportSearchView(title: state.extra as String),
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        SearchAirportsCubit(getIt.get<FlightsRepoImpl>()),
+                child: AirportSearchView(title: state.extra as String),
+              ),
             ),
       ),
       GoRoute(
@@ -683,7 +696,26 @@ abstract class AppRouter {
         name: kFlightsOffersName,
         path: kFlightsOffersView,
         pageBuilder:
-            (context, state) => MaterialPage(child: FlightsOffersView()),
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        SearchFlightOffersCubit(getIt.get<FlightsRepoImpl>()),
+                child: FlightsOffersView(
+                  flightSearchData: state.extra as FlightSearchData,
+                ),
+              ),
+            ),
+      ),
+      GoRoute(
+        name: kFlightsOffeDetailssName,
+        path: kFlightsOfferDetailsView,
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: FlightOfferDetailsView(
+                flightModel: state.extra as FlightModel,
+              ),
+            ),
       ),
       GoRoute(
         name: kAboutAppName,

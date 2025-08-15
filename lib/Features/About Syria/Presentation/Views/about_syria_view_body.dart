@@ -26,7 +26,7 @@ class AboutSyriaViewBody extends StatelessWidget {
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s12)),
-        BlogsCardsListViewBuilder(tag : currentTag),
+        BlogsCardsListViewBuilder(tag: currentTag),
       ],
     );
   }

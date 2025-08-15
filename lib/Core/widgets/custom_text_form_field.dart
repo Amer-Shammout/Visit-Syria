@@ -23,6 +23,7 @@ class CustomTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final bool readOnly;
   final bool enableInteractiveSelection;
+  final void Function(String)? onFieldSubmitted;
 
   const CustomTextFormField({
     super.key,
@@ -45,7 +46,7 @@ class CustomTextFormField extends StatefulWidget {
     this.onTap,
     this.controller,
     this.readOnly = false,
-    this.enableInteractiveSelection = true,
+    this.enableInteractiveSelection = true, this.onFieldSubmitted,
   });
 
   @override
@@ -100,6 +101,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       onTap: widget.onTap,
       child: Ink(
         child: TextFormField(
+          onFieldSubmitted: widget.onFieldSubmitted,
           enableInteractiveSelection: widget.enableInteractiveSelection,
           onTap: widget.onTap,
           controller: widget.controller,

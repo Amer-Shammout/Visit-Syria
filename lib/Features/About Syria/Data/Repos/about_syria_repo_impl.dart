@@ -19,7 +19,8 @@ class AboutSyriaRepoImpl extends AboutSyriaRepo {
     final url = "$kGetArticlesByTagUrl$encodedTag";
 
     return await handleRequest<List<ArticleModel>>(
-      requestFn: () => getIt.get<DioClient>().get(
+      requestFn:
+          () => getIt.get<DioClient>().get(
             url,
             options: Options(
               headers: {"Authorization": "Bearer ${Prefs.getString(kToken)}"},
@@ -42,7 +43,8 @@ class AboutSyriaRepoImpl extends AboutSyriaRepo {
     final url = "$kGetSimialarArticlesByIDUrl$id/$kGetSimialarArticlesByIDUrl2";
 
     return await handleRequest<List<ArticleModel>>(
-      requestFn: () => getIt.get<DioClient>().get(
+      requestFn:
+          () => getIt.get<DioClient>().get(
             url,
             options: Options(
               headers: {"Authorization": "Bearer ${Prefs.getString(kToken)}"},

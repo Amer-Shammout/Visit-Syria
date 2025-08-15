@@ -8,6 +8,8 @@ class FlightSearchData {
   PassengerCountModel passengers;
   String? airlineClass;
   bool nonStop;
+  String? direction;
+  int? max;
 
   FlightSearchData({
     this.fromAirport,
@@ -17,7 +19,11 @@ class FlightSearchData {
     PassengerCountModel? passengers,
     this.airlineClass,
     this.nonStop = false,
+    this.direction,
+    this.max = 8,
   }) : passengers =
            passengers ??
            PassengerCountModel(adults: 1, children: 0, infants: 0);
+
+           
 }

@@ -21,7 +21,8 @@ class SettingsRepoImpl extends SettingsRepo {
     final url = "$kGetSettingsByTypeUrl$encodedType?category=$encodedCategory";
 
     return await handleRequest<List<SettingsModel>>(
-      requestFn: () => getIt.get<DioClient>().get(
+      requestFn:
+          () => getIt.get<DioClient>().get(
             url,
             options: Options(
               headers: {"Authorization": "Bearer ${Prefs.getString(kToken)}"},

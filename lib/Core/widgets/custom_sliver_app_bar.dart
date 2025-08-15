@@ -8,7 +8,8 @@ class CustomSliverAppBar extends StatelessWidget {
     required this.title,
     required this.images,
     this.hasActionButton = true,
-    this.hasRate = true, this.rate,
+    this.hasRate = true,
+    this.rate,
   });
 
   final String title;

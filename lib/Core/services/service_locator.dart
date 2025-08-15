@@ -3,6 +3,7 @@ import 'package:visit_syria/Core/network/dio_client.dart';
 import 'package:visit_syria/Features/About%20Syria/Data/Repos/about_syria_repo_impl.dart';
 import 'package:visit_syria/Features/Auth/Data/Repos/auth_repo_impl.dart';
 import 'package:visit_syria/Features/Events/data/Repos/events_repo_impl.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Data/Repos/flights_repo_impl.dart';
 import 'package:visit_syria/Features/Home/Data/Repos/home_repo_impl.dart';
 import 'package:visit_syria/Features/Settings/Data/Repos/settings_repo_impl.dart';
 import 'package:visit_syria/Features/Trips/Data/Repos/trip_repo_impl.dart';
@@ -21,4 +22,5 @@ void setupGetit() {
   getIt.registerSingleton<PlacesRepoImpl>(PlacesRepoImpl());
   getIt.registerSingleton<SettingsRepoImpl>(SettingsRepoImpl());
   getIt.registerSingleton<AboutSyriaRepoImpl>(AboutSyriaRepoImpl());
+  getIt.registerSingleton<FlightsRepoImpl>(FlightsRepoImpl());
 }

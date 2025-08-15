@@ -5,16 +5,14 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/Widgets/flight_search_form.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/tags_list_view.dart';
 
-class FlightsReservationViewBody extends StatefulWidget {
-  const FlightsReservationViewBody({super.key});
+class FlightsSearchViewBody extends StatefulWidget {
+  const FlightsSearchViewBody({super.key});
 
   @override
-  State<FlightsReservationViewBody> createState() =>
-      _FlightsReservationViewBodyState();
+  State<FlightsSearchViewBody> createState() => _FlightsSearchViewBodyState();
 }
 
-class _FlightsReservationViewBodyState
-    extends State<FlightsReservationViewBody> {
+class _FlightsSearchViewBodyState extends State<FlightsSearchViewBody> {
   FlightType _selectedType = FlightType.fromSyria;
 
   @override

@@ -39,7 +39,11 @@ class _TripsViewBodyState extends State<TripsViewBody> {
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s12)),
-        SliverFillRemaining(child: TripsCardsListViewBuilder()),
+        SliverFillRemaining(
+          child: TripsCardsListViewBuilder(
+            category: category[selectedCategoryIndex],
+          ),
+        ),
         SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
       ],
     );

@@ -74,11 +74,7 @@ class _TripDetailsViewBodyState extends State<TripDetailsViewBody> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: PostandBlogsTagsWrap(
-                    tags:
-                        convertFromDynamicToStringAsList(
-                          widget.tripModel.tags,
-                        ) ??
-                        ["ششش", "ععع", "ضضض"],
+                    tags: widget.tripModel.tags ?? ["ششش", "ععع", "ضضض"],
                   ),
                 ),
               ),

@@ -11,6 +11,7 @@ import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.
 import 'package:visit_syria/Features/Home/Data/Models/weather_model.dart';
 import 'package:visit_syria/Features/Home/Data/Repos/home_repo.dart';
 import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
+import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_model.dart';
 
 class HomeRepoImpl extends HomeRepo {
   @override
@@ -82,6 +83,28 @@ class HomeRepoImpl extends HomeRepo {
       parse:
           (events) =>
               (events as List).map((e) => EventModel.fromJson(e)).toList(),
+    );
+  }
+
+  @override
+  Future<Either<Failure, List<TripModel>>> getOffers() async {
+    return await handleRequest<List<TripModel>>(
+      requestFn:
+          () => getIt.get<DioClient>().get(
+            kGetOffersTripsUrl,
+            options: Options(
+              headers: {"Authorization": "Bearer ${Prefs.getString(kToken)}"},
+            ),
+          ),
+      parse: (data) {
+        final List<TripModel> trips = [];
+        for (var item in data["trips"]) {
+          final TripModel tripModel = TripModel.fromJson(item);
+          trips.add(tripModel);
+        }
+
+        return trips;
+      },
     );
   }
 }

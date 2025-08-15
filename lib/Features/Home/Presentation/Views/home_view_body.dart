@@ -7,16 +7,24 @@ import 'package:visit_syria/Core/widgets/custom_section.dart';
 import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
 import 'package:visit_syria/Features/Home/Data/Models/weather_model.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/events_carousel.dart';
-import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/offers_cards_list_view.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_cards_hor_list_view.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/weather_cards_list_view.dart';
 import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
+import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_model.dart';
+import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/custom_similar_trips.dart';
 
 class HomeViewBody extends StatelessWidget {
-  const HomeViewBody({super.key, this.weathers, this.places, this.events});
+  const HomeViewBody({
+    super.key,
+    this.weathers,
+    this.places,
+    this.events,
+    this.offersTrips,
+  });
   final List<WeatherModel>? weathers;
   final List<PlaceModel>? places;
   final List<EventModel>? events;
+  final List<TripModel>? offersTrips;
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +52,7 @@ class HomeViewBody extends StatelessWidget {
         SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s24)),
 
         SliverToBoxAdapter(
-          child: CustomSection(
-            section: OffersCardsListView(trips: []),
-            hasSeeAll: true,
-            title: "العروض",
-            seaAllAction:
-                () => GoRouter.of(
-                  context,
-                ).pushNamed(AppRouter.kAllMiniTripCardsName, extra: 'العروض'),
-          ),
+          child: CustomMiniTripsSection(title: "العروض", trips: offersTrips!),
         ),
         SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s24)),
 

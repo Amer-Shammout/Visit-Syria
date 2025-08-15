@@ -388,6 +388,7 @@ abstract class AppRouter {
                             GetTripsByCategoryCubit(getIt.get<TripRepoImpl>())
                               ..getTripsByCategory("الكل"),
                   ),
+
                   BlocProvider(
                     create:
                         (context) => GetArticlesByTagCubit(

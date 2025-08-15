@@ -7,6 +7,7 @@ import 'package:visit_syria/Features/Home/Data/Models/weather_model.dart';
 import 'package:visit_syria/Features/Home/Data/Repos/home_repo.dart';
 import 'package:visit_syria/Features/Home/Presentation/Manager/home_cubit/home_state.dart';
 import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
+import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_model.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final HomeRepo homeRepo;
@@ -21,18 +22,21 @@ class HomeCubit extends Cubit<HomeState> {
       homeRepo.getTopRatedPlaces(),
       // homeRepo.getWeatherToday(),
       homeRepo.getAllEvents(),
+      homeRepo.getOffers(),
     ]);
 
     // كاست للأنواع الصحيحة
     final topRatedResult = results[0] as Either<Failure, List<PlaceModel>>;
     // final weatherResult  = results[1] as Either<Failure, List<WeatherModel>>;
     final eventsResult = results[1] as Either<Failure, List<EventModel>>;
+    final offersTripsResult = results[2] as Either<Failure, List<TripModel>>;
 
     // جمع كل النتائج في لائحة
     final allResults = [
       topRatedResult,
       // weatherResult,
       eventsResult,
+      offersTripsResult,
     ];
 
     // التحقق من وجود أي فشل
@@ -56,6 +60,7 @@ class HomeCubit extends Cubit<HomeState> {
         topRatedPlaces: topRatedResult.getOrElse(() => <PlaceModel>[]),
         // weathers: weatherResult.getOrElse(() => <WeatherModel>[]),
         events: eventsResult.getOrElse(() => <EventModel>[]),
+        offersTrips: offersTripsResult.getOrElse(() => <TripModel>[]),
       ),
     );
     // } catch (e) {

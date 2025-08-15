@@ -42,11 +42,7 @@ class TripsCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           SizedBox(height: AppSpacing.s16),
-          PostandBlogsTagsWrap(
-            tags:
-                convertFromDynamicToStringAsList(tripModel.tags) ??
-                ["ششش", "ععع", "ضضض"],
-          ),
+          PostandBlogsTagsWrap(tags: tripModel.tags ?? ["ششش", "ععع", "ضضض"]),
           SizedBox(height: AppSpacing.s16),
           TripsCardGeneralInfo.tripGeneralInfo(tripModel: tripModel),
           SizedBox(height: AppSpacing.s16),

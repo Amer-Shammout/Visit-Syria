@@ -15,6 +15,7 @@ const kGetAllEventsURL = "events";
 const kGetTripsByCategoryUrl = "trips";
 const kGetTripsCompanyUrl = "trip/company/";
 const kGetSimilarTripsUrl = "trips/similar/";
+const kGetOffersTripsUrl = "trip/offers";
 const kGetProfileURL = "auth/profile";
 const kUpdateProfileURL = "auth/updateProfile";
 const kGetPlacesByClassificationAndCityUrl = "places/tourist/";

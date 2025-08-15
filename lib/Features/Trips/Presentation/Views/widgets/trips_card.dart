@@ -67,14 +67,3 @@ class TripsCard extends StatelessWidget {
     );
   }
 }
-
-List<String>? convertFromDynamicToStringAsList(List<dynamic>? dynamicList) {
-  if (dynamicList != null) {
-    List<String> stringList = [];
-    for (var tag in dynamicList) {
-      stringList.add(tag.toString());
-    }
-    return stringList;
-  }
-  return null;
-}

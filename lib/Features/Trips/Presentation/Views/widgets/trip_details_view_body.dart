@@ -11,7 +11,6 @@ import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/custom_imp
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/custom_map_with_path.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/custom_similar_trips_builder.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/custom_time_line.dart';
-import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trips_card.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trips_card_general_info.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trips_card_header.dart';
 import 'package:visit_syria/Features/Trips/Presentation/manager/get_similar_trips_cubit/get_similar_trips_cubit.dart';
@@ -90,10 +89,7 @@ class _TripDetailsViewBodyState extends State<TripDetailsViewBody> {
               if (widget.tripModel.improvements != null) ...[
                 SliverToBoxAdapter(
                   child: CustomImprovements(
-                    improvements:
-                        convertFromDynamicToStringAsList(
-                          widget.tripModel.improvements,
-                        )!,
+                    improvements: widget.tripModel.improvements!,
                   ),
                 ),
                 SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),

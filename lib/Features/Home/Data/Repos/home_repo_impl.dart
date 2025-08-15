@@ -82,7 +82,9 @@ class HomeRepoImpl extends HomeRepo {
           ),
       parse:
           (events) =>
-              (events as List).map((e) => EventModel.fromJson(e)).toList(),
+              (events["data"] as List)
+                  .map((e) => EventModel.fromJson(e))
+                  .toList(),
     );
   }
 

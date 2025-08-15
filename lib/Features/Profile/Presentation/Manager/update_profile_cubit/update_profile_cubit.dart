@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visit_syria/Features/Profile/Data/Models/update_profile_model.dart';
 import 'package:visit_syria/Features/Profile/Data/Repos/profile_repo.dart';
-import 'package:visit_syria/Features/Profile/Data/Repos/profile_repo_impl.dart';
 
 part 'update_profile_state.dart';
 

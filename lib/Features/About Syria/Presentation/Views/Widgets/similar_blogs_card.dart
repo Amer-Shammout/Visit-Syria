@@ -4,9 +4,12 @@ import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/widgets/custom_icon_button.dart';
 import 'package:visit_syria/Core/widgets/custom_image.dart';
+import 'package:visit_syria/Features/About%20Syria/Data/Models/article_model.dart';
 
 class SimilarBlogsCard extends StatelessWidget {
-  const SimilarBlogsCard({super.key});
+  const SimilarBlogsCard({super.key, this.articleModel});
+
+  final ArticleModel? articleModel;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +40,7 @@ class SimilarBlogsCard extends StatelessWidget {
               left: 12,
               right: 12,
               child: Text(
-                "دمشق: أقدم مدينة مأهولة في التاريخ",
+                articleModel?.title ?? "دمشق: أقدم مدينة مأهولة في التاريخ",
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: AppStyles.fontsBold20(

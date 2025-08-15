@@ -8,11 +8,14 @@ class CustomSliverAppBar extends StatelessWidget {
     required this.title,
     required this.images,
     this.hasActionButton = true,
+    this.hasRate = true, this.rate,
   });
 
   final String title;
   final List<String> images;
   final bool hasActionButton;
+  final bool hasRate;
+  final dynamic rate;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +36,8 @@ class CustomSliverAppBar extends StatelessWidget {
           title: title,
           images: images,
           hasActionButton: hasActionButton,
+          hasRate: hasRate,
+          rate: rate,
         ),
       ),
     );

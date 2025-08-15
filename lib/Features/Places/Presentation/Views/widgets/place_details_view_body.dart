@@ -2,18 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
+import 'package:visit_syria/Core/utils/styles/app_colors.dart';
+import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_description.dart';
 import 'package:visit_syria/Core/widgets/custom_map.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
 import 'package:visit_syria/Core/widgets/custom_sliver_app_bar.dart';
-import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_cards_hor_list_view.dart';
+import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/comments_list_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/place_general_info.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/rating_form.dart';
 
 class PlaceDetailsViewBody extends StatelessWidget {
-  const PlaceDetailsViewBody({super.key});
+  const PlaceDetailsViewBody({super.key, required this.place});
+
+  final PlaceModel place;
 
   @override
   Widget build(BuildContext context) {
@@ -28,22 +32,29 @@ class PlaceDetailsViewBody extends StatelessWidget {
               Assets.imagesIdlib,
               Assets.imagesRasafe,
             ],
-            title: "باب شرقي",
+            title: place.name != null ? place.name! : "باب شرقي",
+            rate: place.rating,
           ),
           SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s16)),
-          SliverToBoxAdapter(child: PlaceGeneralInfo()),
+          SliverToBoxAdapter(child: PlaceGeneralInfo(place: place)),
           SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
           SliverToBoxAdapter(
             child: CustomDescription(
               desc:
-                  ' باب شرقي هو أحد أبواب المدينة القديمة في دمشق، وهو يقع في الجدار الشرقي للسور الدمشقي التاريخي. يُعد باب شرقي من أهم أبواب دمشق القديمة وأقدمها، ويعود تاريخه إلى العهد الروماني ثم أعيد بناؤه وتطويره في العصور الإسلامية المختلفة.يتميز الباب بموقعه الحيوي حيث يؤدي إلى منطقة الصالحية والخضراء، وكان يعتبر مدخلًا رئيسيًا للحجاج والتجار القادمين من الشرق. كما أنه يحتفظ بطابع معماري تقليدي يعكس التراث الدمشقي.',
+                  place.description != null
+                      ? place.description!
+                      : ' باب شرقي هو أحد أبواب المدينة القديمة في دمشق، وهو يقع في الجدار الشرقي للسور الدمشقي التاريخي. يُعد باب شرقي من أهم أبواب دمشق القديمة وأقدمها، ويعود تاريخه إلى العهد الروماني ثم أعيد بناؤه وتطويره في العصور الإسلامية المختلفة.يتميز الباب بموقعه الحيوي حيث يؤدي إلى منطقة الصالحية والخضراء، وكان يعتبر مدخلًا رئيسيًا للحجاج والتجار القادمين من الشرق. كما أنه يحتفظ بطابع معماري تقليدي يعكس التراث الدمشقي.',
             ),
           ),
           SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
           SliverToBoxAdapter(
-            child: CustomMap(latitude: 33.5138, longitude: 36.2765),
+            child: CustomMap(
+              latitude: double.parse(place.latitude!),
+              longitude: double.parse(place.longitude!),
+            ),
           ),
           SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
+
           SliverToBoxAdapter(
             child: CustomSection(
               title: "التقييمات و التعليقات",
@@ -52,34 +63,41 @@ class PlaceDetailsViewBody extends StatelessWidget {
                   () => GoRouter.of(
                     context,
                   ).pushNamed(AppRouter.kAllCommentsAndRatingName),
-              section: CommentsListView(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-              ),
+              section:
+                  place.recentComments!.isNotEmpty
+                      ? CommentsListView(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        hasRate: true,
+                        comments: place.recentComments,
+                      )
+                      : Center(
+                        child: Text(
+                          "لا يوجد تعليقات حالياً",
+                          style: AppStyles.fontsRegular14(
+                            context,
+                          ).copyWith(color: AppColors.titleTextColor),
+                        ),
+                      ),
             ),
           ),
           SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
-          SliverToBoxAdapter(
-            child: CustomSection(
-              title: "تقييم المكان",
-              hasSeeAll: false,
-              seaAllAction: () {},
-              section: RatingForm(),
-            ),
-          ),
-          SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
-          SliverToBoxAdapter(
-            child: CustomSection(
-              section: PlacesCardsHorListView(),
-              title: "الأماكن المشابهة",
-              hasSeeAll: true,
-              seaAllAction:
-                  () => GoRouter.of(context).pushNamed(
-                    AppRouter.kAllPlacesName,
-                    extra: "الأماكن المشابهة",
+          place.userRating == "guest"
+              ? SliverToBoxAdapter(child: SizedBox.shrink())
+              : SliverToBoxAdapter(
+                child: CustomSection(
+                  title: "تقييم المكان",
+                  hasSeeAll: false,
+                  seaAllAction: () {},
+                  section: RatingForm(
+                    userComment: place.userComment,
+                    userRate: place.userRating,
                   ),
-            ),
-          ),
+                ),
+              ),
+          place.userRating == "guest"
+              ? SliverToBoxAdapter(child: SizedBox.shrink())
+              : SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
         ],
       ),
     );

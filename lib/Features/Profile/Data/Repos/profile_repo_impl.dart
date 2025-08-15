@@ -1,11 +1,10 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:visit_syria/Core/constants/common_constants.dart';
 import 'package:visit_syria/Core/constants/urls_constants.dart';
 import 'package:visit_syria/Core/errors/failures.dart';
 import 'package:visit_syria/Core/network/dio_client.dart';
+import 'package:visit_syria/Core/services/firebase_notification.dart';
 import 'package:visit_syria/Core/services/service_locator.dart';
 import 'package:visit_syria/Core/services/shared_preferences_singleton.dart';
 import 'package:visit_syria/Core/utils/functions/handle_request.dart';
@@ -20,6 +19,7 @@ class ProfileRepoImpl extends ProfileRepo {
       requestFn:
           () => getIt.get<DioClient>().post(
             kLogoutUrl,
+            data: {'fcm_token': FirebaseNotification.fcmToken},
             options: Options(
               headers: {"Authorization": "Bearer ${Prefs.getString(kToken)}"},
             ),
@@ -92,8 +92,6 @@ class ProfileRepoImpl extends ProfileRepo {
               "Content-Type": "multipart/form-data",
               "Accept": "*/*",
             },
-            // followRedirects: false,
-            // validateStatus: (status) => status != null && status < 500,
           ),
         );
       },

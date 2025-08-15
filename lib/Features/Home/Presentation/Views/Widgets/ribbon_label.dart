@@ -21,10 +21,12 @@ class RibbonLabel extends StatelessWidget {
         ),
       ),
       child: Text(
-        "#1",
+        text,
         style: AppStyles.fontsBold16(
           context,
         ).copyWith(color: AppColors.whiteColor),
+        textAlign: TextAlign.left,
+        textDirection: TextDirection.ltr,
       ),
     );
   }

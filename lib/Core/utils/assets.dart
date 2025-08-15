@@ -562,6 +562,14 @@ class Assets {
   /// assets/Images/dimashq_4.jpg
   static const String imagesDimashq4 = "assets/Images/dimashq_4.jpg";
 
+  /// Assets for imagesFlightsCard
+  /// assets/Images/flights_card.png
+  static const String imagesFlightsCard = "assets/Images/flights_card.png";
+
+  /// Assets for imagesFlightsDir
+  /// assets/Images/flights_dir.svg
+  static const String imagesFlightsDir = "assets/Images/flights_dir.svg";
+
   /// Assets for imagesHalab
   /// assets/Images/halab.png
   static const String imagesHalab = "assets/Images/halab.png";

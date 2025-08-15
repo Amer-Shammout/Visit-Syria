@@ -11,11 +11,13 @@ class CustomSection extends StatelessWidget {
     this.seaAllAction,
     this.section,
     this.widgets,
+    this.haspoint = false,
   });
 
   final String title;
   final String? icon;
   final bool hasSeeAll;
+  final bool haspoint;
   final VoidCallback? seaAllAction;
   final Widget? section;
   final List<Widget>? widgets;
@@ -30,6 +32,7 @@ class CustomSection extends StatelessWidget {
           hasSeeAll: hasSeeAll,
           icon: icon,
           seaAllAction: seaAllAction,
+          hasPoint: haspoint,
         ),
         SizedBox(height: AppSpacing.s12),
         section ??

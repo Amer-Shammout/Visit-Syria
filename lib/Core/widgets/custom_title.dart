@@ -13,11 +13,13 @@ class CustomTitle extends StatelessWidget {
     this.icon,
     required this.hasSeeAll,
     this.seaAllAction,
+    this.hasPoint = false,
   });
 
   final String title;
   final String? icon;
   final bool hasSeeAll;
+  final bool hasPoint;
   final VoidCallback? seaAllAction;
 
   @override
@@ -29,6 +31,12 @@ class CustomTitle extends StatelessWidget {
         children: [
           Row(
             children: [
+              hasPoint
+                  ? const Text(
+                    "• ",
+                    style: TextStyle(fontSize: 20, height: 1.4),
+                  )
+                  : SizedBox.shrink(),
               Text(
                 title,
                 style: AppStyles.fontsBold22(

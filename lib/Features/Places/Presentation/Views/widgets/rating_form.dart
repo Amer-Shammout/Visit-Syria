@@ -15,11 +15,15 @@ class RatingForm extends StatelessWidget {
     this.padding = 16,
     this.boxShadow,
     this.hasBottomRadius = true,
+    this.userRate,
+    this.userComment,
   });
 
   final double padding;
   final BoxShadow? boxShadow;
   final bool hasBottomRadius;
+  final int? userRate;
+  final String? userComment;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +39,7 @@ class RatingForm extends StatelessWidget {
               children: [
                 ProfileAvatar(),
                 SizedBox(width: AppSpacing.s8),
-                CustomRatingBar(),
+                CustomRatingBar(initialRating: userRate?.toDouble() ?? 1),
               ],
             ),
             SizedBox(height: AppSpacing.s12),
@@ -43,6 +47,7 @@ class RatingForm extends StatelessWidget {
               hint: "اوصف تجربتك (اختياري)",
               maxLines: 3,
               textInputAction: TextInputAction.done,
+              initialValue: userComment,
             ),
             SizedBox(height: AppSpacing.s12),
             CustomButton(

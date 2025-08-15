@@ -13,7 +13,10 @@ class FlightGeneralInfo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        GeneralInfoItem(icon: Assets.iconsRank, title: 'اقتصادي'),
+        GeneralInfoItem(
+          icon: Assets.iconsRankVector,
+          title: flightModel.travelClass!,
+        ),
         GeneralInfoItem(
           icon: Assets.iconsPrice,
           title: "${flightModel.pricePerPassenger}\$",

@@ -22,10 +22,10 @@ class BigBackFlightItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         BigAirportAndFlightDetails(
-          airportCode: flightOffer.flightModelReturn!.originAirportCode!,
-          airportName: flightOffer.flightModelReturn!.originAirportName!,
+          airportCode: flightOffer.returnModel!.originAirportCode!,
+          airportName: flightOffer.returnModel!.originAirportName!,
           time: convertTo12HourFormat(
-            flightOffer.flightModelReturn!.departureTime!,
+            flightOffer.returnModel!.departureTime!,
             arabic: true,
           ),
         ),
@@ -33,14 +33,19 @@ class BigBackFlightItem extends StatelessWidget {
         Column(
           children: [
             Text(
-              "${flightOffer.flightModelReturn!.durationHours!} ساعات",
+              "${flightOffer.returnModel!.durationHours!} ساعات",
               style: AppStyles.fontsLight10(
                 context,
               ).copyWith(color: AppColors.bodyTextColor),
             ),
-            SvgPicture.asset(Assets.imagesFlightsDir, matchTextDirection: true,width: 200,height: 32,),
+            SvgPicture.asset(
+              Assets.imagesFlightsDir,
+              matchTextDirection: true,
+              width: 120,
+              height: 20,
+            ),
             Text(
-              "${flightOffer.flightModelReturn!.stops!} محطة توقف",
+              "${flightOffer.returnModel!.stops!} محطة توقف",
               style: AppStyles.fontsLight10(
                 context,
               ).copyWith(color: AppColors.bodyTextColor),
@@ -49,10 +54,10 @@ class BigBackFlightItem extends StatelessWidget {
         ),
         Spacer(),
         BigAirportAndFlightDetails(
-          airportCode: flightOffer.flightModelReturn!.destinationAirportCode!,
-          airportName: flightOffer.flightModelReturn!.destinationAirportName!,
+          airportCode: flightOffer.returnModel!.destinationAirportCode!,
+          airportName: flightOffer.returnModel!.destinationAirportName!,
           time: convertTo12HourFormat(
-            flightOffer.flightModelReturn!.arrivalTime!,
+            flightOffer.returnModel!.arrivalTime!,
             arabic: true,
           ),
         ),

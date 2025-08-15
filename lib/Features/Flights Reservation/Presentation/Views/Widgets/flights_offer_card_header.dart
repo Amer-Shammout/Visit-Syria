@@ -33,7 +33,7 @@ class FlightsOfferCardHeader extends StatelessWidget {
                 SizedBox(height: AppSpacing.s2),
                 Text(
                   flightOffer.isRoundTrip!
-                      ? "${flightOffer.departureModel!.departureDate} / ${flightOffer.flightModelReturn!.departureDate}"
+                      ? "${flightOffer.departureModel!.departureDate} / ${flightOffer.returnModel!.departureDate}"
                       : "${flightOffer.departureModel!.departureDate}",
                   style: AppStyles.fontsLight10(
                     context,
@@ -43,7 +43,7 @@ class FlightsOfferCardHeader extends StatelessWidget {
             ),
           ],
         ),
-        PostandBlogTag(tag: "اقتصادي"),
+        PostandBlogTag(tag: flightOffer.travelClass!),
       ],
     );
   }

@@ -3,6 +3,7 @@ import 'package:visit_syria/Features/Flights%20Reservation/Data/Models/flight_mo
 
 class FlightModel extends Equatable {
   final String? id;
+  final String? travelClass;
   final bool? isRoundTrip;
   final num? priceTotal;
   final String? currency;
@@ -10,7 +11,7 @@ class FlightModel extends Equatable {
   final num? pricePerPassenger;
   final int? seatsRemaining;
   final OneWay? departureModel;
-  final OneWay? flightModelReturn;
+  final OneWay? returnModel;
 
   const FlightModel({
     this.id,
@@ -21,11 +22,13 @@ class FlightModel extends Equatable {
     this.pricePerPassenger,
     this.seatsRemaining,
     this.departureModel,
-    this.flightModelReturn,
+    this.returnModel,
+    this.travelClass,
   });
 
   factory FlightModel.fromJson(Map<String, dynamic> json) => FlightModel(
     id: json['id'] as String?,
+    travelClass: json['travel_class'] as String?,
     isRoundTrip: json['is_round_trip'] as bool?,
     priceTotal: json['price_total'] as num?,
     currency: json['currency'] as String?,
@@ -36,7 +39,7 @@ class FlightModel extends Equatable {
         json['departure'] == null
             ? null
             : OneWay.fromJson(json['departure'] as Map<String, dynamic>),
-    flightModelReturn:
+    returnModel:
         json['return'] == null
             ? null
             : OneWay.fromJson(json['return'] as Map<String, dynamic>),
@@ -51,7 +54,7 @@ class FlightModel extends Equatable {
     'price_per_passenger': pricePerPassenger,
     'seats_remaining': seatsRemaining,
     'departure': departureModel?.toJson(),
-    'return': flightModelReturn?.toJson(),
+    'return': returnModel?.toJson(),
   };
 
   @override
@@ -65,7 +68,7 @@ class FlightModel extends Equatable {
       pricePerPassenger,
       seatsRemaining,
       departureModel,
-      flightModelReturn,
+      returnModel,
     ];
   }
 }

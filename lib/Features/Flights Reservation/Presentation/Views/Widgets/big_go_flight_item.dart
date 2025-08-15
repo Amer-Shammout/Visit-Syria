@@ -34,7 +34,7 @@ class BigGoFlightItem extends StatelessWidget {
                 context,
               ).copyWith(color: AppColors.bodyTextColor),
             ),
-            SvgPicture.asset(Assets.imagesFlightsDir,width: 200,height: 32,),
+            SvgPicture.asset(Assets.imagesFlightsDir, width: 120, height: 20),
             Text(
               "${flightOffer.departureModel!.stops!} محطة توقف",
               style: AppStyles.fontsLight10(

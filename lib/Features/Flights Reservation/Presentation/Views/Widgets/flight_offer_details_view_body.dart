@@ -29,6 +29,13 @@ class FlightOfferDetailsViewBody extends StatelessWidget {
         FlightGeneralInfo(flightModel: flightOffer),
         SizedBox(height: AppSpacing.s32),
         FlightSegementsItem(segments: flightOffer.departureModel!.segments!),
+        flightOffer.returnModel != null
+            ? SizedBox(height: AppSpacing.s32)
+            : SizedBox.shrink(),
+        flightOffer.returnModel != null
+            ? FlightSegementsItem(segments: flightOffer.returnModel!.segments!)
+            : SizedBox.shrink(),
+        SizedBox(height: AppSpacing.s24),
       ],
     );
   }

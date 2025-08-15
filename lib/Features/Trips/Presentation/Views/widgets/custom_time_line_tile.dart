@@ -11,10 +11,12 @@ class CustomTimeLineTile extends StatelessWidget {
     required this.isFirst,
     required this.isLast,
     required this.timeline,
+    this.isFormated = false,
   });
   final bool isFirst;
   final bool isLast;
   final Section timeline;
+  final bool isFormated;
   @override
   Widget build(BuildContext context) {
     return TimelineTile(
@@ -35,7 +37,9 @@ class CustomTimeLineTile extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(top: 2),
           child: Text(
-            getTimeBased12(timeline.time!.substring(0, 5)),
+            isFormated
+                ? timeline.time!
+                : getTimeBased12(timeline.time!.substring(0, 5)),
             style: AppStyles.fontsBold14(context).copyWith(
               color: AppColors.titleTextColor,
               fontWeight: FontWeight.w600,

@@ -7,6 +7,7 @@ class RecentComment extends Equatable {
   final String? body;
   final String? createdAt;
   final int? ratingValue;
+  final String? userAvatar;
 
   const RecentComment({
     this.id,
@@ -15,6 +16,7 @@ class RecentComment extends Equatable {
     this.body,
     this.createdAt,
     this.ratingValue,
+    this.userAvatar,
   });
 
   factory RecentComment.fromJson(Map<String, dynamic> json) => RecentComment(
@@ -24,6 +26,7 @@ class RecentComment extends Equatable {
     body: json['body'] as String?,
     createdAt: json['created_at'] as String?,
     ratingValue: json['rating_value'] as int?,
+    userAvatar: json['user_avatar'] as String?,
   );
 
   Map<String, dynamic> toJson() => {

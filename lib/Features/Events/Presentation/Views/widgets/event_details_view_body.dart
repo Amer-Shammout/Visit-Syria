@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/data/Enums/enum.dart';
-import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_dialog.dart';
-import 'package:visit_syria/Core/widgets/custom_section.dart';
 import 'package:visit_syria/Core/widgets/custom_description.dart';
 import 'package:visit_syria/Core/widgets/custom_map.dart';
 import 'package:visit_syria/Core/widgets/custom_sliver_app_bar.dart';
 import 'package:visit_syria/Features/Events/Presentation/Views/widgets/event_general_info.dart';
-import 'package:visit_syria/Features/Events/Presentation/Views/widgets/small_events_cards_list_view.dart';
 import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
 import 'package:visit_syria/Features/Reservation/Data/Models/reservation_model.dart';
 import 'package:visit_syria/Features/Reservation/Presentation/Views/Widgets/reservation_people_number.dart';
@@ -49,18 +45,6 @@ class EventDetailsViewBody extends StatelessWidget {
                 child: CustomMap(
                   latitude: double.parse(event.latitude!),
                   longitude: double.parse(event.longitude!),
-                ),
-              ),
-              SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
-              SliverToBoxAdapter(
-                child: CustomSection(
-                  section: SmallEventsCardListView(),
-                  title: "الأحداث الرائجة",
-                  hasSeeAll: true,
-                  seaAllAction:
-                      () => GoRouter.of(
-                        context,
-                      ).pushNamed(AppRouter.kAllEventsName),
                 ),
               ),
               SliverToBoxAdapter(child: SizedBox(height: 96)),

@@ -24,7 +24,7 @@ class SavedEventsViewBody extends StatelessWidget {
           price: "1500.00",
           eventType: "limited",
           priceType: "paid",
-          preBooking: 1,
+          preBooking: true,
           media: [
             Media(
               id: 18,
@@ -46,7 +46,7 @@ class SavedEventsViewBody extends StatelessWidget {
           price: "1500.00",
           eventType: "limited",
           priceType: "paid",
-          preBooking: 1,
+          preBooking: true,
           media: [
             Media(
               id: 18,
@@ -68,7 +68,7 @@ class SavedEventsViewBody extends StatelessWidget {
           price: "1500.00",
           eventType: "limited",
           priceType: "paid",
-          preBooking: 1,
+          preBooking: true,
           media: [
             Media(
               id: 18,

@@ -3,6 +3,7 @@ import 'package:timeline_tile_plus/timeline_tile_plus.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Presentation/functions/time_and_date_functions.dart';
 import 'package:visit_syria/Features/Trips/Data/Model/trip_model/section.dart';
 
 class CustomTimeLineTile extends StatelessWidget {
@@ -37,9 +38,7 @@ class CustomTimeLineTile extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(top: 2),
           child: Text(
-            isFormated
-                ? timeline.time!
-                : getTimeBased12(timeline.time!.substring(0, 5)),
+            isFormated ? timeline.time! : convertTo12HourFormat(timeline.time!),
             style: AppStyles.fontsBold14(context).copyWith(
               color: AppColors.titleTextColor,
               fontWeight: FontWeight.w600,
@@ -78,22 +77,5 @@ class CustomTimeLineTile extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-String getTimeBased12(String time) {
-  String am = "AM";
-  String pm = "PM";
-  int timeNo = int.parse(time.substring(0, 2));
-  if (timeNo < 12) {
-    return "$time $am";
-  } else if (timeNo >= 20) {
-    timeNo = timeNo - 12;
-    return "$timeNo${time.substring(2, 5)} $pm";
-  } else if (timeNo == 12) {
-    return "$time $pm";
-  } else {
-    timeNo = timeNo - 12;
-    return "0$timeNo${time.substring(2, 5)} $pm";
   }
 }

@@ -9,7 +9,7 @@ class SavedTripsViewBody extends StatelessWidget {
     return CustomScrollView(
       physics: BouncingScrollPhysics(),
       clipBehavior: Clip.none,
-      slivers: [TripsCardsListView(trips: [],)],
+      slivers: [TripsCardsListView(trips: [])],
     );
   }
 }

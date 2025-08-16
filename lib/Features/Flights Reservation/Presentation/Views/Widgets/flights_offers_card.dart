@@ -21,11 +21,11 @@ class FlightsOffersCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FlightsOfferCardHeader(flightOffer:flightOffer),
+          FlightsOfferCardHeader(flightOffer: flightOffer),
           SizedBox(height: AppSpacing.s24),
-          FlightsOfferCardDetails(flightOffer:flightOffer),
+          FlightsOfferCardDetails(flightOffer: flightOffer),
           SizedBox(height: AppSpacing.s24),
-          FlightsOffersCardFooter(flightOffer:flightOffer),
+          FlightsOffersCardFooter(flightOffer: flightOffer),
         ],
       ),
     );

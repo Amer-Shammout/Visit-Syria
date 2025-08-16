@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:visit_syria/Core/data/repos/common_repo_impl.dart';
 import 'package:visit_syria/Core/network/dio_client.dart';
 import 'package:visit_syria/Features/About%20Syria/Data/Repos/about_syria_repo_impl.dart';
 import 'package:visit_syria/Features/Auth/Data/Repos/auth_repo_impl.dart';
@@ -23,4 +24,5 @@ void setupGetit() {
   getIt.registerSingleton<SettingsRepoImpl>(SettingsRepoImpl());
   getIt.registerSingleton<AboutSyriaRepoImpl>(AboutSyriaRepoImpl());
   getIt.registerSingleton<FlightsRepoImpl>(FlightsRepoImpl());
+  getIt.registerSingleton<CommonRepoImpl>(CommonRepoImpl());
 }

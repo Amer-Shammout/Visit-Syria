@@ -24,6 +24,4 @@ class FlightSearchData {
   }) : passengers =
            passengers ??
            PassengerCountModel(adults: 1, children: 0, infants: 0);
-
-           
 }

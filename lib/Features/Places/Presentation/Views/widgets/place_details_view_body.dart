@@ -58,18 +58,21 @@ class PlaceDetailsViewBody extends StatelessWidget {
           SliverToBoxAdapter(
             child: CustomSection(
               title: "التقييمات و التعليقات",
-              hasSeeAll: true,
+              hasSeeAll: place.recentComments!.isNotEmpty,
               seaAllAction:
-                  () => GoRouter.of(
-                    context,
-                  ).pushNamed(AppRouter.kAllCommentsAndRatingName),
+                  place.recentComments!.isNotEmpty
+                      ? () => GoRouter.of(context).pushNamed(
+                        AppRouter.kAllCommentsAndRatingName,
+                        extra: place,
+                      )
+                      : null,
               section:
                   place.recentComments!.isNotEmpty
                       ? CommentsListView(
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         hasRate: true,
-                        comments: place.recentComments,
+                        recentComments: place.recentComments,
                       )
                       : Center(
                         child: Text(

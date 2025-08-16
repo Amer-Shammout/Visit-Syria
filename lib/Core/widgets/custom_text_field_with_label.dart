@@ -27,7 +27,8 @@ class CustomTextFieldWithLabel extends StatelessWidget {
     this.readOnly = false,
     this.isEnabled = true,
     this.onTap,
-    this.enableInteractiveSelection = true, this.onFieldSubmitted,
+    this.enableInteractiveSelection = true,
+    this.onFieldSubmitted,
     // this.textDirection = TextDirection.ltr,
   });
   final String hint;

@@ -15,11 +15,11 @@ class FlightsOffersView extends StatefulWidget {
 }
 
 class _FlightsOffersViewState extends State<FlightsOffersView> {
-@override
+  @override
   void initState() {
-      BlocProvider.of<SearchFlightOffersCubit>(
-                    context,
-                  ).fetchFlightOffers(widget.flightSearchData);
+    BlocProvider.of<SearchFlightOffersCubit>(
+      context,
+    ).fetchFlightOffers(widget.flightSearchData);
     super.initState();
   }
 

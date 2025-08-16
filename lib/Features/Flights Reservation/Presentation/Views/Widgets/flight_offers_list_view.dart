@@ -14,10 +14,14 @@ class FlightOffersListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemBuilder:
-          (context, index) =>
-              GestureDetector(
-                onTap: () => GoRouter.of(context).pushNamed(AppRouter.kFlightsOffeDetailssName,extra: flightOffers[index]),
-                child: FlightsOffersCard(flightOffer: flightOffers[index])),
+          (context, index) => GestureDetector(
+            onTap:
+                () => GoRouter.of(context).pushNamed(
+                  AppRouter.kFlightsOffeDetailssName,
+                  extra: flightOffers[index],
+                ),
+            child: FlightsOffersCard(flightOffer: flightOffers[index]),
+          ),
       separatorBuilder: (context, index) => SizedBox(height: AppSpacing.s16),
       itemCount: flightOffers.length,
       clipBehavior: Clip.none,

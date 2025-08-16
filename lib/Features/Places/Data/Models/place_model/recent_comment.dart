@@ -26,7 +26,7 @@ class RecentComment extends Equatable {
     body: json['body'] as String?,
     createdAt: json['created_at'] as String?,
     ratingValue: json['rating_value'] as int?,
-    userAvatar: json['user_avatar'] as String?
+    userAvatar: json['user_avatar'] as String?,
   );
 
   Map<String, dynamic> toJson() => {

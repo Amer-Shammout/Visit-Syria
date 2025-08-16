@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/constants/common_constants.dart';
 import 'package:visit_syria/Core/data/models/city_model.dart';
+import 'package:visit_syria/Core/data/repos/common_repo_impl.dart';
+import 'package:visit_syria/Core/manager/get_feedback_cubit/get_feedback_cubit.dart';
 import 'package:visit_syria/Core/services/service_locator.dart';
 import 'package:visit_syria/Core/services/shared_preferences_singleton.dart';
 import 'package:visit_syria/Features/About%20Syria/Data/Models/article_model.dart';
@@ -473,7 +475,12 @@ abstract class AppRouter {
         name: kAllCommentsAndRatingName,
         path: kAllCommentsAndRatingView,
         pageBuilder:
-            (context, state) => MaterialPage(child: AllCommentsAndRatingView()),
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create: (context) => GetFeedbackCubit(getIt.get<CommonRepoImpl>()),
+                child: AllCommentsAndRatingView(placeModel: state.extra as PlaceModel,),
+              ),
+            ),
       ),
       GoRoute(
         name: kCreatePostName,

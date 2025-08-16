@@ -11,6 +11,7 @@ abstract class SearchAirportsState extends Equatable {
 class SearchAirportsInitial extends SearchAirportsState {}
 
 class SearchAirportsLoading extends SearchAirportsState {}
+
 class SearchAirportsEmpty extends SearchAirportsState {}
 
 class SearchAirportsSuccess extends SearchAirportsState {

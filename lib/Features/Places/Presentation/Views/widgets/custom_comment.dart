@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:visit_syria/Core/data/models/comment_model/comment_model.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
@@ -8,10 +9,16 @@ import 'package:visit_syria/Core/widgets/custom_rating.dart';
 import 'package:visit_syria/Features/Places/Data/Models/place_model/recent_comment.dart';
 
 class CustomComment extends StatelessWidget {
-  const CustomComment({super.key, this.hasRate = true, this.comment});
+  const CustomComment({
+    super.key,
+    this.hasRate = true,
+    this.recentComment,
+    this.comment,
+  });
 
   final bool hasRate;
-  final RecentComment? comment;
+  final RecentComment? recentComment;
+  final CommentModel? comment;
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +30,19 @@ class CustomComment extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AvatarandNameandHistory(),
+              AvatarandNameandHistory(comment: comment),
               hasRate
                   ? CustomRating(
                     textColor: AppColors.titleTextColor,
-                    rating: comment?.ratingValue,
+                    rating: recentComment?.ratingValue ?? comment?.userRating,
                   )
                   : SizedBox.shrink(),
             ],
           ),
           SizedBox(height: AppSpacing.s8),
           Text(
-            comment?.body ??
+            recentComment?.body ??
+                comment?.body ??
                 'باب شرقي في دمشق مكان رائع يمزج بين التاريخ والحياة اليومية. الأسواق القديمة والأزقة الضيقة تمنحك تجربة فريدة والناس ودودون. أنصح بزيارة الحمّام والمطاعم التقليدية للاستمتاع بالثقافة الشامية الحقيقية.',
             style: AppStyles.fontsRegular14(
               context,

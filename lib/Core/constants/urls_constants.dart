@@ -28,3 +28,4 @@ const kGetSimialarArticlesByIDUrl = "articles/";
 const kGetSimialarArticlesByIDUrl2 = "similar";
 const kGetFlightOffersUrl = "flights/search";
 const kGetAirportsUrl = "locations/search";
+const kGetFeedbackUrl = "feedback/";

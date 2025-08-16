@@ -76,7 +76,7 @@ class HotelAndResturantsDetailsViewBody extends StatelessWidget {
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             hasRate: true,
-                            comments: place?.recentComments,
+                            recentComments: place?.recentComments,
                           )
                           : Center(
                             child: Text(

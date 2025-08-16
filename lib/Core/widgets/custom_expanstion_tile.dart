@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:visit_syria/Core/utils/styles/app_colors.dart';
+import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
+
+class CustomExpansionTile extends StatelessWidget {
+  const CustomExpansionTile({
+    super.key,
+    this.backGroundColor,
+    this.boxShadow,
+    this.maintainState = false,
+    required this.title,
+    required this.icon,
+    required this.children,
+  });
+  final Color? backGroundColor;
+  final BoxShadow? boxShadow;
+  final bool maintainState;
+  final String title;
+  final String icon;
+  final List<Widget> children;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: backGroundColor ?? AppColors.graySwatch[50]!,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: boxShadow != null ? [boxShadow!] : [],
+      ),
+      child: Theme(
+        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+        child: ExpansionTile(
+          collapsedShape: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(color: Colors.transparent),
+          ),
+          shape: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(color: AppColors.primary),
+          ),
+          tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          childrenPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 20,
+          ),
+          maintainState: maintainState,
+          title: Text(
+            title,
+            style: AppStyles.fontsRegular14(
+              context,
+            ).copyWith(color: AppColors.titleTextColor),
+          ),
+          leading: SvgPicture.asset(
+            icon,
+            width: 24,
+            height: 24,
+            colorFilter: ColorFilter.mode(AppColors.primary, BlendMode.srcATop),
+          ),
+          iconColor: AppColors.primary,
+          collapsedIconColor: AppColors.primary,
+          children: children,
+        ),
+      ),
+    );
+  }
+}

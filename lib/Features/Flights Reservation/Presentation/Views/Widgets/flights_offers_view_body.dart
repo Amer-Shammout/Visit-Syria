@@ -9,5 +9,3 @@ class FlightsOffersViewBody extends StatelessWidget {
     return FlightsOffersViewBodyBuilder();
   }
 }
-
-

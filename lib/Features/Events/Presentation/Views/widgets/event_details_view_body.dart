@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Core/data/Enums/enum.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
+import 'package:visit_syria/Core/widgets/custom_dialog.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
 import 'package:visit_syria/Core/widgets/custom_description.dart';
 import 'package:visit_syria/Core/widgets/custom_map.dart';
@@ -10,6 +12,8 @@ import 'package:visit_syria/Core/widgets/custom_sliver_app_bar.dart';
 import 'package:visit_syria/Features/Events/Presentation/Views/widgets/event_general_info.dart';
 import 'package:visit_syria/Features/Events/Presentation/Views/widgets/small_events_cards_list_view.dart';
 import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
+import 'package:visit_syria/Features/Reservation/Data/Models/reservation_model.dart';
+import 'package:visit_syria/Features/Reservation/Presentation/Views/Widgets/reservation_people_number.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/custom_floating_action_button.dart';
 
 class EventDetailsViewBody extends StatelessWidget {
@@ -66,10 +70,48 @@ class EventDetailsViewBody extends StatelessWidget {
             bottom: 0,
             right: 0,
             left: 0,
-            child: CustomFloatingActionButton(),
+            child: isFAB(event, context),
           ),
         ],
       ),
+    );
+  }
+}
+
+PriceStateEnum getEventPriceType(EventModel eventModel) {
+  if (eventModel.priceType! == "free") {
+    return PriceStateEnum.free;
+  } else {
+    return PriceStateEnum.common;
+  }
+}
+
+Widget isFAB(EventModel event, BuildContext context) {
+  if (event.eventType! == "unlimited" && event.priceType! == "free") {
+    return SizedBox.shrink();
+  } else {
+    return CustomFloatingActionButton(
+      type: getEventPriceType(event),
+      price:
+          getEventPriceType(event) == PriceStateEnum.free
+              ? "مجاناً"
+              : event.price!,
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return CustomDialog(
+              title: "أدخل عدد التذاكر",
+              icon: Assets.iconsUser,
+              child: ReservationPeopleNumber(
+                maxCounter:
+                    event.eventType! == "limited" ? event.tickets : null,
+                reservationModel: ReservationModel(eventModel: event),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

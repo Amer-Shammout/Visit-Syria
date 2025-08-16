@@ -46,7 +46,8 @@ class CustomTextFormField extends StatefulWidget {
     this.onTap,
     this.controller,
     this.readOnly = false,
-    this.enableInteractiveSelection = true, this.onFieldSubmitted,
+    this.enableInteractiveSelection = true,
+    this.onFieldSubmitted,
   });
 
   @override

@@ -9,6 +9,7 @@ abstract class SearchFlightOffersState extends Equatable {
 }
 
 class SearchFlightOffersInitial extends SearchFlightOffersState {}
+
 class SearchFlightOffersEmpty extends SearchFlightOffersState {}
 
 class SearchFlightOffersLoading extends SearchFlightOffersState {}

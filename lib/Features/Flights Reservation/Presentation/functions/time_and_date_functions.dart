@@ -35,10 +35,16 @@ Map<String, String> extractDateAndTime(
   }
 }
 
-List<Map<String, String>> extractTimesFromSegments(List<Segment> segments, {bool arabic = false}) {
+List<Map<String, String>> extractTimesFromSegments(
+  List<Segment> segments, {
+  bool arabic = false,
+}) {
   return segments.map((segment) {
     final arrival = extractDateAndTime(segment.arrivalTime!, arabic: arabic);
-    final departure = extractDateAndTime(segment.departureTime!, arabic: arabic);
+    final departure = extractDateAndTime(
+      segment.departureTime!,
+      arabic: arabic,
+    );
 
     return {
       "arrival_date": arrival["date"] ?? "",
@@ -48,4 +54,3 @@ List<Map<String, String>> extractTimesFromSegments(List<Segment> segments, {bool
     };
   }).toList();
 }
-

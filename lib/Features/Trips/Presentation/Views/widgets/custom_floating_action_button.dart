@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:visit_syria/Core/data/Enums/enum.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
@@ -7,8 +8,15 @@ import 'package:visit_syria/Core/utils/styles/shadows.dart';
 import 'package:visit_syria/Core/widgets/custom_button.dart';
 
 class CustomFloatingActionButton extends StatelessWidget {
-  const CustomFloatingActionButton({super.key});
-
+  const CustomFloatingActionButton({
+    super.key,
+    required this.price,
+    required this.type,
+    required this.onPressed,
+  });
+  final String price;
+  final PriceStateEnum type;
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +37,7 @@ class CustomFloatingActionButton extends StatelessWidget {
           Expanded(
             flex: 2,
             child: CustomButton(
-              onPressed: () {},
+              onPressed: onPressed,
               title: "احجز الآن",
               textStyle: AppStyles.fontsBold14(
                 context,
@@ -57,11 +65,14 @@ class CustomFloatingActionButton extends StatelessWidget {
                     ),
                     SizedBox(height: AppSpacing.s4),
                     Text(
-                      "450 SYP",
+                      price,
                       textDirection: TextDirection.ltr,
-                      style: AppStyles.fontsBold20(
-                        context,
-                      ).copyWith(color: AppColors.titleTextColor),
+                      style: AppStyles.fontsBold20(context).copyWith(
+                        color:
+                            type == PriceStateEnum.common
+                                ? AppColors.titleTextColor
+                                : AppColors.red,
+                      ),
                       textAlign: TextAlign.start,
                     ),
                   ],

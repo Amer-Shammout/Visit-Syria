@@ -89,7 +89,9 @@ Widget isFAB(EventModel event, BuildContext context) {
               icon: Assets.iconsUser,
               child: ReservationPeopleNumber(
                 maxCounter:
-                    event.eventType! == "limited" ? event.tickets : null,
+                    event.eventType! == "limited"
+                        ? event.remainingTickets
+                        : null,
                 reservationModel: ReservationModel(eventModel: event),
               ),
             );

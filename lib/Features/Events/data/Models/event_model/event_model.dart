@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-import 'media.dart';
 
 class EventModel extends Equatable {
   final int? id;
@@ -13,13 +12,16 @@ class EventModel extends Equatable {
   final int? durationDays;
   final int? durationHours;
   final int? tickets;
+  final int? reservedTickets;
   final String? price;
   final String? eventType;
   final String? priceType;
-  final int? preBooking;
+  final bool? preBooking;
   final DateTime? createdAt;
   final DateTime? updatedAt;
-  final List<Media>? media;
+  final List<dynamic>? media;
+  final dynamic isSaved;
+  final String? status;
 
   const EventModel({
     this.id,
@@ -39,6 +41,9 @@ class EventModel extends Equatable {
     this.createdAt,
     this.updatedAt,
     this.media,
+    this.isSaved,
+    this.status,
+    this.reservedTickets
   });
 
   factory EventModel.fromJson(Map<String, dynamic> json) => EventModel(
@@ -52,10 +57,13 @@ class EventModel extends Equatable {
     durationDays: json['duration_days'] as int?,
     durationHours: json['duration_hours'] as int?,
     tickets: json['tickets'] as int?,
+    reservedTickets: json['reserved_tickets'] as int?,
     price: json['price'] as String?,
     eventType: json['event_type'] as String?,
     priceType: json['price_type'] as String?,
-    preBooking: json['pre_booking'] as int?,
+    status: json['status'] as String?,
+    isSaved: json['is_saved'] as dynamic,
+    preBooking: json['pre_booking'] as bool?,
     createdAt:
         json['created_at'] == null
             ? null
@@ -66,8 +74,7 @@ class EventModel extends Equatable {
             : DateTime.parse(json['updated_at'] as String),
     media:
         (json['media'] as List<dynamic>?)
-            ?.map((e) => Media.fromJson(e as Map<String, dynamic>))
-            .toList(),
+            
   );
 
   Map<String, dynamic> toJson() => {

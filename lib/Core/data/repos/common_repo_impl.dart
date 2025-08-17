@@ -12,7 +12,6 @@ class CommonRepoImpl extends CommonRepo {
   Future<Either<Failure, List<CommentModel>>> getFeedback({
     required String id,
     required String type,
-    
   }) {
     final url = "$kGetFeedbackUrl$id?type=$type&rating=all";
     return handleRequest(

@@ -29,3 +29,10 @@ const kGetSimialarArticlesByIDUrl2 = "similar";
 const kGetFlightOffersUrl = "flights/search";
 const kGetAirportsUrl = "locations/search";
 const kGetFeedbackUrl = "feedback/";
+const kGetAllApprovedPostsByTagUrl = "posts";
+const kCreatePostUrl = "posts";
+const kGetMyPostsUrl = "myPosts";
+const kToggleLikeUrl = "posts/";
+const kToggleLikeUrl2 = "/like";
+const kSetCommentUrl = "comments/";
+

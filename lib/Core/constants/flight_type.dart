@@ -10,3 +10,8 @@ enum FeedbackClassification {
   fourStar,
   fiveStar,
 }
+
+enum PostStatus { pending, approved, rejected }
+
+enum PostsFilter { all, approved, pending, rejected }
+

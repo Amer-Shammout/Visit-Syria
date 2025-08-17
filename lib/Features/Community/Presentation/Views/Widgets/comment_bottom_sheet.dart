@@ -7,7 +7,14 @@ import 'package:visit_syria/Core/utils/styles/shadows.dart';
 import 'package:visit_syria/Core/widgets/custom_text_form_field.dart';
 
 class CommentBottomSheet extends StatelessWidget {
-  const CommentBottomSheet({super.key});
+  const CommentBottomSheet({
+    super.key,
+    this.onFieldSubmitted,
+    required this.textEditingController,
+  });
+
+  final void Function(String)? onFieldSubmitted;
+  final TextEditingController textEditingController;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +33,7 @@ class CommentBottomSheet extends StatelessWidget {
             color: AppColors.whiteColor,
           ),
           child: CustomTextFormField(
+            controller: textEditingController,
             hint: "اكتب تعليق",
             prefixIcon: FittedBox(
               fit: BoxFit.scaleDown,
@@ -45,6 +53,7 @@ class CommentBottomSheet extends StatelessWidget {
             ),
             validator: Validation.validateEmptyField,
             textInputAction: TextInputAction.done,
+            onFieldSubmitted: onFieldSubmitted,
           ),
         ),
       ],

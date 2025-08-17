@@ -38,6 +38,11 @@ import 'package:visit_syria/Features/Auth/Presentation/Views/preferences_view.da
 import 'package:visit_syria/Features/Auth/Presentation/Views/setting_info_view.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/sign_up_view.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/verification_view.dart';
+import 'package:visit_syria/Features/Community/Data/Models/post_model/comment.dart';
+import 'package:visit_syria/Features/Community/Data/Repos/community_repo_impl.dart';
+import 'package:visit_syria/Features/Community/Presentation/Manager/create_post_cubit/create_post_cubit.dart';
+import 'package:visit_syria/Features/Community/Presentation/Manager/get_my_posts_cubit/get_my_posts_cubit.dart';
+import 'package:visit_syria/Features/Community/Presentation/Manager/set_comment_cubit/set_comment_cubit.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/all_comments_view.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/create_post_view.dart';
 import 'package:visit_syria/Features/Events/Presentation/Views/all_events_view.dart';
@@ -146,7 +151,7 @@ abstract class AppRouter {
   static const kAllCommentsAndRatingName = 'allCommentsAndRatingView';
   static const kCreatePostView = '/createPostView';
   static const kCreatePostName = 'createPostView';
-  static const kAllCommentsView = '/allCommentsView';
+  static const kAllCommentsView = '/allCommentsView/:postID/:isMyPost';
   static const kAllCommentsName = 'allCommentsView';
   static const kBlogDetailsView = '/blogDetailsView';
   static const kBlogDetailsName = 'blogDetailsView';
@@ -214,6 +219,7 @@ abstract class AppRouter {
   static const kCommonQuestionsName = 'commonQuestions';
 
   static bool get isAuth => Prefs.getString(kToken) != '';
+  static final myPostsCubit = GetMyPostsCubit(getIt.get<CommunityRepoImpl>());
 
   static final router = GoRouter(
     initialLocation: isAuth ? kAppRootView : kSplashView,
@@ -477,8 +483,11 @@ abstract class AppRouter {
         pageBuilder:
             (context, state) => MaterialPage(
               child: BlocProvider(
-                create: (context) => GetFeedbackCubit(getIt.get<CommonRepoImpl>()),
-                child: AllCommentsAndRatingView(placeModel: state.extra as PlaceModel,),
+                create:
+                    (context) => GetFeedbackCubit(getIt.get<CommonRepoImpl>()),
+                child: AllCommentsAndRatingView(
+                  placeModel: state.extra as PlaceModel,
+                ),
               ),
             ),
       ),
@@ -487,14 +496,41 @@ abstract class AppRouter {
         path: kCreatePostView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: CreatePostView(image: state.extra as File?),
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        CreatePostCubit(getIt.get<CommunityRepoImpl>()),
+                child: CreatePostView(image: state.extra as File?),
+              ),
             ),
       ),
       GoRoute(
         name: kAllCommentsName,
         path: kAllCommentsView,
-        pageBuilder: (context, state) => MaterialPage(child: AllCommentsView()),
+        pageBuilder: (context, state) {
+          final postId = state.pathParameters['postID'];
+          final isMyPost = state.pathParameters['isMyPost'];
+          return MaterialPage(
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create:
+                      (context) =>
+                          SetCommentCubit(getIt.get<CommunityRepoImpl>()),
+                ),
+                BlocProvider.value(value: myPostsCubit),
+              ],
+
+              child: AllCommentsView(
+                comments: state.extra as List<Comment>,
+                postId: postId,
+                isMyPost: isMyPost,
+              ),
+            ),
+          );
+        },
       ),
+
       GoRoute(
         name: kBlogDetailsName,
         path: kBlogDetailsView,
@@ -615,7 +651,13 @@ abstract class AppRouter {
       GoRoute(
         name: kMyPostsName,
         path: kMyPostsView,
-        pageBuilder: (context, state) => MaterialPage(child: MyPostsView()),
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider.value(
+                value: myPostsCubit,
+                child: MyPostsView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kSavedItemsName,

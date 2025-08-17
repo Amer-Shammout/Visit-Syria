@@ -12,9 +12,12 @@ class PostandBlogsTagsWrap extends StatelessWidget {
     return Wrap(
       spacing: 8,
       runSpacing: 8,
+      // direction: Axis.horizontal,
       children:
           tags.map((tag) {
-            return PostandBlogTag(tag: tag, textStyle: textStyle);
+            return FittedBox(
+              child: PostandBlogTag(tag: tag, textStyle: textStyle),
+            );
           }).toList(),
     );
   }

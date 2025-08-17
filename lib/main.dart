@@ -2,12 +2,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:visit_syria/Core/constants/common_constants.dart';
 import 'package:visit_syria/Core/services/custom_bloc_observer.dart';
 import 'package:visit_syria/Core/services/firebase_notification.dart';
 import 'package:visit_syria/Core/services/service_locator.dart';
 import 'package:visit_syria/Core/services/shared_preferences_singleton.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/styles/app_theme.dart';
+import 'package:visit_syria/Features/Community/Data/Repos/community_repo_impl.dart';
+import 'package:visit_syria/Features/Community/Presentation/Manager/get_all_approved_posts_by_tag_cubit/get_all_approved_posts_by_tag_cubit.dart';
 import 'package:visit_syria/firebase_options.dart';
 
 void main() async {
@@ -15,10 +18,10 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Prefs.init();
   // Prefs.removePref(kToken);
-  // Prefs.setString(
-  //   kToken,
-  //   "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvdmVyaWZ5RW1haWwiLCJpYXQiOjE3NTUxNjU2NDUsIm5iZiI6MTc1NTE2NTY0NSwianRpIjoiaU9CVlloaDhPaEFrU1U5MSIsInN1YiI6IjYiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.OBKIAUkRRnp-9atj06KH7oqpQsjD0bCgkn3abqx8fw8",
-  // );
+  Prefs.setString(
+    kToken,
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvdmVyaWZ5RW1haWwiLCJpYXQiOjE3NTUzODIxNDcsIm5iZiI6MTc1NTM4MjE0NywianRpIjoibm80Zmo5Z0Z2aWZrb2RNVSIsInN1YiI6IjYiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.mChLNT-xlbHtlJLZcpfMDnb5YRIORg7TPTr1uGa1cm0",
+  );
   await FirebaseNotification.getFCMToken();
 
   Bloc.observer = CustomBlocObserver();
@@ -34,17 +37,24 @@ class VisitSyriaApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      supportedLocales: [Locale('ar'), Locale('en')],
-      locale: Locale('ar'),
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      theme: AppTheme.lightTheme,
-      routerConfig: AppRouter.router,
+    return BlocProvider(
+      create:
+          (context) =>
+              GetAllApprovedPostsByTagCubit(getIt.get<CommunityRepoImpl>())
+                ..fetchPosts("الكل"),
+
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        supportedLocales: [Locale('ar'), Locale('en')],
+        locale: Locale('ar'),
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        theme: AppTheme.lightTheme,
+        routerConfig: AppRouter.router,
+      ),
     );
   }
 }

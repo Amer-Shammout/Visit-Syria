@@ -1,10 +1,14 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visit_syria/Core/utils/functions/validation.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_text_form_field.dart';
+import 'package:visit_syria/Features/Community/Data/Models/create_post_model.dart';
+import 'package:visit_syria/Features/Community/Presentation/Manager/create_post_cubit/create_post_cubit.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/custom_image_picker.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/select_tags_section.dart';
 
@@ -43,14 +47,25 @@ class CreatePostFormState extends State<CreatePostForm> {
     });
   }
 
-  void submit() {
+  void submit() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      log("message");
+      MultipartFile? multipartFile;
+      if (image != null) {
+        multipartFile = await MultipartFile.fromFile(
+          image!.path,
+          filename: image!.path.split('/').last,
+        );
+      }
+      CreatePostModel createPostModel = CreatePostModel(
+        body: postText!,
+        uploadPhoto: multipartFile,
+        tags: selectedTags,
+      );
+      BlocProvider.of<CreatePostCubit>(context).create(createPostModel);
     } else {
       setState(() {
         _isAutoValidate = AutovalidateMode.always;
-        log("message");
       });
     }
   }

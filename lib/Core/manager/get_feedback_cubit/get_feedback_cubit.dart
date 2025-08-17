@@ -20,7 +20,7 @@ class GetFeedbackCubit extends Cubit<GetFeedbackState> {
           emit(GetFeedbackEmpty());
         } else {
           allComments = comments;
-          emit(GetFeedbackSuccess(comments)); 
+          emit(GetFeedbackSuccess(comments));
         }
       },
     );
@@ -35,14 +35,15 @@ class GetFeedbackCubit extends Cubit<GetFeedbackState> {
     } else if (classification == FeedbackClassification.negative) {
       filtered = allComments.where((c) => (c.userRating ?? 0) < 3).toList();
     } else {
-      final stars = classification.index - 2; 
-      filtered = allComments.where((c) => (c.userRating ?? 0) == stars).toList();
+      final stars = classification.index - 2;
+      filtered =
+          allComments.where((c) => (c.userRating ?? 0) == stars).toList();
     }
 
     if (filtered.isEmpty) {
       emit(GetFeedbackEmpty());
     } else {
-      emit(GetFeedbackSuccess(filtered)); 
+      emit(GetFeedbackSuccess(filtered));
     }
   }
 }

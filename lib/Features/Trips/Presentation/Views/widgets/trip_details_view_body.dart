@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:visit_syria/Core/data/Enums/enum.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_description.dart';
+import 'package:visit_syria/Core/widgets/custom_dialog.dart';
 import 'package:visit_syria/Core/widgets/custom_sliver_app_bar.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_and_blogs_tags_wrap.dart';
+import 'package:visit_syria/Features/Reservation/Data/Models/reservation_model.dart';
 import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_model.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/custom_floating_action_button.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/custom_improvements.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/custom_map_with_path.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/custom_similar_trips_builder.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/custom_time_line.dart';
+import 'package:visit_syria/Features/Reservation/Presentation/Views/Widgets/reservation_people_number.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trips_card_general_info.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trips_card_header.dart';
 import 'package:visit_syria/Features/Trips/Presentation/manager/get_similar_trips_cubit/get_similar_trips_cubit.dart';
@@ -115,10 +119,44 @@ class _TripDetailsViewBodyState extends State<TripDetailsViewBody> {
             bottom: 0,
             right: 0,
             left: 0,
-            child: CustomFloatingActionButton(),
+            child: CustomFloatingActionButton(
+              type:
+                  isOffer(widget.tripModel)
+                      ? PriceStateEnum.offer
+                      : PriceStateEnum.common,
+              price:
+                  isOffer(widget.tripModel)
+                      ? widget.tripModel.newPrice!
+                      : widget.tripModel.price!,
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return CustomDialog(
+                      title: "أدخل عدد التذاكر",
+                      icon: Assets.iconsUser,
+                      child: ReservationPeopleNumber(
+                        reservationModel: ReservationModel(
+                          tripModel: widget.tripModel,
+                        ),
+                        maxCounter: widget.tripModel.remainingTickets!,
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
           ),
         ],
       ),
     );
+  }
+}
+
+bool isOffer(TripModel trip) {
+  if (int.parse(trip.discount!) == 0) {
+    return false;
+  } else {
+    return true;
   }
 }

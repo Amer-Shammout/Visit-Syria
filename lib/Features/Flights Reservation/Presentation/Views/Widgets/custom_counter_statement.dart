@@ -17,10 +17,11 @@ class CustomCounterStatement extends StatelessWidget {
     required this.onDecrement,
   });
 
-  final String title, subtitle;
+  final String title;
+  final String? subtitle;
   final int value;
   final int min;
-  final int max;
+  final int? max;
   final double size;
   final VoidCallback onIncrement;
   final VoidCallback onDecrement;
@@ -40,13 +41,15 @@ class CustomCounterStatement extends StatelessWidget {
               ).copyWith(color: AppColors.titleTextColor),
             ),
             SizedBox(height: AppSpacing.s2),
-            Text(
-              subtitle,
-              style: AppStyles.fontsLight12(
-                context,
-                12,
-              ).copyWith(color: AppColors.bodyTextColor),
-            ),
+            subtitle != null
+                ? Text(
+                  subtitle!,
+                  style: AppStyles.fontsLight12(
+                    context,
+                    12,
+                  ).copyWith(color: AppColors.bodyTextColor),
+                )
+                : SizedBox.shrink(),
           ],
         ),
         CustomCounter(

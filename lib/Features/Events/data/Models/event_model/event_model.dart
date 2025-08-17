@@ -12,6 +12,7 @@ class EventModel extends Equatable {
   final int? durationHours;
   final int? tickets;
   final int? reservedTickets;
+  final int? remainingTickets;
   final String? price;
   final String? eventType;
   final String? priceType;
@@ -43,6 +44,7 @@ class EventModel extends Equatable {
     this.isSaved,
     this.status,
     this.reservedTickets,
+    this.remainingTickets,
   });
 
   factory EventModel.fromJson(Map<String, dynamic> json) => EventModel(
@@ -57,6 +59,7 @@ class EventModel extends Equatable {
     durationHours: json['duration_hours'] as int?,
     tickets: json['tickets'] as int?,
     reservedTickets: json['reserved_tickets'] as int?,
+    remainingTickets: json['tickets_remaining'] as int?,
     price: json['price'] as String?,
     eventType: json['event_type'] as String?,
     priceType: json['price_type'] as String?,
@@ -92,6 +95,8 @@ class EventModel extends Equatable {
     'created_at': createdAt?.toIso8601String(),
     'updated_at': updatedAt?.toIso8601String(),
     'media': media?.map((e) => e.toJson()).toList(),
+    'tickets_remaining': remainingTickets,
+    'reserved_tickets': reservedTickets,
   };
 
   @override
@@ -107,6 +112,8 @@ class EventModel extends Equatable {
       durationDays,
       durationHours,
       tickets,
+      reservedTickets,
+      remainingTickets,
       price,
       eventType,
       priceType,

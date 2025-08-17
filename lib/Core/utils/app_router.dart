@@ -86,6 +86,9 @@ import 'package:visit_syria/Features/Profile/Presentation/Views/saved_places_vie
 import 'package:visit_syria/Features/Profile/Presentation/Views/saved_posts_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/saved_resturants_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/saved_trips_view.dart';
+import 'package:visit_syria/Features/Reservation/Data/Models/reservation_model.dart';
+import 'package:visit_syria/Features/Reservation/Presentation/Views/reservation_people_ino_view.dart';
+import 'package:visit_syria/Features/Reservation/Presentation/Views/reservation_people_number_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotel_and_resturants_details_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotels_and_resturants_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/similar_hotels_or_resturants_view.dart';
@@ -217,7 +220,10 @@ abstract class AppRouter {
   static const kPrivacyPolicyName = 'privacyPolicy';
   static const kCommonQuestionsView = '/commonQuestions';
   static const kCommonQuestionsName = 'commonQuestions';
-
+  static const kReservationPeopleInoView = '/reservationPeopleInoView';
+  static const kReservationPeopleInoName = 'reservationPeopleInoView';
+  static const kPaymentInfoView = '/paymentInfoView';
+  static const kPaymentInfoName = 'paymentInfoView';
   static bool get isAuth => Prefs.getString(kToken) != '';
   static final myPostsCubit = GetMyPostsCubit(getIt.get<CommunityRepoImpl>());
 
@@ -816,6 +822,26 @@ abstract class AppRouter {
                         GetSettingsByTypeCubit(getIt.get<SettingsRepoImpl>())
                           ..fetchSettings(type: "common_question"),
                 child: CommonQuestionsView(),
+              ),
+            ),
+      ),
+      GoRoute(
+        name: kReservationPeopleInoName,
+        path: kReservationPeopleInoView,
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: ReservationPeopleInoView(
+                reservationModel: state.extra as ReservationModel,
+              ),
+            ),
+      ),
+      GoRoute(
+        name: kPaymentInfoName,
+        path: kPaymentInfoView,
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: PaymentInfoView(
+                reservationModel: state.extra as ReservationModel,
               ),
             ),
       ),

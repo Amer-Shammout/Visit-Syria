@@ -15,7 +15,7 @@ class CustomCounter extends StatelessWidget {
 
   final int value;
   final int min;
-  final int max;
+  final int? max;
   final double size;
   final VoidCallback onIncrement;
   final VoidCallback onDecrement;
@@ -50,7 +50,12 @@ class CustomCounter extends StatelessWidget {
           ),
         ),
         IconButton(
-          onPressed: value < max ? onIncrement : null,
+          onPressed:
+              max == null
+                  ? onIncrement
+                  : value < max!
+                  ? onIncrement
+                  : null,
           icon: const Icon(Icons.add, color: AppColors.whiteColor),
           iconSize: size,
           color: Colors.white,

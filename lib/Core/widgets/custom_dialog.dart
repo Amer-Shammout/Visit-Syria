@@ -23,7 +23,7 @@ class CustomDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadiusGeometry.circular(32),
+        borderRadius: BorderRadius.circular(32),
       ),
       backgroundColor: AppColors.whiteColor,
       child: Padding(

@@ -10,7 +10,12 @@ import 'package:visit_syria/Features/Auth/Presentation/Manager/google_sign_in_cu
 import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Forget%20Password/forget_password_body_1.dart';
 
 class ForgetPassword1ViewBodyConsumer extends StatelessWidget {
-  const ForgetPassword1ViewBodyConsumer({super.key});
+  const ForgetPassword1ViewBodyConsumer({
+    super.key,
+    required this.isChangePass,
+  });
+
+  final bool isChangePass;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +27,10 @@ class ForgetPassword1ViewBodyConsumer extends StatelessWidget {
               showFailureSnackBar(state.errMessage, context);
             }
             if (state is ForgetPasswordSuccess) {
-              GoRouter.of(
-                context,
-              ).pushNamed(AppRouter.kForgetPassword2Name, extra: state.email);
+              GoRouter.of(context).pushNamed(
+                AppRouter.kForgetPassword2Name,
+                extra: {'email': state.email, 'isChangePass': isChangePass},
+              );
             }
           },
         ),
@@ -46,7 +52,7 @@ class ForgetPassword1ViewBodyConsumer extends StatelessWidget {
             inAsyncCall:
                 state is ForgetPasswordLoading ||
                 context.watch<GoogleSignInCubit>().state is GoogleSignInLoading,
-            child: ForgetPasswordBody1(),
+            child: ForgetPasswordBody1(isChangePass: isChangePass),
           );
         },
       ),

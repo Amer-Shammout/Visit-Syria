@@ -28,7 +28,7 @@ class ProfileOptions extends StatelessWidget {
       case 0:
         return GoRouter.of(context).pushNamed(AppRouter.kPersonalInfoName);
       case 1:
-        return null;
+         return GoRouter.of(context).pushNamed(AppRouter.kChangePasswordName);
       case 2:
         return GoRouter.of(context).pushNamed(AppRouter.kMyTripsName);
       case 3:

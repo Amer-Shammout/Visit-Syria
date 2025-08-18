@@ -18,10 +18,10 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Prefs.init();
   // Prefs.removePref(kToken);
-  Prefs.setString(
-    kToken,
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvdmVyaWZ5RW1haWwiLCJpYXQiOjE3NTUzODIxNDcsIm5iZiI6MTc1NTM4MjE0NywianRpIjoibm80Zmo5Z0Z2aWZrb2RNVSIsInN1YiI6IjYiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.mChLNT-xlbHtlJLZcpfMDnb5YRIORg7TPTr1uGa1cm0",
-  );
+  // Prefs.setString(
+  //   kToken,
+  //   "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvdmVyaWZ5RW1haWwiLCJpYXQiOjE3NTUzODIxNDcsIm5iZiI6MTc1NTM4MjE0NywianRpIjoibm80Zmo5Z0Z2aWZrb2RNVSIsInN1YiI6IjYiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.mChLNT-xlbHtlJLZcpfMDnb5YRIORg7TPTr1uGa1cm0",
+  // );
   await FirebaseNotification.getFCMToken();
 
   Bloc.observer = CustomBlocObserver();

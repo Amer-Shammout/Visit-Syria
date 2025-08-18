@@ -71,9 +71,11 @@ import 'package:visit_syria/Features/Places/Presentation/Views/all_comments_and_
 import 'package:visit_syria/Features/Places/Presentation/Views/city_details_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/place_details_view.dart';
 import 'package:visit_syria/Features/Profile/Data/Repos/profile_repo_impl.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/change_password_cubit/change_password_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/logout_cubit/logout_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/update_profile_cubit/update_profile_cubit.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/change_password_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/my_posts_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/my_trips_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/personal_info_view.dart';
@@ -224,6 +226,8 @@ abstract class AppRouter {
   static const kReservationPeopleInoName = 'reservationPeopleInoView';
   static const kPaymentInfoView = '/paymentInfoView';
   static const kPaymentInfoName = 'paymentInfoView';
+  static const kChangePasswordView = '/changePasswordView';
+  static const kChangePasswordName = 'changePasswordView';
   static bool get isAuth => Prefs.getString(kToken) != '';
   static final myPostsCubit = GetMyPostsCubit(getIt.get<CommunityRepoImpl>());
 
@@ -347,43 +351,55 @@ abstract class AppRouter {
                             GoogleSignInCubit(getIt.get<AuthRepoImpl>()),
                   ),
                 ],
-                child: ForgetPasswordView1(),
+                child: ForgetPasswordView1(isChangePass: state.extra as bool),
               ),
             ),
       ),
       GoRoute(
         name: kForgetPassword2Name,
         path: kForgetPassword2View,
-        pageBuilder:
-            (context, state) => MaterialPage(
-              child: MultiBlocProvider(
-                providers: [
-                  BlocProvider(
-                    create:
-                        (context) => VerifyCodeCubit(getIt.get<AuthRepoImpl>()),
-                  ),
-                  BlocProvider(
-                    create:
-                        (context) => ResendCodeCubit(getIt.get<AuthRepoImpl>()),
-                  ),
-                ],
-                child: ForgetPasswordView2(email: state.extra as String),
+        pageBuilder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>? ?? {};
+          final email = extra['email'] as String? ?? '';
+          final isChangePass = extra['isChangePass'] as bool? ?? false;
+
+          return MaterialPage(
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (_) => VerifyCodeCubit(getIt.get<AuthRepoImpl>()),
+                ),
+                BlocProvider(
+                  create: (_) => ResendCodeCubit(getIt.get<AuthRepoImpl>()),
+                ),
+              ],
+              child: ForgetPasswordView2(
+                email: email,
+                isChangePass: isChangePass,
               ),
             ),
+          );
+        },
       ),
       GoRoute(
         name: kForgetPassword3Name,
         path: kForgetPassword3View,
-        pageBuilder:
-            (context, state) => MaterialPage(
-              child: BlocProvider(
-                create:
-                    (context) => ResetPasswordCubit(getIt.get<AuthRepoImpl>()),
-                child: ForgetPasswordView3(
-                  verificationModel: state.extra as VerificationModel,
-                ),
+        pageBuilder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>? ?? {};
+          final verificationModel =
+              extra['verificationModel'] as VerificationModel;
+          final isChangePass = extra['isChangePass'] as bool;
+          return MaterialPage(
+            child: BlocProvider(
+              create:
+                  (context) => ResetPasswordCubit(getIt.get<AuthRepoImpl>()),
+              child: ForgetPasswordView3(
+                verificationModel: verificationModel,
+                isChangePass: isChangePass,
               ),
             ),
+          );
+        },
       ),
       GoRoute(
         name: kAppRootName,
@@ -842,6 +858,19 @@ abstract class AppRouter {
             (context, state) => MaterialPage(
               child: PaymentInfoView(
                 reservationModel: state.extra as ReservationModel,
+              ),
+            ),
+      ),
+      GoRoute(
+        name: kChangePasswordName,
+        path: kChangePasswordView,
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        ChangePasswordCubit(getIt.get<ProfileRepoImpl>()),
+                child: ChangePasswordView(),
               ),
             ),
       ),

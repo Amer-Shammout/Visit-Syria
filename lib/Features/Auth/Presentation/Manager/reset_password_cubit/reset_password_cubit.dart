@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:visit_syria/Core/constants/common_constants.dart';
+import 'package:visit_syria/Core/services/shared_preferences_singleton.dart';
 import 'package:visit_syria/Features/Auth/Data/Models/auth_response_model.dart';
 import 'package:visit_syria/Features/Auth/Data/Models/reset_password_model.dart';
 import 'package:visit_syria/Features/Auth/Data/Repos/auth_repo.dart';
@@ -15,7 +17,10 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     final result = await _authRepo.resetPassword(model);
     result.fold(
       (failure) => emit(ResetPasswordFailure(errMessage: failure.errMessage)),
-      (data) => emit(ResetPasswordSuccess(authResponse: data)),
+      (data) {
+        Prefs.setString(kToken, data.token!);
+        emit(ResetPasswordSuccess(authResponse: data));
+      },
     );
   }
 }

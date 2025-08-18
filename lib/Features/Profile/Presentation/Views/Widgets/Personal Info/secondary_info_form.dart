@@ -58,11 +58,22 @@ class SecondaryInfoForm extends StatelessWidget {
               initialValue:
                   GetProfileCubit.userModel != null
                       ? PhoneNumber(
-                        countryISOCode:
-                            GetProfileCubit.userModel!.me!.profile!.countryCode,
-                        countryCode:
-                            GetProfileCubit.userModel!.me!.profile!.countryCode,
-                        number: GetProfileCubit.userModel!.me!.profile!.phone,
+                        countryISOCode: GetProfileCubit
+                            .userModel!
+                            .me!
+                            .profile!
+                            .countryCode
+                            .toString()
+                            .substring(1),
+                        countryCode: GetProfileCubit
+                            .userModel!
+                            .me!
+                            .profile!
+                            .countryCode
+                            .toString()
+                            .substring(1),
+                        number:
+                            GetProfileCubit.userModel!.me!.profile!.phone ?? "",
                       )
                       : null,
               label: "رقم الهاتف",

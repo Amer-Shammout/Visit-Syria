@@ -11,6 +11,8 @@ import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/styles/app_theme.dart';
 import 'package:visit_syria/Features/Community/Data/Repos/community_repo_impl.dart';
 import 'package:visit_syria/Features/Community/Presentation/Manager/get_all_approved_posts_by_tag_cubit/get_all_approved_posts_by_tag_cubit.dart';
+import 'package:visit_syria/Features/Profile/Data/Repos/profile_repo_impl.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
 import 'package:visit_syria/firebase_options.dart';
 
 void main() async {
@@ -37,11 +39,20 @@ class VisitSyriaApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create:
-          (context) =>
-              GetAllApprovedPostsByTagCubit(getIt.get<CommunityRepoImpl>())
-                ..fetchPosts("الكل"),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create:
+              (context) =>
+                  GetAllApprovedPostsByTagCubit(getIt.get<CommunityRepoImpl>())
+                    ..fetchPosts("الكل"),
+        ),
+        BlocProvider(
+          create:
+              (context) =>
+                  GetProfileCubit(getIt.get<ProfileRepoImpl>())..getProfile(),
+        ),
+      ],
 
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

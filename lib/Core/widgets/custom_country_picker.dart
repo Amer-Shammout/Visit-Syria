@@ -12,12 +12,13 @@ class CustomCountryPicker extends StatelessWidget {
     super.key,
     required Country? selectedCountry,
     required this.onSelect,
-    required this.hasError,
+    required this.hasError, this.initialCountry,
   }) : _selectedCountry = selectedCountry;
 
   final Country? _selectedCountry;
   final bool hasError;
   final void Function(Country) onSelect;
+  final Country? initialCountry;
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +56,9 @@ class CustomCountryPicker extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    _selectedCountry != null
+                    _selectedCountry != null || initialCountry!=null
                         ? Text(
-                          _selectedCountry.flagEmoji,
+                          _selectedCountry?.flagEmoji ?? initialCountry!.flagEmoji,
                           style: TextStyle(fontSize: 16),
                         )
                         : SizedBox.shrink(),
@@ -65,9 +66,9 @@ class CustomCountryPicker extends StatelessWidget {
                     Text(
                       _selectedCountry != null ||
                               GetProfileCubit.userModel?.me?.profile?.country !=
-                                  null
+                                  null || initialCountry != null
                           ? _selectedCountry?.name ??
-                              GetProfileCubit.userModel!.me!.profile!.country!
+                              GetProfileCubit.userModel?.me?.profile?.country ?? initialCountry!.name
                           : 'اختر البلد',
                       style: AppStyles.fontsRegular16(
                         context,

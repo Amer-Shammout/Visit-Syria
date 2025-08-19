@@ -10,6 +10,7 @@ import 'package:visit_syria/Core/utils/functions/show_snack_bar.dart';
 import 'package:visit_syria/Core/widgets/custom_general_floating_button.dart';
 import 'package:visit_syria/Core/widgets/custom_loading_indicator.dart';
 import 'package:visit_syria/Features/Profile/Data/Models/update_profile_model.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/update_profile_cubit/update_profile_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/Personal%20Info/personal_view_form.dart';
 
@@ -36,8 +37,13 @@ class _PersonalViewBodyState extends State<PersonalViewBody> {
       final UpdateProfileModel newProfile = UpdateProfileModel(
         cities: formState.preferences?['governorates'],
         country:
-            "${formState.selectedCountry?.flagEmoji} ${formState.selectedCountry?.name}",
-        countryCode: "+${formState.selectedCountry?.phoneCode}",
+            formState.selectedCountry != null
+                ? "${formState.selectedCountry?.flagEmoji} ${formState.selectedCountry?.name}"
+                : GetProfileCubit.userModel?.me?.profile?.country,
+        countryCode:
+            formState.selectedCountry != null
+                ? "+${formState.selectedCountry?.phoneCode}"
+                : GetProfileCubit.userModel?.me?.profile?.countryCode,
         dateOfBirth: formState.birthDate,
         duration: formState.preferences?['durations'],
         firstName: formState.firstName,
@@ -52,6 +58,7 @@ class _PersonalViewBodyState extends State<PersonalViewBody> {
       await BlocProvider.of<UpdateProfileCubit>(
         context,
       ).updateProfile(newProfile);
+      BlocProvider.of<GetProfileCubit>(context).getProfile();
     }
   }
 

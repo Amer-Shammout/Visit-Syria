@@ -72,7 +72,6 @@ import 'package:visit_syria/Features/Places/Presentation/Views/city_details_view
 import 'package:visit_syria/Features/Places/Presentation/Views/place_details_view.dart';
 import 'package:visit_syria/Features/Profile/Data/Repos/profile_repo_impl.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/change_password_cubit/change_password_cubit.dart';
-import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/logout_cubit/logout_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/update_profile_cubit/update_profile_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/change_password_view.dart';
@@ -414,12 +413,7 @@ abstract class AppRouter {
                             HomeCubit(getIt.get<HomeRepoImpl>())
                               ..fetchHomeData(),
                   ),
-                  BlocProvider(
-                    create:
-                        (context) =>
-                            GetProfileCubit(getIt.get<ProfileRepoImpl>())
-                              ..getProfile(),
-                  ),
+                 
                   BlocProvider(
                     create:
                         (context) =>

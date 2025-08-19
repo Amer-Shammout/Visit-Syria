@@ -9,8 +9,15 @@ class ProfileAvatarPicker extends StatefulWidget {
   final void Function(File?)? onImageSelected;
 
   final String? userImage;
+  final String? userImageUrl;
+  final bool canUpload;
 
-  const ProfileAvatarPicker({super.key, this.onImageSelected, this.userImage});
+  const ProfileAvatarPicker({
+    super.key,
+    this.onImageSelected,
+    this.userImage,
+    this.userImageUrl,  this.canUpload = true,
+  });
 
   @override
   State<ProfileAvatarPicker> createState() => _ProfileAvatarPickerState();
@@ -33,7 +40,7 @@ class _ProfileAvatarPickerState extends State<ProfileAvatarPicker> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: _pickImage,
+      onTap: widget.canUpload ? _pickImage : null,
       child: Stack(
         alignment: Alignment.bottomRight,
         children: [
@@ -43,11 +50,15 @@ class _ProfileAvatarPickerState extends State<ProfileAvatarPicker> {
             backgroundImage:
                 _image != null
                     ? FileImage(_image!)
+                    : widget.userImageUrl != null
+                    ? NetworkImage(widget.userImageUrl!)
                     : (widget.userImage != null
                         ? NetworkImage(widget.userImage!)
                         : null),
             child:
-                _image == null && widget.userImage == null
+                _image == null &&
+                        widget.userImage == null &&
+                        widget.userImageUrl == null
                     ? SvgPicture.asset(
                       Assets.iconsUser,
                       height: 48,
@@ -59,7 +70,7 @@ class _ProfileAvatarPickerState extends State<ProfileAvatarPicker> {
                     )
                     : null,
           ),
-          Container(
+         widget.canUpload ? Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: AppColors.primary,
@@ -74,7 +85,7 @@ class _ProfileAvatarPickerState extends State<ProfileAvatarPicker> {
                 BlendMode.srcATop,
               ),
             ),
-          ),
+          ) : SizedBox.shrink(),
         ],
       ),
     );

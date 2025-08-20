@@ -9,9 +9,14 @@ import 'package:visit_syria/Features/Auth/Presentation/Manager/verify_code_cubit
 import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Forget%20Password/forget_password_body_2.dart';
 
 class ForgetPassword2ViewBodyConsumer extends StatelessWidget {
-  const ForgetPassword2ViewBodyConsumer({super.key, required this.email});
+  const ForgetPassword2ViewBodyConsumer({
+    super.key,
+    required this.email,
+    required this.isChangePass,
+  });
 
   final String email;
+  final bool isChangePass;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,10 @@ class ForgetPassword2ViewBodyConsumer extends StatelessWidget {
         if (state is VerifyCodeSuccess) {
           GoRouter.of(context).pushNamed(
             AppRouter.kForgetPassword3Name,
-            extra: state.verificationModel,
+            extra: {
+              'verificationModel': state.verificationModel,
+              'isChangePass': isChangePass,
+            },
           );
         }
       },

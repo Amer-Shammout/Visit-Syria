@@ -14,7 +14,7 @@ class AllCommentsAndRatingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar2(title: "التقييمات و التعليقات"),
-      body: AllCommentsAndRatingViewBody(id:placeModel.id!),
+      body: AllCommentsAndRatingViewBody(id: placeModel.id!),
       bottomSheet: Wrap(
         children: [
           RatingForm(

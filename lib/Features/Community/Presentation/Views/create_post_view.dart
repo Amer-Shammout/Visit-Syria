@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
@@ -20,6 +21,11 @@ class CreatePostView extends StatelessWidget {
         GlobalKey<CreatePostFormState>();
     return Scaffold(
       appBar: CustomAppBar2(
+        onTap: () {
+          if (context.mounted) {
+            GoRouter.of(context).pop();
+          }
+        },
         title: "انشاء منشور",
         trailing: CustomButton(
           onPressed: () => formKey.currentState?.submit(),

@@ -60,4 +60,3 @@ class _AllCommentsAndRatingViewBodyState
     );
   }
 }
-

@@ -37,7 +37,9 @@ class PersonalViewFormState extends State<PersonalViewForm> {
     preferences = _preferencesWidgetKey.currentState!.selectedPreferences;
     // log("$birthDate");
     final isValid =
-        _formKey.currentState!.validate() && selectedCountry != null;
+        _formKey.currentState!.validate() &&
+        (selectedCountry != null ||
+        GetProfileCubit.userModel?.me?.profile?.country != null);
     if (isValid) {
       _formKey.currentState!.save();
       return true;

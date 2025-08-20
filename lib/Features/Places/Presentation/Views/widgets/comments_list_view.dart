@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/data/models/comment_model/comment_model.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
+import 'package:visit_syria/Features/Community/Data/Models/post_model/comment.dart';
 import 'package:visit_syria/Features/Places/Data/Models/place_model/recent_comment.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/custom_comment.dart';
 
@@ -12,6 +13,7 @@ class CommentsListView extends StatelessWidget {
     this.hasRate,
     this.recentComments,
     this.comments,
+    this.postComments,
   });
 
   final ScrollPhysics physics;
@@ -19,6 +21,7 @@ class CommentsListView extends StatelessWidget {
   final bool? hasRate;
   final List<RecentComment>? recentComments;
   final List<CommentModel>? comments;
+  final List<Comment>? postComments;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +33,11 @@ class CommentsListView extends StatelessWidget {
                 (context, index) => CustomComment(
                   hasRate: hasRate ?? true,
                   comment: comments?[index],
+                  postComment: postComments?[index],
                 ),
             separatorBuilder:
                 (context, index) => SizedBox(height: AppSpacing.s12),
-            itemCount: comments?.length ?? 10,
+            itemCount: comments?.length ?? postComments?.length ?? 10,
           ),
         )
         : ListView.separated(

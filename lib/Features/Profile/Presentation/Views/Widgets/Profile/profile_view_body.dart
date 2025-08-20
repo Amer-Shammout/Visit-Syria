@@ -30,7 +30,7 @@ class ProfileViewBody extends StatelessWidget {
               SliverToBoxAdapter(child: ProfileViewHeader()),
               SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
               SliverToBoxAdapter(child: ProfileOptions()),
-              SliverToBoxAdapter(child: SizedBox(height: 80)),
+              SliverToBoxAdapter(child: SizedBox(height: 120)),
             ],
           ),
           Positioned(

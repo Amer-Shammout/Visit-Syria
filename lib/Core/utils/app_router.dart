@@ -38,6 +38,11 @@ import 'package:visit_syria/Features/Auth/Presentation/Views/preferences_view.da
 import 'package:visit_syria/Features/Auth/Presentation/Views/setting_info_view.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/sign_up_view.dart';
 import 'package:visit_syria/Features/Auth/Presentation/Views/verification_view.dart';
+import 'package:visit_syria/Features/Community/Data/Models/post_model/comment.dart';
+import 'package:visit_syria/Features/Community/Data/Repos/community_repo_impl.dart';
+import 'package:visit_syria/Features/Community/Presentation/Manager/create_post_cubit/create_post_cubit.dart';
+import 'package:visit_syria/Features/Community/Presentation/Manager/get_my_posts_cubit/get_my_posts_cubit.dart';
+import 'package:visit_syria/Features/Community/Presentation/Manager/set_comment_cubit/set_comment_cubit.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/all_comments_view.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/create_post_view.dart';
 import 'package:visit_syria/Features/Events/Presentation/Views/all_events_view.dart';
@@ -66,9 +71,10 @@ import 'package:visit_syria/Features/Places/Presentation/Views/all_comments_and_
 import 'package:visit_syria/Features/Places/Presentation/Views/city_details_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/place_details_view.dart';
 import 'package:visit_syria/Features/Profile/Data/Repos/profile_repo_impl.dart';
-import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/change_password_cubit/change_password_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/logout_cubit/logout_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/update_profile_cubit/update_profile_cubit.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/change_password_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/my_posts_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/my_trips_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/personal_info_view.dart';
@@ -149,7 +155,7 @@ abstract class AppRouter {
   static const kAllCommentsAndRatingName = 'allCommentsAndRatingView';
   static const kCreatePostView = '/createPostView';
   static const kCreatePostName = 'createPostView';
-  static const kAllCommentsView = '/allCommentsView';
+  static const kAllCommentsView = '/allCommentsView/:postID/:isMyPost';
   static const kAllCommentsName = 'allCommentsView';
   static const kBlogDetailsView = '/blogDetailsView';
   static const kBlogDetailsName = 'blogDetailsView';
@@ -219,7 +225,10 @@ abstract class AppRouter {
   static const kReservationPeopleInoName = 'reservationPeopleInoView';
   static const kPaymentInfoView = '/paymentInfoView';
   static const kPaymentInfoName = 'paymentInfoView';
+  static const kChangePasswordView = '/changePasswordView';
+  static const kChangePasswordName = 'changePasswordView';
   static bool get isAuth => Prefs.getString(kToken) != '';
+  static final myPostsCubit = GetMyPostsCubit(getIt.get<CommunityRepoImpl>());
 
   static final router = GoRouter(
     initialLocation: isAuth ? kAppRootView : kSplashView,
@@ -341,43 +350,55 @@ abstract class AppRouter {
                             GoogleSignInCubit(getIt.get<AuthRepoImpl>()),
                   ),
                 ],
-                child: ForgetPasswordView1(),
+                child: ForgetPasswordView1(isChangePass: state.extra as bool),
               ),
             ),
       ),
       GoRoute(
         name: kForgetPassword2Name,
         path: kForgetPassword2View,
-        pageBuilder:
-            (context, state) => MaterialPage(
-              child: MultiBlocProvider(
-                providers: [
-                  BlocProvider(
-                    create:
-                        (context) => VerifyCodeCubit(getIt.get<AuthRepoImpl>()),
-                  ),
-                  BlocProvider(
-                    create:
-                        (context) => ResendCodeCubit(getIt.get<AuthRepoImpl>()),
-                  ),
-                ],
-                child: ForgetPasswordView2(email: state.extra as String),
+        pageBuilder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>? ?? {};
+          final email = extra['email'] as String? ?? '';
+          final isChangePass = extra['isChangePass'] as bool? ?? false;
+
+          return MaterialPage(
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (_) => VerifyCodeCubit(getIt.get<AuthRepoImpl>()),
+                ),
+                BlocProvider(
+                  create: (_) => ResendCodeCubit(getIt.get<AuthRepoImpl>()),
+                ),
+              ],
+              child: ForgetPasswordView2(
+                email: email,
+                isChangePass: isChangePass,
               ),
             ),
+          );
+        },
       ),
       GoRoute(
         name: kForgetPassword3Name,
         path: kForgetPassword3View,
-        pageBuilder:
-            (context, state) => MaterialPage(
-              child: BlocProvider(
-                create:
-                    (context) => ResetPasswordCubit(getIt.get<AuthRepoImpl>()),
-                child: ForgetPasswordView3(
-                  verificationModel: state.extra as VerificationModel,
-                ),
+        pageBuilder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>? ?? {};
+          final verificationModel =
+              extra['verificationModel'] as VerificationModel;
+          final isChangePass = extra['isChangePass'] as bool;
+          return MaterialPage(
+            child: BlocProvider(
+              create:
+                  (context) => ResetPasswordCubit(getIt.get<AuthRepoImpl>()),
+              child: ForgetPasswordView3(
+                verificationModel: verificationModel,
+                isChangePass: isChangePass,
               ),
             ),
+          );
+        },
       ),
       GoRoute(
         name: kAppRootName,
@@ -392,12 +413,7 @@ abstract class AppRouter {
                             HomeCubit(getIt.get<HomeRepoImpl>())
                               ..fetchHomeData(),
                   ),
-                  BlocProvider(
-                    create:
-                        (context) =>
-                            GetProfileCubit(getIt.get<ProfileRepoImpl>())
-                              ..getProfile(),
-                  ),
+                 
                   BlocProvider(
                     create:
                         (context) =>
@@ -496,14 +512,41 @@ abstract class AppRouter {
         path: kCreatePostView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: CreatePostView(image: state.extra as File?),
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        CreatePostCubit(getIt.get<CommunityRepoImpl>()),
+                child: CreatePostView(image: state.extra as File?),
+              ),
             ),
       ),
       GoRoute(
         name: kAllCommentsName,
         path: kAllCommentsView,
-        pageBuilder: (context, state) => MaterialPage(child: AllCommentsView()),
+        pageBuilder: (context, state) {
+          final postId = state.pathParameters['postID'];
+          final isMyPost = state.pathParameters['isMyPost'];
+          return MaterialPage(
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create:
+                      (context) =>
+                          SetCommentCubit(getIt.get<CommunityRepoImpl>()),
+                ),
+                BlocProvider.value(value: myPostsCubit),
+              ],
+
+              child: AllCommentsView(
+                comments: state.extra as List<Comment>,
+                postId: postId,
+                isMyPost: isMyPost,
+              ),
+            ),
+          );
+        },
       ),
+
       GoRoute(
         name: kBlogDetailsName,
         path: kBlogDetailsView,
@@ -624,7 +667,13 @@ abstract class AppRouter {
       GoRoute(
         name: kMyPostsName,
         path: kMyPostsView,
-        pageBuilder: (context, state) => MaterialPage(child: MyPostsView()),
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider.value(
+                value: myPostsCubit,
+                child: MyPostsView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kSavedItemsName,
@@ -803,6 +852,19 @@ abstract class AppRouter {
             (context, state) => MaterialPage(
               child: PaymentInfoView(
                 reservationModel: state.extra as ReservationModel,
+              ),
+            ),
+      ),
+      GoRoute(
+        name: kChangePasswordName,
+        path: kChangePasswordView,
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        ChangePasswordCubit(getIt.get<ProfileRepoImpl>()),
+                child: ChangePasswordView(),
               ),
             ),
       ),

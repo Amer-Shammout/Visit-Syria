@@ -27,7 +27,7 @@ class PostStateTag extends StatelessWidget {
           ),
           SizedBox(width: AppSpacing.s4),
           Text(
-            "انتظار",
+            state,
             style: AppStyles.fontsBold12(context).copyWith(color: setColor()),
           ),
         ],
@@ -36,9 +36,9 @@ class PostStateTag extends StatelessWidget {
   }
 
   String setIcon() {
-    if (state == "pending") {
+    if (state == "Pending") {
       return Assets.iconsPending;
-    } else if (state == 'accept') {
+    } else if (state == 'Approved') {
       return Assets.iconsAccept;
     } else {
       return Assets.iconsReject;
@@ -46,9 +46,9 @@ class PostStateTag extends StatelessWidget {
   }
 
   Color setColor() {
-    if (state == "pending") {
+    if (state == "Pending") {
       return AppColors.gold;
-    } else if (state == 'accept') {
+    } else if (state == 'Approved') {
       return AppColors.primary;
     } else {
       return AppColors.red;
@@ -56,9 +56,9 @@ class PostStateTag extends StatelessWidget {
   }
 
   Color setBackgroundColor() {
-    if (state == "pending") {
+    if (state == "Pending") {
       return AppColors.gold.withValues(alpha: .2);
-    } else if (state == 'accept') {
+    } else if (state == 'Approved') {
       return AppColors.primary.withValues(alpha: .2);
     } else {
       return AppColors.red.withValues(alpha: .2);

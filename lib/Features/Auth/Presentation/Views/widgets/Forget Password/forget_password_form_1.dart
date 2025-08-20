@@ -13,7 +13,9 @@ import 'package:visit_syria/Features/Auth/Presentation/Manager/forget_password_c
 import 'package:visit_syria/Features/Auth/Presentation/Views/widgets/Common/have_and_dont_have_account.dart';
 
 class ForgetPasswordForm1 extends StatefulWidget {
-  const ForgetPasswordForm1({super.key});
+  const ForgetPasswordForm1({super.key, required this.isChangePass});
+
+  final bool isChangePass;
 
   @override
   State<ForgetPasswordForm1> createState() => _ForgetPasswordForm1State();
@@ -67,13 +69,17 @@ class _ForgetPasswordForm1State extends State<ForgetPasswordForm1> {
             verPadding: 16,
             width: double.infinity,
           ),
-          const SizedBox(height: AppSpacing.s16),
-          HaveandDontHaveAccount(
-            actionStatement: 'سجّل دخول',
-            statement: 'لديك حساب؟',
-            onPressed:
-                () => GoRouter.of(context).pushNamed(AppRouter.kLoginName),
-          ),
+          widget.isChangePass
+              ? SizedBox.shrink()
+              : const SizedBox(height: AppSpacing.s16),
+          widget.isChangePass
+              ? SizedBox.shrink()
+              : HaveandDontHaveAccount(
+                actionStatement: 'سجّل دخول',
+                statement: 'لديك حساب؟',
+                onPressed:
+                    () => GoRouter.of(context).pushNamed(AppRouter.kLoginName),
+              ),
         ],
       ),
     );

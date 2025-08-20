@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/avatar_and_name_and_history.dart';
 import 'package:visit_syria/Core/widgets/custom_card_background.dart';
+import 'package:visit_syria/Features/Community/Data/Models/post_model/post_model.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/expandable_text.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_action_buttons.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_image.dart';
@@ -9,10 +10,18 @@ import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_a
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_state_tag.dart';
 
 class PostCard extends StatelessWidget {
-  const PostCard({super.key, required this.hasImage, this.state});
+  const PostCard({
+    super.key,
+    required this.hasImage,
+    required this.postModel,
+    required this.displayStatus,  this.isMyPost = false,
+  });
 
   final bool hasImage;
-  final String? state;
+  final PostModel postModel;
+  final bool displayStatus;
+    final bool isMyPost;
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,29 +35,18 @@ class PostCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AvatarandNameandHistory(),
-              state != null ? PostStateTag(state: state!) : SizedBox.shrink(),
+              AvatarandNameandHistory(date: postModel.createdAt!,name: postModel.user!.name!,),
+              displayStatus
+                  ? PostStateTag(state: postModel.status!)
+                  : SizedBox.shrink(),
             ],
           ),
           SizedBox(height: AppSpacing.s16),
-          ExpandableText(
-            "استيقظت على طقس دمشق الدافئ وبدأت رحلتي الساحرة في قلب التاريخ. أول محطة كانت الجامع الأموي، المزيد تحفة معمارية فريدة تأسر الأنفاس بجمالها وروحانيتها. التجول داخل أروقته كان كرحلة عبر الزمن، وهنا شعرت بعمق الحضارة الإسلامية التي خطت بخطوطها مدينة دمـ المزيد.ثم توجهت إلى قصر العظم، ذلك الصرح العثماني الفخم الذي يسرد حكايات من الماضي عبر جدرانه الضخمة وزخارفه الرائعة. المكان ينبض بالحياة ويوفر لمحة حقيقية عن تاريخ سوريا العريق.لم أستطع مقاومة سوق الحميدية، حيث تختلط رائحة التوابل بألوان الحرف اليدوية وصخب الباعة. تجربة التسوق هناك ليست فقط شراءً، بل رحلة في قلب الثقافة الدمشقية.بعد دمشق، أخذت الطريق إلى تدمر، المدينة التي تفخر بأطلالها الرومانية العظيمة. المشهد من الأعمدة الباقية والأبنية القديمة يشعرك بعظمة الحضارة التي مرت من هنا.وأخيرًا، زرت مدرج بصرى الروماني، حيث يحتفظ الحجر وحتى الصوت بصدى الحفلات والعروض التي كانت تقام فيه منذ قرون. الجلوس هناك والتأمل في المكان كان لحظة استثنائية أضافت بعدًا خاصًا لرحلتي.سوريا، بكل ألوانها وتاريخها، أبهرتني وأثرت في قلبي. رحلة لا تُنسى، أعود منها محملاً بذكريات لا تُقدر بثمن.",
-          ),
+          ExpandableText(postModel.description!),
           SizedBox(height: AppSpacing.s12),
-          PostandBlogsTagsWrap(
-            tags: [
-              "دمشق",
-              "حمص",
-              "اثري",
-              "ساحل",
-              "ثقافة",
-              "سورية",
-              "اللاذقية",
-              "مركز المدينة",
-            ],
-          ),
+          PostandBlogsTagsWrap(tags: postModel.tags!),
           SizedBox(height: AppSpacing.s16),
-          PostActionButtons(),
+          PostActionButtons(postModel: postModel,isMyPost:isMyPost),
         ],
       ),
     );

@@ -13,9 +13,11 @@ class ForgetPassword3ViewBodyConsumer extends StatelessWidget {
   const ForgetPassword3ViewBodyConsumer({
     super.key,
     required this.verificationModel,
+    required this.isChangePass,
   });
 
   final VerificationModel verificationModel;
+  final bool isChangePass;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,9 @@ class ForgetPassword3ViewBodyConsumer extends StatelessWidget {
           showFailureSnackBar(state.errMessage, context);
         }
         if (state is ResetPasswordSuccess) {
-          GoRouter.of(context).goNamed(AppRouter.kLoginName);
+          isChangePass
+              ? GoRouter.of(context).goNamed(AppRouter.kAppRootName)
+              : GoRouter.of(context).goNamed(AppRouter.kLoginName);
         }
       },
       builder: (context, state) {

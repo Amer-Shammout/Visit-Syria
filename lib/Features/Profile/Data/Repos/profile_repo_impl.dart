@@ -8,6 +8,7 @@ import 'package:visit_syria/Core/services/firebase_notification.dart';
 import 'package:visit_syria/Core/services/service_locator.dart';
 import 'package:visit_syria/Core/services/shared_preferences_singleton.dart';
 import 'package:visit_syria/Core/utils/functions/handle_request.dart';
+import 'package:visit_syria/Features/Profile/Data/Models/change_password_model.dart';
 import 'package:visit_syria/Features/Profile/Data/Models/update_profile_model.dart';
 import 'package:visit_syria/Features/Profile/Data/Models/user_model/user_model.dart';
 import 'package:visit_syria/Features/Profile/Data/Repos/profile_repo.dart';
@@ -48,7 +49,6 @@ class ProfileRepoImpl extends ProfileRepo {
   ) async {
     final formData = FormData();
 
-    // --- الحقول النصية العادية ---
     void addField(String key, dynamic value) {
       if (value != null) {
         formData.fields.add(MapEntry(key, value.toString()));
@@ -96,6 +96,23 @@ class ProfileRepoImpl extends ProfileRepo {
         );
       },
       parse: (_) => true,
+    );
+  }
+
+  @override
+  Future<Either<Failure, dynamic>> changePassword(
+    ChangePasswordModel changePasswordModel,
+  ) async {
+    return await handleRequest<dynamic>(
+      requestFn:
+          () => getIt.get<DioClient>().post(
+            kChangePasswordUrl,
+            data: changePasswordModel.toJson(),
+            options: Options(
+              headers: {"Authorization": "Bearer ${Prefs.getString(kToken)}"},
+            ),
+          ),
+      parse: (data) => data,
     );
   }
 }

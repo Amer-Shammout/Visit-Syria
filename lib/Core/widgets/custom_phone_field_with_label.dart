@@ -80,6 +80,12 @@ class _CustomPhoneFieldWithLabelState extends State<CustomPhoneFieldWithLabel> {
         Directionality(
           textDirection: TextDirection.ltr,
           child: IntlPhoneField(
+            style: AppStyles.fontsRegular16(context).copyWith(
+              color:
+                  widget.isEnabled
+                      ? AppColors.titleTextColor
+                      : AppColors.graySwatch,
+            ),
             initialCountryCode: widget.initialCountyCode,
             focusNode: widget.focusNode,
             controller: widget.controller,

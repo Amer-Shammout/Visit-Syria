@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/profile_avatar_picker.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
 
 class ProfileViewHeader extends StatelessWidget {
   const ProfileViewHeader({super.key});
@@ -12,7 +12,10 @@ class ProfileViewHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ProfileAvatarPicker(userImage: Assets.imagesHama),
+        ProfileAvatarPicker(
+          userImageUrl: GetProfileCubit.userModel?.me?.profile?.photo,
+          canUpload: false,
+        ),
         SizedBox(height: AppSpacing.s16),
         Text(
           "أحمد محسن",

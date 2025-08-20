@@ -100,11 +100,11 @@ class _PreferencesViewBodyState extends State<PreferencesViewBody> {
   }
 
   setList(key) {
-    if (key == 'preferredSeason') {
+    if (key == 'seasons') {
       return preferencesModel.preferredSeason;
-    } else if (key == 'preferredActivities') {
+    } else if (key == 'types') {
       return preferencesModel.preferredActivities;
-    } else if (key == 'cities') {
+    } else if (key == 'governorates') {
       return preferencesModel.cities;
     } else {
       return preferencesModel.duration;

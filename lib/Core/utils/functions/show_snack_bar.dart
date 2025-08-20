@@ -87,54 +87,54 @@ void showFailureSnackBar(String message, context) {
   );
 }
 
-// void showWaitSnackBar(context) {
-//   ScaffoldMessenger.of(context).showSnackBar(
-//     SnackBar(
-//       duration: const Duration(seconds: 1),
-//       showCloseIcon: true,
-//       closeIconColor: Theme.of(context).colorScheme.primary,
-//       backgroundColor: Theme.of(context).colorScheme.secondary,
-//       padding: EdgeInsets.zero,
-//       content: IntrinsicHeight(
-//         child: ConstrainedBox(
-//           constraints: const BoxConstraints(
-//             minHeight: 60,
-//           ),
-//           child: Row(
-//             children: [
-//               Container(
-//                 width: 6,
-//                 color: Colors.orange,
-//               ),
-//               const SizedBox(
-//                 width: 8,
-//               ),
-//               const FittedBox(
-//                 fit: BoxFit.scaleDown,
-//                 child: Icon(
-//                   Icons.timer,
-//                   color: Colors.orange,
-//                   size: 24,
-//                 ),
-//               ),
-//               const SizedBox(
-//                 width: 8,
-//               ),
-//               Expanded(
-//                 child: Text(
-//                   textAlign: TextAlign.start,
-//                   S.of(context).wait_message,
-//                   style: TextStyle(
-//                     color: Theme.of(context).colorScheme.error,
-//                     fontSize: 14,
-//                     fontWeight: FontWeight.w500,
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     ),
-//   );
-// }
+void showWaitSnackBar(context) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      duration: const Duration(seconds: 1),
+      showCloseIcon: true,
+      closeIconColor: AppColors.primary,
+      backgroundColor: AppColors.graySwatch[100],
+      padding: EdgeInsets.zero,
+      content: IntrinsicHeight(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            minHeight: 60,
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 6,
+                color: AppColors.gold,
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              const FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Icon(
+                  Icons.timer,
+                  color: AppColors.gold,
+                  size: 24,
+                ),
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              Expanded(
+                child: Text(
+                  textAlign: TextAlign.start,
+                  "الرجاء الانتظار قليلاً...",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.error,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+}

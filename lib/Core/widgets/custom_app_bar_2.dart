@@ -12,13 +12,14 @@ class CustomAppBar2 extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.alignmentDirectional = AlignmentDirectional.centerStart,
     this.trailing,
-    this.hasTitle = true,
+    this.hasTitle = true, this.onTap,
   });
 
   final String? title;
   final AlignmentDirectional alignmentDirectional;
   final Widget? trailing;
   final bool hasTitle;
+  final VoidCallback? onTap;
 
   @override
   Size get preferredSize => const Size.fromHeight(100);
@@ -38,7 +39,7 @@ class CustomAppBar2 extends StatelessWidget implements PreferredSizeWidget {
                   IconButton(
                     iconSize: 32,
                     padding: EdgeInsets.zero,
-                    onPressed: () {
+                    onPressed: onTap ?? () {
                       GoRouter.of(context).pop();
                     },
                     icon: Transform.flip(

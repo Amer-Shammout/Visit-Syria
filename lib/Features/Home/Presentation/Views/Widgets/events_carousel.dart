@@ -13,7 +13,7 @@ class EventsCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider.builder(
-      itemCount: events.length >= 3 ? 3 : 2,
+      itemCount: events.length >= 3 ? 3 : events.length,
       itemBuilder: (context, index, realIndex) {
         return GestureDetector(
           onTap:

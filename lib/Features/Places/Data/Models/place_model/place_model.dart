@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'recent_comment.dart';
 
 class PlaceModel extends Equatable {
-  final String? id;
+  final dynamic id;
   final int? cityId;
   final String? type;
   final String? name;
@@ -50,7 +50,7 @@ class PlaceModel extends Equatable {
   });
 
   factory PlaceModel.fromJson(Map<String, dynamic> json) => PlaceModel(
-    id: json['id'] as String?,
+    id: json['id'] as dynamic,
     cityId: json['city_id'] as int?,
     type: json['type'] as String?,
     name: json['name'] as String?,

@@ -122,7 +122,11 @@ class AuthRepoImpl extends AuthRepo {
       requestFn:
           () => getIt.get<DioClient>().post(
             kVerifyCodeUrl,
-            data: verificationModel.toJson(),
+            data: {
+              'email': verificationModel.email!.trim(),
+              'code': verificationModel.code,
+              'fcm_token': FirebaseNotification.fcmToken,
+            },
           ),
       parse: (data) => AuthResponseModel.fromJson(data),
     );

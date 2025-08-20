@@ -6,6 +6,7 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/avatar_and_name_and_history.dart';
 import 'package:visit_syria/Core/widgets/custom_card_background.dart';
 import 'package:visit_syria/Core/widgets/custom_rating.dart';
+import 'package:visit_syria/Features/Community/Data/Models/post_model/comment.dart';
 import 'package:visit_syria/Features/Places/Data/Models/place_model/recent_comment.dart';
 
 class CustomComment extends StatelessWidget {
@@ -14,11 +15,13 @@ class CustomComment extends StatelessWidget {
     this.hasRate = true,
     this.recentComment,
     this.comment,
+    this.postComment,
   });
 
   final bool hasRate;
   final RecentComment? recentComment;
   final CommentModel? comment;
+  final Comment? postComment;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,10 @@ class CustomComment extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AvatarandNameandHistory(comment: comment),
+              AvatarandNameandHistory(
+                date: comment?.createdAt ?? postComment!.createdAt!,
+                name: comment?.user?.name ?? postComment!.user!.name!,
+              ),
               hasRate
                   ? CustomRating(
                     textColor: AppColors.titleTextColor,
@@ -43,6 +49,7 @@ class CustomComment extends StatelessWidget {
           Text(
             recentComment?.body ??
                 comment?.body ??
+                postComment?.comment ??
                 'باب شرقي في دمشق مكان رائع يمزج بين التاريخ والحياة اليومية. الأسواق القديمة والأزقة الضيقة تمنحك تجربة فريدة والناس ودودون. أنصح بزيارة الحمّام والمطاعم التقليدية للاستمتاع بالثقافة الشامية الحقيقية.',
             style: AppStyles.fontsRegular14(
               context,

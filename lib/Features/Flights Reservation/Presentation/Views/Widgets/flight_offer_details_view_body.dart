@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/data/Enums/enum.dart';
@@ -8,13 +10,39 @@ import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/Wi
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/Widgets/big_go_flight_item.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/Widgets/flight_general_info.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/Widgets/flight_segements_item.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/Widgets/passangers_view_body.dart';
+import 'package:visit_syria/Features/Reservation/Data/Models/reservation_info_model.dart';
 import 'package:visit_syria/Features/Reservation/Data/Models/reservation_model.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/custom_floating_action_button.dart';
 
-class FlightOfferDetailsViewBody extends StatelessWidget {
+class FlightOfferDetailsViewBody extends StatefulWidget {
   const FlightOfferDetailsViewBody({super.key, required this.flightOffer});
 
   final FlightModel flightOffer;
+
+  @override
+  State<FlightOfferDetailsViewBody> createState() =>
+      _FlightOfferDetailsViewBodyState();
+}
+
+class _FlightOfferDetailsViewBodyState
+    extends State<FlightOfferDetailsViewBody> {
+  ReservationModel? reservationModel;
+  @override
+  void initState() {
+    super.initState();
+    reservationModel = ReservationModel();
+    reservationModel!.flightModel = widget.flightOffer;
+    reservationModel!.tickets = widget.flightOffer.travelerCount!;
+    if (reservationModel!.info == null) {
+      reservationModel!.info = [];
+      for (var i = 0; i < reservationModel!.tickets!; i++) {
+        reservationModel!.info!.add(ReservationInfoModel());
+      }
+    }
+    reservationModel!.passengers = passengers;
+    log("${reservationModel!.deletePeople}");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,25 +53,25 @@ class FlightOfferDetailsViewBody extends StatelessWidget {
           clipBehavior: Clip.none,
           padding: EdgeInsets.symmetric(horizontal: 16),
           children: [
-            BigGoFlightItem(flightOffer: flightOffer),
-            flightOffer.isRoundTrip!
+            BigGoFlightItem(flightOffer: widget.flightOffer),
+            widget.flightOffer.isRoundTrip!
                 ? SizedBox(height: AppSpacing.s24)
                 : SizedBox.shrink(),
-            flightOffer.isRoundTrip!
-                ? BigBackFlightItem(flightOffer: flightOffer)
+            widget.flightOffer.isRoundTrip!
+                ? BigBackFlightItem(flightOffer: widget.flightOffer)
                 : SizedBox.shrink(),
             SizedBox(height: AppSpacing.s24),
-            FlightGeneralInfo(flightModel: flightOffer),
+            FlightGeneralInfo(flightModel: widget.flightOffer),
             SizedBox(height: AppSpacing.s32),
             FlightSegementsItem(
-              segments: flightOffer.departureModel!.segments!,
+              segments: widget.flightOffer.departureModel!.segments!,
             ),
-            flightOffer.returnModel != null
+            widget.flightOffer.returnModel != null
                 ? SizedBox(height: AppSpacing.s32)
                 : SizedBox.shrink(),
-            flightOffer.returnModel != null
+            widget.flightOffer.returnModel != null
                 ? FlightSegementsItem(
-                  segments: flightOffer.returnModel!.segments!,
+                  segments: widget.flightOffer.returnModel!.segments!,
                 )
                 : SizedBox.shrink(),
             SizedBox(height: AppSpacing.s24),
@@ -55,11 +83,11 @@ class FlightOfferDetailsViewBody extends StatelessWidget {
           left: 0,
           child: CustomFloatingActionButton(
             type: PriceStateEnum.common,
-            price: flightOffer.priceTotal.toString(),
+            price: widget.flightOffer.priceTotal.toString(),
             onPressed: () {
               GoRouter.of(context).pushNamed(
                 AppRouter.kReservationPeopleInoName,
-                extra: ReservationModel(flightModel: flightOffer),
+                extra: reservationModel,
               );
             },
           ),

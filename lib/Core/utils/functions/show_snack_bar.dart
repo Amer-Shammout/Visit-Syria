@@ -4,7 +4,7 @@ import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 void showSuccessSnackBar(String message, context) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      duration: const Duration(seconds: 1),
+      duration: const Duration(seconds: 3),
       showCloseIcon: true,
       closeIconColor: Theme.of(context).colorScheme.primary,
       backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -49,7 +49,7 @@ void showFailureSnackBar(String message, context) {
     SnackBar(
       duration: const Duration(seconds: 1),
       showCloseIcon: true,
-      closeIconColor: AppColors.primary,
+      closeIconColor: AppColors.titleTextColor,
       backgroundColor: AppColors.graySwatch[100],
       padding: EdgeInsets.zero,
       content: IntrinsicHeight(

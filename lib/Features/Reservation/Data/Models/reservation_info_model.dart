@@ -1,18 +1,21 @@
 import 'package:equatable/equatable.dart';
 
+// ignore: must_be_immutable
 class ReservationInfoModel extends Equatable {
-  final String? firstName;
-  final String? lastName;
-  final String? gender;
-  final String? birthDate;
-  final String? nationality;
-  final String? email;
-  final String? phone;
-  final String? countryCode;
-  final String? passportNumber;
-  final String? passportExpiryDate;
+  String? firstName;
+  String? lastName;
+  String? gender;
+  String? birthDate;
+  String? nationality;
+  String? email;
+  String? phone;
+  String? countryCode;
+  String? countryISOCode;
+  String? isoCode;
+  String? passportNumber;
+  String? passportExpiryDate;
 
-  const ReservationInfoModel({
+  ReservationInfoModel({
     this.firstName,
     this.lastName,
     this.gender,
@@ -21,6 +24,8 @@ class ReservationInfoModel extends Equatable {
     this.email,
     this.phone,
     this.countryCode,
+    this.countryISOCode,
+    this.isoCode,
     this.passportNumber,
     this.passportExpiryDate,
   });
@@ -66,8 +71,40 @@ class ReservationInfoModel extends Equatable {
       email,
       phone,
       countryCode,
+      countryISOCode,
+      isoCode,
       passportNumber,
       passportExpiryDate,
     ];
+  }
+
+  ReservationInfoModel copyWith({
+    String? firstName,
+    String? lastName,
+    String? gender,
+    String? birthDate,
+    String? nationality,
+    String? email,
+    String? phone,
+    String? countryCode,
+    String? countryISOCode,
+    String? isoCode,
+    String? passportNumber,
+    String? passportExpiryDate,
+  }) {
+    return ReservationInfoModel(
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      gender: gender ?? this.gender,
+      birthDate: birthDate ?? this.birthDate,
+      nationality: nationality ?? this.nationality,
+      email: email ?? this.email,
+      phone: phone ?? this.phone,
+      countryCode: countryCode ?? this.countryCode,
+      countryISOCode: countryISOCode ?? this.countryISOCode,
+      isoCode: isoCode ?? this.isoCode,
+      passportNumber: passportNumber ?? this.passportNumber,
+      passportExpiryDate: passportExpiryDate ?? this.passportExpiryDate,
+    );
   }
 }

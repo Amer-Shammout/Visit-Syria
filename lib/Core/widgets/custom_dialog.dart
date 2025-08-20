@@ -9,8 +9,8 @@ class CustomDialog extends StatelessWidget {
     super.key,
 
     this.data,
-    required this.title,
-    required this.icon,
+    this.title,
+    this.icon,
     this.useHeader = true,
     required this.child,
   });
@@ -27,14 +27,16 @@ class CustomDialog extends StatelessWidget {
       ),
       backgroundColor: AppColors.whiteColor,
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             useHeader
                 ? Column(
                   children: [
                     ListTile(
+                      contentPadding: EdgeInsets.zero,
                       horizontalTitleGap: 4,
                       leading: SvgPicture.asset(icon!),
                       title: Text(

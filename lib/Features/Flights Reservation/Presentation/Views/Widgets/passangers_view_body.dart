@@ -27,6 +27,9 @@ class _PassangersViewBodyState extends State<PassangersViewBody> {
   @override
   void initState() {
     _passengerCountModel = widget.passengerCountModel;
+    passengers.adults = 0;
+    passengers.children = 0;
+    passengers.infants = 0;
     super.initState();
   }
 
@@ -141,7 +144,16 @@ class _PassangersViewBodyState extends State<PassangersViewBody> {
       );
       return;
     }
+    passengers.adults = _passengerCountModel.adults;
+    passengers.children = _passengerCountModel.children;
+    passengers.infants = _passengerCountModel.infants;
 
     GoRouter.of(context).pop<PassengerCountModel>(_passengerCountModel);
   }
 }
+
+PassengerCountModel passengers = PassengerCountModel(
+  adults: 0,
+  children: 0,
+  infants: 0,
+);

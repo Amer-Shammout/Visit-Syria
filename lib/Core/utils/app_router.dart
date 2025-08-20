@@ -483,8 +483,11 @@ abstract class AppRouter {
         pageBuilder:
             (context, state) => MaterialPage(
               child: BlocProvider(
-                create: (context) => GetFeedbackCubit(getIt.get<CommonRepoImpl>()),
-                child: AllCommentsAndRatingView(placeModel: state.extra as PlaceModel,),
+                create:
+                    (context) => GetFeedbackCubit(getIt.get<CommonRepoImpl>()),
+                child: AllCommentsAndRatingView(
+                  placeModel: state.extra as PlaceModel,
+                ),
               ),
             ),
       ),
@@ -788,7 +791,7 @@ abstract class AppRouter {
         path: kReservationPeopleInoView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: ReservationPeopleInoView(
+              child: ReservationPeopleInfoView(
                 reservationModel: state.extra as ReservationModel,
               ),
             ),

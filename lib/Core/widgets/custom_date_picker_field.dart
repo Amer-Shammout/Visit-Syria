@@ -8,7 +8,7 @@ import 'package:visit_syria/Core/widgets/custom_text_field_with_label.dart';
 class CustomDatePickerField extends StatelessWidget {
   final String label;
   final String hint;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final DateTime? initialDate;
   final DateTime? firstDate;
   final DateTime? lastDate;
@@ -21,7 +21,7 @@ class CustomDatePickerField extends StatelessWidget {
     super.key,
     required this.label,
     required this.hint,
-    required this.controller,
+    this.controller,
     this.initialDate,
     this.firstDate,
     this.lastDate,
@@ -62,8 +62,8 @@ class CustomDatePickerField extends StatelessWidget {
           dateFormat: dateFormat,
         );
 
-        if (date != null) {
-          controller.text = date;
+        if (date != null && controller != null) {
+          controller!.text = date;
           if (onDateSelected != null) {
             onDateSelected!(date);
           }

@@ -54,7 +54,7 @@ class _SettingInfoFormState extends State<SettingInfoForm> {
         firstName: firstName,
         lastName: lastName,
         country: "${_selectedCountry?.flagEmoji} ${_selectedCountry?.name}",
-        countryCode: _selectedCountry?.countryCode,
+        countryCode: "${_selectedCountry?.countryCode}",
         uploadPhoto: multipartFile,
       );
       await BlocProvider.of<SetProfileCubit>(context).setProfile(profileModel);

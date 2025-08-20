@@ -39,9 +39,9 @@ class EventGenerlInfo extends StatelessWidget {
               GeneralInfoItem(
                 icon: Assets.iconsTicket,
                 title:
-                    event.eventType == null
+                    event.eventType != null
                         ? event.eventType == "limited"
-                            ? event.remainingTickets.toString()
+                            ? event.remainingTickets!.toString()
                             : "غير محدودة"
                         : "",
               ),

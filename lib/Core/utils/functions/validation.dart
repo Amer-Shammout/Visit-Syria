@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:email_validator/email_validator.dart';
+import 'package:intl_phone_field/phone_number.dart';
 
 abstract class Validation {
   static String? validateEmail(val) {
@@ -77,4 +80,74 @@ abstract class Validation {
 
   static String? validateEmptyField(val) =>
       val == null || val.isEmpty ? 'مطلوب' : null;
+
+  static String? validateEmptyPhone(val) {
+    if (val == null) {
+      return 'مطلوب';
+    }
+
+    PhoneNumber phoneNumber = val;
+
+    log(phoneNumber.toString());
+    if (phoneNumber.number == '') {
+      return 'مطلوب';
+    }
+    return null;
+  }
+
+  static String? validateAdultAge(String? date) {
+    if (date == null) {
+      return null;
+    }
+    DateTime adultAge = DateTime.parse(date);
+    if (DateTime.now().year - adultAge.year < 18) {
+      return 'يجب أن يكون العمر 18 عام على الأقل';
+    }
+    return null;
+  }
+
+  static String? validatChildAge(String? date) {
+    if (date == null) {
+      return null;
+    }
+    DateTime childAge = DateTime.parse(date);
+    if (DateTime.now().year - childAge.year < 2 ||
+        DateTime.now().year - childAge.year > 17) {
+      return 'يجب أن يكون العمر بين 2 و 17 عام';
+    }
+    return null;
+  }
+
+  static String? validateInfantAge(String? date) {
+    if (date == null) {
+      return null;
+    }
+    DateTime childAge = DateTime.parse(date);
+    if (DateTime.now().year - childAge.year > 2) {
+      return 'يجب أن يكون العمر 2 عام على الأقل';
+    }
+    return null;
+  }
+
+  static String? validatePersonAge(String? date) {
+    if (date == null) {
+      return null;
+    }
+    DateTime childAge = DateTime.parse(date);
+    if (DateTime.now().year - childAge.year < 2) {
+      return 'يجب أن يكون العمر 2 عام على الأقل';
+    }
+    return null;
+  }
+
+  static String? validatePassportNumber(String? value) {
+    if (value == null) return 'الرجاء إدخال رقم الجواز';
+    final s = value.trim().toUpperCase();
+    // اسمح فقط بحروف A-Z وأرقام 0-9، طول بين 6 و 9
+    final re = RegExp(r'^[A-Z0-9]{6,9}$');
+    if (!re.hasMatch(s)) {
+      return 'رقم الجواز يجب أن يكون 6–9 محارف من A–Z أو 0–9 بدون مسافات أو رموز';
+    }
+    return null; // صالح
+  }
 }

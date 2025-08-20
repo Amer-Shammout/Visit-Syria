@@ -12,6 +12,11 @@ class CustomExpansionTile extends StatelessWidget {
     required this.title,
     required this.icon,
     required this.children,
+    this.expansionKey,
+    this.onExpansionChanged,
+    this.initiallyExpanded,
+    this.titleTextStyle,
+    this.borderSide,
   });
   final Color? backGroundColor;
   final BoxShadow? boxShadow;
@@ -19,10 +24,15 @@ class CustomExpansionTile extends StatelessWidget {
   final String title;
   final String icon;
   final List<Widget> children;
+  final Key? expansionKey;
+  final void Function(bool)? onExpansionChanged;
+  final bool? initiallyExpanded;
+  final TextStyle? titleTextStyle;
+  final Color? borderSide;
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
+      margin: const EdgeInsets.symmetric(horizontal: 0),
       decoration: BoxDecoration(
         color: backGroundColor ?? AppColors.graySwatch[50]!,
         borderRadius: BorderRadius.circular(16),
@@ -31,15 +41,19 @@ class CustomExpansionTile extends StatelessWidget {
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
+          key: expansionKey,
+          onExpansionChanged: onExpansionChanged,
+          initiallyExpanded: initiallyExpanded ?? false,
+
           collapsedShape: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: BorderSide(color: Colors.transparent),
+            borderSide: BorderSide(color: borderSide ?? Colors.transparent),
           ),
           shape: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: BorderSide(color: AppColors.primary),
+            borderSide: BorderSide(color: borderSide ?? AppColors.primary),
           ),
-          tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           childrenPadding: const EdgeInsets.symmetric(
             horizontal: 20,
             vertical: 20,
@@ -47,9 +61,11 @@ class CustomExpansionTile extends StatelessWidget {
           maintainState: maintainState,
           title: Text(
             title,
-            style: AppStyles.fontsRegular14(
-              context,
-            ).copyWith(color: AppColors.titleTextColor),
+            style:
+                titleTextStyle ??
+                AppStyles.fontsBold14(
+                  context,
+                ).copyWith(color: AppColors.titleTextColor),
           ),
           leading: SvgPicture.asset(
             icon,

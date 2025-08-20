@@ -1,26 +1,38 @@
+import 'package:visit_syria/Core/data/Enums/enum.dart';
 import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Data/Models/flight_model/flight_model.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Data/Models/passenger_count_model.dart';
 import 'package:visit_syria/Features/Reservation/Data/Models/reservation_info_model.dart';
 import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_model.dart';
 
 class ReservationModel {
-  final TripModel? tripModel;
-  final EventModel? eventModel;
-  final FlightModel? flightModel;
-  final int? tickets;
-  final List<ReservationInfoModel>? info;
-  final int? numberOfAdults;
-  final int? numberOfChildren;
-  final int? numberOfInfants;
+  TripModel? tripModel;
+  EventModel? eventModel;
+  FlightModel? flightModel;
+  int? tickets;
+  List<ReservationInfoModel>? info;
+  int? numberOfAdults;
+  int? numberOfChildren;
+  int? numberOfInfants;
+  bool? deletePeople;
+  int? difference;
+  PassengerCountModel? passengers;
+  List<AgeStateEnum>? ageState;
+  List<bool>? hasError;
   ReservationModel({
-     this.tripModel,
-     this.eventModel,
-     this.flightModel,
-     this.tickets,
-     this.info,
-     this.numberOfAdults,
-     this.numberOfChildren,
-     this.numberOfInfants,
+    this.tripModel,
+    this.eventModel,
+    this.flightModel,
+    this.tickets,
+    this.info,
+    this.numberOfAdults,
+    this.numberOfChildren,
+    this.numberOfInfants,
+    this.deletePeople,
+    this.difference,
+    this.passengers,
+    this.ageState,
+    this.hasError,
   });
 
   ReservationModel copyWith({
@@ -32,6 +44,11 @@ class ReservationModel {
     int? numberOfAdults,
     int? numberOfChildren,
     int? numberOfInfants,
+    bool? deletePeople,
+    int? difference,
+    PassengerCountModel? passengers,
+    List<AgeStateEnum>? ageState,
+    List<bool>? hasError,
   }) {
     return ReservationModel(
       tripModel: tripModel ?? this.tripModel,
@@ -41,7 +58,12 @@ class ReservationModel {
       info: info ?? this.info,
       numberOfAdults: numberOfAdults ?? this.numberOfAdults,
       numberOfChildren: numberOfChildren ?? this.numberOfChildren,
-      numberOfInfants: numberOfInfants ?? numberOfInfants,
+      numberOfInfants: numberOfInfants ?? this.numberOfInfants,
+      deletePeople: deletePeople ?? this.deletePeople,
+      difference: difference ?? this.difference,
+      passengers: passengers ?? this.passengers,
+      ageState: ageState ?? ageState,
+      hasError: hasError ?? this.hasError,
     );
   }
 }

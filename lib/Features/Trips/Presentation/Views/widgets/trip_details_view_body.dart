@@ -129,6 +129,8 @@ class _TripDetailsViewBodyState extends State<TripDetailsViewBody> {
                       ? widget.tripModel.newPrice!
                       : widget.tripModel.price!,
               onPressed: () {
+                ReservationModel reservationModel = ReservationModel();
+                reservationModel.tripModel = widget.tripModel;
                 showDialog(
                   context: context,
                   builder: (context) {
@@ -136,9 +138,7 @@ class _TripDetailsViewBodyState extends State<TripDetailsViewBody> {
                       title: "أدخل عدد التذاكر",
                       icon: Assets.iconsUser,
                       child: ReservationPeopleNumber(
-                        reservationModel: ReservationModel(
-                          tripModel: widget.tripModel,
-                        ),
+                        reservationModel: reservationModel,
                         maxCounter: widget.tripModel.remainingTickets!,
                       ),
                     );
@@ -154,7 +154,7 @@ class _TripDetailsViewBodyState extends State<TripDetailsViewBody> {
 }
 
 bool isOffer(TripModel trip) {
-  if (int.parse(trip.discount!) == 0) {
+  if (double.parse(trip.discount!) == 0) {
     return false;
   } else {
     return true;

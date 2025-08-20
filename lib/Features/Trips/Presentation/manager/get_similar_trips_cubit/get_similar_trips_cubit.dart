@@ -8,9 +8,9 @@ part 'get_similar_trips_state.dart';
 class GetSimilarTripsCubit extends Cubit<GetSimilarTripsState> {
   GetSimilarTripsCubit(this._tripRepo) : super(GetSimilarTripsInitial());
   final TripRepo _tripRepo;
-  Future<void> getSimilarTrips(final int TripID) async {
+  Future<void> getSimilarTrips(final int tripID) async {
     emit(GetSimilarTripsLoading());
-    var result = await _tripRepo.getSimilarTrips(TripID);
+    var result = await _tripRepo.getSimilarTrips(tripID);
 
     result.fold(
       (failure) {

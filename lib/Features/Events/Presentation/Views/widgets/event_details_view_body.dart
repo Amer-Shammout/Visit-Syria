@@ -81,6 +81,8 @@ Widget isFAB(EventModel event, BuildContext context) {
               ? "مجاناً"
               : event.price!,
       onPressed: () {
+        ReservationModel reservationModel = ReservationModel();
+        reservationModel.eventModel = event;
         showDialog(
           context: context,
           builder: (context) {
@@ -92,7 +94,7 @@ Widget isFAB(EventModel event, BuildContext context) {
                     event.eventType! == "limited"
                         ? event.remainingTickets
                         : null,
-                reservationModel: ReservationModel(eventModel: event),
+                reservationModel: reservationModel,
               ),
             );
           },

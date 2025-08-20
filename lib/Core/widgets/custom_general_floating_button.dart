@@ -20,7 +20,7 @@ class CustomGeneralFloatingButton extends StatelessWidget {
     return Container(
       width: double.infinity,
 
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 28),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(24),

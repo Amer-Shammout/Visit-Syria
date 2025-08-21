@@ -5,6 +5,7 @@ import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/functions/show_snack_bar.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_general_floating_button.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/logout_cubit/logout_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/Profile/profile_options.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/Profile/profile_view_header.dart';
@@ -27,7 +28,11 @@ class ProfileViewBody extends StatelessWidget {
         children: [
           CustomScrollView(
             slivers: [
-              SliverToBoxAdapter(child: ProfileViewHeader()),
+              SliverToBoxAdapter(
+                child: BlocBuilder<GetProfileCubit, GetProfileState>(
+                  builder: (context, state) => ProfileViewHeader(),
+                ),
+              ),
               SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
               SliverToBoxAdapter(child: ProfileOptions()),
               SliverToBoxAdapter(child: SizedBox(height: 120)),

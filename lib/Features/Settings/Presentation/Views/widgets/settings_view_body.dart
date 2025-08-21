@@ -30,7 +30,7 @@ class SettingsViewBody extends StatelessWidget {
       case 1:
         return GoRouter.of(context).pushNamed(AppRouter.kPrivacyPolicyName);
       case 2:
-        return null;
+        return GoRouter.of(context).pushNamed(AppRouter.kSupportname);
       case 3:
         return GoRouter.of(context).pushNamed(AppRouter.kCommonQuestionsName);
       case 4:

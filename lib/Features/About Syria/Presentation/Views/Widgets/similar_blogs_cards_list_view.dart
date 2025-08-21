@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
+import 'package:visit_syria/Core/widgets/scale_on_tap.dart';
 import 'package:visit_syria/Features/About%20Syria/Data/Models/article_model.dart';
 import 'package:visit_syria/Features/About%20Syria/Presentation/Views/Widgets/similar_blogs_card.dart';
 
@@ -23,7 +24,7 @@ class SimilarBlogsCardsListView extends StatelessWidget {
                 start: index == 0 ? 16 : 0,
                 end: index == 5 ? 16 : 0,
               ),
-              child: GestureDetector(
+              child: ScaleOnTap(
                 onTap:
                     () => GoRouter.of(context).pushNamed(
                       AppRouter.kBlogDetailsName,

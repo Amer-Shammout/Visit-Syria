@@ -7,10 +7,11 @@ import 'package:intl/intl.dart';
 import 'package:visit_syria/Core/utils/functions/show_snack_bar.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/avatar_and_name_and_history.dart';
-import 'package:visit_syria/Core/widgets/custom_loading_indicator.dart';
+import 'package:visit_syria/Core/widgets/loading_dialog.dart';
 import 'package:visit_syria/Features/Community/Presentation/Manager/create_post_cubit/create_post_cubit.dart';
 import 'package:visit_syria/Features/Community/Presentation/Manager/create_post_cubit/create_post_state.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/create_post_form.dart';
+import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/success_post_dialog.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
 
 class CreatePostViewBody extends StatelessWidget {
@@ -25,19 +26,21 @@ class CreatePostViewBody extends StatelessWidget {
     return BlocListener<CreatePostCubit, CreatePostState>(
       listener: (context, state) {
         if (state is CreatePostFailure) {
+          GoRouter.of(context).pop();
           showFailureSnackBar(state.message, context);
         }
+
         if (state is CreatePostSuccess) {
           GoRouter.of(context).pop();
-        }
-        if (state is CreatePostLoading) {
           showDialog(
             context: context,
             barrierDismissible: false,
-            builder: (_) => Center(child: CustomLoadingIndicator()),
+            builder: (context) => SuccessPostDialog(),
           );
-        } else {
-          GoRouter.of(context).pop();
+        }
+
+        if (state is CreatePostLoading) {
+          showLoadingDialog(context);
         }
       },
       child: ListView(

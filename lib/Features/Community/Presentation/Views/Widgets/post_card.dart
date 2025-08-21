@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Core/utils/app_router.dart';
+import 'package:visit_syria/Core/utils/assets.dart';
+import 'package:visit_syria/Core/utils/styles/app_colors.dart';
+import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/avatar_and_name_and_history.dart';
+import 'package:visit_syria/Core/widgets/custom_button.dart';
 import 'package:visit_syria/Core/widgets/custom_card_background.dart';
+import 'package:visit_syria/Core/widgets/custom_dialog.dart';
+import 'package:visit_syria/Core/widgets/scale_on_tap.dart';
 import 'package:visit_syria/Features/Community/Data/Models/post_model/post_model.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/expandable_text.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_action_buttons.dart';
@@ -25,33 +33,136 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomCardBackground(
-      padding: 12,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          hasImage ? PostImage() : SizedBox.shrink(),
-          hasImage ? SizedBox(height: AppSpacing.s16) : SizedBox.shrink(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              AvatarandNameandHistory(
-                date: postModel.createdAt!,
-                name: postModel.user!.name!,
-              ),
-              displayStatus
-                  ? PostStateTag(state: postModel.status!)
-                  : SizedBox.shrink(),
-            ],
-          ),
-          SizedBox(height: AppSpacing.s16),
-          ExpandableText(postModel.description!),
-          SizedBox(height: AppSpacing.s12),
-          PostandBlogsTagsWrap(tags: postModel.tags!),
-          SizedBox(height: AppSpacing.s16),
-          PostActionButtons(postModel: postModel, isMyPost: isMyPost),
-        ],
+    return ScaleOnTap(
+      duration: Duration(milliseconds: 300),
+      onTap: () => _onTap(context),
+      child: CustomCardBackground(
+        padding: 12,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            hasImage ? PostImage() : SizedBox.shrink(),
+            hasImage ? SizedBox(height: AppSpacing.s16) : SizedBox.shrink(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AvatarandNameandHistory(
+                  date: postModel.createdAt!,
+                  name: postModel.user!.name!,
+                ),
+                displayStatus
+                    ? PostStateTag(state: postModel.status!)
+                    : SizedBox.shrink(),
+              ],
+            ),
+            SizedBox(height: AppSpacing.s16),
+            ExpandableText(postModel.description!),
+            SizedBox(height: AppSpacing.s12),
+            PostandBlogsTagsWrap(tags: postModel.tags!),
+            SizedBox(height: AppSpacing.s16),
+            PostActionButtons(postModel: postModel, isMyPost: isMyPost),
+          ],
+        ),
       ),
     );
+  }
+
+  _onTap(context) {
+    if (postModel.status == "Rejected") {
+      showDialog(
+        context: context,
+        builder:
+            (context) => CustomDialog(
+              useHeader: true,
+              title: "تم رفض منشورك",
+              icon: Assets.iconsReject,
+              child: Column(
+                children: [
+                  Text(
+                    "شكرًا لمساهمتك في مجتمعنا. للأسف، لم يستوفِ منشورك معايير النشر لدينا ولذلك لم يتم قبوله في الوقت الحالي. نرجو مراجعة إرشادات النشر والمحاولة مرة أخرى مع تعديل المحتوى ليكون مناسبًا للجميع.نقدّر تفهمك ونتطلع لرؤية إبداعاتك القادمة!",
+                    style: AppStyles.fontsRegular14(
+                      context,
+                    ).copyWith(color: AppColors.bodyTextColor),
+                  ),
+                  SizedBox(height: AppSpacing.s20),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomButton(
+                          onPressed: () => GoRouter.of(context).pop(),
+                          title: "موافق",
+                          textStyle: AppStyles.fontsBold14(
+                            context,
+                          ).copyWith(color: AppColors.whiteColor),
+                          borderRadius: 16,
+                          verPadding: 12,
+                          icon: Assets.iconsArrow,
+                          iconColor: AppColors.whiteColor,
+                          size: 16,
+                          fillColor: AppColors.primary,
+                        ),
+                      ),
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: CustomButton(
+                          onPressed: () {
+                            GoRouter.of(context).pushNamed(AppRouter.kPostRejectCausesName);
+                          },
+                          title: "الأسئلة الشائعة",
+                          textStyle: AppStyles.fontsBold14(
+                            context,
+                          ).copyWith(color: AppColors.primary),
+                          borderRadius: 16,
+                          verPadding: 12,
+
+                          iconColor: AppColors.primary,
+                          size: 16,
+                          fillColor: AppColors.whiteColor,
+                          strokeColor: AppColors.primary,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+      );
+    } else if (postModel.status == "Pending") {
+      showDialog(
+        context: context,
+        builder:
+            (context) => CustomDialog(
+              useHeader: true,
+              title: "منشورك قيد الانتظار...",
+              icon: Assets.iconsPending,
+              child: Column(
+                children: [
+                  Text(
+                    "عادة تستغرق مراجعة المنشورات (1-4 ساعات).\nشكراً لصبرك.",
+                    style: AppStyles.fontsRegular14(
+                      context,
+                    ).copyWith(color: AppColors.bodyTextColor),
+                  ),
+                  SizedBox(height: AppSpacing.s20),
+                  CustomButton(
+                    onPressed: () => GoRouter.of(context).pop(),
+                    title: "موافق",
+                    textStyle: AppStyles.fontsBold14(
+                      context,
+                    ).copyWith(color: AppColors.whiteColor),
+                    borderRadius: 16,
+                    verPadding: 12,
+                    icon: Assets.iconsArrow,
+                    iconColor: AppColors.whiteColor,
+                    size: 16,
+                    fillColor: AppColors.primary,
+                  ),
+                ],
+              ),
+            ),
+      );
+    } else {
+      return null;
+    }
   }
 }

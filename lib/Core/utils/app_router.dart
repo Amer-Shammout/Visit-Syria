@@ -62,6 +62,7 @@ import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/pa
 import 'package:visit_syria/Features/Home/Data/Repos/home_repo_impl.dart';
 import 'package:visit_syria/Features/Home/Presentation/Manager/home_cubit/home_cubit.dart';
 import 'package:visit_syria/Features/Home/Presentation/Manager/weather/get_weather_for_week_cubit/get_weather_for_week_cubit.dart';
+import 'package:visit_syria/Features/Home/Presentation/Views/all_best_places_view.dart';
 import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
 import 'package:visit_syria/Features/Places/Data/Repos/places_repo_impl.dart';
 import 'package:visit_syria/Features/Places/Presentation/Manager/get_hotels_by_city_cubit/get_hotels_by_city_cubit.dart';
@@ -74,6 +75,7 @@ import 'package:visit_syria/Features/Profile/Data/Repos/profile_repo_impl.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/change_password_cubit/change_password_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/logout_cubit/logout_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/update_profile_cubit/update_profile_cubit.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/My%20Posts/post_reject_causes_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/change_password_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/my_posts_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/my_trips_view.dart';
@@ -98,11 +100,13 @@ import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/similar_hotels_or_resturants_view.dart';
 import 'package:visit_syria/Features/Search/Presentation/Views/search_view.dart';
 import 'package:visit_syria/Features/Settings/Data/Repos/settings_repo_impl.dart';
+import 'package:visit_syria/Features/Settings/Presentation/Manager/create_support_cubit/create_support_note_cubit.dart';
 import 'package:visit_syria/Features/Settings/Presentation/Manager/get_settings_by_type_cubit/get_settings_by_type_cubit.dart';
 import 'package:visit_syria/Features/Settings/Presentation/Views/about_app_view.dart';
 import 'package:visit_syria/Features/Settings/Presentation/Views/common_questions_view.dart';
 import 'package:visit_syria/Features/Settings/Presentation/Views/privacy_policy_view.dart';
 import 'package:visit_syria/Features/Settings/Presentation/Views/settings_view.dart';
+import 'package:visit_syria/Features/Settings/Presentation/Views/support_view.dart';
 import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_view.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_companies_view.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_company_details_view.dart';
@@ -230,6 +234,10 @@ abstract class AppRouter {
   static const kPaymentInfoName = 'paymentInfoView';
   static const kChangePasswordView = '/changePasswordView';
   static const kChangePasswordName = 'changePasswordView';
+  static const kSupportView = '/supportView';
+  static const kSupportname = 'supportView';
+  static const kPostRejectCausesView = '/postRejectCausesView';
+  static const kPostRejectCausesName = 'postRejectCausesView';
   static bool get isAuth => Prefs.getString(kToken) != '';
   static final myPostsCubit = GetMyPostsCubit(getIt.get<CommunityRepoImpl>());
 
@@ -878,6 +886,35 @@ abstract class AppRouter {
                 child: ChangePasswordView(),
               ),
             ),
+      ),
+      GoRoute(
+        name: kSupportname,
+        path: kSupportView,
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        CreateSupportNoteCubit(getIt.get<SettingsRepoImpl>()),
+                child: SupportView(),
+              ),
+            ),
+      ),
+      GoRoute(
+        name: kAllPlacesName,
+        path: kAllPlacesView,
+
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: AllPlacesView(places: state.extra as List<PlaceModel>),
+            ),
+      ),
+      GoRoute(
+        name: kPostRejectCausesName,
+        path: kPostRejectCausesView,
+
+        pageBuilder:
+            (context, state) => MaterialPage(child: PostRejectCausesView()),
       ),
     ],
   );

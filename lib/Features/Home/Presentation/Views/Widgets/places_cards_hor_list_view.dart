@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
+import 'package:visit_syria/Core/widgets/scale_on_tap.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_card.dart';
 import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
 
@@ -23,7 +24,7 @@ class PlacesCardsHorListView extends StatelessWidget {
                 start: index == 0 ? 16 : 0,
                 end: index == 5 ? 16 : 0,
               ),
-              child: GestureDetector(
+              child: ScaleOnTap(
                 onTap:
                     () => GoRouter.of(context).pushNamed(
                       AppRouter.kPlaceDetailsName,

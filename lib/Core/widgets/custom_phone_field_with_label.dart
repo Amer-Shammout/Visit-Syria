@@ -42,17 +42,11 @@ class CustomPhoneFieldWithLabel extends StatefulWidget {
 
 class _CustomPhoneFieldWithLabelState extends State<CustomPhoneFieldWithLabel> {
   bool _isValid = false;
-  String? _errorText;
 
   void _handleChanged(PhoneNumber value) {
-    if (widget.onChanged != null) {
-      widget.onChanged!(value);
-    }
-
     if (widget.validator != null) {
       final error = widget.validator!(value);
       setState(() {
-        _errorText = error;
         _isValid = error == null;
       });
     }
@@ -67,68 +61,79 @@ class _CustomPhoneFieldWithLabelState extends State<CustomPhoneFieldWithLabel> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          widget.label,
-          style: AppStyles.fontsRegular12(
-            context,
-          ).copyWith(color: AppColors.titleTextColor),
-        ),
-        const SizedBox(height: AppSpacing.s4),
-        Directionality(
-          textDirection: TextDirection.ltr,
-          child: IntlPhoneField(
-            style: AppStyles.fontsRegular16(context).copyWith(
-              color:
-                  widget.isEnabled
-                      ? AppColors.titleTextColor
-                      : AppColors.graySwatch,
-            ),
-            initialCountryCode: widget.initialCountyCode,
-            focusNode: widget.focusNode,
-            controller: widget.controller,
-            initialValue: widget.initialValue?.number,
-            enabled: widget.isEnabled,
-            showDropdownIcon: true,
-            textInputAction: widget.textInputAction,
-            onSubmitted: (_) => widget.onEditingComplete?.call(),
-            onChanged: _handleChanged,
-            onSaved: widget.onSaved,
-            validator: widget.validator,
-            decoration: InputDecoration(
-              hintText: widget.hint,
-              hintStyle: AppStyles.fontsRegular16(
-                context,
-              ).copyWith(color: AppColors.graySwatch[500]),
-              filled: true,
-              fillColor:
-                  widget.isEnabled
-                      ? AppColors.graySwatch[50]
-                      : AppColors.graySwatch[200],
-              errorText: _errorText,
-              errorStyle: AppStyles.fontsRegular12(
-                context,
-              ).copyWith(color: AppColors.redSwatch),
-              contentPadding: const EdgeInsets.symmetric(
-                vertical: 14,
-                horizontal: 12,
+    return FormField<PhoneNumber>(
+      validator: widget.validator,
+      onSaved: widget.onSaved,
+      builder:
+          (field) => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.label,
+                style: AppStyles.fontsRegular12(
+                  context,
+                ).copyWith(color: AppColors.titleTextColor),
               ),
-              border: _buildBorder(Colors.transparent),
-              enabledBorder: _buildBorder(
-                _isValid ? AppColors.primary : Colors.transparent,
+              const SizedBox(height: AppSpacing.s4),
+              Directionality(
+                textDirection: TextDirection.ltr,
+                child: IntlPhoneField(
+                  style: AppStyles.fontsRegular16(context).copyWith(
+                    color:
+                        widget.isEnabled
+                            ? AppColors.titleTextColor
+                            : AppColors.graySwatch,
+                  ),
+                  initialCountryCode: widget.initialCountyCode,
+                  focusNode: widget.focusNode,
+                  controller: widget.controller,
+                  initialValue: widget.initialValue?.number,
+                  enabled: widget.isEnabled,
+                  showDropdownIcon: true,
+                  textInputAction: widget.textInputAction,
+                  onSubmitted: (_) => widget.onEditingComplete?.call(),
+                  onChanged: (phone) {
+                    field.didChange(phone);
+                    _handleChanged(phone);
+                    widget.onChanged?.call(phone);
+                  },
+                  onSaved: widget.onSaved,
+                  decoration: InputDecoration(
+                    hintText: widget.hint,
+                    hintStyle: AppStyles.fontsRegular16(
+                      context,
+                    ).copyWith(color: AppColors.graySwatch[500]),
+                    filled: true,
+                    fillColor:
+                        widget.isEnabled
+                            ? AppColors.graySwatch[50]
+                            : AppColors.graySwatch[200],
+                    errorText: field.errorText, // هيك يظهر خطأ الـ validator
+
+                    errorStyle: AppStyles.fontsRegular12(
+                      context,
+                    ).copyWith(color: AppColors.redSwatch),
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 14,
+                      horizontal: 12,
+                    ),
+                    border: _buildBorder(Colors.transparent),
+                    enabledBorder: _buildBorder(
+                      _isValid ? AppColors.primary : Colors.transparent,
+                    ),
+                    focusedBorder: _buildBorder(
+                      _isValid
+                          ? AppColors.primary
+                          : AppColors.primarySwatch[950]!,
+                    ),
+                    errorBorder: _buildBorder(AppColors.redSwatch[500]!),
+                    focusedErrorBorder: _buildBorder(AppColors.redSwatch[500]!),
+                    disabledBorder: _buildBorder(Colors.transparent),
+                  ),
+                ),
               ),
-              focusedBorder: _buildBorder(
-                _isValid ? AppColors.primary : AppColors.primarySwatch[950]!,
-              ),
-              errorBorder: _buildBorder(AppColors.redSwatch[500]!),
-              focusedErrorBorder: _buildBorder(AppColors.redSwatch[500]!),
-              disabledBorder: _buildBorder(Colors.transparent),
-            ),
+            ],
           ),
-        ),
-      ],
     );
   }
 }

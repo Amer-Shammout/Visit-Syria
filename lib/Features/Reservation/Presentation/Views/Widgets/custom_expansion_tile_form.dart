@@ -193,7 +193,7 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
             CustomDropDownFormFieldWithLabel<String>(
               validator: Validation.validateEmptyField,
               label: "الجنس",
-              value: widget.reservationModel.info![widget.index].gender,
+              value: "male",
               hint: "اختر الجنس",
               items: kGenderDropdownItems,
               onChanged: (gender) {

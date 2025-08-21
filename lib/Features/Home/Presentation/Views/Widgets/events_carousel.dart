@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
+import 'package:visit_syria/Core/widgets/scale_on_tap.dart';
 import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/events_card.dart';
 
@@ -15,7 +16,7 @@ class EventsCarousel extends StatelessWidget {
     return CarouselSlider.builder(
       itemCount: events.length >= 3 ? 3 : events.length,
       itemBuilder: (context, index, realIndex) {
-        return GestureDetector(
+        return ScaleOnTap(
           onTap:
               () => GoRouter.of(
                 context,

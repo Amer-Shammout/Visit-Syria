@@ -8,5 +8,7 @@ abstract class ProfileRepo {
   Future<Either<Failure, bool>> logout();
   Future<Either<Failure, UserModel>> getProfile();
   Future<Either<Failure, bool>> updateProfile(UpdateProfileModel updateModel);
-  Future<Either<Failure, dynamic>> changePassword(ChangePasswordModel changePasswordModel);
+  Future<Either<Failure, dynamic>> changePassword(
+    ChangePasswordModel changePasswordModel,
+  );
 }

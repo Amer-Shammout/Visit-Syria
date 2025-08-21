@@ -9,8 +9,11 @@ abstract class GetMyPostsState extends Equatable {
 }
 
 class GetMyPostsInitial extends GetMyPostsState {}
+
 class GetMyPostsLoading extends GetMyPostsState {}
+
 class GetMyPostsEmpty extends GetMyPostsState {}
+
 class GetMyPostsSuccess extends GetMyPostsState {
   final List<PostModel> posts;
   const GetMyPostsSuccess(this.posts);
@@ -18,6 +21,7 @@ class GetMyPostsSuccess extends GetMyPostsState {
   @override
   List<Object?> get props => [posts];
 }
+
 class GetMyPostsFailure extends GetMyPostsState {
   final String message;
   const GetMyPostsFailure(this.message);

@@ -12,7 +12,8 @@ class CustomAppBar2 extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.alignmentDirectional = AlignmentDirectional.centerStart,
     this.trailing,
-    this.hasTitle = true, this.onTap,
+    this.hasTitle = true,
+    this.onTap,
   });
 
   final String? title;
@@ -39,9 +40,11 @@ class CustomAppBar2 extends StatelessWidget implements PreferredSizeWidget {
                   IconButton(
                     iconSize: 32,
                     padding: EdgeInsets.zero,
-                    onPressed: onTap ?? () {
-                      GoRouter.of(context).pop();
-                    },
+                    onPressed:
+                        onTap ??
+                        () {
+                          GoRouter.of(context).pop();
+                        },
                     icon: Transform.flip(
                       flipX: true,
                       child: SvgPicture.asset(

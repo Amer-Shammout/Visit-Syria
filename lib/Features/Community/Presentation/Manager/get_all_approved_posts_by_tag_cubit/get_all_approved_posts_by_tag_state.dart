@@ -9,7 +9,9 @@ abstract class GetAllApprovedPostsByTagState extends Equatable {
 }
 
 class GetAllApprovedPostsByTagInitial extends GetAllApprovedPostsByTagState {}
+
 class GetAllApprovedPostsByTagLoading extends GetAllApprovedPostsByTagState {}
+
 class GetAllApprovedPostsByTagSuccess extends GetAllApprovedPostsByTagState {
   final List<PostModel> posts;
   const GetAllApprovedPostsByTagSuccess(this.posts);
@@ -17,6 +19,7 @@ class GetAllApprovedPostsByTagSuccess extends GetAllApprovedPostsByTagState {
   @override
   List<Object?> get props => [posts];
 }
+
 class GetAllApprovedPostsByTagFailure extends GetAllApprovedPostsByTagState {
   final String message;
   const GetAllApprovedPostsByTagFailure(this.message);

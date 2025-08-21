@@ -36,8 +36,16 @@ class _FlightOfferDetailsViewBodyState
     reservationModel!.tickets = widget.flightOffer.travelerCount!;
     if (reservationModel!.info == null) {
       reservationModel!.info = [];
+      reservationModel!.formKeys = [];
+      reservationModel!.isAutoValidate = [];
+      reservationModel!.strokeError = [];
+      reservationModel!.hasError = [];
       for (var i = 0; i < reservationModel!.tickets!; i++) {
         reservationModel!.info!.add(ReservationInfoModel());
+        reservationModel!.formKeys!.add(GlobalKey<FormState>());
+        reservationModel!.isAutoValidate!.add(AutovalidateMode.disabled);
+        reservationModel!.hasError!.add(false);
+        reservationModel!.strokeError!.add(false);
       }
     }
     reservationModel!.passengers = passengers;

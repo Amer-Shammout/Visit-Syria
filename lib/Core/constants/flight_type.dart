@@ -14,4 +14,3 @@ enum FeedbackClassification {
 enum PostStatus { pending, approved, rejected }
 
 enum PostsFilter { all, approved, pending, rejected }
-

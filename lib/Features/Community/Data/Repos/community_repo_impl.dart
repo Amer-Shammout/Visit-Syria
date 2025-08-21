@@ -104,14 +104,12 @@ class CommunityRepoImpl extends CommunityRepo {
   }
 
   @override
-  Future<Either<Failure, dynamic>> setComment(String comment,String id) async {
+  Future<Either<Failure, dynamic>> setComment(String comment, String id) async {
     return await handleRequest<dynamic>(
       requestFn:
           () => getIt.get<DioClient>().post(
             "$kSetCommentUrl$id?type=post",
-            data: {
-              "body":comment
-            },
+            data: {"body": comment},
             options: Options(
               headers: {"Authorization": "Bearer ${Prefs.getString(kToken)}"},
             ),

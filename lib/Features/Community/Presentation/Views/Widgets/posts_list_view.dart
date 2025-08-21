@@ -25,7 +25,7 @@ class PostsListView extends StatelessWidget {
               hasImage: posts[index].image != null,
               postModel: posts[index],
               displayStatus: displayStatus,
-              isMyPost : isMyPost
+              isMyPost: isMyPost,
             ),
         separatorBuilder: (context, index) => SizedBox(height: AppSpacing.s16),
         itemCount: posts.length,

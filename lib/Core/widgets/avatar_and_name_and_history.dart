@@ -5,7 +5,12 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/profile_avatar.dart';
 
 class AvatarandNameandHistory extends StatelessWidget {
-  const AvatarandNameandHistory({super.key, required this.name, required this.date, this.image});
+  const AvatarandNameandHistory({
+    super.key,
+    required this.name,
+    required this.date,
+    this.image,
+  });
 
   final String name, date;
   final String? image;
@@ -20,14 +25,14 @@ class AvatarandNameandHistory extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              name ,
+              name,
               style: AppStyles.fontsRegular16(
                 context,
               ).copyWith(color: AppColors.titleTextColor),
             ),
             SizedBox(height: AppSpacing.s4),
             Text(
-             date,
+              date,
               textDirection: TextDirection.ltr,
               style: AppStyles.fontsLight10(
                 context,

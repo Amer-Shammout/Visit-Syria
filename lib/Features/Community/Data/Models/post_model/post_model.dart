@@ -35,40 +35,42 @@ class PostModel extends Equatable {
   });
 
   factory PostModel.fromJson(Map<String, dynamic> json) => PostModel(
-        id: json['id'] as int?,
-        user: json['user'] == null
+    id: json['id'] as int?,
+    user:
+        json['user'] == null
             ? null
             : User.fromJson(json['user'] as Map<String, dynamic>),
-        description: json['description'] as String?,
-        image: json['image'] as String?,
-        tags: json['tags'] as List<dynamic>?,
-        status: json['status'] as String?,
-        likesCount: json['likes_count'] as int?,
-        commentsCount: json['comments_count'] as int?,
-        savesCount: json['saves_count'] as int?,
-        isLiked: json['is_liked'] as bool?,
-        isSaved: json['is_saved'] as bool?,
-        comments: (json['comments'] as List<dynamic>?)
+    description: json['description'] as String?,
+    image: json['image'] as String?,
+    tags: json['tags'] as List<dynamic>?,
+    status: json['status'] as String?,
+    likesCount: json['likes_count'] as int?,
+    commentsCount: json['comments_count'] as int?,
+    savesCount: json['saves_count'] as int?,
+    isLiked: json['is_liked'] as bool?,
+    isSaved: json['is_saved'] as bool?,
+    comments:
+        (json['comments'] as List<dynamic>?)
             ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
             .toList(),
-        createdAt: json['created_at'] as String?,
-      );
+    createdAt: json['created_at'] as String?,
+  );
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'user': user?.toJson(),
-        'description': description,
-        'image': image,
-        'tags': tags,
-        'status': status,
-        'likes_count': likesCount,
-        'comments_count': commentsCount,
-        'saves_count': savesCount,
-        'is_liked': isLiked,
-        'is_saved': isSaved,
-        'comments': comments?.map((e) => e.toJson()).toList(),
-        'created_at': createdAt,
-      };
+    'id': id,
+    'user': user?.toJson(),
+    'description': description,
+    'image': image,
+    'tags': tags,
+    'status': status,
+    'likes_count': likesCount,
+    'comments_count': commentsCount,
+    'saves_count': savesCount,
+    'is_liked': isLiked,
+    'is_saved': isSaved,
+    'comments': comments?.map((e) => e.toJson()).toList(),
+    'created_at': createdAt,
+  };
 
   PostModel copyWith({
     int? id,

@@ -87,9 +87,12 @@ import 'package:visit_syria/Features/Profile/Presentation/Views/saved_places_vie
 import 'package:visit_syria/Features/Profile/Presentation/Views/saved_posts_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/saved_resturants_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/saved_trips_view.dart';
+import 'package:visit_syria/Features/Reservation/Data/Models/booking_model/booking_model.dart';
 import 'package:visit_syria/Features/Reservation/Data/Models/reservation_model.dart';
+import 'package:visit_syria/Features/Reservation/Data/Repos/reservation_repo_impl.dart';
+import 'package:visit_syria/Features/Reservation/Presentation/Manager/event_and_trip_booking_cubit/event_and_trips_booking_cubit.dart';
 import 'package:visit_syria/Features/Reservation/Presentation/Views/reservation_people_ino_view.dart';
-import 'package:visit_syria/Features/Reservation/Presentation/Views/reservation_people_number_view.dart';
+import 'package:visit_syria/Features/Reservation/Presentation/Views/payment_info_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotel_and_resturants_details_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotels_and_resturants_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/similar_hotels_or_resturants_view.dart';
@@ -413,7 +416,7 @@ abstract class AppRouter {
                             HomeCubit(getIt.get<HomeRepoImpl>())
                               ..fetchHomeData(),
                   ),
-                 
+
                   BlocProvider(
                     create:
                         (context) =>
@@ -840,8 +843,18 @@ abstract class AppRouter {
         path: kReservationPeopleInoView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: ReservationPeopleInfoView(
-                reservationModel: state.extra as ReservationModel,
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) => EventAndTripsBookingCubit(
+                          getIt.get<ReservationRepoImpl>(),
+                        ),
+                  ),
+                ],
+                child: ReservationPeopleInfoView(
+                  reservationModel: state.extra as ReservationModel,
+                ),
               ),
             ),
       ),
@@ -850,9 +863,7 @@ abstract class AppRouter {
         path: kPaymentInfoView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: PaymentInfoView(
-                reservationModel: state.extra as ReservationModel,
-              ),
+              child: PaymentInfoView(bookingModel: state.extra as BookingModel),
             ),
       ),
       GoRoute(

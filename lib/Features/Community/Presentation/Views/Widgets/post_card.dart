@@ -14,14 +14,14 @@ class PostCard extends StatelessWidget {
     super.key,
     required this.hasImage,
     required this.postModel,
-    required this.displayStatus,  this.isMyPost = false,
+    required this.displayStatus,
+    this.isMyPost = false,
   });
 
   final bool hasImage;
   final PostModel postModel;
   final bool displayStatus;
-    final bool isMyPost;
-
+  final bool isMyPost;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,10 @@ class PostCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AvatarandNameandHistory(date: postModel.createdAt!,name: postModel.user!.name!,),
+              AvatarandNameandHistory(
+                date: postModel.createdAt!,
+                name: postModel.user!.name!,
+              ),
               displayStatus
                   ? PostStateTag(state: postModel.status!)
                   : SizedBox.shrink(),
@@ -46,7 +49,7 @@ class PostCard extends StatelessWidget {
           SizedBox(height: AppSpacing.s12),
           PostandBlogsTagsWrap(tags: postModel.tags!),
           SizedBox(height: AppSpacing.s16),
-          PostActionButtons(postModel: postModel,isMyPost:isMyPost),
+          PostActionButtons(postModel: postModel, isMyPost: isMyPost),
         ],
       ),
     );

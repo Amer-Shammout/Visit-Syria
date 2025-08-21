@@ -227,8 +227,7 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
             CountryPickerField(
               reservationModel: widget.reservationModel,
               index: widget.index,
-              initialCountryName:
-                  widget.reservationModel.info![widget.index].nationality,
+
               onSelect: (country) {
                 widget.reservationModel.info![widget.index].nationality =
                     country.name;

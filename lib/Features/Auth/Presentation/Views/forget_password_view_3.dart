@@ -17,7 +17,7 @@ class ForgetPasswordView3 extends StatelessWidget {
     return Scaffold(
       body: ForgetPassword3ViewBodyConsumer(
         verificationModel: verificationModel,
-        isChangePass:isChangePass
+        isChangePass: isChangePass,
       ),
     );
   }

@@ -36,4 +36,5 @@ const kGetMyPostsUrl = "myPosts";
 const kToggleLikeUrl = "posts/";
 const kToggleLikeUrl2 = "/like";
 const kSetCommentUrl = "comments/";
-
+const kBookEventOrTripURL = 'reserve';
+const kBookFlightURL = 'bookFlight';

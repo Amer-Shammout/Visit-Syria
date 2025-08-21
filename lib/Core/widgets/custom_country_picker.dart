@@ -12,7 +12,8 @@ class CustomCountryPicker extends StatelessWidget {
     super.key,
     required Country? selectedCountry,
     required this.onSelect,
-    required this.hasError, this.initialCountry,
+    required this.hasError,
+    this.initialCountry,
   }) : _selectedCountry = selectedCountry;
 
   final Country? _selectedCountry;
@@ -56,9 +57,10 @@ class CustomCountryPicker extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    _selectedCountry != null || initialCountry!=null
+                    _selectedCountry != null || initialCountry != null
                         ? Text(
-                          _selectedCountry?.flagEmoji ?? initialCountry!.flagEmoji,
+                          _selectedCountry?.flagEmoji ??
+                              initialCountry!.flagEmoji,
                           style: TextStyle(fontSize: 16),
                         )
                         : SizedBox.shrink(),
@@ -66,9 +68,11 @@ class CustomCountryPicker extends StatelessWidget {
                     Text(
                       _selectedCountry != null ||
                               GetProfileCubit.userModel?.me?.profile?.country !=
-                                  null || initialCountry != null
+                                  null ||
+                              initialCountry != null
                           ? _selectedCountry?.name ??
-                              GetProfileCubit.userModel?.me?.profile?.country ?? initialCountry!.name
+                              GetProfileCubit.userModel?.me?.profile?.country ??
+                              initialCountry!.name
                           : 'اختر البلد',
                       style: AppStyles.fontsRegular16(
                         context,

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/data/Enums/enum.dart';
 import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Data/Models/flight_model/flight_model.dart';
@@ -19,6 +20,9 @@ class ReservationModel {
   PassengerCountModel? passengers;
   List<AgeStateEnum>? ageState;
   List<bool>? hasError;
+  List<GlobalKey<FormState>>? formKeys;
+  List<AutovalidateMode>? isAutoValidate;
+  List<bool>? strokeError;
   ReservationModel({
     this.tripModel,
     this.eventModel,
@@ -33,6 +37,9 @@ class ReservationModel {
     this.passengers,
     this.ageState,
     this.hasError,
+    this.formKeys,
+    this.isAutoValidate,
+    this.strokeError,
   });
 
   ReservationModel copyWith({
@@ -49,6 +56,9 @@ class ReservationModel {
     PassengerCountModel? passengers,
     List<AgeStateEnum>? ageState,
     List<bool>? hasError,
+    List<GlobalKey<FormState>>? formKeys,
+    List<AutovalidateMode>? isAutoValidate,
+    List<bool>? strokeError,
   }) {
     return ReservationModel(
       tripModel: tripModel ?? this.tripModel,
@@ -64,6 +74,9 @@ class ReservationModel {
       passengers: passengers ?? this.passengers,
       ageState: ageState ?? ageState,
       hasError: hasError ?? this.hasError,
+      formKeys: formKeys ?? this.formKeys,
+      isAutoValidate: isAutoValidate ?? this.isAutoValidate,
+      strokeError: strokeError ?? this.strokeError,
     );
   }
 }

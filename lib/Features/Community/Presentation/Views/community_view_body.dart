@@ -43,4 +43,3 @@ class CommunityViewBody extends StatelessWidget {
     );
   }
 }
-

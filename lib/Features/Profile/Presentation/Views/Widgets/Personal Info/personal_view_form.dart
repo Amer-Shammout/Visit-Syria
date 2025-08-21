@@ -39,7 +39,7 @@ class PersonalViewFormState extends State<PersonalViewForm> {
     final isValid =
         _formKey.currentState!.validate() &&
         (selectedCountry != null ||
-        GetProfileCubit.userModel?.me?.profile?.country != null);
+            GetProfileCubit.userModel?.me?.profile?.country != null);
     if (isValid) {
       _formKey.currentState!.save();
       return true;

@@ -97,29 +97,16 @@ void showWaitSnackBar(context) {
       padding: EdgeInsets.zero,
       content: IntrinsicHeight(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            minHeight: 60,
-          ),
+          constraints: const BoxConstraints(minHeight: 60),
           child: Row(
             children: [
-              Container(
-                width: 6,
-                color: AppColors.gold,
-              ),
-              const SizedBox(
-                width: 8,
-              ),
+              Container(width: 6, color: AppColors.gold),
+              const SizedBox(width: 8),
               const FittedBox(
                 fit: BoxFit.scaleDown,
-                child: Icon(
-                  Icons.timer,
-                  color: AppColors.gold,
-                  size: 24,
-                ),
+                child: Icon(Icons.timer, color: AppColors.gold, size: 24),
               ),
-              const SizedBox(
-                width: 8,
-              ),
+              const SizedBox(width: 8),
               Expanded(
                 child: Text(
                   textAlign: TextAlign.start,

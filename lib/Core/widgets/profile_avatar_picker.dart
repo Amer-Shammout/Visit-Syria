@@ -16,7 +16,8 @@ class ProfileAvatarPicker extends StatefulWidget {
     super.key,
     this.onImageSelected,
     this.userImage,
-    this.userImageUrl,  this.canUpload = true,
+    this.userImageUrl,
+    this.canUpload = true,
   });
 
   @override
@@ -70,22 +71,24 @@ class _ProfileAvatarPickerState extends State<ProfileAvatarPicker> {
                     )
                     : null,
           ),
-         widget.canUpload ? Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: AppColors.primary,
-              shape: BoxShape.circle,
-            ),
-            child: SvgPicture.asset(
-              Assets.iconsUpload,
-              width: 20,
-              height: 20,
-              colorFilter: ColorFilter.mode(
-                AppColors.whiteColor,
-                BlendMode.srcATop,
-              ),
-            ),
-          ) : SizedBox.shrink(),
+          widget.canUpload
+              ? Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
+                  shape: BoxShape.circle,
+                ),
+                child: SvgPicture.asset(
+                  Assets.iconsUpload,
+                  width: 20,
+                  height: 20,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.whiteColor,
+                    BlendMode.srcATop,
+                  ),
+                ),
+              )
+              : SizedBox.shrink(),
         ],
       ),
     );

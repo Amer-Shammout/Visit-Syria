@@ -47,7 +47,9 @@ class PrimaryInfoForm extends StatelessWidget {
             ),
             SizedBox(height: AppSpacing.s16),
             CustomTextFieldWithLabel(
-              initialValue: "amershammout2004@gmail.com",
+              initialValue:
+                  GetProfileCubit.userModel!.me!.user!.email ??
+                  "amershammout2004@gmail.com",
               label: "البريد الالكتروني",
               hint: "",
               readOnly: true,

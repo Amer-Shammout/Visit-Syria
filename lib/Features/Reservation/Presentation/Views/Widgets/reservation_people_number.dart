@@ -76,8 +76,20 @@ class _ReservationPeopleNumberState extends State<ReservationPeopleNumber> {
                   }
                   if (widget.reservationModel.info == null) {
                     widget.reservationModel.info = [];
+                    widget.reservationModel.formKeys = [];
+                    widget.reservationModel.isAutoValidate = [];
+                    widget.reservationModel.strokeError = [];
+                    widget.reservationModel.hasError = [];
                     for (var i = 0; i < widget.reservationModel.tickets!; i++) {
                       widget.reservationModel.info!.add(ReservationInfoModel());
+                      widget.reservationModel.formKeys!.add(
+                        GlobalKey<FormState>(),
+                      );
+                      widget.reservationModel.isAutoValidate!.add(
+                        AutovalidateMode.disabled,
+                      );
+                      widget.reservationModel.hasError!.add(false);
+                      widget.reservationModel.strokeError!.add(false);
                     }
                   } else {
                     if (widget.reservationModel.info!.length <
@@ -89,6 +101,14 @@ class _ReservationPeopleNumberState extends State<ReservationPeopleNumber> {
                         widget.reservationModel.info!.add(
                           ReservationInfoModel(),
                         );
+                        widget.reservationModel.formKeys!.add(
+                          GlobalKey<FormState>(),
+                        );
+                        widget.reservationModel.isAutoValidate!.add(
+                          AutovalidateMode.disabled,
+                        );
+                        widget.reservationModel.hasError!.add(false);
+                        widget.reservationModel.strokeError!.add(false);
                       }
                     }
                     for (

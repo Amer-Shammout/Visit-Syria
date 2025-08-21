@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
@@ -11,8 +12,11 @@ import 'package:visit_syria/Core/utils/styles/shadows.dart';
 import 'package:visit_syria/Core/widgets/confirm_delete_dialog.dart';
 import 'package:visit_syria/Core/widgets/custom_general_floating_button.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
+import 'package:visit_syria/Features/Reservation/Data/Models/event_and_trips_booking_model/event_and_trips_booking_model.dart';
+import 'package:visit_syria/Features/Reservation/Data/Models/event_and_trips_booking_model/passenger.dart';
 import 'package:visit_syria/Features/Reservation/Data/Models/reservation_info_model.dart';
 import 'package:visit_syria/Features/Reservation/Data/Models/reservation_model.dart';
+import 'package:visit_syria/Features/Reservation/Presentation/Manager/event_and_trip_booking_cubit/event_and_trips_booking_cubit.dart';
 import 'package:visit_syria/Features/Reservation/Presentation/Views/Widgets/reservation_expansion_tile.dart';
 import 'package:visit_syria/Features/Reservation/Presentation/Views/Widgets/shaking_icon.dart';
 
@@ -31,15 +35,19 @@ class ReservationPeopleInfoViewBody extends StatefulWidget {
 class _ReservationPeopleInfoViewBodyState
     extends State<ReservationPeopleInfoViewBody> {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
-  List<GlobalKey<FormState>> formKeys = [];
-  List<AutovalidateMode> isAutoValidate = [];
-  List<bool> strokeError = [];
+  //  List<GlobalKey<FormState>> formKeys = [];
+  //  List<AutovalidateMode> isAutoValidate = [];
+  // List<bool> strokeError = [];
   @override
   void initState() {
     super.initState();
 
     _setFirstPersonInfo();
-    widget.reservationModel.hasError = [];
+    for (var i = 1; i < widget.reservationModel.info!.length; i++) {
+      widget.reservationModel.info![i].nationality =
+          widget.reservationModel.info![0].nationality;
+    }
+    //   widget.reservationModel.hasError = [];
   }
 
   void _setFirstPersonInfo() {
@@ -74,6 +82,8 @@ class _ReservationPeopleInfoViewBodyState
     }
     tempInfo.add(removedItem);
     final ReservationModel temp = ReservationModel(info: tempInfo);
+    final AutovalidateMode isAutoValidate = AutovalidateMode.disabled;
+    final GlobalKey<FormState> formKey = GlobalKey();
     _listKey.currentState!.removeItem(
       index,
       (context, animation) => FadeTransition(
@@ -82,9 +92,9 @@ class _ReservationPeopleInfoViewBodyState
           sizeFactor: animation,
           child: ReservationExpansionTile(
             initiallyExpanded: false,
-            isAutoValidate: isAutoValidate[index],
-            errorStroke: strokeError[index],
-            formKey: formKeys[index],
+            isAutoValidate: isAutoValidate,
+            errorStroke: false,
+            formKey: formKey,
             reservationModel: temp,
             index: index,
 
@@ -117,18 +127,18 @@ class _ReservationPeopleInfoViewBodyState
           padding: EdgeInsets.only(top: 16, right: 16, left: 16, bottom: 120),
           initialItemCount: widget.reservationModel.info!.length,
           itemBuilder: (context, index, animation) {
-            if (formKeys.length <= index) {
-              formKeys.add(GlobalKey<FormState>());
-            }
-            if (isAutoValidate.length <= index) {
-              isAutoValidate.add(AutovalidateMode.disabled);
-            }
-            if (widget.reservationModel.hasError!.length <= index) {
-              widget.reservationModel.hasError!.add(false);
-            }
-            if (strokeError.length <= index) {
-              strokeError.add(false);
-            }
+            // if (formKeys.length <= index) {
+            //   formKeys.add(GlobalKey<FormState>());
+            // }
+            // if (isAutoValidate.length <= index) {
+            //   isAutoValidate.add(AutovalidateMode.disabled);
+            // }
+            // if (widget.reservationModel.hasError!.length <= index) {
+            //   widget.reservationModel.hasError!.add(false);
+            // }
+            // if (strokeError.length <= index) {
+            //   strokeError.add(false);
+            // }
             return Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -141,9 +151,11 @@ class _ReservationPeopleInfoViewBodyState
                     child: SizeTransition(
                       sizeFactor: animation,
                       child: ReservationExpansionTile(
-                        errorStroke: strokeError[index],
-                        formKey: formKeys[index],
-                        isAutoValidate: isAutoValidate[index],
+                        errorStroke:
+                            widget.reservationModel.strokeError![index],
+                        formKey: widget.reservationModel.formKeys![index],
+                        isAutoValidate:
+                            widget.reservationModel.isAutoValidate![index],
                         initiallyExpanded: false,
                         index: index,
                         reservationModel: widget.reservationModel,
@@ -169,11 +181,16 @@ class _ReservationPeopleInfoViewBodyState
                                   onPressed: () {
                                     GoRouter.of(context).pop();
                                     _removeItem(index);
-                                    formKeys.removeAt(index);
-                                    isAutoValidate.removeAt(index);
+                                    widget.reservationModel.formKeys!.removeAt(
+                                      index,
+                                    );
+                                    widget.reservationModel.isAutoValidate!
+                                        .removeAt(index);
                                     widget.reservationModel.hasError!.removeAt(
                                       index,
                                     );
+                                    widget.reservationModel.strokeError!
+                                        .removeAt(index);
                                   },
                                   text: 'هل أنت متأكد من عملية الحذف؟',
                                   confirmTitle: 'حذف',
@@ -226,43 +243,86 @@ class _ReservationPeopleInfoViewBodyState
                           widget.reservationModel.deletePeople! == false) ||
                       widget.reservationModel.flightModel != null)
                   ? CustomGeneralFloatingButton(
-                    onPressed: () {
-                      bool isAllValid = true;
-
-                      for (int i = 0; i < formKeys.length; i++) {
-                        if (formKeys[i].currentState != null) {
-                          if (formKeys[i].currentState!.validate()) {
-                            if (widget.reservationModel.info![i].nationality !=
-                                null) {
-                              formKeys[i].currentState!.save();
-                              strokeError[i] = false;
-                              widget.reservationModel.hasError![i] = false;
-                            } else {
-                              isAllValid = false;
-                              widget.reservationModel.hasError![i] = true;
-                              strokeError[i] = true;
-                            }
-                          } else {
-                            isAutoValidate[i] = AutovalidateMode.always;
-                            isAllValid = false;
-                            isAllValid = false;
-                            if (widget.reservationModel.info![i].nationality ==
-                                null) {
-                              widget.reservationModel.hasError![i] = true;
-                            }
-                            strokeError[i] = true;
-                          }
-                        }
-                      }
+                    onPressed: () async {
+                      bool isAllValid = checkValidate(context);
                       if (isAllValid) {
-                      } else {}
-                      setState(() {});
+                        await bookEventOrTrip(context);
+                      } else {
+                        setState(() {});
+                      }
                     },
                     title: 'التالي',
                   )
-                  : Container(height: 50, width: 50, color: Colors.amber),
+                  : SizedBox.shrink(),
         ),
       ],
     );
+  }
+
+  bool checkValidate(BuildContext context) {
+    bool isAllValid = true;
+
+    for (int i = 0; i < widget.reservationModel.formKeys!.length; i++) {
+      if (widget.reservationModel.formKeys![i].currentState != null) {
+        if (widget.reservationModel.formKeys![i].currentState!.validate()) {
+          if (widget.reservationModel.info![i].nationality != null) {
+            widget.reservationModel.formKeys![i].currentState!.save();
+            widget.reservationModel.strokeError![i] = false;
+            widget.reservationModel.hasError![i] = false;
+          } else {
+            isAllValid = false;
+            widget.reservationModel.hasError![i] = true;
+            widget.reservationModel.strokeError![i] = true;
+          }
+        } else {
+          widget.reservationModel.isAutoValidate![i] = AutovalidateMode.always;
+          isAllValid = false;
+          isAllValid = false;
+          if (widget.reservationModel.info![i].nationality == null) {
+            widget.reservationModel.hasError![i] = true;
+          }
+          widget.reservationModel.strokeError![i] = true;
+        }
+      }
+    }
+    return isAllValid;
+  }
+
+  Future<void> bookEventOrTrip(BuildContext context) async {
+    String type = '';
+    int id = 0;
+    if (widget.reservationModel.tripModel != null) {
+      type = 'trip';
+      id = widget.reservationModel.tripModel!.id!;
+    }
+    if (widget.reservationModel.eventModel != null) {
+      type = 'event';
+      id = widget.reservationModel.eventModel!.id!;
+    }
+    int tickets = widget.reservationModel.tickets!;
+    List<Passenger> passengers = [];
+    for (var i = 0; i < tickets; i++) {
+      Passenger passenger = Passenger(
+        firstName: widget.reservationModel.info![i].firstName,
+        lastName: widget.reservationModel.info![i].lastName,
+        birthDate: widget.reservationModel.info![i].birthDate,
+        email: widget.reservationModel.info![i].email,
+        gender: widget.reservationModel.info![i].gender,
+        nationality: widget.reservationModel.info![i].nationality,
+        phone: widget.reservationModel.info![i].phone,
+        countryCode: widget.reservationModel.info![i].countryCode,
+      );
+      passengers.add(passenger);
+    }
+    EventAndTripsBookingModel reserve = EventAndTripsBookingModel(
+      type: type,
+      id: id,
+      numberOfTickets: tickets,
+      passengers: passengers,
+    );
+    await BlocProvider.of<EventAndTripsBookingCubit>(
+      context,
+    ).bookEventOrTrip(reserve);
+    log(reserve.toString());
   }
 }

@@ -19,7 +19,7 @@ class PostsListViewBuilder extends StatelessWidget {
     >(
       builder: (context, state) {
         if (state is GetAllApprovedPostsByTagSuccess) {
-          return PostsListView(posts: state.posts,displayStatus: false,);
+          return PostsListView(posts: state.posts, displayStatus: false);
         } else if (state is GetAllApprovedPostsByTagFailure) {
           return SliverFillRemaining(
             child: CustomErrorAndEmptyStateBody(

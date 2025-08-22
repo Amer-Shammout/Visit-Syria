@@ -106,7 +106,9 @@ class PostCard extends StatelessWidget {
                       Expanded(
                         child: CustomButton(
                           onPressed: () {
-                            GoRouter.of(context).pushNamed(AppRouter.kPostRejectCausesName);
+                            GoRouter.of(
+                              context,
+                            ).pushNamed(AppRouter.kPostRejectCausesName);
                           },
                           title: "الأسئلة الشائعة",
                           textStyle: AppStyles.fontsBold14(

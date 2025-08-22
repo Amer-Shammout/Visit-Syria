@@ -13,7 +13,3 @@ class ChangePasswordView extends StatelessWidget {
     );
   }
 }
-
-
-
-

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
-import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 
 class CustomTextFormField extends StatefulWidget {
-  final String hint;
+  final String? hint;
+  final Widget? hintWidget; // Animated hint
   final bool obscureText;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
@@ -27,7 +27,8 @@ class CustomTextFormField extends StatefulWidget {
 
   const CustomTextFormField({
     super.key,
-    required this.hint,
+    this.hint,
+    this.hintWidget,
     this.obscureText = false,
     this.suffixIcon,
     this.keyboardType,
@@ -57,15 +58,28 @@ class CustomTextFormField extends StatefulWidget {
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   bool _isValid = false;
   late FocusNode _internalFocusNode;
+  late TextEditingController _internalController;
 
   FocusNode get _effectiveFocusNode => widget.focusNode ?? _internalFocusNode;
+  TextEditingController get _effectiveController =>
+      widget.controller ?? _internalController;
+
+  bool get _isFieldEmpty =>
+      _effectiveController.text.isEmpty &&
+      (widget.initialValue?.isEmpty ?? true);
 
   @override
   void initState() {
     super.initState();
     _internalFocusNode = FocusNode();
+    _internalController = TextEditingController(text: widget.initialValue);
+
     _effectiveFocusNode.addListener(() {
       setState(() {});
+    });
+
+    _effectiveController.addListener(() {
+      setState(() {}); // لتحديث ظهور hintWidget
     });
 
     if (widget.initialValue != null && widget.validator != null) {
@@ -78,6 +92,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   void dispose() {
     if (widget.focusNode == null) {
       _internalFocusNode.dispose();
+    }
+    if (widget.controller == null) {
+      _internalController.dispose();
     }
     super.dispose();
   }
@@ -97,59 +114,47 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(12),
-      onTap: widget.onTap,
-      child: Ink(
-        child: TextFormField(
+    return Stack(
+      alignment: AlignmentDirectional.centerStart,
+      children: [
+        TextFormField(
+          controller: _effectiveController,
           onFieldSubmitted: widget.onFieldSubmitted,
           enableInteractiveSelection: widget.enableInteractiveSelection,
           onTap: widget.onTap,
-          controller: widget.controller,
           readOnly: widget.readOnly,
           cursorColor: AppColors.titleTextColor,
           cursorErrorColor: AppColors.redSwatch,
           focusNode: _effectiveFocusNode,
-          maxLines: widget.maxLines,
+          maxLines: widget.maxLines ?? 1,
           validator: widget.validator,
           onSaved: widget.onSaved,
           onChanged: _handleChanged,
           maxLength: widget.maxLength,
-          initialValue: widget.initialValue,
           obscureText: widget.obscureText,
           keyboardType: widget.keyboardType,
           textInputAction: widget.textInputAction,
           onEditingComplete: widget.onEditingComplete,
-          style: AppStyles.fontsRegular16(context).copyWith(
-            color:
-                widget.isEnabled
-                    ? AppColors.titleTextColor
-                    : AppColors.graySwatch,
+          style: TextStyle(
+            color: widget.isEnabled ? Colors.black : Colors.grey,
+            fontSize: 16,
           ),
-
           decoration: InputDecoration(
             enabled: widget.isEnabled,
             prefixIcon: widget.prefixIcon,
-            prefixIconConstraints: BoxConstraints(maxHeight: 32, maxWidth: 32),
-            errorStyle: AppStyles.fontsRegular12(
-              context,
-            ).copyWith(color: AppColors.redSwatch),
+            prefixIconConstraints: const BoxConstraints(
+              maxHeight: 32,
+              maxWidth: 32,
+            ),
+            errorStyle: TextStyle(color: Colors.red, fontSize: 12),
             helperText: widget.helperText,
-            helperStyle: AppStyles.fontsRegular12(
-              context,
-            ).copyWith(color: AppColors.graySwatch[500]),
+            helperStyle: TextStyle(color: Colors.grey, fontSize: 12),
             isDense: true,
-            hintText: widget.hint,
-            hintStyle: AppStyles.fontsRegular16(
-              context,
-            ).copyWith(color: AppColors.graySwatch[500]),
-            hintMaxLines: 1,
+            hintText: widget.hintWidget == null ? widget.hint : null,
+            hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
             suffixIcon: widget.suffixIcon,
             filled: true,
-            fillColor:
-                widget.isEnabled
-                    ? AppColors.graySwatch[50]
-                    : AppColors.graySwatch[200],
+            fillColor: widget.isEnabled ? Colors.grey[100] : Colors.grey[200],
             border: buildBorder(color: Colors.transparent),
             enabledBorder: buildBorder(
               color: _isValid ? AppColors.primary : Colors.transparent,
@@ -166,7 +171,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             ),
           ),
         ),
-      ),
+        if (widget.hintWidget != null && _isFieldEmpty)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40),
+            child: IgnorePointer(child: widget.hintWidget!),
+          ),
+      ],
     );
   }
 

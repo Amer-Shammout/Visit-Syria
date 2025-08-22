@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/widgets/tourism_companies_cards_grid_view.dart';
+import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/widgets/tourism_companies_grid_view_builder.dart';
 
 class TourismCompaniesViewBody extends StatelessWidget {
   const TourismCompaniesViewBody({super.key});
@@ -9,7 +9,8 @@ class TourismCompaniesViewBody extends StatelessWidget {
     return CustomScrollView(
       physics: BouncingScrollPhysics(),
       clipBehavior: Clip.none,
-      slivers: [TourismCompaniesCardsGridView()],
+      slivers: [TourismCompaniesCardsGridViewBuilder()],
     );
   }
 }
+

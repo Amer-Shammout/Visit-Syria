@@ -39,3 +39,5 @@ const kSetCommentUrl = "comments/";
 const kBookEventOrTripURL = 'reserve';
 const kBookFlightURL = 'bookFlight';
 const kAddSupportNoteURL = 'supports';
+const kGetAllCompaniesURL = 'companies';
+const kSearchURL = 'search';

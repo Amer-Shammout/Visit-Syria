@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
+import 'package:visit_syria/Core/widgets/scale_on_tap.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/widgets/tourism_company_card.dart';
 
 class TourismCompaniesCardsGridView extends StatelessWidget {
-  const TourismCompaniesCardsGridView({super.key});
+  const TourismCompaniesCardsGridView({super.key, required this.companies});
+
+  final List<dynamic> companies;
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +21,15 @@ class TourismCompaniesCardsGridView extends StatelessWidget {
           mainAxisSpacing: 16,
         ),
         itemBuilder:
-            (context, index) => GestureDetector(
+            (context, index) => ScaleOnTap(
               onTap:
-                  () => GoRouter.of(
-                    context,
-                  ).pushNamed(AppRouter.kTourismCompanyDetailsName),
-              child: TourismCompanyCard(),
+                  () => GoRouter.of(context).pushNamed(
+                    AppRouter.kTourismCompanyDetailsName,
+                    extra: companies[index],
+                  ),
+              child: TourismCompanyCard(company: companies[index]),
             ),
-        itemCount: 16,
+        itemCount: companies.length,
       ),
     );
   }

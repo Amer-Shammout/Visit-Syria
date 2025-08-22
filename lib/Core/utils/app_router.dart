@@ -98,6 +98,8 @@ import 'package:visit_syria/Features/Reservation/Presentation/Views/payment_info
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotel_and_resturants_details_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotels_and_resturants_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/similar_hotels_or_resturants_view.dart';
+import 'package:visit_syria/Features/Search/Data/Repos/search_repo_impl.dart';
+import 'package:visit_syria/Features/Search/Presentation/Manager/search_cubit/search_cubit.dart';
 import 'package:visit_syria/Features/Search/Presentation/Views/search_view.dart';
 import 'package:visit_syria/Features/Settings/Data/Repos/settings_repo_impl.dart';
 import 'package:visit_syria/Features/Settings/Presentation/Manager/create_support_cubit/create_support_note_cubit.dart';
@@ -108,6 +110,9 @@ import 'package:visit_syria/Features/Settings/Presentation/Views/privacy_policy_
 import 'package:visit_syria/Features/Settings/Presentation/Views/settings_view.dart';
 import 'package:visit_syria/Features/Settings/Presentation/Views/support_view.dart';
 import 'package:visit_syria/Features/Splash%20Screen/Presentation/Views/splash_view.dart';
+import 'package:visit_syria/Features/Tourism%20Companies/Data/Models/company_model.dart';
+import 'package:visit_syria/Features/Tourism%20Companies/Data/Repos/companies_repo_impl.dart';
+import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Manager/get_all_companies_cubit/get_all_companies_cubit.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_companies_view.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/tourism_company_details_view.dart';
 import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_model.dart';
@@ -631,7 +636,12 @@ abstract class AppRouter {
         name: kTourismCompanieName,
         path: kTourismCompaniesView,
         pageBuilder:
-            (context, state) => MaterialPage(child: TourismCompaniesView()),
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create: (context) => GetAllCompaniesCubit(getIt.get<CompaniesRepoImpl>())..getAllCompanies(),
+                child: TourismCompaniesView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kTourismCompanyDetailsName,
@@ -642,7 +652,7 @@ abstract class AppRouter {
                 create:
                     (context) =>
                         GetCompanyTripsCubit(getIt.get<TripRepoImpl>()),
-                child: TourismCompanyDetailsView(),
+                child: TourismCompanyDetailsView(company:state.extra as CompanyModel),
               ),
             ),
       ),
@@ -735,7 +745,10 @@ abstract class AppRouter {
       GoRoute(
         name: kSearchName,
         path: kSearchView,
-        pageBuilder: (context, state) => MaterialPage(child: SearchView()),
+        pageBuilder: (context, state) => MaterialPage(child: BlocProvider(
+          create: (context) => SearchCubit(getIt.get<SearchRepoImpl>()),
+          child: SearchView(),
+        )),
       ),
       GoRoute(
         name: kTripDetailsName,

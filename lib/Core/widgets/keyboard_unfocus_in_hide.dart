@@ -16,7 +16,14 @@ class _KeyboardUnfocusOnHideState extends State<KeyboardUnfocusOnHide>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _lastBottom = WidgetsBinding.instance.platformDispatcher.views.first.viewInsets.bottom;
+    _lastBottom =
+        WidgetsBinding
+            .instance
+            .platformDispatcher
+            .views
+            .first
+            .viewInsets
+            .bottom;
   }
 
   @override
@@ -27,7 +34,14 @@ class _KeyboardUnfocusOnHideState extends State<KeyboardUnfocusOnHide>
 
   @override
   void didChangeMetrics() {
-    final bottom = WidgetsBinding.instance.platformDispatcher.views.first.viewInsets.bottom;
+    final bottom =
+        WidgetsBinding
+            .instance
+            .platformDispatcher
+            .views
+            .first
+            .viewInsets
+            .bottom;
     if (_lastBottom > 0 && bottom == 0) {
       FocusManager.instance.primaryFocus?.unfocus();
     }

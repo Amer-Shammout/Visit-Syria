@@ -22,7 +22,7 @@ class CreatePostView extends StatelessWidget {
         GlobalKey<CreatePostFormState>();
     return KeyboardUnfocusOnHide(
       child: GestureDetector(
-        behavior: HitTestBehavior.translucent, 
+        behavior: HitTestBehavior.translucent,
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
           appBar: CustomAppBar2(

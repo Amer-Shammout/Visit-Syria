@@ -36,7 +36,7 @@ class CustomDialog extends StatelessWidget {
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       horizontalTitleGap: 4,
-                      leading: SvgPicture.asset(icon!, width: 32, height: 32,),
+                      leading: SvgPicture.asset(icon!, width: 32, height: 32),
                       title: Text(
                         title!,
                         style: AppStyles.fontsBold24(

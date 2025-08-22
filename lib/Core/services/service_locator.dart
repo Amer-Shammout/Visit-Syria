@@ -8,7 +8,9 @@ import 'package:visit_syria/Features/Events/data/Repos/events_repo_impl.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Data/Repos/flights_repo_impl.dart';
 import 'package:visit_syria/Features/Home/Data/Repos/home_repo_impl.dart';
 import 'package:visit_syria/Features/Reservation/Data/Repos/reservation_repo_impl.dart';
+import 'package:visit_syria/Features/Search/Data/Repos/search_repo_impl.dart';
 import 'package:visit_syria/Features/Settings/Data/Repos/settings_repo_impl.dart';
+import 'package:visit_syria/Features/Tourism%20Companies/Data/Repos/companies_repo_impl.dart';
 import 'package:visit_syria/Features/Trips/Data/Repos/trip_repo_impl.dart';
 import 'package:visit_syria/Features/Places/Data/Repos/places_repo_impl.dart';
 import 'package:visit_syria/Features/Profile/Data/Repos/profile_repo_impl.dart';
@@ -29,4 +31,6 @@ void setupGetit() {
   getIt.registerSingleton<CommonRepoImpl>(CommonRepoImpl());
   getIt.registerSingleton<CommunityRepoImpl>(CommunityRepoImpl());
   getIt.registerSingleton<ReservationRepoImpl>(ReservationRepoImpl());
+  getIt.registerSingleton<CompaniesRepoImpl>(CompaniesRepoImpl());
+  getIt.registerSingleton<SearchRepoImpl>(SearchRepoImpl());
 }

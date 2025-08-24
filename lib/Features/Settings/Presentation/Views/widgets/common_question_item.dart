@@ -12,17 +12,20 @@ class CommonQuestionsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomExpansionTile(
-      title: settingsModel.title!,
-      icon: Assets.iconsAbout,
-      children: [
-        Text(
-          settingsModel.description!,
-          style: AppStyles.fontsRegular14(
-            context,
-          ).copyWith(color: AppColors.bodyTextColor),
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: CustomExpansionTile(
+        title: settingsModel.title!,
+        icon: Assets.iconsAbout,
+        children: [
+          Text(
+            settingsModel.description!,
+            style: AppStyles.fontsRegular14(
+              context,
+            ).copyWith(color: AppColors.bodyTextColor),
+          ),
+        ],
+      ),
     );
   }
 }

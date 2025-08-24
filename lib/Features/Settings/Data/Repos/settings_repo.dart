@@ -7,4 +7,8 @@ abstract class SettingsRepo {
     required String type,
     required String category,
   });
+  Future<Either<Failure, dynamic>> createSupportNote({
+    required String note,
+    required String rating,
+  });
 }

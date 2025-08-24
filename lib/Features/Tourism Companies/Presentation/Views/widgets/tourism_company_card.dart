@@ -5,11 +5,14 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_button.dart';
 import 'package:visit_syria/Core/widgets/custom_card_background.dart';
+import 'package:visit_syria/Features/Tourism%20Companies/Data/Models/company_model.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/widgets/tourism_company_card_general_info.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/widgets/tourism_company_card_header.dart';
 
 class TourismCompanyCard extends StatelessWidget {
-  const TourismCompanyCard({super.key});
+  const TourismCompanyCard({super.key, required this.company});
+
+  final CompanyModel company;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +24,9 @@ class TourismCompanyCard extends StatelessWidget {
           padding: 8,
           child: Column(
             children: [
-              TourismCompanyCardHeader(),
+              TourismCompanyCardHeader(company: company,),
               SizedBox(height: AppSpacing.s16),
-              TourismCompanyCardGeneralInfo(),
+              TourismCompanyCardGeneralInfo(company:company),
               SizedBox(height: AppSpacing.s16),
               CustomButton(
                 onPressed: () {},

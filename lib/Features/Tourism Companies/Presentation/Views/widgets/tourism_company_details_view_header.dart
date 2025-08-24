@@ -5,10 +5,13 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_rating.dart';
 import 'package:visit_syria/Core/widgets/general_info_item.dart';
+import 'package:visit_syria/Features/Tourism%20Companies/Data/Models/company_model.dart';
 import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/widgets/custom_company_logo.dart';
 
 class TourismCompanyDetailsViewHeader extends StatelessWidget {
-  const TourismCompanyDetailsViewHeader({super.key});
+  const TourismCompanyDetailsViewHeader({super.key, required this.company});
+    final CompanyModel company;
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,7 @@ class TourismCompanyDetailsViewHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "تيك أوف",
+                    company.nameOfCompany!,
                     style: AppStyles.fontsBold20(
                       context,
                     ).copyWith(color: AppColors.titleTextColor),
@@ -35,15 +38,15 @@ class TourismCompanyDetailsViewHeader extends StatelessWidget {
                     children: [
                       GeneralInfoItem(
                         icon: Assets.iconsMedal,
-                        title: '10 سنوات خبرة',
+                        title: '${company.yearsOfExperience} سنوات خبرة',
                         iconSize: 18,
                       ),
                       GeneralInfoItem(
                         icon: Assets.iconsTripsInActive,
-                        title: '10 رحلات',
+                        title: '${company.numberOfTrips} رحلات',
                         iconSize: 18,
                       ),
-                      CustomRating(textColor: AppColors.titleTextColor),
+                      CustomRating(textColor: AppColors.titleTextColor,rating: company.rating,),
                     ],
                   ),
                 ],

@@ -34,8 +34,14 @@ class CustomComment extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AvatarandNameandHistory(
-                date: comment?.createdAt ?? postComment!.createdAt!,
-                name: comment?.user?.name ?? postComment!.user!.name!,
+                date:
+                    comment?.createdAt ??
+                    postComment?.createdAt ??
+                    recentComment!.createdAt!,
+                name:
+                    comment?.user?.name ??
+                    postComment?.user?.name ??
+                    recentComment!.userName!,
               ),
               hasRate
                   ? CustomRating(

@@ -38,13 +38,23 @@ class PostActionButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                isSelected ? activeIcon! : inActiveIcon,
-                height: 20,
-                width: 20,
-                colorFilter: ColorFilter.mode(
-                  isSelected ? AppColors.primary : AppColors.bodyTextColor,
-                  BlendMode.srcATop,
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 250),
+                transitionBuilder: (child, animation) {
+                  return ScaleTransition(
+                    scale: animation,
+                    child: FadeTransition(opacity: animation, child: child),
+                  );
+                },
+                child: SvgPicture.asset(
+                  isSelected ? activeIcon! : inActiveIcon,
+                  key: ValueKey<bool>(isSelected),
+                  height: 20,
+                  width: 20,
+                  colorFilter: ColorFilter.mode(
+                    isSelected ? AppColors.primary : AppColors.bodyTextColor,
+                    BlendMode.srcATop,
+                  ),
                 ),
               ),
               SizedBox(width: AppSpacing.s4),

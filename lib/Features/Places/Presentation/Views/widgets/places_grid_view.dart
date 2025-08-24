@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
+import 'package:visit_syria/Core/widgets/scale_on_tap.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_card.dart';
-import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
 
 class PlacesGridView extends StatelessWidget {
   const PlacesGridView({
@@ -12,7 +12,7 @@ class PlacesGridView extends StatelessWidget {
   });
 
   final ScrollPhysics scrollPhysics;
-  final List<PlaceModel>? places;
+  final List<dynamic>? places;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class PlacesGridView extends StatelessWidget {
           mainAxisSpacing: 16,
         ),
         itemBuilder:
-            (context, index) => GestureDetector(
+            (context, index) => ScaleOnTap(
               onTap:
                   () => GoRouter.of(context).pushNamed(
                     AppRouter.kPlaceDetailsName,

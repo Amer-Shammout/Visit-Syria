@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
-import 'package:visit_syria/Features/Community/Data/Models/post_model/post_model.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_card.dart';
 
 class PostsListView extends StatelessWidget {
@@ -11,7 +10,7 @@ class PostsListView extends StatelessWidget {
     this.isMyPost = false,
   });
 
-  final List<PostModel> posts;
+  final List<dynamic> posts;
   final bool displayStatus;
   final bool isMyPost;
 

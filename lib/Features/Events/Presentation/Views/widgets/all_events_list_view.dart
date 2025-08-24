@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
-import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/events_card.dart';
 
 class AllEventsListView extends StatelessWidget {
   const AllEventsListView({super.key, required this.events});
 
-  final List<EventModel> events;
+  final List<dynamic> events;
 
   @override
   Widget build(BuildContext context) {

@@ -525,6 +525,16 @@ class Assets {
   static const String illustrationsSearchNoResults =
       "assets/Illustrations/Search-No-Results.svg";
 
+  /// Assets for illustrationsSuccessCircle
+  /// assets/Illustrations/success_circle.svg
+  static const String illustrationsSuccessCircle =
+      "assets/Illustrations/success_circle.svg";
+
+  /// Assets for illustrationsSuccessDialog
+  /// assets/Illustrations/Success_Dialog.svg
+  static const String illustrationsSuccessDialog =
+      "assets/Illustrations/Success_Dialog.svg";
+
   /// Assets for illustrationsSuccessPayment
   /// assets/Illustrations/Success-Payment.svg
   static const String illustrationsSuccessPayment =

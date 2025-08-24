@@ -18,14 +18,14 @@ class ProfileViewHeader extends StatelessWidget {
         ),
         SizedBox(height: AppSpacing.s16),
         Text(
-          "أحمد محسن",
+          "${GetProfileCubit.userModel?.me?.profile?.firstName} ${GetProfileCubit.userModel?.me?.profile?.lastName}",
           style: AppStyles.fontsBold20(
             context,
           ).copyWith(color: AppColors.titleTextColor),
         ),
         SizedBox(height: AppSpacing.s4),
         Text(
-          "سوريا",
+          GetProfileCubit.userModel?.me?.profile?.country ?? "",
           style: AppStyles.fontsRegular14(
             context,
           ).copyWith(color: AppColors.titleTextColor),

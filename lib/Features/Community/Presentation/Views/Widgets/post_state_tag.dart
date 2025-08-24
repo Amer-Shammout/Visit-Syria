@@ -4,6 +4,8 @@ import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
+import 'package:visit_syria/Core/widgets/blink_animation.dart';
+import 'package:visit_syria/Core/widgets/shake_widget.dart';
 
 class PostStateTag extends StatelessWidget {
   const PostStateTag({super.key, required this.state});
@@ -11,26 +13,37 @@ class PostStateTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: setBackgroundColor(),
-      ),
-      child: Row(
-        children: [
-          SvgPicture.asset(
-            setIcon(),
-            width: 16,
-            height: 16,
-            colorFilter: ColorFilter.mode(setColor(), BlendMode.srcATop),
+    return ConditionalBlink(
+      state: state,
+      blinkingStates: ['Pending'],
+      child: ShakeWidget(
+        shake: state == "Rejected",
+        shakes: 3,
+        offset: 6,
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: setBackgroundColor(),
           ),
-          SizedBox(width: AppSpacing.s4),
-          Text(
-            state,
-            style: AppStyles.fontsBold12(context).copyWith(color: setColor()),
+          child: Row(
+            children: [
+              SvgPicture.asset(
+                setIcon(),
+                width: 16,
+                height: 16,
+                colorFilter: ColorFilter.mode(setColor(), BlendMode.srcATop),
+              ),
+              SizedBox(width: AppSpacing.s4),
+              Text(
+                state,
+                style: AppStyles.fontsBold12(
+                  context,
+                ).copyWith(color: setColor()),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

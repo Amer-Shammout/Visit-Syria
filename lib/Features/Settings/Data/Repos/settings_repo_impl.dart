@@ -37,4 +37,23 @@ class SettingsRepoImpl extends SettingsRepo {
       },
     );
   }
+
+  @override
+  Future<Either<Failure, dynamic>> createSupportNote({
+    required String note,
+    required String rating,
+  }) async {
+    final encodedNote = Uri.encodeComponent(note);
+    return await handleRequest<dynamic>(
+      requestFn:
+          () => getIt.get<DioClient>().post(
+            kAddSupportNoteURL,
+            options: Options(
+              headers: {"Authorization": "Bearer ${Prefs.getString(kToken)}"},
+            ),
+            queryParameters: {"rating": rating, "comment": encodedNote},
+          ),
+      parse: (data) => data,
+    );
+  }
 }

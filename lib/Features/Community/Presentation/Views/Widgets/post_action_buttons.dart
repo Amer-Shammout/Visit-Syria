@@ -30,7 +30,7 @@ class PostActionButtons extends StatelessWidget {
             text: "${postModel.likesCount}",
             activeIcon: Assets.iconsHeartActive,
             isSelected: postModel.isLiked!,
-            onTap: () {
+            onTap: () async {
               !isMyPost
                   ? BlocProvider.of<GetAllApprovedPostsByTagCubit>(
                     context,
@@ -42,7 +42,7 @@ class PostActionButtons extends StatelessWidget {
                           context,
                         )
                         : {
-                          BlocProvider.of<GetMyPostsCubit>(
+                          await BlocProvider.of<GetMyPostsCubit>(
                             context,
                           ).toggleLikeForPost(postModel.id.toString()),
                           BlocProvider.of<GetAllApprovedPostsByTagCubit>(

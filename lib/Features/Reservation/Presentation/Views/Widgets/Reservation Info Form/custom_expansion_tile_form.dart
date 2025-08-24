@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:country_picker/country_picker.dart';
 import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +14,8 @@ import 'package:visit_syria/Core/widgets/custom_phone_field_with_label.dart';
 import 'package:visit_syria/Core/widgets/custom_text_field_with_label.dart';
 import 'package:visit_syria/Features/Reservation/Data/Models/reservation_info_model.dart';
 import 'package:visit_syria/Features/Reservation/Data/Models/reservation_model.dart';
-import 'package:visit_syria/Features/Reservation/Presentation/Views/Widgets/Form/country_picker_field.dart';
-import 'package:visit_syria/Features/Reservation/Presentation/Views/Widgets/Form/passport_section.dart';
+import 'package:visit_syria/Features/Reservation/Presentation/Views/Widgets/Reservation%20Info%20Form/country_picker_field.dart';
+import 'package:visit_syria/Features/Reservation/Presentation/Views/Widgets/Reservation%20Info%20Form/passport_section.dart';
 
 class CustomExpansionTileForm extends StatefulWidget {
   const CustomExpansionTileForm({
@@ -56,6 +58,7 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
   );
   @override
   void initState() {
+    log(widget.reservationModel.info![widget.index].gender.toString());
     super.initState();
     if (widget.reservationModel.info![widget.index].birthDate != null) {
       _birthDateController.text =
@@ -193,7 +196,14 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
             CustomDropDownFormFieldWithLabel<String>(
               validator: Validation.validateEmptyField,
               label: "الجنس",
-              value: widget.reservationModel.info![widget.index].gender,
+              value:
+                  widget.reservationModel.info![widget.index].gender! == 'ذكر'
+                      ? "male"
+                      : widget.reservationModel.info![widget.index].gender! ==
+                          'أنثى'
+                      ? "female"
+                      : null,
+
               hint: "اختر الجنس",
               items: kGenderDropdownItems,
               onChanged: (gender) {

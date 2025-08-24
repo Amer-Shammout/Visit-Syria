@@ -38,3 +38,4 @@ const kToggleLikeUrl2 = "/like";
 const kSetCommentUrl = "comments/";
 const kBookEventOrTripURL = 'reserve';
 const kBookFlightURL = 'bookFlight';
+const kCreateStripeTokenUrl = 'https://api.stripe.com/v1/tokens';

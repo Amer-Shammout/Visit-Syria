@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:get_it/get_it.dart';
 import 'package:visit_syria/Core/constants/common_constants.dart';
 import 'package:visit_syria/Core/constants/urls_constants.dart';
 import 'package:visit_syria/Core/errors/failures.dart';

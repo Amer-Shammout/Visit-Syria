@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
-import 'package:visit_syria/Core/utils/styles/app_colors.dart';
-import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
-import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_error_and_empty_state_body.dart';
 import 'package:visit_syria/Core/widgets/custom_loading_indicator.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trips_cards_list_view.dart';
@@ -21,19 +17,9 @@ class TripsCardsListViewBuilder extends StatelessWidget {
           return TripsCardsListView(trips: state.trips);
         }
         if (state is GetTripsByCategoryEmpty) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SvgPicture.asset(Assets.illustrationsEmptyTrips),
-              SizedBox(height: AppSpacing.s16),
-              Text(
-                "لا يوجد رحلات حالياً",
-                style: AppStyles.fontsRegular16(
-                  context,
-                ).copyWith(color: AppColors.titleTextColor),
-              ),
-            ],
+          return CustomErrorAndEmptyStateBody(
+            illustration: Assets.illustrationsEmptyTrips,
+            text: 'لا يوجد رحلات حالياً',
           );
         }
         if (state is GetTripsByCategoryFailure) {

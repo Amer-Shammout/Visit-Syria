@@ -29,6 +29,7 @@ class CustomTextFieldWithLabel extends StatelessWidget {
     this.onTap,
     this.enableInteractiveSelection = true,
     this.onFieldSubmitted,
+    this.inputFormatter,
     // this.textDirection = TextDirection.ltr,
   });
   final String hint;
@@ -52,7 +53,7 @@ class CustomTextFieldWithLabel extends StatelessWidget {
   final VoidCallback? onTap;
   final bool enableInteractiveSelection;
   final void Function(String)? onFieldSubmitted;
-
+  final List<TextInputFormatter>? inputFormatter;
   // final TextDirection? textDirection;
 
   @override
@@ -68,6 +69,7 @@ class CustomTextFieldWithLabel extends StatelessWidget {
         ),
         SizedBox(height: AppSpacing.s4),
         CustomTextFormField(
+          inputFormatter: inputFormatter,
           onTap: onTap,
           isEnabled: isEnabled,
           // textDirection: textDirection ?? TextDirection.rtl,

@@ -150,4 +150,14 @@ abstract class Validation {
     }
     return null; // صالح
   }
+
+  static String? validateCVC(String? val) {
+    if (val == null || val.isEmpty) {
+      return 'مطلوب';
+    }
+    if (val.length < 3) {
+      return 'رمز التحقق يجب أن يكون 3 أرقام على الأقل';
+    }
+    return null;
+  }
 }

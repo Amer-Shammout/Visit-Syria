@@ -46,13 +46,14 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^9.1.1
   flutter_dash: ^1.0.0
-  flutter_email_sender: ^7.0.0
+
   flutter_localizations:
     sdk: flutter
   flutter_map: ^8.1.1
   flutter_native_splash: ^2.4.6
   flutter_rating_bar: ^4.0.1
   flutter_slidable: ^4.0.0
+  flutter_stripe: ^11.5.0 
   flutter_svg: ^2.1.0
   flutter_svg_provider: ^1.0.7
   flutter_timer_countdown: ^1.0.7

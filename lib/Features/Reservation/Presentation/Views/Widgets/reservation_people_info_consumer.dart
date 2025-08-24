@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/functions/show_snack_bar.dart';
+import 'package:visit_syria/Core/widgets/custom_app_bar_2.dart';
 import 'package:visit_syria/Core/widgets/custom_loading_indicator.dart';
 import 'package:visit_syria/Features/Reservation/Data/Models/reservation_model.dart';
 import 'package:visit_syria/Features/Reservation/Presentation/Manager/event_and_trip_booking_cubit/event_and_trips_booking_cubit.dart';
@@ -40,8 +41,11 @@ class ReservationPeopleInfoConsumer extends StatelessWidget {
           return ModalProgressHUD(
             progressIndicator: CustomLoadingIndicator(),
             inAsyncCall: state is EventAndTripsBookingLoading,
-            child: ReservationPeopleInfoViewBody(
-              reservationModel: reservationModel,
+            child: Scaffold(
+              appBar: CustomAppBar2(title: 'معلومات الحجز'),
+              body: ReservationPeopleInfoViewBody(
+                reservationModel: reservationModel,
+              ),
             ),
           );
         },

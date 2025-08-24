@@ -16,6 +16,7 @@ import 'package:visit_syria/Features/Reservation/Data/Models/event_and_trips_boo
 import 'package:visit_syria/Features/Reservation/Data/Models/event_and_trips_booking_model/passenger.dart';
 import 'package:visit_syria/Features/Reservation/Data/Models/reservation_info_model.dart';
 import 'package:visit_syria/Features/Reservation/Data/Models/reservation_model.dart';
+import 'package:visit_syria/Features/Reservation/Presentation/Functions/check_validate.dart';
 import 'package:visit_syria/Features/Reservation/Presentation/Manager/event_and_trip_booking_cubit/event_and_trips_booking_cubit.dart';
 import 'package:visit_syria/Features/Reservation/Presentation/Views/Widgets/reservation_expansion_tile.dart';
 import 'package:visit_syria/Features/Reservation/Presentation/Views/Widgets/shaking_icon.dart';
@@ -35,9 +36,6 @@ class ReservationPeopleInfoViewBody extends StatefulWidget {
 class _ReservationPeopleInfoViewBodyState
     extends State<ReservationPeopleInfoViewBody> {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
-  //  List<GlobalKey<FormState>> formKeys = [];
-  //  List<AutovalidateMode> isAutoValidate = [];
-  // List<bool> strokeError = [];
   @override
   void initState() {
     super.initState();
@@ -47,7 +45,6 @@ class _ReservationPeopleInfoViewBodyState
       widget.reservationModel.info![i].nationality =
           widget.reservationModel.info![0].nationality;
     }
-    //   widget.reservationModel.hasError = [];
   }
 
   void _setFirstPersonInfo() {
@@ -127,18 +124,6 @@ class _ReservationPeopleInfoViewBodyState
           padding: EdgeInsets.only(top: 16, right: 16, left: 16, bottom: 120),
           initialItemCount: widget.reservationModel.info!.length,
           itemBuilder: (context, index, animation) {
-            // if (formKeys.length <= index) {
-            //   formKeys.add(GlobalKey<FormState>());
-            // }
-            // if (isAutoValidate.length <= index) {
-            //   isAutoValidate.add(AutovalidateMode.disabled);
-            // }
-            // if (widget.reservationModel.hasError!.length <= index) {
-            //   widget.reservationModel.hasError!.add(false);
-            // }
-            // if (strokeError.length <= index) {
-            //   strokeError.add(false);
-            // }
             return Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -244,9 +229,51 @@ class _ReservationPeopleInfoViewBodyState
                       widget.reservationModel.flightModel != null)
                   ? CustomGeneralFloatingButton(
                     onPressed: () async {
-                      bool isAllValid = checkValidate(context);
+                      bool isAllValid = checkValidate(
+                        context,
+                        widget.reservationModel,
+                      );
                       if (isAllValid) {
-                        await bookEventOrTrip(context);
+                        String type = '';
+                        int id = 0;
+                        if (widget.reservationModel.tripModel != null) {
+                          type = 'trip';
+                          id = widget.reservationModel.tripModel!.id!;
+                        }
+                        if (widget.reservationModel.eventModel != null) {
+                          type = 'event';
+                          id = widget.reservationModel.eventModel!.id!;
+                        }
+                        int tickets = widget.reservationModel.tickets!;
+                        List<Passenger> passengers = [];
+                        for (var i = 0; i < tickets; i++) {
+                          Passenger passenger = Passenger(
+                            firstName:
+                                widget.reservationModel.info![i].firstName,
+                            lastName: widget.reservationModel.info![i].lastName,
+                            birthDate:
+                                widget.reservationModel.info![i].birthDate,
+                            email: widget.reservationModel.info![i].email,
+                            gender: widget.reservationModel.info![i].gender,
+                            nationality:
+                                widget.reservationModel.info![i].nationality,
+                            phone: widget.reservationModel.info![i].phone,
+                            countryCode:
+                                widget.reservationModel.info![i].countryCode,
+                          );
+                          passengers.add(passenger);
+                        }
+                        EventAndTripsBookingModel reserve =
+                            EventAndTripsBookingModel(
+                              type: type,
+                              id: id,
+                              numberOfTickets: tickets,
+                              passengers: passengers,
+                            );
+                        await BlocProvider.of<EventAndTripsBookingCubit>(
+                          context,
+                        ).bookEventOrTrip(reserve);
+                        log(reserve.toString());
                       } else {
                         setState(() {});
                       }
@@ -257,72 +284,5 @@ class _ReservationPeopleInfoViewBodyState
         ),
       ],
     );
-  }
-
-  bool checkValidate(BuildContext context) {
-    bool isAllValid = true;
-
-    for (int i = 0; i < widget.reservationModel.formKeys!.length; i++) {
-      if (widget.reservationModel.formKeys![i].currentState != null) {
-        if (widget.reservationModel.formKeys![i].currentState!.validate()) {
-          if (widget.reservationModel.info![i].nationality != null) {
-            widget.reservationModel.formKeys![i].currentState!.save();
-            widget.reservationModel.strokeError![i] = false;
-            widget.reservationModel.hasError![i] = false;
-          } else {
-            isAllValid = false;
-            widget.reservationModel.hasError![i] = true;
-            widget.reservationModel.strokeError![i] = true;
-          }
-        } else {
-          widget.reservationModel.isAutoValidate![i] = AutovalidateMode.always;
-          isAllValid = false;
-          isAllValid = false;
-          if (widget.reservationModel.info![i].nationality == null) {
-            widget.reservationModel.hasError![i] = true;
-          }
-          widget.reservationModel.strokeError![i] = true;
-        }
-      }
-    }
-    return isAllValid;
-  }
-
-  Future<void> bookEventOrTrip(BuildContext context) async {
-    String type = '';
-    int id = 0;
-    if (widget.reservationModel.tripModel != null) {
-      type = 'trip';
-      id = widget.reservationModel.tripModel!.id!;
-    }
-    if (widget.reservationModel.eventModel != null) {
-      type = 'event';
-      id = widget.reservationModel.eventModel!.id!;
-    }
-    int tickets = widget.reservationModel.tickets!;
-    List<Passenger> passengers = [];
-    for (var i = 0; i < tickets; i++) {
-      Passenger passenger = Passenger(
-        firstName: widget.reservationModel.info![i].firstName,
-        lastName: widget.reservationModel.info![i].lastName,
-        birthDate: widget.reservationModel.info![i].birthDate,
-        email: widget.reservationModel.info![i].email,
-        gender: widget.reservationModel.info![i].gender,
-        nationality: widget.reservationModel.info![i].nationality,
-        phone: widget.reservationModel.info![i].phone,
-        countryCode: widget.reservationModel.info![i].countryCode,
-      );
-      passengers.add(passenger);
-    }
-    EventAndTripsBookingModel reserve = EventAndTripsBookingModel(
-      type: type,
-      id: id,
-      numberOfTickets: tickets,
-      passengers: passengers,
-    );
-    await BlocProvider.of<EventAndTripsBookingCubit>(
-      context,
-    ).bookEventOrTrip(reserve);
-    log(reserve.toString());
   }
 }

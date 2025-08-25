@@ -14,6 +14,7 @@ class CustomTitle extends StatelessWidget {
     required this.hasSeeAll,
     this.seaAllAction,
     this.hasPoint = false,
+    this.mainAxisAlignment,
   });
 
   final String title;
@@ -21,15 +22,17 @@ class CustomTitle extends StatelessWidget {
   final bool hasSeeAll;
   final bool hasPoint;
   final VoidCallback? seaAllAction;
+  final MainAxisAlignment? mainAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.spaceBetween,
         children: [
           Row(
+            mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
             children: [
               hasPoint
                   ? const Text(

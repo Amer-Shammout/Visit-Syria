@@ -41,3 +41,4 @@ const kBookFlightURL = 'bookFlight';
 const kAddSupportNoteURL = 'supports';
 const kGetAllCompaniesURL = 'companies';
 const kSearchURL = 'search';
+const kPaymentURL = 'stripe/pay';

@@ -12,6 +12,7 @@ class CustomSection extends StatelessWidget {
     this.section,
     this.widgets,
     this.haspoint = false,
+    this.crossAxisAlignment,
   });
 
   final String title;
@@ -21,13 +22,16 @@ class CustomSection extends StatelessWidget {
   final VoidCallback? seaAllAction;
   final Widget? section;
   final List<Widget>? widgets;
+  final CrossAxisAlignment? crossAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.start,
       children: [
         CustomTitle(
+          mainAxisAlignment:
+              crossAxisAlignment != null ? MainAxisAlignment.center : null,
           title: title,
           hasSeeAll: hasSeeAll,
           icon: icon,
@@ -37,7 +41,8 @@ class CustomSection extends StatelessWidget {
         SizedBox(height: AppSpacing.s12),
         section ??
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment:
+                  crossAxisAlignment ?? CrossAxisAlignment.start,
               children: widgets!,
             ),
       ],

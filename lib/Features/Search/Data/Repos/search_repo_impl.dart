@@ -22,16 +22,12 @@ class SearchRepoImpl extends SearchRepo {
     required String sub,
   }) {
     return handleRequest(
-      requestFn: () => getIt.get<DioClient>().get(
+      requestFn:
+          () => getIt.get<DioClient>().get(
             kSearchURL,
-            queryParameters: {
-              "type": type,
-              "sub": sub,
-            },
+            queryParameters: {"type": type, "sub": sub},
             options: Options(
-              headers: {
-                "Authorization": "Bearer ${Prefs.getString(kToken)}",
-              },
+              headers: {"Authorization": "Bearer ${Prefs.getString(kToken)}"},
             ),
           ),
       parse: (data) {
@@ -58,7 +54,6 @@ class SearchRepoImpl extends SearchRepo {
               results.add(ArticleModel.fromJson(item));
               break;
             default:
-             
               break;
           }
         }

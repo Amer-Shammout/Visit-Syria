@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:visit_syria/Core/constants/common_constants.dart';
 import 'package:visit_syria/Core/services/custom_bloc_observer.dart';
 import 'package:visit_syria/Core/services/firebase_notification.dart';
 import 'package:visit_syria/Core/services/service_locator.dart';
@@ -24,7 +26,10 @@ void main() async {
   //   "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvdmVyaWZ5RW1haWwiLCJpYXQiOjE3NTUzODIxNDcsIm5iZiI6MTc1NTM4MjE0NywianRpIjoibm80Zmo5Z0Z2aWZrb2RNVSIsInN1YiI6IjYiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.mChLNT-xlbHtlJLZcpfMDnb5YRIORg7TPTr1uGa1cm0",
   // );
   await FirebaseNotification.getFCMToken();
+  Stripe.publishableKey =
+      'pk_test_51RzhGTFOUKBGQ0NC3H0JgGkkaSbf7hy0jwbxdtSKa2eVERw6wF4fg1SjXYbM1556OI8FUeWItAV1gDjIEUltktFe00cjaJ0qAn';
 
+  await Stripe.instance.applySettings();
   Bloc.observer = CustomBlocObserver();
 
   setupGetit();

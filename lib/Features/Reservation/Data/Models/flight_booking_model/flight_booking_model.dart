@@ -1,10 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:visit_syria/Features/Reservation/Data/Models/event_and_trips_booking_model/passenger.dart';
-
-import 'flight_data.dart';
+import 'package:visit_syria/Features/Flights%20Reservation/Data/Models/flight_model/flight_model.dart';
+import 'package:visit_syria/Features/Reservation/Data/Models/passenger.dart';
 
 class FlightBookingModel extends Equatable {
-  final FlightData? flightData;
+  final FlightModel? flightData;
   final int? numberOfAdults;
   final int? numberOfChildren;
   final int? numberOfInfants;
@@ -23,7 +22,7 @@ class FlightBookingModel extends Equatable {
       flightData:
           json['flight_data'] == null
               ? null
-              : FlightData.fromJson(
+              : FlightModel.fromJson(
                 json['flight_data'] as Map<String, dynamic>,
               ),
       numberOfAdults: json['number_of_adults'] as int?,

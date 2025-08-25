@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-
-import 'passenger.dart';
+import 'package:visit_syria/Features/Reservation/Data/Models/passenger.dart';
 
 class EventAndTripsBookingModel extends Equatable {
   final String? type;

@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 
 import 'interceptors.dart';
 
@@ -6,18 +9,41 @@ class DioClient {
   late final Dio _dio;
 
   // Amer's URL:
-  final String _baseUrl = 'http://10.48.88.141:8000/api/';
+  //final String _baseUrl = 'http://10.48.88.141:8000/api/';
   //George's URL:
-  // final String _baseUrl = 'http://192.168.127.241:8000/api/';
+  final String _baseUrl = 'http://192.168.127.241:8000/api/';
+  //  final String _baseUrl = "https://d53a684b73c5.ngrok-free.app/api/";
+  // DioClient()
+  //   : _dio = Dio(
+  //       BaseOptions(
+  //         headers: {'Content-Type': 'application/json; charset=UTF-8'},
+  //         responseType: ResponseType.json,
+  //         sendTimeout: const Duration(seconds: 60),
+  //         receiveTimeout: const Duration(seconds: 120),
+  //       ),
+  //     )..interceptors.addAll([LoggerInterceptor()]);
   DioClient()
     : _dio = Dio(
         BaseOptions(
-          headers: {'Content-Type': 'application/json; charset=UTF-8'},
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+          },
           responseType: ResponseType.json,
           sendTimeout: const Duration(seconds: 60),
           receiveTimeout: const Duration(seconds: 120),
         ),
-      )..interceptors.addAll([LoggerInterceptor()]);
+      )..interceptors.addAll([LoggerInterceptor()]) {
+    // السماح بتجاوز SSL وقت تستخدم ngrok
+    // ignore: deprecated_member_use
+    (_dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate = (
+      HttpClient client,
+    ) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+  }
 
   // GET METHOD
   Future<Response> get(

@@ -9,6 +9,8 @@ class Passenger extends Equatable {
   final String? email;
   final String? phone;
   final String? countryCode;
+  final String? passportNumber;
+  final String? passportExpiryDate;
 
   const Passenger({
     this.firstName,
@@ -19,6 +21,8 @@ class Passenger extends Equatable {
     this.email,
     this.phone,
     this.countryCode,
+    this.passportNumber,
+    this.passportExpiryDate,
   });
 
   factory Passenger.fromJson(Map<String, dynamic> json) {
@@ -31,6 +35,8 @@ class Passenger extends Equatable {
       email: json['email'] as String?,
       phone: json['phone'] as String?,
       countryCode: json['country_code'] as String?,
+      passportNumber: json['passport_number'] as String?,
+      passportExpiryDate: json['passport_expiry_date'] as String?,
     );
   }
 
@@ -44,6 +50,8 @@ class Passenger extends Equatable {
       'email': email,
       'phone': phone,
       'country_code': countryCode,
+      'passport_number': passportNumber,
+      'passport_expiry_date': passportExpiryDate,
     };
   }
 
@@ -58,6 +66,8 @@ class Passenger extends Equatable {
       email,
       phone,
       countryCode,
+      passportNumber,
+      passportExpiryDate,
     ];
   }
 }

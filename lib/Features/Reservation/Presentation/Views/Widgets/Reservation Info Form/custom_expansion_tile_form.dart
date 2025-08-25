@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:country_picker/country_picker.dart';
 import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +56,6 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
   );
   @override
   void initState() {
-    log(widget.reservationModel.info![widget.index].gender.toString());
     super.initState();
     if (widget.reservationModel.info![widget.index].birthDate != null) {
       _birthDateController.text =
@@ -197,11 +194,17 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
               validator: Validation.validateEmptyField,
               label: "الجنس",
               value:
-                  widget.reservationModel.info![widget.index].gender! == 'ذكر'
-                      ? "male"
-                      : widget.reservationModel.info![widget.index].gender! ==
-                          'أنثى'
-                      ? "female"
+                  widget.reservationModel.info![widget.index].gender != null
+                      ? widget.reservationModel.info![widget.index].gender! ==
+                              'ذكر'
+                          ? "male"
+                          : widget
+                                  .reservationModel
+                                  .info![widget.index]
+                                  .gender! ==
+                              'أنثى'
+                          ? "female"
+                          : null
                       : null,
 
               hint: "اختر الجنس",

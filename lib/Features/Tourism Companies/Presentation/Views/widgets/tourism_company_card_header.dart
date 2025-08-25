@@ -24,7 +24,10 @@ class TourismCompanyCardHeader extends StatelessWidget {
           ).copyWith(color: AppColors.titleTextColor),
         ),
         SizedBox(height: AppSpacing.s8),
-        CustomRating(textColor: AppColors.titleTextColor,rating: company.rating,),
+        CustomRating(
+          textColor: AppColors.titleTextColor,
+          rating: company.rating,
+        ),
       ],
     );
   }

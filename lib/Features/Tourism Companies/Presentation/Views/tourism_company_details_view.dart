@@ -11,7 +11,7 @@ class TourismCompanyDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar2(hasTitle: false),
-      body: TourismCompanyDetailsViewBody(company:company),
+      body: TourismCompanyDetailsViewBody(company: company),
     );
   }
 }

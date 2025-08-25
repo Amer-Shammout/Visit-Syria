@@ -10,8 +10,7 @@ import 'package:visit_syria/Features/Tourism%20Companies/Presentation/Views/widg
 
 class TourismCompanyDetailsViewHeader extends StatelessWidget {
   const TourismCompanyDetailsViewHeader({super.key, required this.company});
-    final CompanyModel company;
-
+  final CompanyModel company;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,10 @@ class TourismCompanyDetailsViewHeader extends StatelessWidget {
                         title: '${company.numberOfTrips} رحلات',
                         iconSize: 18,
                       ),
-                      CustomRating(textColor: AppColors.titleTextColor,rating: company.rating,),
+                      CustomRating(
+                        textColor: AppColors.titleTextColor,
+                        rating: company.rating,
+                      ),
                     ],
                   ),
                 ],

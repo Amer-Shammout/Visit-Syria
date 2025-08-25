@@ -1,8 +1,6 @@
 import 'dart:developer';
-
 import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
@@ -12,12 +10,10 @@ import 'package:visit_syria/Core/utils/styles/shadows.dart';
 import 'package:visit_syria/Core/widgets/confirm_delete_dialog.dart';
 import 'package:visit_syria/Core/widgets/custom_general_floating_button.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
-import 'package:visit_syria/Features/Reservation/Data/Models/event_and_trips_booking_model/event_and_trips_booking_model.dart';
-import 'package:visit_syria/Features/Reservation/Data/Models/event_and_trips_booking_model/passenger.dart';
 import 'package:visit_syria/Features/Reservation/Data/Models/reservation_info_model.dart';
 import 'package:visit_syria/Features/Reservation/Data/Models/reservation_model.dart';
+import 'package:visit_syria/Features/Reservation/Presentation/Functions/book_event_or_trip.dart';
 import 'package:visit_syria/Features/Reservation/Presentation/Functions/check_validate.dart';
-import 'package:visit_syria/Features/Reservation/Presentation/Manager/event_and_trip_booking_cubit/event_and_trips_booking_cubit.dart';
 import 'package:visit_syria/Features/Reservation/Presentation/Views/Widgets/reservation_expansion_tile.dart';
 import 'package:visit_syria/Features/Reservation/Presentation/Views/Widgets/shaking_icon.dart';
 
@@ -234,46 +230,55 @@ class _ReservationPeopleInfoViewBodyState
                         widget.reservationModel,
                       );
                       if (isAllValid) {
-                        String type = '';
-                        int id = 0;
-                        if (widget.reservationModel.tripModel != null) {
-                          type = 'trip';
-                          id = widget.reservationModel.tripModel!.id!;
-                        }
-                        if (widget.reservationModel.eventModel != null) {
-                          type = 'event';
-                          id = widget.reservationModel.eventModel!.id!;
-                        }
-                        int tickets = widget.reservationModel.tickets!;
-                        List<Passenger> passengers = [];
-                        for (var i = 0; i < tickets; i++) {
-                          Passenger passenger = Passenger(
-                            firstName:
-                                widget.reservationModel.info![i].firstName,
-                            lastName: widget.reservationModel.info![i].lastName,
-                            birthDate:
-                                widget.reservationModel.info![i].birthDate,
-                            email: widget.reservationModel.info![i].email,
-                            gender: widget.reservationModel.info![i].gender,
-                            nationality:
-                                widget.reservationModel.info![i].nationality,
-                            phone: widget.reservationModel.info![i].phone,
-                            countryCode:
-                                widget.reservationModel.info![i].countryCode,
+                        if (widget.reservationModel.flightModel != null) {
+                          await bookFlight(context, widget.reservationModel);
+                        } else {
+                          await bookEventOrTrip(
+                            context,
+                            widget.reservationModel,
                           );
-                          passengers.add(passenger);
                         }
-                        EventAndTripsBookingModel reserve =
-                            EventAndTripsBookingModel(
-                              type: type,
-                              id: id,
-                              numberOfTickets: tickets,
-                              passengers: passengers,
-                            );
-                        await BlocProvider.of<EventAndTripsBookingCubit>(
-                          context,
-                        ).bookEventOrTrip(reserve);
-                        log(reserve.toString());
+
+                        // String type = '';
+                        // int id = 0;
+                        // if (widget.reservationModel.tripModel != null) {
+                        //   type = 'trip';
+                        //   id = widget.reservationModel.tripModel!.id!;
+                        // }
+                        // if (widget.reservationModel.eventModel != null) {
+                        //   type = 'event';
+                        //   id = widget.reservationModel.eventModel!.id!;
+                        // }
+                        // int tickets = widget.reservationModel.tickets!;
+                        // List<Passenger> passengers = [];
+                        // for (var i = 0; i < tickets; i++) {
+                        //   Passenger passenger = Passenger(
+                        //     firstName:
+                        //         widget.reservationModel.info![i].firstName,
+                        //     lastName: widget.reservationModel.info![i].lastName,
+                        //     birthDate:
+                        //         widget.reservationModel.info![i].birthDate,
+                        //     email: widget.reservationModel.info![i].email,
+                        //     gender: widget.reservationModel.info![i].gender,
+                        //     nationality:
+                        //         widget.reservationModel.info![i].nationality,
+                        //     phone: widget.reservationModel.info![i].phone,
+                        //     countryCode:
+                        //         widget.reservationModel.info![i].countryCode,
+                        //   );
+                        //   passengers.add(passenger);
+                        // }
+                        // EventAndTripsBookingModel reserve =
+                        //     EventAndTripsBookingModel(
+                        //       type: type,
+                        //       id: id,
+                        //       numberOfTickets: tickets,
+                        //       passengers: passengers,
+                        //     );
+                        // await BlocProvider.of<EventAndTripsBookingCubit>(
+                        //   context,
+                        // ).bookEventOrTrip(reserve);
+                        // log(reserve.toString());
                       } else {
                         setState(() {});
                       }

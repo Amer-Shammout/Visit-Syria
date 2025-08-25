@@ -37,7 +37,7 @@ class ErrorSearchViewBody extends StatelessWidget {
           illustration: Assets.illustrationsFailure,
           text: message,
           buttonText: "إعادة المحاولة",
-          onTap: ()=>context.read<SearchCubit>().doSearch(),
+          onTap: () => context.read<SearchCubit>().doSearch(),
         ),
       ),
     );

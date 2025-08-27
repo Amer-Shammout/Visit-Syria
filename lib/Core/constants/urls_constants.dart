@@ -44,3 +44,4 @@ const kSearchURL = 'search';
 const kFeedbackUrl = 'feedback/';
 const kSaveUrl = 'saves/';
 const kGetSaveUrl = 'saves';
+const kPaymentURL = 'stripe/pay';

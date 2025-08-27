@@ -34,7 +34,7 @@ extension SearchTypesX on SearchTypes {
       case SearchTypes.trip:
         return "trip";
       case SearchTypes.tourist:
-        return "tourist"; 
+        return "tourist";
       case SearchTypes.restaurant:
         return "restaurant";
       case SearchTypes.hotel:
@@ -48,4 +48,3 @@ extension SearchTypesX on SearchTypes {
     }
   }
 }
-

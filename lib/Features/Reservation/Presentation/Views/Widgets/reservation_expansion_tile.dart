@@ -8,7 +8,7 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/widgets/custom_expanstion_tile.dart';
 import 'package:visit_syria/Features/Reservation/Data/Models/reservation_info_model.dart';
 import 'package:visit_syria/Features/Reservation/Data/Models/reservation_model.dart';
-import 'package:visit_syria/Features/Reservation/Presentation/Views/Widgets/custom_expansion_tile_form.dart';
+import 'package:visit_syria/Features/Reservation/Presentation/Views/Widgets/Reservation%20Info%20Form/custom_expansion_tile_form.dart';
 
 class ReservationExpansionTile extends StatefulWidget {
   const ReservationExpansionTile({

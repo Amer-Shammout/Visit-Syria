@@ -24,9 +24,9 @@ class TourismCompanyCard extends StatelessWidget {
           padding: 8,
           child: Column(
             children: [
-              TourismCompanyCardHeader(company: company,),
+              TourismCompanyCardHeader(company: company),
               SizedBox(height: AppSpacing.s16),
-              TourismCompanyCardGeneralInfo(company:company),
+              TourismCompanyCardGeneralInfo(company: company),
               SizedBox(height: AppSpacing.s16),
               CustomButton(
                 onPressed: () {},

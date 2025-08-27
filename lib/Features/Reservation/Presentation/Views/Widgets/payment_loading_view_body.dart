@@ -1,0 +1,42 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:visit_syria/Core/constants/text_constant.dart';
+import 'package:visit_syria/Core/utils/assets.dart';
+import 'package:visit_syria/Core/utils/styles/app_colors.dart';
+import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
+import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
+import 'package:visit_syria/Core/widgets/custom_loading_indicator.dart';
+import 'package:visit_syria/Core/widgets/custom_section.dart';
+
+class PaymentLoadingViewBody extends StatelessWidget {
+  const PaymentLoadingViewBody({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SvgPicture.asset(Assets.illustrationsLoadingPayment),
+            SizedBox(height: AppSpacing.s64),
+            CustomSection(
+              title: kPaymentLoadingTitle,
+              hasSeeAll: false,
+              section: Text(
+                kPaymentLoadingDescription,
+                style: AppStyles.fontsRegular14(
+                  context,
+                ).copyWith(color: AppColors.bodyTextColor),
+              ),
+            ),
+            SizedBox(height: AppSpacing.s64),
+            CustomLoadingIndicator(),
+          ],
+        ),
+      ),
+    );
+  }
+}

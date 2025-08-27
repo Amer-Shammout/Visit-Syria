@@ -7,7 +7,6 @@ class Prefs {
     _instance = await SharedPreferences.getInstance();
   }
 
-  
   static setBool(String key, bool value) async {
     await _instance.setBool(key, value);
   }
@@ -28,23 +27,18 @@ class Prefs {
     await _instance.remove(key);
   }
 
-  
   static const String _searchHistoryKey = "search_history";
 
- 
   static List<String> getSearchHistory() {
     return _instance.getStringList(_searchHistoryKey) ?? [];
   }
 
- 
   static Future<void> addSearchQuery(String query, {int maxItems = 10}) async {
     final history = getSearchHistory();
 
-   
     history.remove(query);
     history.insert(0, query);
 
-   
     if (history.length > maxItems) {
       history.removeRange(maxItems, history.length);
     }
@@ -52,7 +46,6 @@ class Prefs {
     await _instance.setStringList(_searchHistoryKey, history);
   }
 
-  
   static Future<void> clearSearchHistory() async {
     await _instance.remove(_searchHistoryKey);
   }

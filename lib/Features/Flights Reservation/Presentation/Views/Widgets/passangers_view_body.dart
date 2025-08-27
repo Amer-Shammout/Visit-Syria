@@ -153,7 +153,7 @@ class _PassangersViewBodyState extends State<PassangersViewBody> {
 }
 
 PassengerCountModel passengers = PassengerCountModel(
-  adults: 0,
+  adults: 1,
   children: 0,
   infants: 0,
 );

@@ -17,11 +17,7 @@ final class SearchInitial extends SearchState {
 
 final class SearchHistoryState extends SearchState {
   final List<String> history;
-  const SearchHistoryState({
-    required this.history,
-    super.type,
-    super.query,
-  });
+  const SearchHistoryState({required this.history, super.type, super.query});
 
   @override
   List<Object?> get props => [type, query, history];
@@ -37,11 +33,7 @@ final class SearchNoResults extends SearchState {
 
 final class SearchSuccess extends SearchState {
   final List<dynamic> results;
-  const SearchSuccess({
-    required this.results,
-    super.type,
-    super.query,
-  });
+  const SearchSuccess({required this.results, super.type, super.query});
 
   @override
   List<Object?> get props => [type, query, results];
@@ -49,11 +41,7 @@ final class SearchSuccess extends SearchState {
 
 final class SearchFailure extends SearchState {
   final String errMessage;
-  const SearchFailure({
-    required this.errMessage,
-    super.type,
-    super.query,
-  });
+  const SearchFailure({required this.errMessage, super.type, super.query});
 
   @override
   List<Object?> get props => [type, query, errMessage];

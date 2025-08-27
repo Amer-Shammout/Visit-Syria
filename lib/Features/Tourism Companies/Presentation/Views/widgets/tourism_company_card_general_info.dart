@@ -13,8 +13,14 @@ class TourismCompanyCardGeneralInfo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        GeneralInfoItem(icon: Assets.iconsMedal, title: '${company.yearsOfExperience} سنوات خبرة'),
-        GeneralInfoItem(icon: Assets.iconsTripsInActive, title: '${company.numberOfTrips} رحلات'),
+        GeneralInfoItem(
+          icon: Assets.iconsMedal,
+          title: '${company.yearsOfExperience} سنوات خبرة',
+        ),
+        GeneralInfoItem(
+          icon: Assets.iconsTripsInActive,
+          title: '${company.numberOfTrips} رحلات',
+        ),
       ],
     );
   }

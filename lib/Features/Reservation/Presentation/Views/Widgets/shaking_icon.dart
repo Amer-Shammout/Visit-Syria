@@ -21,7 +21,6 @@ class _ShakingIconState extends State<ShakingIcon>
       duration: const Duration(milliseconds: 600),
     )..repeat(reverse: true);
 
-    // حركة يمين - يسار صغيرة
     _animation = Tween<double>(
       begin: -3,
       end: 3,
@@ -40,7 +39,7 @@ class _ShakingIconState extends State<ShakingIcon>
       animation: _animation,
       builder: (context, child) {
         return Transform.translate(
-          offset: Offset(_animation.value, 0), // تحريك بس أفقياً
+          offset: Offset(_animation.value, 0),
           child: widget.child,
         );
       },

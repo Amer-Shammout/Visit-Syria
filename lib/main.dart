@@ -4,10 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:visit_syria/Core/constants/common_constants.dart';
-import 'package:visit_syria/Core/data/repos/common_repo_impl.dart';
-import 'package:visit_syria/Core/manager/delete_save_cubit/delete_save_cubit.dart';
-import 'package:visit_syria/Core/manager/set_save_cubit/set_save_cubit.dart';
 import 'package:visit_syria/Core/services/custom_bloc_observer.dart';
 import 'package:visit_syria/Core/services/firebase_notification.dart';
 import 'package:visit_syria/Core/services/notifications_cubit.dart';
@@ -31,7 +27,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Prefs.init();
-  log(Prefs.getString(kToken));
   // Prefs.removePref(kToken);
   // Prefs.setString(
   //   kToken,
@@ -40,7 +35,10 @@ void main() async {
   WidgetsBinding.instance.addPostFrameCallback((_) {
     FirebaseNotification.getFCMToken();
   });
+  Stripe.publishableKey =
+      'pk_test_51RzhGTFOUKBGQ0NC3H0JgGkkaSbf7hy0jwbxdtSKa2eVERw6wF4fg1SjXYbM1556OI8FUeWItAV1gDjIEUltktFe00cjaJ0qAn';
 
+  await Stripe.instance.applySettings();
   Bloc.observer = CustomBlocObserver();
 
   setupGetit();

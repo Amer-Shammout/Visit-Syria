@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/constants/common_constants.dart';
 import 'package:visit_syria/Core/constants/flight_type.dart';
+import 'package:visit_syria/Core/constants/trips_categories_list.dart';
 import 'package:visit_syria/Core/data/models/city_model.dart';
 import 'package:visit_syria/Core/data/repos/common_repo_impl.dart';
 import 'package:visit_syria/Core/manager/get_feedback_cubit/get_feedback_cubit.dart';
@@ -94,7 +95,11 @@ import 'package:visit_syria/Features/Profile/Presentation/Views/saved_trips_view
 import 'package:visit_syria/Features/Reservation/Data/Models/booking_model/booking_model.dart';
 import 'package:visit_syria/Features/Reservation/Data/Models/reservation_model.dart';
 import 'package:visit_syria/Features/Reservation/Data/Repos/reservation_repo_impl.dart';
-import 'package:visit_syria/Features/Reservation/Presentation/Manager/event_and_trip_booking_cubit/event_and_trips_booking_cubit.dart';
+import 'package:visit_syria/Features/Reservation/Presentation/Manager/event_and_trip_booking_cubit%20copy/event_and_trips_booking_cubit.dart';
+import 'package:visit_syria/Features/Reservation/Presentation/Manager/flight_booking_cubit/flight_booking_cubit.dart';
+import 'package:visit_syria/Features/Reservation/Presentation/Manager/payment_cubit.dart/payment_cubit.dart';
+import 'package:visit_syria/Features/Reservation/Presentation/Views/Payment_loading_view.dart';
+import 'package:visit_syria/Features/Reservation/Presentation/Views/payment_success_view.dart';
 import 'package:visit_syria/Features/Reservation/Presentation/Views/reservation_people_ino_view.dart';
 import 'package:visit_syria/Features/Reservation/Presentation/Views/payment_info_view.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/hotel_and_resturants_details_view.dart';
@@ -245,6 +250,10 @@ abstract class AppRouter {
   static const kSupportname = 'supportView';
   static const kPostRejectCausesView = '/postRejectCausesView';
   static const kPostRejectCausesName = 'postRejectCausesView';
+  static const String kPaymentLoadingView = '/paymentLoadingView';
+  static const String kPaymentLoadingName = 'paymentLoadingView';
+  static const String kPaymentSuccessView = '/paymentSuccessView';
+  static const String kPaymentSuccessName = 'paymentSuccessView';
   static bool get isAuth => Prefs.getString(kToken) != '';
   static final myPostsCubit = GetMyPostsCubit(getIt.get<CommunityRepoImpl>());
   static final getTripsCubit = GetTripsByCategoryCubit(
@@ -932,6 +941,12 @@ abstract class AppRouter {
                           getIt.get<ReservationRepoImpl>(),
                         ),
                   ),
+                  BlocProvider(
+                    create:
+                        (context) => FlightBookingCubit(
+                          getIt.get<ReservationRepoImpl>(),
+                        ),
+                  ),
                 ],
                 child: ReservationPeopleInfoView(
                   reservationModel: state.extra as ReservationModel,
@@ -944,7 +959,13 @@ abstract class AppRouter {
         path: kPaymentInfoView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: PaymentInfoView(bookingModel: state.extra as BookingModel),
+              child: BlocProvider(
+                create:
+                    (context) => PaymentCubit(getIt.get<ReservationRepoImpl>()),
+                child: PaymentInfoView(
+                  bookingModel: state.extra as BookingModel,
+                ),
+              ),
             ),
       ),
       GoRoute(
@@ -988,6 +1009,20 @@ abstract class AppRouter {
 
         pageBuilder:
             (context, state) => MaterialPage(child: PostRejectCausesView()),
+      ),
+      GoRoute(
+        name: kPaymentLoadingName,
+        path: kPaymentLoadingView,
+
+        pageBuilder:
+            (context, state) => MaterialPage(child: PaymentLoadingView()),
+      ),
+      GoRoute(
+        name: kPaymentSuccessName,
+        path: kPaymentSuccessView,
+
+        pageBuilder:
+            (context, state) => MaterialPage(child: PaymentSuccessView()),
       ),
     ],
   );

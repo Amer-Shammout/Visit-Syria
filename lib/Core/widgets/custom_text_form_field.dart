@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 
@@ -25,7 +26,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool readOnly;
   final bool enableInteractiveSelection;
   final void Function(String)? onFieldSubmitted;
-
+  final List<TextInputFormatter>? inputFormatter;
   const CustomTextFormField({
     super.key,
     this.hint,
@@ -50,6 +51,7 @@ class CustomTextFormField extends StatefulWidget {
     this.readOnly = false,
     this.enableInteractiveSelection = true,
     this.onFieldSubmitted,
+    this.inputFormatter,
   });
 
   @override

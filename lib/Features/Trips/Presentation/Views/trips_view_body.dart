@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:visit_syria/Core/constants/trips_categories_list.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/tags_list_view.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trips_cards_list_view_builder.dart';
@@ -37,19 +38,19 @@ class _TripsViewBodyState extends State<TripsViewBody> {
       slivers: [
         PinnedHeaderSliver(
           child: TagsListView(
-            data: category,
+            data: kTripsCategories,
             onTagSelected: (value, index) async {
               selectedCategoryIndex = index;
               await BlocProvider.of<GetTripsByCategoryCubit>(
                 context,
-              ).getTripsByCategory(category[selectedCategoryIndex]);
+              ).getTripsByCategory(kTripsCategories[selectedCategoryIndex]);
             },
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s12)),
         SliverFillRemaining(
           child: TripsCardsListViewBuilder(
-            category: category[selectedCategoryIndex],
+            category: kTripsCategories[selectedCategoryIndex],
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),

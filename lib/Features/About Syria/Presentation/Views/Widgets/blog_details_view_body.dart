@@ -36,6 +36,10 @@ class _BlogDetailsViewBodyState extends State<BlogDetailsViewBody> {
         physics: BouncingScrollPhysics(),
         slivers: [
           CustomSliverAppBar(
+            model: widget.articleModel,
+            type: "article",
+            id: widget.articleModel!.id.toString(),
+            isSaved: widget.articleModel!.isSaved!,
             images: [Assets.imagesDaraa],
             title:
                 widget.articleModel?.title ??

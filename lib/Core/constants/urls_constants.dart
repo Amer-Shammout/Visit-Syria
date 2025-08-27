@@ -41,3 +41,6 @@ const kBookFlightURL = 'bookFlight';
 const kAddSupportNoteURL = 'supports';
 const kGetAllCompaniesURL = 'companies';
 const kSearchURL = 'search';
+const kFeedbackUrl = 'feedback/';
+const kSaveUrl = 'saves/';
+const kGetSaveUrl = 'saves';

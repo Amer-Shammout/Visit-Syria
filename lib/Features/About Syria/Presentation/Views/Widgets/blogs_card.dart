@@ -18,7 +18,12 @@ class BlogsCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Expanded(child: BlogsCardImage()),
+            Expanded(
+              child: BlogsCardImage(
+                id: articleModel!.id!.toString(),
+                articleModel: articleModel!,
+              ),
+            ),
             SizedBox(width: AppSpacing.s8),
             Expanded(child: BlogsCardDetails(articleModel: articleModel)),
           ],

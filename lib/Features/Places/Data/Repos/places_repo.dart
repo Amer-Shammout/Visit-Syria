@@ -21,7 +21,7 @@ abstract class PlacesRepo {
   Future<Either<Failure, dynamic>> addCommentAndRating({
     required String placeId,
     required String comment,
-    required double rating,
+    required String rating,
   });
 
   Future<Either<Failure, dynamic>> deleteCommentAndRating(String commentId);

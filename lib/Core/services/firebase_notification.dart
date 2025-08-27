@@ -1,7 +1,11 @@
 import 'dart:developer';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:visit_syria/Core/services/notifications_cubit.dart';
+import 'package:visit_syria/Core/utils/app_router.dart';
+import 'package:visit_syria/Core/utils/functions/show_snack_bar.dart';
 
 abstract class FirebaseNotification {
   static String? fcmToken;
@@ -17,5 +21,18 @@ abstract class FirebaseNotification {
     }
 
     log(fcmToken ?? 'no token');
+    FirebaseMessaging.onMessage.listen((message) {
+      AppRouter.navigatorKey.currentState?.context;
+      log("message");
+      final context = AppRouter.navigatorKey.currentContext;
+      if (context != null) {
+        context.read<NotificationCubit>().showBadge();
+        showTopSnackBar(
+          message.notification?.title ?? "Hello Sir",
+          message.notification?.body ?? "",
+          context,
+        );
+      }
+    });
   }
 }

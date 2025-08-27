@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
-import 'package:visit_syria/Core/widgets/custom_icon_button.dart';
 import 'package:visit_syria/Core/widgets/custom_image.dart';
 import 'package:visit_syria/Features/About%20Syria/Data/Models/article_model.dart';
+import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_card.dart';
 
 class SimilarBlogsCard extends StatelessWidget {
   const SimilarBlogsCard({super.key, this.articleModel});
@@ -28,12 +28,7 @@ class SimilarBlogsCard extends StatelessWidget {
             PositionedDirectional(
               end: 12,
               top: 12,
-              child: CustomIconButton(
-                inActiveIcon: Assets.iconsBookmarkStroke,
-                onTap: () {},
-                isActive: false,
-                activeIcon: Assets.iconsBookmarkFill,
-              ),
+              child: CustomBookmarkButton(isActive: articleModel!.isSaved!,id: articleModel!.id.toString(),type: 'article',model: articleModel,),
             ),
             Positioned(
               bottom: 12,

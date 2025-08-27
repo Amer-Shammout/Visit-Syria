@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/widgets/custom_app_bar.dart';
 import 'package:visit_syria/Core/widgets/custom_drawer.dart';
 import 'package:visit_syria/Core/widgets/custom_nav_bar.dart';
@@ -18,8 +20,11 @@ class AppRootView extends StatefulWidget {
 class _AppRootViewState extends State<AppRootView> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = const [
-    HomeViewBodyBuilder(),
+  final List<Widget> _pages = [
+    BlocProvider.value(
+      value: AppRouter.getTripsCubit, 
+      child: HomeViewBodyBuilder(),
+    ),
     CitiesViewBody(),
     TripsViewBody(),
     CommunityViewBody(),

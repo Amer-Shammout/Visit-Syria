@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/functions/show_snack_bar.dart';
 import 'package:visit_syria/Core/widgets/custom_app_bar_2.dart';
+import 'package:visit_syria/Core/widgets/custom_error_and_empty_state_body.dart';
 import 'package:visit_syria/Features/Community/Data/Models/post_model/comment.dart';
 import 'package:visit_syria/Features/Community/Data/Models/post_model/user.dart';
 import 'package:visit_syria/Features/Community/Presentation/Manager/get_all_approved_posts_by_tag_cubit/get_all_approved_posts_by_tag_cubit.dart';
@@ -37,11 +39,18 @@ class _AllCommentsViewState extends State<AllCommentsView> {
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: [
-          CommentsListView(
-            hasRate: false,
-            shrinkWrap: false,
-            postComments: widget.comments,
-          ),
+          widget.comments.isEmpty
+              ? SliverFillRemaining(
+                child: CustomErrorAndEmptyStateBody(
+                  illustration: Assets.illustrationsEmptyComments,
+                  text: "كن أول من يعلق!",
+                ),
+              )
+              : CommentsListView(
+                hasRate: false,
+                shrinkWrap: false,
+                postComments: widget.comments,
+              ),
           SliverToBoxAdapter(child: SizedBox(height: 100)),
         ],
       ),

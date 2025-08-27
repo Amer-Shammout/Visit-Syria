@@ -45,6 +45,10 @@ class _TripDetailsViewBodyState extends State<TripDetailsViewBody> {
             physics: BouncingScrollPhysics(),
             slivers: [
               CustomSliverAppBar(
+                model: widget.tripModel,
+                type: 'trip',
+                id: widget.tripModel.id.toString(),
+                isSaved: widget.tripModel.isSaved!,
                 images: [
                   Assets.imagesTest,
                   Assets.imagesAzemPalace,

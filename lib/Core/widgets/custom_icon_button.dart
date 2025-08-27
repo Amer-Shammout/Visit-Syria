@@ -36,13 +36,23 @@ class CustomIconButton extends StatelessWidget {
           ),
           child: Transform.flip(
             flipX: true,
-            child: SvgPicture.asset(
-              isActive ? activeIcon! : inActiveIcon,
-              height: isSmall ? 12 : 16,
-              width: isSmall ? 12 : 16,
-              colorFilter: ColorFilter.mode(
-                AppColors.whiteColor,
-                BlendMode.srcATop,
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: ScaleTransition(scale: animation, child: child),
+                );
+              },
+              child: SvgPicture.asset(
+                isActive ? activeIcon! : inActiveIcon,
+                key: ValueKey<bool>(isActive), // مهم للتمييز بين الحالات
+                height: isSmall ? 12 : 16,
+                width: isSmall ? 12 : 16,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.whiteColor,
+                  BlendMode.srcATop,
+                ),
               ),
             ),
           ),

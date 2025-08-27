@@ -13,12 +13,21 @@ class ImageSelector extends StatefulWidget {
     this.hasActionButton = true,
     this.hasRate = true,
     this.rate,
+    required this.isSaved,
+    required this.id,
+    required this.type,
+    required this.model, this.action,
   });
   final List<String> images;
   final String title;
   final bool hasActionButton;
   final bool hasRate;
   final dynamic rate;
+  final bool isSaved;
+  final String id;
+  final String type;
+  final dynamic model;
+  final VoidCallback? action;
 
   @override
   State<ImageSelector> createState() => _ImageSelectorState();
@@ -47,7 +56,12 @@ class _ImageSelectorState extends State<ImageSelector> {
                 left: 16,
                 top: 16,
                 child: DetailsViewsHeader(
+                  action: widget.action,
+                  type: widget.type,
+                  model: widget.model,
+                  id: widget.id,
                   hasActionButton: widget.hasActionButton,
+                  isSaved: widget.isSaved,
                 ),
               ),
               Positioned(

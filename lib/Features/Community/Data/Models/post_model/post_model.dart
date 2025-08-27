@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'comment.dart';
 import 'user.dart';
 
+// ignore: must_be_immutable
 class PostModel extends Equatable {
   final int? id;
   final User? user;
@@ -14,11 +15,11 @@ class PostModel extends Equatable {
   final int? commentsCount;
   final int? savesCount;
   final bool? isLiked;
-  final bool? isSaved;
+  bool? isSaved;
   final List<Comment>? comments;
   final String? createdAt;
 
-  const PostModel({
+  PostModel({
     this.id,
     this.user,
     this.description,

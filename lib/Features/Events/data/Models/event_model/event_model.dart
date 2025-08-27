@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+// ignore: must_be_immutable
 class EventModel extends Equatable {
   final int? id;
   final String? name;
@@ -20,10 +21,10 @@ class EventModel extends Equatable {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final List<dynamic>? media;
-  final dynamic isSaved;
+  dynamic isSaved;
   final String? status;
 
-  const EventModel({
+  EventModel({
     this.id,
     this.name,
     this.description,

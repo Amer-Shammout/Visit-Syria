@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/constants/common_constants.dart';
+import 'package:visit_syria/Core/constants/flight_type.dart';
 import 'package:visit_syria/Core/data/models/city_model.dart';
 import 'package:visit_syria/Core/data/repos/common_repo_impl.dart';
 import 'package:visit_syria/Core/manager/get_feedback_cubit/get_feedback_cubit.dart';
@@ -11,7 +12,6 @@ import 'package:visit_syria/Core/services/service_locator.dart';
 import 'package:visit_syria/Core/services/shared_preferences_singleton.dart';
 import 'package:visit_syria/Features/About%20Syria/Data/Models/article_model.dart';
 import 'package:visit_syria/Features/About%20Syria/Data/Repos/about_syria_repo_impl.dart';
-import 'package:visit_syria/Features/About%20Syria/Presentation/Manager/get_articles_by_tag_cubit/get_articles_by_tag_cubit.dart';
 import 'package:visit_syria/Features/About%20Syria/Presentation/Manager/get_similar_articles_by_id_cubit/get_similar_articles_by_id_cubit.dart';
 import 'package:visit_syria/Features/About%20Syria/Presentation/Views/all_similar_blogs_view.dart';
 import 'package:visit_syria/Features/About%20Syria/Presentation/Views/blog_details_view.dart';
@@ -60,11 +60,11 @@ import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/fl
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/flights_search_view.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/passangers_view.dart';
 import 'package:visit_syria/Features/Home/Data/Repos/home_repo_impl.dart';
-import 'package:visit_syria/Features/Home/Presentation/Manager/home_cubit/home_cubit.dart';
 import 'package:visit_syria/Features/Home/Presentation/Manager/weather/get_weather_for_week_cubit/get_weather_for_week_cubit.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/all_best_places_view.dart';
 import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
 import 'package:visit_syria/Features/Places/Data/Repos/places_repo_impl.dart';
+import 'package:visit_syria/Features/Places/Presentation/Manager/add_comment_and_rating_cubit/add_comment_and_rating_cubit.dart';
 import 'package:visit_syria/Features/Places/Presentation/Manager/get_hotels_by_city_cubit/get_hotels_by_city_cubit.dart';
 import 'package:visit_syria/Features/Places/Presentation/Manager/get_places_by_classification_and_city_cubit/get_places_by_classification_and_city_cubit.dart';
 import 'package:visit_syria/Features/Places/Presentation/Manager/get_resturants_by_city_cubit/get_restruants_by_city_cubit.dart';
@@ -72,7 +72,9 @@ import 'package:visit_syria/Features/Places/Presentation/Views/all_comments_and_
 import 'package:visit_syria/Features/Places/Presentation/Views/city_details_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/place_details_view.dart';
 import 'package:visit_syria/Features/Profile/Data/Repos/profile_repo_impl.dart';
+import 'package:visit_syria/Features/Profile/Data/Repos/saves_repo_impl.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/change_password_cubit/change_password_cubit.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/get_saves_cubit/get_saves_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/logout_cubit/logout_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/update_profile_cubit/update_profile_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/My%20Posts/post_reject_causes_view.dart';
@@ -245,8 +247,18 @@ abstract class AppRouter {
   static const kPostRejectCausesName = 'postRejectCausesView';
   static bool get isAuth => Prefs.getString(kToken) != '';
   static final myPostsCubit = GetMyPostsCubit(getIt.get<CommunityRepoImpl>());
+  static final getTripsCubit = GetTripsByCategoryCubit(
+    getIt.get<TripRepoImpl>(),
+  );
+  static final addCommentCubit = AddCommentAndRatingCubit(
+    getIt.get<PlacesRepoImpl>(),
+  );
+
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
 
   static final router = GoRouter(
+    navigatorKey: navigatorKey,
     initialLocation: isAuth ? kAppRootView : kSplashView,
     routes: [
       GoRoute(
@@ -421,29 +433,10 @@ abstract class AppRouter {
         path: kAppRootView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: MultiBlocProvider(
-                providers: [
-                  BlocProvider(
-                    create:
-                        (context) =>
-                            HomeCubit(getIt.get<HomeRepoImpl>())
-                              ..fetchHomeData(),
-                  ),
-
-                  BlocProvider(
-                    create:
-                        (context) =>
-                            GetTripsByCategoryCubit(getIt.get<TripRepoImpl>())
-                              ..getTripsByCategory("الكل"),
-                  ),
-
-                  BlocProvider(
-                    create:
-                        (context) => GetArticlesByTagCubit(
-                          getIt.get<AboutSyriaRepoImpl>(),
-                        )..fetchArticles("الكل"),
-                  ),
-                ],
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        GetTripsByCategoryCubit(getIt.get<TripRepoImpl>()),
                 child: AppRootView(),
               ),
             ),
@@ -506,7 +499,10 @@ abstract class AppRouter {
         path: kPlaceDetailsView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: PlaceDetailsView(placeModel: state.extra as PlaceModel),
+              child: BlocProvider.value(
+                value: addCommentCubit,
+                child: PlaceDetailsView(placeModel: state.extra as PlaceModel),
+              ),
             ),
       ),
       GoRoute(
@@ -514,9 +510,15 @@ abstract class AppRouter {
         path: kAllCommentsAndRatingView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: BlocProvider(
-                create:
-                    (context) => GetFeedbackCubit(getIt.get<CommonRepoImpl>()),
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) =>
+                            GetFeedbackCubit(getIt.get<CommonRepoImpl>()),
+                  ),
+                  BlocProvider.value(value: addCommentCubit),
+                ],
                 child: AllCommentsAndRatingView(
                   placeModel: state.extra as PlaceModel,
                 ),
@@ -550,7 +552,7 @@ abstract class AppRouter {
                       (context) =>
                           SetCommentCubit(getIt.get<CommunityRepoImpl>()),
                 ),
-                BlocProvider.value(value: myPostsCubit),
+                BlocProvider.value(value: getTripsCubit),
               ],
 
               child: AllCommentsView(
@@ -617,8 +619,11 @@ abstract class AppRouter {
         path: kHotelsAndResturantsDetailsView,
         pageBuilder:
             (context, state) => MaterialPage(
-              child: HotelAndResturantsDetailsView(
-                place: state.extra as PlaceModel,
+              child: BlocProvider.value(
+                value: addCommentCubit,
+                child: HotelAndResturantsDetailsView(
+                  place: state.extra as PlaceModel,
+                ),
               ),
             ),
       ),
@@ -638,7 +643,10 @@ abstract class AppRouter {
         pageBuilder:
             (context, state) => MaterialPage(
               child: BlocProvider(
-                create: (context) => GetAllCompaniesCubit(getIt.get<CompaniesRepoImpl>())..getAllCompanies(),
+                create:
+                    (context) =>
+                        GetAllCompaniesCubit(getIt.get<CompaniesRepoImpl>())
+                          ..getAllCompanies(),
                 child: TourismCompaniesView(),
               ),
             ),
@@ -652,7 +660,9 @@ abstract class AppRouter {
                 create:
                     (context) =>
                         GetCompanyTripsCubit(getIt.get<TripRepoImpl>()),
-                child: TourismCompanyDetailsView(company:state.extra as CompanyModel),
+                child: TourismCompanyDetailsView(
+                  company: state.extra as CompanyModel,
+                ),
               ),
             ),
       ),
@@ -704,38 +714,85 @@ abstract class AppRouter {
       GoRoute(
         name: kSavedEventsName,
         path: kSavedEventsView,
-        pageBuilder: (context, state) => MaterialPage(child: SavedEventsView()),
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) => GetSavesCubit(getIt.get<MySavesRepoImpl>())..getSaves(type: SearchTypes.event),
+                child: SavedEventsView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kSavedTripsName,
         path: kSavedTripsView,
-        pageBuilder: (context, state) => MaterialPage(child: SavedTripsView()),
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) => GetSavesCubit(getIt.get<MySavesRepoImpl>())..getSaves(type: SearchTypes.trip),
+                child: SavedTripsView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kSavedPlacesName,
         path: kSavedPlacesView,
-        pageBuilder: (context, state) => MaterialPage(child: SavedPlacesView()),
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) => GetSavesCubit(getIt.get<MySavesRepoImpl>())..getSaves(type: SearchTypes.tourist),
+                child: SavedPlacesView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kSavedResturantsName,
         path: kSavedResturantsView,
         pageBuilder:
-            (context, state) => MaterialPage(child: SavedResturantsView()),
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) => GetSavesCubit(getIt.get<MySavesRepoImpl>())..getSaves(type: SearchTypes.restaurant),
+                child: SavedResturantsView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kSavedHotelsName,
         path: kSavedHotelsView,
-        pageBuilder: (context, state) => MaterialPage(child: SavedHotelsView()),
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) => GetSavesCubit(getIt.get<MySavesRepoImpl>())..getSaves(type: SearchTypes.hotel),
+                child: SavedHotelsView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kSavedBlogsName,
         path: kSavedBlogsView,
-        pageBuilder: (context, state) => MaterialPage(child: SavedBlogsView()),
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) => GetSavesCubit(getIt.get<MySavesRepoImpl>())..getSaves(type: SearchTypes.article),
+                child: SavedBlogsView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kSavedPostsName,
         path: kSavedPostsView,
-        pageBuilder: (context, state) => MaterialPage(child: SavedPostsView()),
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create: (context) => GetSavesCubit(getIt.get<MySavesRepoImpl>())..getSaves(type: SearchTypes.post),
+                child: SavedPostsView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kSettingsName,
@@ -745,10 +802,13 @@ abstract class AppRouter {
       GoRoute(
         name: kSearchName,
         path: kSearchView,
-        pageBuilder: (context, state) => MaterialPage(child: BlocProvider(
-          create: (context) => SearchCubit(getIt.get<SearchRepoImpl>()),
-          child: SearchView(),
-        )),
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create: (context) => SearchCubit(getIt.get<SearchRepoImpl>()),
+                child: SearchView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kTripDetailsName,

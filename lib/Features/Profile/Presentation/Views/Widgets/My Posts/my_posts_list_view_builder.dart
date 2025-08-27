@@ -8,6 +8,7 @@ import 'package:visit_syria/Core/widgets/custom_loading_indicator.dart';
 import 'package:visit_syria/Features/Community/Presentation/Manager/get_my_posts_cubit/get_my_posts_cubit.dart';
 import 'package:visit_syria/Features/Community/Presentation/Manager/get_my_posts_cubit/get_my_posts_state.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/posts_list_view.dart';
+import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_card.dart';
 
 class MyPostsListViewBuilder extends StatelessWidget {
   const MyPostsListViewBuilder({super.key});
@@ -17,10 +18,12 @@ class MyPostsListViewBuilder extends StatelessWidget {
     return BlocBuilder<GetMyPostsCubit, GetMyPostsState>(
       builder: (context, state) {
         if (state is GetMyPostsSuccess) {
-          return PostsListView(
-            posts: state.posts,
-            displayStatus: true,
-            isMyPost: true,
+          return CustomSaveMultiBlocListener(
+            child: PostsListView(
+              posts: state.posts,
+              displayStatus: true,
+              isMyPost: true,
+            ),
           );
         } else if (state is GetMyPostsFailure) {
           return SliverFillRemaining(

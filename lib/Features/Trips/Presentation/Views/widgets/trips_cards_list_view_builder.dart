@@ -7,6 +7,7 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_error_and_empty_state_body.dart';
 import 'package:visit_syria/Core/widgets/custom_loading_indicator.dart';
+import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_card.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trips_cards_list_view.dart';
 import 'package:visit_syria/Features/Trips/Presentation/manager/get_trips_by_category_cubit/get_trips_by_category_cubit.dart';
 
@@ -18,9 +19,8 @@ class TripsCardsListViewBuilder extends StatelessWidget {
     return BlocBuilder<GetTripsByCategoryCubit, GetTripsByCategoryState>(
       builder: (context, state) {
         if (state is GetTripsByCategorySuccess) {
-          return TripsCardsListView(trips: state.trips);
-        }
-        if (state is GetTripsByCategoryEmpty) {
+          return CustomSaveMultiBlocListener(child: TripsCardsListView(trips: state.trips));
+        } else if (state is GetTripsByCategoryEmpty) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,8 +35,7 @@ class TripsCardsListViewBuilder extends StatelessWidget {
               ),
             ],
           );
-        }
-        if (state is GetTripsByCategoryFailure) {
+        } else if (state is GetTripsByCategoryFailure) {
           return CustomErrorAndEmptyStateBody(
             illustration: Assets.illustrationsFailure,
             text: state.errMessage,
@@ -46,8 +45,9 @@ class TripsCardsListViewBuilder extends StatelessWidget {
                 ).getTripsByCategory(category),
             buttonText: "أعادة المحاولة",
           );
+        } else {
+          return Center(child: CustomLoadingIndicator());
         }
-        return Center(child: CustomLoadingIndicator());
       },
     );
   }

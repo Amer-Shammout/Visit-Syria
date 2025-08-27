@@ -6,6 +6,7 @@ import 'package:visit_syria/Core/widgets/custom_loading_indicator.dart';
 import 'package:visit_syria/Features/Community/Presentation/Manager/get_all_approved_posts_by_tag_cubit/get_all_approved_posts_by_tag_cubit.dart';
 import 'package:visit_syria/Features/Community/Presentation/Manager/get_all_approved_posts_by_tag_cubit/get_all_approved_posts_by_tag_state.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/posts_list_view.dart';
+import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_card.dart';
 
 class PostsListViewBuilder extends StatelessWidget {
   const PostsListViewBuilder({super.key, required this.tag});
@@ -19,7 +20,9 @@ class PostsListViewBuilder extends StatelessWidget {
     >(
       builder: (context, state) {
         if (state is GetAllApprovedPostsByTagSuccess) {
-          return PostsListView(posts: state.posts, displayStatus: false);
+          return CustomSaveMultiBlocListener(
+            child: PostsListView(posts: state.posts, displayStatus: false),
+          );
         } else if (state is GetAllApprovedPostsByTagFailure) {
           return SliverFillRemaining(
             child: CustomErrorAndEmptyStateBody(

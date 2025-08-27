@@ -42,7 +42,7 @@ class BlogsCardDetails extends StatelessWidget {
             context,
           ).copyWith(color: AppColors.primary),
         ),
-        SizedBox(height: AppSpacing.s8),
+        Spacer(),
         CustomButton(
           height: 30,
           onPressed: () {},

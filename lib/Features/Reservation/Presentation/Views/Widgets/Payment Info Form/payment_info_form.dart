@@ -205,50 +205,50 @@ class _PaymentInfoFormState extends State<PaymentInfoForm> {
                             log(cardCVC!);
                             log(expMonth!);
                             log(expYear!);
-                            // final cardDetails = CardDetails(
-                            //   number: cardNumber,
-                            //   cvc: cardCVC,
-                            //   expirationMonth: int.parse(expMonth!),
-                            //   expirationYear: int.parse(expYear!),
-                            // );
-                            // await Stripe.instance
-                            //     .dangerouslyUpdateCardDetails(
-                            //       cardDetails,
-                            //     );
-                            // final billingDetails = BillingDetails(
-                            //   name: cardName,
-                            //   email: 'george2004ma@gmail.com',
-                            // );
-                            // final tokenData = await Stripe.instance
-                            //     .createToken(
-                            //       CreateTokenParams.card(
-                            //         params: CardTokenParams(
-                            //           type: TokenType.Card,
-                            //           name: cardName,
-                            //         ),
-                            //       ),
-                            //     );
-                            // log(tokenData.id);
-                            // dynamic paymentModel = PaymentModel(
-                            // bookingId: widget.bookingModel.booking!.id,
-                            // stripeToken: tokenData.id,
-                            // );
-                            // log(paymentModel.toString());
-                            // await BlocProvider.of<PaymentCubit>(
-                            // context,
-                            // ).payment(paymentModel);
-                            String stripeToken =
-                                cardNumber == '4242424242424242'
-                                    ? 'tok_visa'
-                                    : 'tok_visa_chargeDeclined';
+                            final cardDetails = CardDetails(
+                              number: cardNumber,
+                              cvc: cardCVC,
+                              expirationMonth: int.parse(expMonth!),
+                              expirationYear: int.parse(expYear!),
+                            );
+                            await Stripe.instance
+                                .dangerouslyUpdateCardDetails(
+                                  cardDetails,
+                                );
+                            final billingDetails = BillingDetails(
+                              name: cardName,
+                              email: 'george2004ma@gmail.com',
+                            );
+                            final tokenData = await Stripe.instance
+                                .createToken(
+                                  CreateTokenParams.card(
+                                    params: CardTokenParams(
+                                      type: TokenType.Card,
+                                      name: cardName,
+                                    ),
+                                  ),
+                                );
+                            log(tokenData.id);
                             dynamic paymentModel = PaymentModel(
-                              bookingId: widget.bookingModel.booking!.id,
-                              stripeToken: stripeToken,
+                            bookingId: widget.bookingModel.booking!.id,
+                            stripeToken: tokenData.id,
                             );
                             log(paymentModel.toString());
                             await BlocProvider.of<PaymentCubit>(
-                              context,
+                            context,
                             ).payment(paymentModel);
+                            // String stripeToken =
+                            //     cardNumber == '4242424242424242'
+                            //         ? 'tok_visa'
+                            //         : 'tok_visa_chargeDeclined';
+                            // dynamic paymentModel = PaymentModel(
+                            //   bookingId: widget.bookingModel.booking!.id,
+                            //   stripeToken: stripeToken,
+                            // );
+                            // log(paymentModel.toString());
+                            // await BlocProvider.of<PaymentCubit>(
+                            //   context,
+                            // ).payment(paymentModel);
                           } else {
                             isAutoValidate = AutovalidateMode.always;
                             GoRouter.of(context).pop();

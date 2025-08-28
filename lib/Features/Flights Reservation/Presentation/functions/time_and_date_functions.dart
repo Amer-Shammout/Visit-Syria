@@ -6,9 +6,9 @@ String convertTo12HourFormat(String time24, {bool arabic = false}) {
     DateTime dateTime = DateFormat("HH:mm").parse(time24);
 
     if (arabic) {
-      return DateFormat("h a", "ar").format(dateTime);
+      return DateFormat("h:mm a", "ar").format(dateTime);
     } else {
-      return DateFormat("h a").format(dateTime);
+      return DateFormat("h:mm a").format(dateTime);
     }
   } catch (e) {
     return time24;

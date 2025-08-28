@@ -138,7 +138,7 @@ showTopSnackBar(String title, String message, BuildContext context) {
     animationCurve: Curves.easeIn,
     animationDuration: Duration(milliseconds: 300),
     autoDismiss: true,
-    snackbarDuration: Duration(seconds: 2),
+    snackbarDuration: Duration(seconds: 4),
     builder:
         (context) => ToastCard(
           color: AppColors.whiteColor,

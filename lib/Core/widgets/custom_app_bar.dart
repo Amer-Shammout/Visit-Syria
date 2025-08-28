@@ -49,6 +49,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                           BlocProvider.of<NotificationCubit>(
                             context,
                           ).clearBadge();
+                          GoRouter.of(
+                            context,
+                          ).pushNamed(AppRouter.kNotificationsName);
                         },
                         icon: SvgPicture.asset(
                           Assets.iconsNotifications,

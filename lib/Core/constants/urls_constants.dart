@@ -45,3 +45,5 @@ const kFeedbackUrl = 'feedback/';
 const kSaveUrl = 'saves/';
 const kGetSaveUrl = 'saves';
 const kPaymentURL = 'stripe/pay';
+const kGetNotificationsUrl = 'getAllNotifications/';
+const kDeleteNotificationsUrl = 'destroyNotification/';

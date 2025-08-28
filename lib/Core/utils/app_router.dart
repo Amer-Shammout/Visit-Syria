@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/constants/common_constants.dart';
 import 'package:visit_syria/Core/constants/flight_type.dart';
-import 'package:visit_syria/Core/constants/trips_categories_list.dart';
 import 'package:visit_syria/Core/data/models/city_model.dart';
 import 'package:visit_syria/Core/data/repos/common_repo_impl.dart';
 import 'package:visit_syria/Core/manager/get_feedback_cubit/get_feedback_cubit.dart';
@@ -63,6 +62,10 @@ import 'package:visit_syria/Features/Flights%20Reservation/Presentation/Views/pa
 import 'package:visit_syria/Features/Home/Data/Repos/home_repo_impl.dart';
 import 'package:visit_syria/Features/Home/Presentation/Manager/weather/get_weather_for_week_cubit/get_weather_for_week_cubit.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/all_best_places_view.dart';
+import 'package:visit_syria/Features/Notifications/Data/repos/notifications_repo_impl.dart';
+import 'package:visit_syria/Features/Notifications/Presentation/manager/delete_notification_cubit/delete_notification_cubit.dart';
+import 'package:visit_syria/Features/Notifications/Presentation/manager/get_notifications_cubit/get_notifications_cubit.dart';
+import 'package:visit_syria/Features/Notifications/Presentation/views/notifications_view.dart';
 import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
 import 'package:visit_syria/Features/Places/Data/Repos/places_repo_impl.dart';
 import 'package:visit_syria/Features/Places/Presentation/Manager/add_comment_and_rating_cubit/add_comment_and_rating_cubit.dart';
@@ -254,6 +257,8 @@ abstract class AppRouter {
   static const String kPaymentLoadingName = 'paymentLoadingView';
   static const String kPaymentSuccessView = '/paymentSuccessView';
   static const String kPaymentSuccessName = 'paymentSuccessView';
+  static const String kNotificationsView = '/notificationsView';
+  static const String kNotificationsName = 'notificationsView';
   static bool get isAuth => Prefs.getString(kToken) != '';
   static final myPostsCubit = GetMyPostsCubit(getIt.get<CommunityRepoImpl>());
   static final getTripsCubit = GetTripsByCategoryCubit(
@@ -727,7 +732,9 @@ abstract class AppRouter {
             (context, state) => MaterialPage(
               child: BlocProvider(
                 create:
-                    (context) => GetSavesCubit(getIt.get<MySavesRepoImpl>())..getSaves(type: SearchTypes.event),
+                    (context) =>
+                        GetSavesCubit(getIt.get<MySavesRepoImpl>())
+                          ..getSaves(type: SearchTypes.event),
                 child: SavedEventsView(),
               ),
             ),
@@ -739,7 +746,9 @@ abstract class AppRouter {
             (context, state) => MaterialPage(
               child: BlocProvider(
                 create:
-                    (context) => GetSavesCubit(getIt.get<MySavesRepoImpl>())..getSaves(type: SearchTypes.trip),
+                    (context) =>
+                        GetSavesCubit(getIt.get<MySavesRepoImpl>())
+                          ..getSaves(type: SearchTypes.trip),
                 child: SavedTripsView(),
               ),
             ),
@@ -751,7 +760,9 @@ abstract class AppRouter {
             (context, state) => MaterialPage(
               child: BlocProvider(
                 create:
-                    (context) => GetSavesCubit(getIt.get<MySavesRepoImpl>())..getSaves(type: SearchTypes.tourist),
+                    (context) =>
+                        GetSavesCubit(getIt.get<MySavesRepoImpl>())
+                          ..getSaves(type: SearchTypes.tourist),
                 child: SavedPlacesView(),
               ),
             ),
@@ -763,7 +774,9 @@ abstract class AppRouter {
             (context, state) => MaterialPage(
               child: BlocProvider(
                 create:
-                    (context) => GetSavesCubit(getIt.get<MySavesRepoImpl>())..getSaves(type: SearchTypes.restaurant),
+                    (context) =>
+                        GetSavesCubit(getIt.get<MySavesRepoImpl>())
+                          ..getSaves(type: SearchTypes.restaurant),
                 child: SavedResturantsView(),
               ),
             ),
@@ -775,7 +788,9 @@ abstract class AppRouter {
             (context, state) => MaterialPage(
               child: BlocProvider(
                 create:
-                    (context) => GetSavesCubit(getIt.get<MySavesRepoImpl>())..getSaves(type: SearchTypes.hotel),
+                    (context) =>
+                        GetSavesCubit(getIt.get<MySavesRepoImpl>())
+                          ..getSaves(type: SearchTypes.hotel),
                 child: SavedHotelsView(),
               ),
             ),
@@ -787,7 +802,9 @@ abstract class AppRouter {
             (context, state) => MaterialPage(
               child: BlocProvider(
                 create:
-                    (context) => GetSavesCubit(getIt.get<MySavesRepoImpl>())..getSaves(type: SearchTypes.article),
+                    (context) =>
+                        GetSavesCubit(getIt.get<MySavesRepoImpl>())
+                          ..getSaves(type: SearchTypes.article),
                 child: SavedBlogsView(),
               ),
             ),
@@ -798,7 +815,10 @@ abstract class AppRouter {
         pageBuilder:
             (context, state) => MaterialPage(
               child: BlocProvider(
-                create: (context) => GetSavesCubit(getIt.get<MySavesRepoImpl>())..getSaves(type: SearchTypes.post),
+                create:
+                    (context) =>
+                        GetSavesCubit(getIt.get<MySavesRepoImpl>())
+                          ..getSaves(type: SearchTypes.post),
                 child: SavedPostsView(),
               ),
             ),
@@ -1023,6 +1043,30 @@ abstract class AppRouter {
 
         pageBuilder:
             (context, state) => MaterialPage(child: PaymentSuccessView()),
+      ),
+      GoRoute(
+        name: kNotificationsName,
+        path: kNotificationsView,
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) => GetNotificationsCubit(
+                          getIt.get<NotificationsRepoImpl>(),
+                        )..getNotifications(false),
+                  ),
+                  BlocProvider(
+                    create:
+                        (context) => DeleteNotificationCubit(
+                          getIt.get<NotificationsRepoImpl>(),
+                        ),
+                  ),
+                ],
+                child: NotificationsView(),
+              ),
+            ),
       ),
     ],
   );

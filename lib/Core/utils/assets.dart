@@ -653,5 +653,9 @@ class Assets {
   /// Assets for lottieLogoAnimation
   /// assets/Lottie/Logo-animation.json
   static const String lottieLogoAnimation = "assets/Lottie/Logo-animation.json";
+
+  /// Assets for soundNotify
+  /// assets/sound/notify.wav
+  static const String soundNotify = "sound/notify.wav";
 }
 

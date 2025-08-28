@@ -12,7 +12,7 @@ class SplashViewBody extends StatefulWidget {
 }
 
 class _SplashViewBodyState extends State<SplashViewBody> {
-  bool _navigated = false; // للتأكد أننا لا ننتقل أكثر من مرة
+  bool _navigated = false; 
 
   @override
   Widget build(BuildContext context) {

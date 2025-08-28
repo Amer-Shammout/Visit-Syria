@@ -11,6 +11,12 @@ final class PaymentInitial extends PaymentState {}
 
 final class PaymentLoading extends PaymentState {}
 
+final class PaymentDeclined extends PaymentState {
+  final String message;
+
+  const PaymentDeclined({required this.message});
+}
+
 final class PaymentSuccess extends PaymentState {
   final PaymentResultModel paymentResultModel;
 

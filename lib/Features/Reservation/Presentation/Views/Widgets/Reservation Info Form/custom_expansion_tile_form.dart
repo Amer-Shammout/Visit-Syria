@@ -41,7 +41,7 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
   final _passportNumberFocus = FocusNode();
   final ReservationInfoModel info = ReservationInfoModel();
   final TextEditingController _birthDateController = TextEditingController();
-
+  final TextEditingController _phoneController = TextEditingController();
   Country? selectedCountry;
 
   DateTime firstDate = DateTime(
@@ -61,6 +61,10 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
       _birthDateController.text =
           widget.reservationModel.info![widget.index].birthDate!;
     }
+    if (widget.reservationModel.info![widget.index].phone != null) {
+      _phoneController.text =
+          widget.reservationModel.info![widget.index].phone!;
+    }
   }
 
   @override
@@ -72,6 +76,15 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
     _phoneNumberFocus.dispose();
     _passportNumberFocus.dispose();
     super.dispose();
+  }
+
+  static String? validateEmptyPhone(
+    PhoneNumber? phone,
+    TextEditingController controller,
+  ) {
+    final text = phone?.number ?? controller.text;
+    if (text.isEmpty) return 'مطلوب';
+    return null;
   }
 
   String? Function(String?) get passportDateExpiryValidator {
@@ -135,6 +148,7 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
         child: Column(
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: CustomTextFieldWithLabel(
@@ -148,12 +162,25 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
                     label: "الاسم الأول",
                     validator: Validation.validateEmptyField,
                     onChanged: (firstName) {
-                      widget.reservationModel.info![widget.index].firstName =
-                          firstName;
+                      if (firstName.isEmpty) {
+                        widget.reservationModel.info![widget.index].firstName =
+                            null;
+                      } else {
+                        widget.reservationModel.info![widget.index].firstName =
+                            firstName;
+                      }
                     },
                     onSaved: (firstName) {
-                      widget.reservationModel.info![widget.index].firstName =
-                          firstName;
+                      if (firstName == null) {
+                        widget.reservationModel.info![widget.index].firstName =
+                            null;
+                      } else if (firstName.isEmpty) {
+                        widget.reservationModel.info![widget.index].firstName =
+                            null;
+                      } else {
+                        widget.reservationModel.info![widget.index].firstName =
+                            firstName;
+                      }
                     },
                     focusNode: _firstNameFocus,
                     textInputAction: TextInputAction.next,
@@ -175,12 +202,25 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
                     label: "الاسم الأخير",
                     validator: Validation.validateEmptyField,
                     onChanged: (lastName) {
-                      widget.reservationModel.info![widget.index].lastName =
-                          lastName;
+                      if (lastName.isEmpty) {
+                        widget.reservationModel.info![widget.index].lastName =
+                            null;
+                      } else {
+                        widget.reservationModel.info![widget.index].lastName =
+                            lastName;
+                      }
                     },
                     onSaved: (lastName) {
-                      widget.reservationModel.info![widget.index].lastName =
-                          lastName;
+                      if (lastName == null) {
+                        widget.reservationModel.info![widget.index].lastName =
+                            null;
+                      } else if (lastName.isEmpty) {
+                        widget.reservationModel.info![widget.index].lastName =
+                            null;
+                      } else {
+                        widget.reservationModel.info![widget.index].lastName =
+                            lastName;
+                      }
                     },
                     focusNode: _lastNameFocus,
                     textInputAction: TextInputAction.done,
@@ -196,13 +236,13 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
               value:
                   widget.reservationModel.info![widget.index].gender != null
                       ? widget.reservationModel.info![widget.index].gender! ==
-                              'ذكر'
+                              'male'
                           ? "male"
                           : widget
                                   .reservationModel
                                   .info![widget.index]
                                   .gender! ==
-                              'أنثى'
+                              'female'
                           ? "female"
                           : null
                       : null,
@@ -267,7 +307,9 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
               ),
               SizedBox(height: AppSpacing.s16),
               CustomPhoneFieldWithLabel(
-                validator: Validation.validateEmptyPhone,
+                controller: _phoneController,
+                validator:
+                    (phone) => validateEmptyPhone(phone, _phoneController),
                 focusNode: _phoneNumberFocus,
                 textInputAction: TextInputAction.done,
                 onEditingComplete: () => FocusScope.of(context).unfocus(),
@@ -277,18 +319,13 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
                     widget.reservationModel.info![widget.index].countryCode !=
                                 null &&
                             widget.reservationModel.info![widget.index].phone !=
-                                null &&
-                            widget
-                                    .reservationModel
-                                    .info![widget.index]
-                                    .countryISOCode !=
                                 null
                         ? PhoneNumber(
                           countryISOCode:
                               widget
                                   .reservationModel
                                   .info![widget.index]
-                                  .countryISOCode!,
+                                  .countryCode!,
                           countryCode:
                               widget
                                   .reservationModel
@@ -307,7 +344,7 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
                                 null &&
                             widget.reservationModel.info![widget.index].phone !=
                                 null
-                        ? " "
+                        ? ""
                         : "00000000",
                 onChanged: (phone) {
                   widget.reservationModel.info![widget.index].countryCode =
@@ -322,16 +359,18 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
                       ).isoCode;
                 },
                 onSaved: (phone) {
-                  widget.reservationModel.info![widget.index].countryCode =
-                      phone!.countryCode;
-                  widget.reservationModel.info![widget.index].phone =
-                      phone.number;
-                  widget.reservationModel.info![widget.index].countryISOCode =
-                      phone.countryISOCode;
-                  widget.reservationModel.info![widget.index].isoCode =
-                      CountryPickerUtils.getCountryByPhoneCode(
-                        phone.countryCode.substring(1),
-                      ).isoCode;
+                  if (phone != null) {
+                    widget.reservationModel.info![widget.index].countryCode =
+                        phone!.countryCode;
+                    widget.reservationModel.info![widget.index].phone =
+                        phone.number;
+                    widget.reservationModel.info![widget.index].countryISOCode =
+                        phone.countryISOCode;
+                    widget.reservationModel.info![widget.index].isoCode =
+                        CountryPickerUtils.getCountryByPhoneCode(
+                          phone.countryCode.substring(1),
+                        ).isoCode;
+                  }
                 },
               ),
               SizedBox(height: AppSpacing.s16),

@@ -42,6 +42,8 @@ class CustomTile extends StatelessWidget {
                   ),
                   SizedBox(width: AppSpacing.s8),
                   Text(
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     tileModel.title,
                     style: AppStyles.fontsRegular16(
                       context,

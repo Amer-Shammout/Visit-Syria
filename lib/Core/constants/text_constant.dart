@@ -4,3 +4,6 @@ const String kPaymentLoadingTitle = 'جار معالجة الدفع...';
 const String kPaymentSuccessTitle = 'تم الدفع بنجاح';
 const String kPaymentSuccessDescription =
     'شكرًا لك! تم إتمام عملية الحجز بنجاح!';
+const String kTryAgainButtonText = 'إعادة المحاولة';
+const String kEmptyTripsText = 'لا يوجد رحلات حالياً';
+const String kAIAssistantAppBarTitle = 'المساعد الذكي';

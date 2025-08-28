@@ -37,12 +37,13 @@ class PaymentSuccessViewBody extends StatelessWidget {
             ),
             SizedBox(height: AppSpacing.s64),
             CustomButton(
+              borderRadius: 12,
               width: double.infinity,
               onPressed: () {
                 GoRouter.of(context).goNamed(AppRouter.kAppRootName);
               },
               title: 'تم',
-              textStyle: AppStyles.fontsBold14(
+              textStyle: AppStyles.fontsBold16(
                 context,
               ).copyWith(color: AppColors.whiteColor),
             ),

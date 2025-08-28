@@ -37,7 +37,8 @@ class ReservationExpansionTile extends StatefulWidget {
       _ReservationExpansionTileState();
 }
 
-class _ReservationExpansionTileState extends State<ReservationExpansionTile> {
+class _ReservationExpansionTileState extends State<ReservationExpansionTile>
+    with AutomaticKeepAliveClientMixin {
   String getTitle() {
     String title = "";
     if (widget.reservationModel!.info![widget.index].firstName != null &&
@@ -84,13 +85,18 @@ class _ReservationExpansionTileState extends State<ReservationExpansionTile> {
     }
   }
 
+  bool expanded = false;
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     log("index: ${widget.index}");
     return CustomExpansionTile(
       borderSide: widget.errorStroke ? AppColors.red : null,
       initiallyExpanded: widget.initiallyExpanded,
-      onExpansionChanged: widget.onExpansionChanged,
+      onExpansionChanged: (isExpanded) {
+        expanded = isExpanded;
+        setState(() {});
+      },
       backGroundColor: AppColors.whiteColor,
       maintainState: true,
       title: getTitle(),
@@ -105,13 +111,19 @@ class _ReservationExpansionTileState extends State<ReservationExpansionTile> {
               ).copyWith(color: AppColors.bodyTextColor),
       icon: Assets.iconsUser,
       children: [
-        CustomExpansionTileForm(
-          isAutoValidate: widget.isAutoValidate,
-          formKey: widget.formKey,
-          reservationModel: widget.reservationModel!,
-          index: widget.index,
+        Offstage(
+          offstage: !expanded,
+          child: CustomExpansionTileForm(
+            isAutoValidate: widget.isAutoValidate,
+            formKey: widget.formKey,
+            reservationModel: widget.reservationModel!,
+            index: widget.index,
+          ),
         ),
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

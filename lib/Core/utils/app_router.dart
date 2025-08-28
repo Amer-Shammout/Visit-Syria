@@ -10,6 +10,14 @@ import 'package:visit_syria/Core/data/repos/common_repo_impl.dart';
 import 'package:visit_syria/Core/manager/get_feedback_cubit/get_feedback_cubit.dart';
 import 'package:visit_syria/Core/services/service_locator.dart';
 import 'package:visit_syria/Core/services/shared_preferences_singleton.dart';
+import 'package:visit_syria/Features/AI%20Assistant/Data/Repos/ai_repo_impl.dart';
+import 'package:visit_syria/Features/AI%20Assistant/Data/Models/ai_trip_model/ai_trip_model.dart';
+import 'package:visit_syria/Features/AI%20Assistant/Presentation/Managers/generate_ai_trip_cubit/generate_ai_trip_cubit.dart';
+import 'package:visit_syria/Features/AI%20Assistant/Presentation/Managers/get_ai_trips_cubit/get_ai_trips_cubit.dart';
+import 'package:visit_syria/Features/AI%20Assistant/Presentation/Views/ai_generate_trip_view.dart';
+import 'package:visit_syria/Features/AI%20Assistant/Presentation/Views/ai_home_trips_view.dart';
+import 'package:visit_syria/Features/AI%20Assistant/Presentation/Views/ai_loading_view.dart';
+import 'package:visit_syria/Features/AI%20Assistant/Presentation/Views/ai_trip_details_view.dart';
 import 'package:visit_syria/Features/About%20Syria/Data/Models/article_model.dart';
 import 'package:visit_syria/Features/About%20Syria/Data/Repos/about_syria_repo_impl.dart';
 import 'package:visit_syria/Features/About%20Syria/Presentation/Manager/get_articles_by_tag_cubit/get_articles_by_tag_cubit.dart';
@@ -252,6 +260,14 @@ abstract class AppRouter {
   static const String kPaymentLoadingName = 'paymentLoadingView';
   static const String kPaymentSuccessView = '/paymentSuccessView';
   static const String kPaymentSuccessName = 'paymentSuccessView';
+  static const String kAIHomeTripsView = '/aiHomeTripsView';
+  static const String kAIHomeTripsName = 'aiHomeTripsView';
+  static const String kAIGenerateTripView = '/aiGenerateTripView';
+  static const String kAIGenerateTripName = 'aiGenerateTripView';
+  static const String kAILoadingView = '/aiLoadingView';
+  static const String kAILoadingName = 'aiLoadingView';
+  static const String kAITripDetailsView = '/aiTripDetailsView';
+  static const String kAITripDetailsName = 'aiTripDetailsView';
   static bool get isAuth => Prefs.getString(kToken) != '';
   static final myPostsCubit = GetMyPostsCubit(getIt.get<CommunityRepoImpl>());
 
@@ -971,6 +987,48 @@ abstract class AppRouter {
 
         pageBuilder:
             (context, state) => MaterialPage(child: PaymentSuccessView()),
+      ),
+      GoRoute(
+        name: kAIHomeTripsName,
+        path: kAIHomeTripsView,
+
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        GetAiTripsCubit(getIt.get<AIRepoImpl>())..getAITrips(),
+                child: AIHomeTripsView(),
+              ),
+            ),
+      ),
+      GoRoute(
+        name: kAITripDetailsName,
+        path: kAITripDetailsView,
+
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: AITripDetailsView(aiTripModel: state.extra as AiTripModel),
+            ),
+      ),
+      GoRoute(
+        name: kAIGenerateTripName,
+        path: kAIGenerateTripView,
+
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) => GenerateAiTripCubit(getIt.get<AIRepoImpl>()),
+                child: AIGenerateTripView(),
+              ),
+            ),
+      ),
+      GoRoute(
+        name: kAILoadingName,
+        path: kAILoadingView,
+
+        pageBuilder: (context, state) => MaterialPage(child: AILoadingView()),
       ),
     ],
   );

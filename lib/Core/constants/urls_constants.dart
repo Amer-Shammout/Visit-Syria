@@ -42,3 +42,5 @@ const kAddSupportNoteURL = 'supports';
 const kGetAllCompaniesURL = 'companies';
 const kSearchURL = 'search';
 const kPaymentURL = 'stripe/pay';
+const kAITripsURL = 'itineraries';
+const kAIGenerateTripURL = 'itinerary';

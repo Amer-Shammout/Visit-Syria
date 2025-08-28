@@ -140,16 +140,12 @@ abstract class Validation {
     return null;
   }
 
-  static String? validatePassportNumber(String? value) {
-    if (value == null) return 'الرجاء إدخال رقم الجواز';
-    final s = value.trim().toUpperCase();
-    // اسمح فقط بحروف A-Z وأرقام 0-9، طول بين 6 و 9
-    final re = RegExp(r'^[A-Z0-9]{6,9}$');
-    if (!re.hasMatch(s)) {
-      return 'رقم الجواز يجب أن يكون 6–9 محارف من A–Z أو 0–9 بدون مسافات أو رموز';
-    }
-    return null; // صالح
-  }
+  static String? validateCardNumber(val) =>
+      val == null || val.isEmpty
+          ? 'الرجاء إدخال رقم البطاقة'
+          : !RegExp(r'^\d{16}$').hasMatch(val)
+          ? 'رقم البطاقة غير صالح، يجب أن يحتوي 16 رقمًا'
+          : null;
 
   static String? validateCVC(String? val) {
     if (val == null || val.isEmpty) {

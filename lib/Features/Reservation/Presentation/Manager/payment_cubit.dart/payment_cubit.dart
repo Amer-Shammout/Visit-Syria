@@ -16,7 +16,9 @@ class PaymentCubit extends Cubit<PaymentState> {
     result.fold(
       (failure) => emit(PaymentFailure(errMessage: failure.errMessage)),
       (paymentResult) =>
-          emit(PaymentSuccess(paymentResultModel: paymentResult)),
+          paymentResult.booking == null
+              ? emit(PaymentDeclined(message: paymentResult.message!))
+              : emit(PaymentSuccess(paymentResultModel: paymentResult)),
     );
   }
 }

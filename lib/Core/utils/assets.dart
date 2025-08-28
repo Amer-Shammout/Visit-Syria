@@ -305,6 +305,10 @@ class Assets {
   /// assets/Icons/pending.svg
   static const String iconsPending = "assets/Icons/pending.svg";
 
+  /// Assets for iconsPlus
+  /// assets/Icons/Plus.svg
+  static const String iconsPlus = "assets/Icons/Plus.svg";
+
   /// Assets for iconsPlusFill
   /// assets/Icons/Plus-Fill.svg
   static const String iconsPlusFill = "assets/Icons/Plus-Fill.svg";
@@ -664,6 +668,15 @@ class Assets {
   /// assets/Lottie/AI.json
   static const String lottieAI = "assets/Lottie/AI.json";
 
+  /// Assets for lottieAILoading
+  /// assets/Lottie/AI-loading.json
+  static const String lottieAILoading = "assets/Lottie/AI-loading.json";
+
+  /// Assets for lottieAITripeDetails
+  /// assets/Lottie/AI-tripe-details.json
+  static const String lottieAITripeDetails =
+      "assets/Lottie/AI-tripe-details.json";
+
   /// Assets for lottieArabicLogoWhite
   /// assets/Lottie/Arabic-Logo-White.json
   static const String lottieArabicLogoWhite =
@@ -676,4 +689,9 @@ class Assets {
   /// Assets for lottieLogoAnimation
   /// assets/Lottie/Logo-animation.json
   static const String lottieLogoAnimation = "assets/Lottie/Logo-animation.json";
+
+  /// Assets for lottieVisit syria logo
+  /// assets/Lottie/visit syria logo.json
+  static const String lottieVisitSyriaLogo =
+      "assets/Lottie/visit syria logo.json";
 }

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:visit_syria/Core/constants/text_constant.dart';
+import 'package:lottie/lottie.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
-import 'package:visit_syria/Core/widgets/custom_loading_indicator.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
 
-class PaymentLoadingViewBody extends StatelessWidget {
-  const PaymentLoadingViewBody({super.key});
+class AILoadingViewBody extends StatelessWidget {
+  const AILoadingViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +18,15 @@ class PaymentLoadingViewBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SvgPicture.asset(Assets.illustrationsLoadingPayment),
+            LottieBuilder.asset(Assets.lottieAILoading),
             SizedBox(height: AppSpacing.s64),
             CustomSection(
-              title: kPaymentLoadingTitle,
+              title: 'جار إعداد رحلتك...',
               hasSeeAll: false,
               section: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
-                  kPaymentLoadingDescription,
+                  'نجهز لك تجربة سياحية مخصصة بناءً على اختياراتك – فقط لحظات قليلة ونأخذك في مغامرة لا تُنسى!',
                   style: AppStyles.fontsRegular14(
                     context,
                   ).copyWith(color: AppColors.bodyTextColor),
@@ -36,7 +34,6 @@ class PaymentLoadingViewBody extends StatelessWidget {
               ),
             ),
             SizedBox(height: AppSpacing.s64),
-            CustomLoadingIndicator(),
           ],
         ),
       ),

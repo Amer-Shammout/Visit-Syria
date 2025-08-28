@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
@@ -10,6 +11,7 @@ import 'package:visit_syria/Core/widgets/custom_map.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
 import 'package:visit_syria/Core/widgets/custom_sliver_app_bar.dart';
 import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
+import 'package:visit_syria/Features/Places/Presentation/Manager/add_comment_and_rating_cubit/add_comment_and_rating_cubit.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/comments_list_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/place_general_info.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/rating_form.dart';
@@ -26,6 +28,10 @@ class PlaceDetailsViewBody extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         slivers: [
           CustomSliverAppBar(
+            model: place,
+            type: 'place',
+            id: place.id.toString(),
+            isSaved: place.isSaved,
             images: [
               Assets.imagesTest,
               Assets.imagesAzemPalace,
@@ -68,11 +74,18 @@ class PlaceDetailsViewBody extends StatelessWidget {
                       : null,
               section:
                   place.recentComments!.isNotEmpty
-                      ? CommentsListView(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        hasRate: true,
-                        recentComments: place.recentComments,
+                      ? BlocBuilder<
+                        AddCommentAndRatingCubit,
+                        AddCommentAndRatingState
+                      >(
+                        builder: (context, state) {
+                          return CommentsListView(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            hasRate: true,
+                            recentComments: place.recentComments,
+                          );
+                        },
                       )
                       : Center(
                         child: Text(
@@ -95,6 +108,9 @@ class PlaceDetailsViewBody extends StatelessWidget {
                   section: RatingForm(
                     userComment: place.userComment,
                     userRate: place.userRating,
+                    recentComments: place.recentComments,
+                    id: place.id,
+                    placeModel: place,
                   ),
                 ),
               ),

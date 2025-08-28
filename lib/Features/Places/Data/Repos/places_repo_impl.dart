@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:visit_syria/Core/constants/common_constants.dart';
@@ -92,7 +94,6 @@ class PlacesRepoImpl extends PlacesRepo {
 
   @override
   Future<Either<Failure, dynamic>> getAllCommentsByPlaceId(String placeId) {
-    // TODO: implement
     throw UnimplementedError();
   }
 
@@ -100,10 +101,21 @@ class PlacesRepoImpl extends PlacesRepo {
   Future<Either<Failure, dynamic>> addCommentAndRating({
     required String placeId,
     required String comment,
-    required double rating,
+    required String rating,
   }) {
-    // TODO: implement
-    throw UnimplementedError();
+    log("$comment $placeId $rating");
+    return handleRequest(
+      requestFn:
+          () => getIt.get<DioClient>().post(
+            "$kFeedbackUrl$placeId?type=place",
+            options: Options(
+              headers: {"Authorization": "Bearer ${Prefs.getString(kToken)}"},
+            ),
+            data: {"rating_value": rating, "body": comment},
+            // queryParameters: {"type": "place"},
+          ),
+      parse: (data) => data,
+    );
   }
 
   @override

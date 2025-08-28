@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+// ignore: must_be_immutable
 class ArticleModel extends Equatable {
   final int? id;
   final String? title;
@@ -8,9 +9,9 @@ class ArticleModel extends Equatable {
   final List<dynamic>? tags;
   final String? createdAt;
   final String? updatedAt;
-  final bool? isSaved;
+  bool? isSaved;
 
-  const ArticleModel({
+  ArticleModel({
     this.id,
     this.title,
     this.body,

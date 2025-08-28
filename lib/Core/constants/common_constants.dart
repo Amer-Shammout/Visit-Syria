@@ -6,3 +6,4 @@ const kToken = 'token';
 const kEmailMethod = 'email';
 const kGoogleMethod = 'google';
 const kLoginMethod = 'login_method';
+const kHasBadge = 'has_badge';

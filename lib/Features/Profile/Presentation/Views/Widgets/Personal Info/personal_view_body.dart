@@ -41,9 +41,10 @@ class _PersonalViewBodyState extends State<PersonalViewBody> {
                 ? "${formState.selectedCountry?.flagEmoji} ${formState.selectedCountry?.name}"
                 : GetProfileCubit.userModel?.me?.profile?.country,
         countryCode:
-            formState.selectedCountry != null
+            formState.countryCode ??
+            (formState.selectedCountry != null
                 ? "+${formState.selectedCountry?.phoneCode}"
-                : GetProfileCubit.userModel?.me?.profile?.countryCode,
+                : GetProfileCubit.userModel?.me?.profile?.countryCode),
         dateOfBirth: formState.birthDate,
         duration: formState.preferences?['durations'],
         firstName: formState.firstName,

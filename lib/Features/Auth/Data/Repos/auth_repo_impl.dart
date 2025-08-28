@@ -24,6 +24,7 @@ class AuthRepoImpl extends AuthRepo {
   Future<Either<Failure, String>> register(
     AuthRequestModel authRequestModel,
   ) async {
+    log("${authRequestModel.toJsonRegister()}");
     return await handleRequest<String>(
       requestFn:
           () => getIt.get<DioClient>().post(

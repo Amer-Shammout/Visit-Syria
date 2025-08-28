@@ -201,6 +201,10 @@ class Assets {
   static const String iconsCreditCardStroke =
       "assets/Icons/CreditCardStroke.svg";
 
+  /// Assets for iconsDamascusStar
+  /// assets/Icons/Damascus_Star.svg
+  static const String iconsDamascusStar = "assets/Icons/Damascus_Star.svg";
+
   /// Assets for iconsDate
   /// assets/Icons/Date.svg
   static const String iconsDate = "assets/Icons/Date.svg";
@@ -272,6 +276,10 @@ class Assets {
   /// Assets for iconsLocation
   /// assets/Icons/Location.svg
   static const String iconsLocation = "assets/Icons/Location.svg";
+
+  /// Assets for iconsLogoIcon
+  /// assets/Icons/logo_icon.svg
+  static const String iconsLogoIcon = "assets/Icons/logo_icon.svg";
 
   /// Assets for iconsLogout
   /// assets/Icons/Logout.svg
@@ -694,4 +702,8 @@ class Assets {
   /// assets/Lottie/visit syria logo.json
   static const String lottieVisitSyriaLogo =
       "assets/Lottie/visit syria logo.json";
+
+  /// Assets for soundNotify
+  /// assets/sound/notify.wav
+  static const String soundNotify = "sound/notify.wav";
 }

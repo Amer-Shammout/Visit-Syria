@@ -4,6 +4,7 @@ import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_path.dart'
 
 import 'company.dart';
 
+// ignore: must_be_immutable
 class TripModel extends Equatable {
   final int? id;
   final String? name;
@@ -23,9 +24,9 @@ class TripModel extends Equatable {
   final TripPath? tripPath;
   final List<Timeline>? timelines;
   final Company? company;
-  final bool? isSaved;
+   bool? isSaved;
 
-  const TripModel({
+   TripModel({
     this.id,
     this.name,
     this.description,

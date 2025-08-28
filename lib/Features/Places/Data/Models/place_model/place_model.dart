@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import 'recent_comment.dart';
 
+// ignore: must_be_immutable
 class PlaceModel extends Equatable {
   final dynamic id;
   final int? cityId;
@@ -14,18 +15,18 @@ class PlaceModel extends Equatable {
   final String? place;
   final String? longitude;
   final String? latitude;
-  final double? rating;
+  final dynamic rating;
   final String? classification;
   final List<dynamic>? images;
   final int? rank;
-  final dynamic userRating;
-  final dynamic userComment;
+  dynamic userRating;
+  dynamic userComment;
   final List<RecentComment>? recentComments;
   final DateTime? createdAt;
   final DateTime? updatedAt;
-  final dynamic isSaved;
+  dynamic isSaved;
 
-  const PlaceModel({
+  PlaceModel({
     this.id,
     this.cityId,
     this.type,
@@ -61,7 +62,7 @@ class PlaceModel extends Equatable {
     place: json['place'] as String?,
     longitude: json['longitude'] as String?,
     latitude: json['latitude'] as String?,
-    rating: (json['rating'] as num?)?.toDouble(),
+    rating: json['rating'] as dynamic,
     classification: json['classification'] as String?,
     images: json['images'] as List<dynamic>?,
     rank: json['rank'] as int?,

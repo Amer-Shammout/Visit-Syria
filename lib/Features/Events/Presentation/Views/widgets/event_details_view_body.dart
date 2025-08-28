@@ -26,6 +26,10 @@ class EventDetailsViewBody extends StatelessWidget {
             physics: BouncingScrollPhysics(),
             slivers: [
               CustomSliverAppBar(
+                type: 'event',
+                model: event,
+                id: event.id.toString(),
+                isSaved: event.isSaved,
                 images: [
                   Assets.imagesTest,
                   Assets.imagesAzemPalace,

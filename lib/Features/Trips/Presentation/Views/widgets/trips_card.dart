@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
@@ -8,6 +9,7 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_button.dart';
 import 'package:visit_syria/Core/widgets/custom_card_background.dart';
 import 'package:visit_syria/Features/Community/Presentation/Views/Widgets/post_and_blogs_tags_wrap.dart';
+import 'package:visit_syria/Features/Home/Presentation/Manager/home_cubit/home_cubit.dart';
 import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_model.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trips_card_general_info.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trips_card_header.dart';
@@ -24,10 +26,16 @@ class TripsCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TripsCardImage(
+            action:  () => BlocProvider.of<HomeCubit>(
+                                  context,
+                                ).fetchHomeData(),
+            id: tripModel.id.toString(),
             imageHeight: 200,
             positionedVal: 12,
             discount: tripModel.discount!,
             title: tripModel.name,
+            isSaved: tripModel.isSaved ?? false,
+            model: tripModel,
           ),
           SizedBox(height: AppSpacing.s16),
           CustomTourismCompanyRow(company: tripModel.company),

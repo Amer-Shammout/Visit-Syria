@@ -5,6 +5,7 @@ import 'package:visit_syria/Core/manager/get_feedback_cubit/get_feedback_state.d
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/widgets/custom_error_and_empty_state_body.dart';
 import 'package:visit_syria/Core/widgets/custom_loading_indicator.dart';
+import 'package:visit_syria/Features/Places/Presentation/Manager/add_comment_and_rating_cubit/add_comment_and_rating_cubit.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/comments_list_view.dart';
 
 class CommentsListViewBuilder extends StatelessWidget {
@@ -36,7 +37,17 @@ class CommentsListViewBuilder extends StatelessWidget {
             ),
           );
         } else if (state is GetFeedbackSuccess) {
-          return CommentsListView(comments: state.comments, shrinkWrap: false);
+          return BlocBuilder<
+            AddCommentAndRatingCubit,
+            AddCommentAndRatingState
+          >(
+            builder: (context, _) {
+              return CommentsListView(
+                comments: state.comments,
+                shrinkWrap: false,
+              );
+            },
+          );
         } else {
           return SliverFillRemaining(
             child: Center(child: CustomLoadingIndicator()),

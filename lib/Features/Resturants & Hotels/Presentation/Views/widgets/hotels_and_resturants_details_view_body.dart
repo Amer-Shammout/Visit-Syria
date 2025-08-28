@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
@@ -10,6 +11,7 @@ import 'package:visit_syria/Core/widgets/custom_map.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
 import 'package:visit_syria/Core/widgets/custom_sliver_app_bar.dart';
 import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
+import 'package:visit_syria/Features/Places/Presentation/Manager/add_comment_and_rating_cubit/add_comment_and_rating_cubit.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/comments_list_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/widgets/rating_form.dart';
 import 'package:visit_syria/Features/Resturants%20&%20Hotels/Presentation/Views/widgets/custom_contact_floating_action_button.dart';
@@ -34,6 +36,10 @@ class HotelAndResturantsDetailsViewBody extends StatelessWidget {
             physics: BouncingScrollPhysics(),
             slivers: [
               CustomSliverAppBar(
+                type: 'place',
+                model: place,
+                id: place!.id!.toString(),
+                isSaved: place!.isSaved!,
                 images: [
                   Assets.imagesTest,
                   Assets.imagesAzemPalace,
@@ -67,16 +73,24 @@ class HotelAndResturantsDetailsViewBody extends StatelessWidget {
                   title: "التقييمات و التعليقات",
                   hasSeeAll: true,
                   seaAllAction:
-                      () => GoRouter.of(
-                        context,
-                      ).pushNamed(AppRouter.kAllCommentsAndRatingName),
+                      () => GoRouter.of(context).pushNamed(
+                        AppRouter.kAllCommentsAndRatingName,
+                        extra: place,
+                      ),
                   section:
                       place!.recentComments!.isNotEmpty
-                          ? CommentsListView(
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            hasRate: true,
-                            recentComments: place?.recentComments,
+                          ? BlocBuilder<
+                            AddCommentAndRatingCubit,
+                            AddCommentAndRatingState
+                          >(
+                            builder: (context, state) {
+                              return CommentsListView(
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                hasRate: true,
+                                recentComments: place?.recentComments,
+                              );
+                            },
                           )
                           : Center(
                             child: Text(
@@ -99,12 +113,17 @@ class HotelAndResturantsDetailsViewBody extends StatelessWidget {
                       section: RatingForm(
                         userComment: place?.userComment,
                         userRate: place?.userRating,
+                        recentComments: place?.recentComments,
+                        id: place?.id,
+                        placeModel: place,
                       ),
                     ),
                   ),
               place?.userRating == "guest"
                   ? SliverToBoxAdapter(child: SizedBox.shrink())
                   : SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s32)),
+
+              SliverToBoxAdapter(child: SizedBox(height: 64)),
             ],
           ),
           Positioned(

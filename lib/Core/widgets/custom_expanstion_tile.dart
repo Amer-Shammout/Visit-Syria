@@ -16,7 +16,7 @@ class CustomExpansionTile extends StatelessWidget {
     this.onExpansionChanged,
     this.initiallyExpanded,
     this.titleTextStyle,
-    this.borderSide,
+    this.borderSide,  this.iconSize=24,
   });
   final Color? backGroundColor;
   final BoxShadow? boxShadow;
@@ -29,6 +29,7 @@ class CustomExpansionTile extends StatelessWidget {
   final bool? initiallyExpanded;
   final TextStyle? titleTextStyle;
   final Color? borderSide;
+  final double iconSize;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -69,8 +70,8 @@ class CustomExpansionTile extends StatelessWidget {
           ),
           leading: SvgPicture.asset(
             icon,
-            width: 24,
-            height: 24,
+            width: iconSize,
+            height: iconSize,
             colorFilter: ColorFilter.mode(AppColors.primary, BlendMode.srcATop),
           ),
           iconColor: AppColors.primary,

@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_model.dart';
 import 'package:visit_syria/Features/Trips/Data/Repos/trip_repo.dart';
 

@@ -1,3 +1,4 @@
+import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:visit_syria/Core/constants/gender_constants.dart';
@@ -6,6 +7,7 @@ import 'package:visit_syria/Core/widgets/custom_date_picker_field.dart';
 import 'package:visit_syria/Core/widgets/custom_drop_down_form_field_with_label.dart';
 import 'package:visit_syria/Core/widgets/custom_phone_field_with_label.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/get_profile_cubit/get_profile_cubit.dart';
 
 class SecondaryInfoForm extends StatelessWidget {
   const SecondaryInfoForm({
@@ -52,8 +54,32 @@ class SecondaryInfoForm extends StatelessWidget {
             ),
             SizedBox(height: AppSpacing.s16),
             CustomPhoneFieldWithLabel(
-              initialCountyCode: 'SY',
-
+              initialCountyCode:
+                  CountryPickerUtils.getCountryByPhoneCode(
+                    GetProfileCubit.userModel!.me!.profile!.countryCode!
+                        .toString()
+                        .substring(1),
+                  ).isoCode,
+              initialValue:
+                  GetProfileCubit.userModel != null &&
+                          GetProfileCubit.userModel!.me!.profile!.phone != null
+                      ? PhoneNumber(
+                        countryISOCode:
+                            CountryPickerUtils.getCountryByPhoneCode(
+                              GetProfileCubit
+                                  .userModel!
+                                  .me!
+                                  .profile!
+                                  .countryCode!
+                                  .toString()
+                                  .substring(1),
+                            ).isoCode,
+                        countryCode:
+                            GetProfileCubit.userModel!.me!.profile!.countryCode
+                                .toString(),
+                        number: GetProfileCubit.userModel!.me!.profile!.phone,
+                      )
+                      : null,
               label: "رقم الهاتف",
               hint: "00000000",
               onSaved: onPhoneNumberSaved,

@@ -7,4 +7,12 @@ abstract class CommonRepo {
     required String id,
     required String type,
   });
+  Future<Either<Failure, dynamic>> setSave({
+    required String id,
+    required String type,
+  });
+  Future<Either<Failure, dynamic>> deleteSave({
+    required String id,
+    required String type,
+  });
 }

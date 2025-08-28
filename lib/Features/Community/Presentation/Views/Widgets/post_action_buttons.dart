@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Core/manager/delete_save_cubit/delete_save_cubit.dart';
+import 'package:visit_syria/Core/manager/set_save_cubit/set_save_cubit.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/functions/show_snack_bar.dart';
@@ -74,12 +76,46 @@ class PostActionButtons extends StatelessWidget {
         ),
         SizedBox(width: AppSpacing.s8),
         Expanded(
-          child: PostActionButton(
-            onTap: () {},
-            inActiveIcon: Assets.iconsBookmarkStroke,
-            text: "حفظ",
-            activeIcon: Assets.iconsBookmarkFill,
-            isSelected: false,
+          child: BlocBuilder<DeleteSaveCubit, DeleteSaveState>(
+            builder: (context, state) {
+              return BlocBuilder<SetSaveCubit, SetSaveState>(
+                builder: (context, state) {
+                  return PostActionButton(
+                    onTap: () {
+                      if (postModel.status == "Approved") {
+                        if (postModel.isSaved!) {
+                          BlocProvider.of<DeleteSaveCubit>(context).deleteSave(
+                            id: postModel.id.toString(),
+                            type: 'post',
+                            model: postModel,
+                          );
+                        } else {
+                          BlocProvider.of<SetSaveCubit>(context).setSave(
+                            id: postModel.id.toString(),
+                            type: 'post',
+                            model: postModel,
+                          );
+                        }
+                        isMyPost
+                            ? BlocProvider.of<GetAllApprovedPostsByTagCubit>(
+                              context,
+                            ).fetchPosts("الكل")
+                            : null;
+                      } else {
+                        showFailureSnackBar(
+                          "لم يتم قبول المنشور بعد!",
+                          context,
+                        );
+                      }
+                    },
+                    inActiveIcon: Assets.iconsBookmarkStroke,
+                    text: "حفظ",
+                    activeIcon: Assets.iconsBookmarkFill,
+                    isSelected: postModel.isSaved!,
+                  );
+                },
+              );
+            },
           ),
         ),
       ],

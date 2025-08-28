@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
+import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final String? hint;
@@ -137,10 +138,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           keyboardType: widget.keyboardType,
           textInputAction: widget.textInputAction,
           onEditingComplete: widget.onEditingComplete,
-          style: TextStyle(
-            color: widget.isEnabled ? Colors.black : Colors.grey,
-            fontSize: 16,
-          ),
+          style: AppStyles.fontsRegular16(
+            context,
+          ).copyWith(color: AppColors.titleTextColor),
           decoration: InputDecoration(
             enabled: widget.isEnabled,
             prefixIcon: widget.prefixIcon,
@@ -148,12 +148,18 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               maxHeight: 32,
               maxWidth: 32,
             ),
-            errorStyle: TextStyle(color: Colors.red, fontSize: 12),
+            errorStyle: AppStyles.fontsRegular12(
+              context,
+            ).copyWith(color: AppColors.redSwatch),
             helperText: widget.helperText,
-            helperStyle: TextStyle(color: Colors.grey, fontSize: 12),
+            helperStyle: AppStyles.fontsRegular12(
+              context,
+            ).copyWith(color: AppColors.graySwatch[500]),
             isDense: true,
             hintText: widget.hintWidget == null ? widget.hint : null,
-            hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
+            hintStyle: AppStyles.fontsRegular16(
+              context,
+            ).copyWith(color: AppColors.graySwatch[500]),
             suffixIcon: widget.suffixIcon,
             filled: true,
             fillColor: widget.isEnabled ? Colors.grey[100] : Colors.grey[200],

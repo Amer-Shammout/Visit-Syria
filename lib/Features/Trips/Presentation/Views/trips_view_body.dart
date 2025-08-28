@@ -14,6 +14,22 @@ class TripsViewBody extends StatefulWidget {
 }
 
 class _TripsViewBodyState extends State<TripsViewBody> {
+  @override
+  void initState() {
+    BlocProvider.of<GetTripsByCategoryCubit>(
+      context,
+    ).getTripsByCategory("الكل");
+    super.initState();
+  }
+
+  final List<String> category = [
+    "الكل",
+    "تراثي",
+    "ديني",
+    "ترفيهي",
+    "طبيعي",
+    "ثقافي",
+  ];
   int selectedCategoryIndex = 0;
   @override
   Widget build(BuildContext context) {

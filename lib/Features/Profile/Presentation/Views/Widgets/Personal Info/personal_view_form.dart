@@ -29,6 +29,7 @@ class PersonalViewFormState extends State<PersonalViewForm> {
   String? phoneNum;
   String? firstName, lastName;
   File? userImage;
+  String? countryCode;
   Map<String, List<dynamic>>? preferences;
   final GlobalKey<PreferencesFormState> _preferencesWidgetKey =
       GlobalKey<PreferencesFormState>();
@@ -118,6 +119,7 @@ class PersonalViewFormState extends State<PersonalViewForm> {
             },
             onPhoneNumberSaved: (phoneNumber) {
               phoneNum = phoneNumber?.completeNumber;
+              countryCode = phoneNumber?.countryCode;
             },
           ),
           SizedBox(height: AppSpacing.s32),

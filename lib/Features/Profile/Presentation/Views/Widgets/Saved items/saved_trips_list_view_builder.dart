@@ -31,7 +31,7 @@ class SavedTripsListViewBuilder extends StatelessWidget {
             text: "لا يوجد رحلات محفوظة!",
           );
         } else if (state is GetSavesSuccess) {
-          return TripsCardsListView(trips: state.items);
+          return TripsCardsListView(trips: state.items,action:()=>BlocProvider.of<GetSavesCubit>(context).getSaves(type: SearchTypes.trip));
         } else {
           return Center(child: CustomLoadingIndicator());
         }

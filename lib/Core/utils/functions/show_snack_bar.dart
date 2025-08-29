@@ -148,6 +148,8 @@ showTopSnackBar(String title, String message, BuildContext context) {
             style: AppStyles.fontsBold16(
               context,
             ).copyWith(color: AppColors.titleTextColor),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
           leading: SvgPicture.asset(
             Assets.iconsLogoIcon,
@@ -166,6 +168,8 @@ showTopSnackBar(String title, String message, BuildContext context) {
             style: AppStyles.fontsRegular14(
               context,
             ).copyWith(color: AppColors.bodyTextColor),
+             maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
   ).show(context);

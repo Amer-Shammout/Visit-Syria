@@ -35,7 +35,13 @@ class SavedResturantsListViewBuilder extends StatelessWidget {
             ),
           );
         } else if (state is GetSavesSuccess) {
-          return HotelsAndResturantGridView(places: state.items);
+          return HotelsAndResturantGridView(
+            places: state.items,
+            action:
+                () => BlocProvider.of<GetSavesCubit>(
+                  context,
+                ).getSaves(type: SearchTypes.restaurant),
+          );
         } else {
           return SliverFillRemaining(
             child: Center(child: CustomLoadingIndicator()),

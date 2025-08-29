@@ -35,7 +35,14 @@ class SavedPostsListViewBuilder extends StatelessWidget {
             ),
           );
         } else if (state is GetSavesSuccess) {
-          return PostsListView(posts: state.items, displayStatus: false);
+          return PostsListView(
+            posts: state.items,
+            displayStatus: false,
+            action:
+                () => BlocProvider.of<GetSavesCubit>(
+                  context,
+                ).getSaves(type: SearchTypes.post),
+          );
         } else {
           return SliverFillRemaining(
             child: Center(child: CustomLoadingIndicator()),

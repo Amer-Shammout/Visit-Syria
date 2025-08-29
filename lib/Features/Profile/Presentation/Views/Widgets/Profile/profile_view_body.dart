@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:visit_syria/Core/constants/common_constants.dart';
+import 'package:visit_syria/Core/services/shared_preferences_singleton.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/functions/show_snack_bar.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
@@ -18,6 +20,7 @@ class ProfileViewBody extends StatelessWidget {
     return BlocListener<LogoutCubit, LogoutState>(
       listener: (context, state) {
         if (state is LogoutSuccess && context.mounted) {
+          Prefs.setBool(kHasBadge,false);
           GoRouter.of(context).goNamed(AppRouter.kLoginName);
         }
         if (state is LogoutFailure) {

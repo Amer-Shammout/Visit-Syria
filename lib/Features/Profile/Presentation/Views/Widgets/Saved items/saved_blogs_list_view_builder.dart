@@ -35,7 +35,13 @@ class SavedBlogsListViewBuilder extends StatelessWidget {
             ),
           );
         } else if (state is GetSavesSuccess) {
-          return BlogsCardsListView(articles: state.items);
+          return BlogsCardsListView(
+            articles: state.items,
+            action:
+                () => BlocProvider.of<GetSavesCubit>(
+                  context,
+                ).getSaves(type: SearchTypes.article),
+          );
         } else {
           return SliverFillRemaining(
             child: Center(child: CustomLoadingIndicator()),

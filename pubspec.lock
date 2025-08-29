@@ -45,10 +45,10 @@ packages:
     dependency: transitive
     description:
       name: async
-      sha256: "758e6d74e971c3e5aceb4110bfd6698efc7f501675bcfe0c775459a8140750eb"
+      sha256: d2872f9c19731c2e5f10444b14686eb7cc85c76274bd6c16e1816bff9a3bab63
       url: "https://pub.dev"
     source: hosted
-    version: "2.13.0"
+    version: "2.12.0"
   audioplayers:
     dependency: "direct main"
     description:
@@ -301,10 +301,10 @@ packages:
     dependency: transitive
     description:
       name: fake_async
-      sha256: "5368f224a74523e8d2e7399ea1638b37aecfca824a3cc4dfdf77bf1fa905ac44"
+      sha256: "6a95e56b2449df2273fd8c45a662d6947ce1ebb7aafe80e550a3f68297f3cacc"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.3"
+    version: "1.3.2"
   feedback:
     dependency: "direct main"
     description:
@@ -441,14 +441,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
-  flashy_flushbar:
-    dependency: "direct main"
-    description:
-      name: flashy_flushbar
-      sha256: a2210b2742b7ac4e896520a459e912c2ac436a1f8d087830962435ff18e97cbd
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.4.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -539,14 +531,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.3"
-  flutter_slidable:
-    dependency: "direct main"
-    description:
-      name: flutter_slidable
-      sha256: ab7dbb16f783307c9d7762ede2593ce32c220ba2ba0fd540a3db8e9a3acba71a
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.0"
   flutter_stripe:
     dependency: "direct main"
     description:
@@ -576,14 +560,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_timer_countdown:
-    dependency: "direct main"
-    description:
-      name: flutter_timer_countdown
-      sha256: "0c73e1593ad7949c007752199a17e7ed50bb581568743dbc32f061f49873219e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.7"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -661,22 +637,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.12.4+4"
-  gradient_borders:
-    dependency: "direct main"
-    description:
-      name: gradient_borders
-      sha256: b1cd969552c83f458ff755aa68e13a0327d09f06c3f42f471b423b01427f21f8
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
-  hive_ce:
-    dependency: transitive
-    description:
-      name: hive_ce
-      sha256: "708bb39050998707c5d422752159f91944d3c81ab42d80e1bd0ee37d8e130658"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.11.3"
   html:
     dependency: transitive
     description:
@@ -701,14 +661,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
-  hydrated_bloc:
-    dependency: "direct main"
-    description:
-      name: hydrated_bloc
-      sha256: "5401d5df7d800256a0d1ae16b5d8b518dd44c50d412fe96c6a96d8a4ea85a938"
-      url: "https://pub.dev"
-    source: hosted
-    version: "10.0.0"
   image:
     dependency: transitive
     description:
@@ -785,10 +737,10 @@ packages:
     dependency: "direct main"
     description:
       name: intl
-      sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
+      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
       url: "https://pub.dev"
     source: hosted
-    version: "0.20.2"
+    version: "0.19.0"
   intl_phone_field:
     dependency: "direct main"
     description:
@@ -797,14 +749,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
-  isolate_channel:
-    dependency: transitive
-    description:
-      name: isolate_channel
-      sha256: f3d36f783b301e6b312c3450eeb2656b0e7d1db81331af2a151d9083a3f6b18d
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.2+1"
   json_annotation:
     dependency: transitive
     description:
@@ -825,10 +769,10 @@ packages:
     dependency: transitive
     description:
       name: leak_tracker
-      sha256: "6bb818ecbdffe216e81182c2f0714a2e62b593f4a4f13098713ff1685dfb6ab0"
+      sha256: c35baad643ba394b40aac41080300150a4f08fd0fd6a10378f8f7c6bc161acec
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.9"
+    version: "10.0.8"
   leak_tracker_flutter_testing:
     dependency: transitive
     description:
@@ -1041,10 +985,10 @@ packages:
     dependency: "direct main"
     description:
       name: permission_handler
-      sha256: "2d070d8684b68efb580a5997eb62f675e8a885ef0be6e754fb9ef489c177470f"
+      sha256: bc917da36261b00137bbc8896bf1482169cd76f866282368948f032c8c1caae1
       url: "https://pub.dev"
     source: hosted
-    version: "12.0.0+1"
+    version: "12.0.1"
   permission_handler_android:
     dependency: transitive
     description:
@@ -1149,14 +1093,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.5"
-  restart_app:
-    dependency: "direct main"
-    description:
-      name: restart_app
-      sha256: "00d5ec3e9de871cedbe552fc41e615b042b5ec654385e090e0983f6d02f655ed"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.2"
   rxdart:
     dependency: transitive
     description:
@@ -1494,10 +1430,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: ddfa8d30d89985b96407efce8acbdd124701f96741f2d981ca860662f1c0dc02
+      sha256: "0968250880a6c5fe7edc067ed0a13d4bae1577fe2771dcf3010d52c4a9d3ca14"
       url: "https://pub.dev"
     source: hosted
-    version: "15.0.0"
+    version: "14.3.1"
   web:
     dependency: transitive
     description:

@@ -12,8 +12,14 @@ import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_card
 class EventCard extends StatelessWidget {
   final bool isSmall;
   final EventModel event;
+  final VoidCallback? action;
 
-  const EventCard({super.key, this.isSmall = false, required this.event});
+  const EventCard({
+    super.key,
+    this.isSmall = false,
+    required this.event,
+    this.action,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +34,7 @@ class EventCard extends StatelessWidget {
           CustomImage(
             borderRadius: isSmall ? 22 : 32,
             height: isSmall ? 173 : 235,
+            image: event.media![0],
           ),
           Positioned(
             right: isSmall ? 8 : 16,
@@ -42,6 +49,7 @@ class EventCard extends StatelessWidget {
                     return BlocBuilder<SetSaveCubit, SetSaveState>(
                       builder: (context, state) {
                         return CustomBookmarkButton(
+                          action: action,
                           isSmall: isSmall,
                           isActive: event.isSaved,
                           id: event.id.toString(),

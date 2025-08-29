@@ -6,8 +6,10 @@ import 'package:visit_syria/Core/widgets/scale_on_tap.dart';
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trips_card.dart';
 
 class TripsCardsListView extends StatelessWidget {
-  const TripsCardsListView({super.key, required this.trips});
+  const TripsCardsListView({super.key, required this.trips, this.action});
   final List<dynamic> trips;
+  final VoidCallback? action;
+
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
@@ -19,7 +21,7 @@ class TripsCardsListView extends StatelessWidget {
                 () => GoRouter.of(
                   context,
                 ).pushNamed(AppRouter.kTripDetailsName, extra: trips[index]),
-            child: TripsCard(tripModel: trips[index]),
+            child: TripsCard(tripModel: trips[index],action:action),
           ),
       separatorBuilder: (context, index) => SizedBox(height: AppSpacing.s16),
       itemCount: trips.length,

@@ -35,7 +35,13 @@ class SavedPlacesListViewBuilder extends StatelessWidget {
             ),
           );
         } else if (state is GetSavesSuccess) {
-          return PlacesGridView(places: state.items);
+          return PlacesGridView(
+            places: state.items,
+            action:
+                () => BlocProvider.of<GetSavesCubit>(
+                  context,
+                ).getSaves(type: SearchTypes.tourist),
+          );
         } else {
           return SliverFillRemaining(
             child: Center(child: CustomLoadingIndicator()),

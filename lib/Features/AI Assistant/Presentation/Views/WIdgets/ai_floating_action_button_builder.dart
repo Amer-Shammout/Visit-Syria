@@ -47,7 +47,7 @@ class CustomFAB extends StatelessWidget {
       shape:
           shape ??
           RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.circular(16),
+            borderRadius: BorderRadius.circular(16),
           ),
       child:
           child ??

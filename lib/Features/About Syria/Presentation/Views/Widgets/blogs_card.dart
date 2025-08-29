@@ -6,9 +6,11 @@ import 'package:visit_syria/Features/About%20Syria/Presentation/Views/Widgets/bl
 import 'package:visit_syria/Features/About%20Syria/Presentation/Views/Widgets/blogs_card_image.dart';
 
 class BlogsCard extends StatelessWidget {
-  const BlogsCard({super.key, this.articleModel});
+  const BlogsCard({super.key, this.articleModel, this.action});
 
   final ArticleModel? articleModel;
+    final VoidCallback? action;
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class BlogsCard extends StatelessWidget {
               child: BlogsCardImage(
                 id: articleModel!.id!.toString(),
                 articleModel: articleModel!,
+                action: action,
               ),
             ),
             SizedBox(width: AppSpacing.s8),

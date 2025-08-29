@@ -16,8 +16,14 @@ import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trips_card
 import 'package:visit_syria/Features/Trips/Presentation/Views/widgets/trips_card_image.dart';
 
 class TripsCard extends StatelessWidget {
-  const TripsCard({super.key, required this.tripModel});
+  const TripsCard({
+    super.key,
+    required this.tripModel,
+    this.action,
+  });
   final TripModel tripModel;
+  final VoidCallback? action;
+
   @override
   Widget build(BuildContext context) {
     return CustomCardBackground(
@@ -26,7 +32,10 @@ class TripsCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TripsCardImage(
-            action: () => BlocProvider.of<HomeCubit>(context).fetchHomeData(),
+            action: () {
+              BlocProvider.of<HomeCubit>(context).fetchHomeData();
+              action != null ? action!() : null;
+            },
             id: tripModel.id.toString(),
             imageHeight: 200,
             positionedVal: 12,

@@ -23,7 +23,7 @@ class SimilarBlogsCard extends StatelessWidget {
             CustomImage(
               height: 220,
               borderRadius: 24,
-              image: Assets.imagesDaraa,
+              image: articleModel!.imageUrl!,
             ),
             PositionedDirectional(
               end: 12,

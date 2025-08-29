@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/styles/shadows.dart';
 
@@ -7,11 +8,13 @@ class CustomImage extends StatelessWidget {
     required this.height,
     required this.borderRadius,
     this.image,
+    this.isAsset = false,
   });
 
   final double height;
   final double borderRadius;
   final String? image;
+  final bool isAsset;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,8 @@ class CustomImage extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [Shadows.commonShadow],
         image: DecorationImage(
-          image: AssetImage(image ?? 'assets/Images/test.jpg'),
+          image:
+              isAsset ? AssetImage(image!) : CachedNetworkImageProvider(image!),
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.circular(borderRadius),

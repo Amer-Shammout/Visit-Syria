@@ -49,6 +49,7 @@ class _CityDetailsViewBodyState extends State<CityDetailsViewBody> {
               title: widget.cityModel.title,
               hasActionButton: false,
               hasRate: false,
+              isAsset: true,
             ),
 
             SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s16)),

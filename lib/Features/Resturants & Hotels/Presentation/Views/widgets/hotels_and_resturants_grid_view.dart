@@ -4,9 +4,10 @@ import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/places_card.dart';
 
 class HotelsAndResturantGridView extends StatelessWidget {
-  const HotelsAndResturantGridView({super.key, this.places});
+  const HotelsAndResturantGridView({super.key, this.places, this.action});
 
   final List<dynamic>? places;
+  final VoidCallback? action;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class HotelsAndResturantGridView extends StatelessWidget {
                     AppRouter.kHotelsAndResturantsDetailsName,
                     extra: places?[index],
                   ),
-              child: PlacesCard(place: places?[index]),
+              child: PlacesCard(place: places?[index],action:action),
             ),
         itemCount: places?.length ?? 10,
       ),

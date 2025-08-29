@@ -15,10 +15,11 @@ class CustomSliverAppBar extends StatelessWidget {
     required this.type,
     required this.model,
     this.action,
+    this.isAsset = false,
   });
 
   final String title;
-  final List<String> images;
+  final List<dynamic> images;
   final bool hasActionButton;
   final bool hasRate;
   final dynamic rate;
@@ -27,6 +28,7 @@ class CustomSliverAppBar extends StatelessWidget {
   final String type;
   final dynamic model;
   final VoidCallback? action;
+  final bool isAsset;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,7 @@ class CustomSliverAppBar extends StatelessWidget {
 
       flexibleSpace: FlexibleSpaceBar(
         background: ImageSelector(
+          isAsset: isAsset,
           action: action,
           model: model,
           type: type,

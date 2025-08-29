@@ -49,12 +49,7 @@ class _TripDetailsViewBodyState extends State<TripDetailsViewBody> {
                 type: 'trip',
                 id: widget.tripModel.id.toString(),
                 isSaved: widget.tripModel.isSaved!,
-                images: [
-                  Assets.imagesTest,
-                  Assets.imagesAzemPalace,
-                  Assets.imagesIdlib,
-                  Assets.imagesRasafe,
-                ],
+                images: widget.tripModel.images!,
                 title:
                     widget.tripModel.name ?? " رحلة في سوريا اوعى تجي او ترجع",
               ),

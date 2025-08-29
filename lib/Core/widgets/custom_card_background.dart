@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/shadows.dart';
@@ -37,7 +38,10 @@ class CustomCardBackground extends StatelessWidget {
         color: color ?? AppColors.whiteColor,
         image:
             image != null
-                ? DecorationImage(image: AssetImage(image!), fit: BoxFit.fill)
+                ? DecorationImage(
+                  image: CachedNetworkImageProvider(image!),
+                  fit: BoxFit.fill,
+                )
                 : null,
       ),
       child: child,

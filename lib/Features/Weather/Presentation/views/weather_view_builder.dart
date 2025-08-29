@@ -5,14 +5,28 @@ import 'package:visit_syria/Core/widgets/custom_loading_indicator.dart';
 import 'package:visit_syria/Features/Home/Presentation/Manager/weather/get_weather_for_week_cubit/get_weather_for_week_cubit.dart';
 import 'package:visit_syria/Features/Weather/Presentation/views/widgets/weather_view_body.dart';
 
-class WeatherView extends StatelessWidget {
+class WeatherView extends StatefulWidget {
   const WeatherView({super.key, required this.cityName});
   final String cityName;
+
+  @override
+  State<WeatherView> createState() => _WeatherViewState();
+}
+
+class _WeatherViewState extends State<WeatherView> {
+  @override
+  void initState() {
+    BlocProvider.of<GetWeatherForWeekCubit>(
+      context,
+    ).getWeatherForWeek(widget.cityName);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar2(
-        title: cityName,
+        title: widget.cityName,
         alignmentDirectional: AlignmentDirectional.center,
       ),
       body: BlocBuilder<GetWeatherForWeekCubit, GetWeatherForWeekState>(

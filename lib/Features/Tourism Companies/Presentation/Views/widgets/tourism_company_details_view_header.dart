@@ -19,7 +19,7 @@ class TourismCompanyDetailsViewHeader extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Row(
           children: [
-            CustomCompanyLogo(size: 80),
+            CustomCompanyLogo(size: 80,image: company.image,),
             SizedBox(width: AppSpacing.s8),
             Expanded(
               child: Column(

@@ -18,8 +18,9 @@ class ImageSelector extends StatefulWidget {
     required this.type,
     required this.model,
     this.action,
+    required this.isAsset,
   });
-  final List<String> images;
+  final List<dynamic> images;
   final String title;
   final bool hasActionButton;
   final bool hasRate;
@@ -29,6 +30,7 @@ class ImageSelector extends StatefulWidget {
   final String type;
   final dynamic model;
   final VoidCallback? action;
+  final bool isAsset;
 
   @override
   State<ImageSelector> createState() => _ImageSelectorState();
@@ -51,7 +53,12 @@ class _ImageSelectorState extends State<ImageSelector> {
         children: [
           Stack(
             children: [
-              CustomImage(height: 324, borderRadius: 24, image: _currentImage),
+              CustomImage(
+                height: 324,
+                borderRadius: 24,
+                image: _currentImage,
+                isAsset: widget.isAsset,
+              ),
               Positioned(
                 right: 16,
                 left: 16,
@@ -95,6 +102,7 @@ class _ImageSelectorState extends State<ImageSelector> {
                         });
                       },
                       child: CustomSelectorImage(
+                        isAsset: widget.isAsset,
                         isSelected: _currentIndex == index,
                         image: widget.images[index],
                       ),

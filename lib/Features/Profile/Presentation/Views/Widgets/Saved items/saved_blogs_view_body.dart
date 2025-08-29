@@ -13,4 +13,3 @@ class SavedBlogsViewBody extends StatelessWidget {
     );
   }
 }
-

@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/constants/month_constants.dart';
@@ -16,9 +15,7 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_button.dart';
 import 'package:visit_syria/Core/widgets/custom_drop_down_form_field_with_label.dart';
-import 'package:visit_syria/Core/widgets/custom_text_field_with_label.dart';
 import 'package:visit_syria/Features/Reservation/Data/Models/booking_model/booking_model.dart';
-import 'package:visit_syria/Features/Reservation/Data/Models/payment_model/payment_model.dart';
 import 'package:visit_syria/Features/Reservation/Presentation/Functions/card_number_mask_formatter.dart';
 import 'package:visit_syria/Features/Reservation/Presentation/Functions/get_validate_month_value.dart';
 import 'package:visit_syria/Features/Reservation/Presentation/Manager/payment_cubit.dart/payment_cubit.dart';
@@ -110,6 +107,7 @@ class _PaymentInfoFormState extends State<PaymentInfoForm> {
               ),
               SizedBox(height: AppSpacing.s16),
               CustomPaymentTextFieldWithLabel(
+                obscureText: true,
                 onSaved: (value) {
                   cardNumber = value;
                 },
@@ -152,6 +150,7 @@ class _PaymentInfoFormState extends State<PaymentInfoForm> {
                       validator: Validation.validateCVC,
                       hint: 'CVC',
                       label: 'رقم التحقق',
+                      keyboardType: TextInputType.number,
                     ),
                   ),
                   SizedBox(width: 32),
@@ -213,36 +212,17 @@ class _PaymentInfoFormState extends State<PaymentInfoForm> {
                             log(cardCVC!);
                             log(expMonth!);
                             log(expYear!);
-                            final cardDetails = CardDetails(
-                              number: cardNumber,
-                              cvc: cardCVC,
-                              expirationMonth: int.parse(expMonth!),
-                              expirationYear: int.parse(expYear!),
-                            );
-                            await Stripe.instance.dangerouslyUpdateCardDetails(
-                              cardDetails,
-                            );
-                            // final billingDetails = BillingDetails(
-                            //   name: cardName,
-                            //   email: 'george2004ma@gmail.com',
-                            // );
-                            final tokenData = await Stripe.instance.createToken(
-                              CreateTokenParams.card(
-                                params: CardTokenParams(
-                                  type: TokenType.Card,
-                                  name: cardName,
-                                ),
-                              ),
-                            );
-                            log(tokenData.id);
-                            dynamic paymentModel = PaymentModel(
-                              bookingId: widget.bookingModel.booking!.id,
-                              stripeToken: tokenData.id,
-                            );
-                            log(paymentModel.toString());
+
                             await BlocProvider.of<PaymentCubit>(
                               context,
-                            ).payment(paymentModel);
+                            ).payment(
+                              widget.bookingModel.booking!.id!,
+                              cardName!,
+                              cardNumber!,
+                              cardCVC!,
+                              expMonth!,
+                              expYear!,
+                            );
                             // String stripeToken =
                             //     cardNumber == '4242424242424242'
                             //         ? 'tok_visa'

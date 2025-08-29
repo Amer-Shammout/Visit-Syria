@@ -9,6 +9,7 @@ import 'package:visit_syria/Features/Community/Data/Repos/community_repo_impl.da
 import 'package:visit_syria/Features/Events/data/Repos/events_repo_impl.dart';
 import 'package:visit_syria/Features/Flights%20Reservation/Data/Repos/flights_repo_impl.dart';
 import 'package:visit_syria/Features/Home/Data/Repos/home_repo_impl.dart';
+import 'package:visit_syria/Features/Profile/Data/Repos/my_reservation_repo_impl.dart';
 import 'package:visit_syria/Features/Profile/Data/Repos/saves_repo_impl.dart';
 import 'package:visit_syria/Features/Reservation/Data/Repos/reservation_repo_impl.dart';
 import 'package:visit_syria/Features/Search/Data/Repos/search_repo_impl.dart';
@@ -39,4 +40,5 @@ void setupGetit() {
   getIt.registerSingleton<AIRepoImpl>(AIRepoImpl());
   getIt.registerSingleton<MySavesRepoImpl>(MySavesRepoImpl());
   getIt.registerSingleton<NotificationsRepoImpl>(NotificationsRepoImpl());
+  getIt.registerSingleton<MyReservationRepoImpl>(MyReservationRepoImpl());
 }

@@ -48,8 +48,6 @@ void main() async {
   Bloc.observer = CustomBlocObserver();
 
   setupGetit();
-  log("user token: ${Prefs.getString(kToken)}");
-  runApp(VisitSyriaApp());
 
   runApp(
     BlocProvider(

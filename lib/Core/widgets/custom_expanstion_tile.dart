@@ -16,7 +16,8 @@ class CustomExpansionTile extends StatelessWidget {
     this.onExpansionChanged,
     this.initiallyExpanded,
     this.titleTextStyle,
-    this.borderSide,  this.iconSize=24,
+    this.borderSide,
+    this.iconSize = 24,
   });
   final Color? backGroundColor;
   final BoxShadow? boxShadow;

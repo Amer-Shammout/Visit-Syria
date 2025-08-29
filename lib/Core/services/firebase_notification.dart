@@ -27,7 +27,7 @@ abstract class FirebaseNotification {
       log("message");
       final context = AppRouter.navigatorKey.currentContext;
       if (context != null) {
-      NotificationSound.play();
+        NotificationSound.play();
         context.read<NotificationCubit>().showBadge();
         showTopSnackBar(
           message.notification?.title ?? "Hello Sir",

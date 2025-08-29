@@ -22,7 +22,7 @@ class _AppRootViewState extends State<AppRootView> {
 
   final List<Widget> _pages = [
     BlocProvider.value(
-      value: AppRouter.getTripsCubit, 
+      value: AppRouter.getTripsCubit,
       child: HomeViewBodyBuilder(),
     ),
     CitiesViewBody(),

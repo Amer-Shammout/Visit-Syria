@@ -35,7 +35,7 @@ class SavedHotelsListViewBuilder extends StatelessWidget {
             ),
           );
         } else if (state is GetSavesSuccess) {
-          return HotelsAndResturantGridView(places: state.items,);
+          return HotelsAndResturantGridView(places: state.items);
         } else {
           return SliverFillRemaining(
             child: Center(child: CustomLoadingIndicator()),

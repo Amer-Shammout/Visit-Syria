@@ -361,7 +361,7 @@ class _CustomExpansionTileFormState extends State<CustomExpansionTileForm> {
                 onSaved: (phone) {
                   if (phone != null) {
                     widget.reservationModel.info![widget.index].countryCode =
-                        phone!.countryCode;
+                        phone.countryCode;
                     widget.reservationModel.info![widget.index].phone =
                         phone.number;
                     widget.reservationModel.info![widget.index].countryISOCode =

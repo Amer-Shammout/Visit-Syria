@@ -18,7 +18,8 @@ class NotificationsRepoImpl extends NotificationsRepo {
     final url = "$kGetNotificationsUrl${read ? 'read' : 'unread'}";
 
     return handleRequest(
-      requestFn: () => getIt.get<DioClient>().get(
+      requestFn:
+          () => getIt.get<DioClient>().get(
             url,
             options: Options(
               headers: {"Authorization": "Bearer ${Prefs.getString(kToken)}"},
@@ -35,13 +36,12 @@ class NotificationsRepoImpl extends NotificationsRepo {
   }
 
   @override
-  Future<Either<Failure, dynamic>> deleteNotification({
-    required String id,
-  }) {
+  Future<Either<Failure, dynamic>> deleteNotification({required String id}) {
     final url = "$kDeleteNotificationsUrl$id";
 
     return handleDelete(
-      requestFn: () => getIt.get<DioClient>().delete(
+      requestFn:
+          () => getIt.get<DioClient>().delete(
             url,
             options: Options(
               headers: {"Authorization": "Bearer ${Prefs.getString(kToken)}"},

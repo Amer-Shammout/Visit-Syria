@@ -18,7 +18,7 @@ class NotificationModel {
       id: json['id'] ?? '',
       title: json['title'] ?? '',
       message: json['message'] ?? '',
-      readAt: json['read_at'], 
+      readAt: json['read_at'],
       createdAt: json['created_at'] ?? '',
     );
   }

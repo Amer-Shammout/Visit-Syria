@@ -49,3 +49,5 @@ const kAITripsURL = 'itineraries';
 const kAIGenerateTripURL = 'itinerary';
 const kGetNotificationsUrl = 'getAllNotifications/';
 const kDeleteNotificationsUrl = 'destroyNotification/';
+const kGetMyBookingURl = 'myBookings';
+const kCancelReservationURL = 'stripe/refund/';

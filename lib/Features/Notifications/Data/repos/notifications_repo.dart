@@ -7,7 +7,5 @@ abstract class NotificationsRepo {
     required bool read,
   });
 
-  Future<Either<Failure, dynamic>> deleteNotification({
-    required String id,
-  });
+  Future<Either<Failure, dynamic>> deleteNotification({required String id});
 }

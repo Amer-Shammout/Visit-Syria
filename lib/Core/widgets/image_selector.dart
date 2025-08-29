@@ -16,7 +16,8 @@ class ImageSelector extends StatefulWidget {
     required this.isSaved,
     required this.id,
     required this.type,
-    required this.model, this.action,
+    required this.model,
+    this.action,
   });
   final List<String> images;
   final String title;

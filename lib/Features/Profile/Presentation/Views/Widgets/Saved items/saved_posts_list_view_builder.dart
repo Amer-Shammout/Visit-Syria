@@ -13,7 +13,7 @@ class SavedPostsListViewBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return BlocBuilder<GetSavesCubit, GetSavesState>(
+    return BlocBuilder<GetSavesCubit, GetSavesState>(
       builder: (context, state) {
         if (state is GetSavesFailure) {
           return SliverFillRemaining(
@@ -35,7 +35,7 @@ class SavedPostsListViewBuilder extends StatelessWidget {
             ),
           );
         } else if (state is GetSavesSuccess) {
-          return PostsListView(posts: state.items,displayStatus: false,);
+          return PostsListView(posts: state.items, displayStatus: false);
         } else {
           return SliverFillRemaining(
             child: Center(child: CustomLoadingIndicator()),

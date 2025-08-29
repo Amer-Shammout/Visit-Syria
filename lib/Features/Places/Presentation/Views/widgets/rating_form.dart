@@ -127,12 +127,12 @@ class _RatingFormState extends State<RatingForm> {
       },
     );
   }
-  double _parseUserRate(dynamic rate) {
-  if (rate == null) return 1.0; // القيمة الافتراضية
-  if (rate is int) return rate.toDouble();
-  if (rate is double) return rate;
-  if (rate is String) return double.tryParse(rate) ?? 1.0;
-  return 1.0;
-}
 
+  double _parseUserRate(dynamic rate) {
+    if (rate == null) return 1.0; // القيمة الافتراضية
+    if (rate is int) return rate.toDouble();
+    if (rate is double) return rate;
+    if (rate is String) return double.tryParse(rate) ?? 1.0;
+    return 1.0;
+  }
 }

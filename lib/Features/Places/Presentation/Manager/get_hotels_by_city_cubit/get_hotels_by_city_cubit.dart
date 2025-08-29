@@ -15,5 +15,3 @@ class GetHotelsByCityCubit extends Cubit<GetHotelsByCityState> {
     );
   }
 }
-
-

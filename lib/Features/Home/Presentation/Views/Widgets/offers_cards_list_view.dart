@@ -23,9 +23,10 @@ class OffersCardsListView extends StatelessWidget {
               ),
               child: GestureDetector(
                 onTap:
-                    () => GoRouter.of(
-                      context,
-                    ).pushNamed(AppRouter.kTripDetailsName),
+                    () => GoRouter.of(context).pushNamed(
+                      AppRouter.kTripDetailsName,
+                      extra: <String, dynamic>{'trip': trips[index]},
+                    ),
                 child: MiniTripCard(tripModel: trips[index]),
               ),
             ),

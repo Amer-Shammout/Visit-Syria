@@ -18,7 +18,8 @@ class TripsCardImage extends StatelessWidget {
     required this.title,
     required this.isSaved,
     required this.id,
-    required this.model, required this.action,
+    required this.model,
+    required this.action,
   });
 
   final double imageHeight;

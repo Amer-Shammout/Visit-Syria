@@ -26,9 +26,7 @@ class TripsCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TripsCardImage(
-            action:  () => BlocProvider.of<HomeCubit>(
-                                  context,
-                                ).fetchHomeData(),
+            action: () => BlocProvider.of<HomeCubit>(context).fetchHomeData(),
             id: tripModel.id.toString(),
             imageHeight: 200,
             positionedVal: 12,

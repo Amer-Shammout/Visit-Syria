@@ -13,7 +13,7 @@ class SavedResturantsListViewBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     return BlocBuilder<GetSavesCubit, GetSavesState>(
+    return BlocBuilder<GetSavesCubit, GetSavesState>(
       builder: (context, state) {
         if (state is GetSavesFailure) {
           return SliverFillRemaining(
@@ -35,7 +35,7 @@ class SavedResturantsListViewBuilder extends StatelessWidget {
             ),
           );
         } else if (state is GetSavesSuccess) {
-          return HotelsAndResturantGridView(places: state.items,);
+          return HotelsAndResturantGridView(places: state.items);
         } else {
           return SliverFillRemaining(
             child: Center(child: CustomLoadingIndicator()),

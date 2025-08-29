@@ -17,12 +17,11 @@ import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_model.dart
 
 class MySavesRepoImpl extends MySavesRepo {
   @override
-  Future<Either<Failure, List<dynamic>>> getSaves({
-    required SearchTypes type,
-  }) {
+  Future<Either<Failure, List<dynamic>>> getSaves({required SearchTypes type}) {
     final url = "$kGetSaveUrl?type=${type.asQueryParam}";
     return handleRequest(
-      requestFn: () => getIt.get<DioClient>().get(
+      requestFn:
+          () => getIt.get<DioClient>().get(
             url,
             options: Options(
               headers: {"Authorization": "Bearer ${Prefs.getString(kToken)}"},

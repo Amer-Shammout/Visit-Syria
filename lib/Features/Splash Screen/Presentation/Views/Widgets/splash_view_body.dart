@@ -12,7 +12,7 @@ class SplashViewBody extends StatefulWidget {
 }
 
 class _SplashViewBodyState extends State<SplashViewBody> {
-  bool _navigated = false; 
+  bool _navigated = false;
 
   @override
   Widget build(BuildContext context) {

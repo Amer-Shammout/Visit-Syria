@@ -3,7 +3,6 @@ import 'package:visit_syria/Core/constants/flight_type.dart';
 import 'package:visit_syria/Features/Profile/Data/Repos/saves_repo.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/get_saves_cubit/get_saves_state.dart';
 
-
 class GetSavesCubit extends Cubit<GetSavesState> {
   GetSavesCubit(this._mySavesRepo) : super(GetSavesInitial());
 
@@ -25,4 +24,3 @@ class GetSavesCubit extends Cubit<GetSavesState> {
     );
   }
 }
-

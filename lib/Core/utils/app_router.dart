@@ -83,13 +83,19 @@ import 'package:visit_syria/Features/Places/Presentation/Manager/get_resturants_
 import 'package:visit_syria/Features/Places/Presentation/Views/all_comments_and_rating_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/city_details_view.dart';
 import 'package:visit_syria/Features/Places/Presentation/Views/place_details_view.dart';
+import 'package:visit_syria/Features/Profile/Data/Models/my_booking_model/my_booking_model.dart';
+import 'package:visit_syria/Features/Profile/Data/Repos/my_reservation_repo_impl.dart';
 import 'package:visit_syria/Features/Profile/Data/Repos/profile_repo_impl.dart';
 import 'package:visit_syria/Features/Profile/Data/Repos/saves_repo_impl.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/cancel_reservation_cubit/cancel_reservation_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/change_password_cubit/change_password_cubit.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Manager/get_my_booking_cubit/get_my_booking_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/get_saves_cubit/get_saves_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/logout_cubit/logout_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/update_profile_cubit/update_profile_cubit.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/My%20Posts/post_reject_causes_view.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/My%20Trips/my_trip_details_view.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/MyReservation/complete_payment_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/change_password_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/my_posts_view.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Views/my_trips_view.dart';
@@ -275,10 +281,17 @@ abstract class AppRouter {
   static const String kAITripDetailsName = 'aiTripDetailsView';
   static const String kNotificationsView = '/notificationsView';
   static const String kNotificationsName = 'notificationsView';
+  static const String kMyTripDetailsView = '/myTripDetailsView';
+  static const String kMyTripDetailsName = 'myTripDetailsView';
+  static const String kCompletePaymentView = '/completePaymentView';
+  static const String kCompletePaymentName = 'completePaymentView';
   static bool get isAuth => Prefs.getString(kToken) != '';
   static final myPostsCubit = GetMyPostsCubit(getIt.get<CommunityRepoImpl>());
   static final getTripsCubit = GetTripsByCategoryCubit(
     getIt.get<TripRepoImpl>(),
+  );
+  static final myBookingCubit = GetMyBookingCubit(
+    getIt.get<MyReservationRepoImpl>(),
   );
   static final addCommentCubit = AddCommentAndRatingCubit(
     getIt.get<PlacesRepoImpl>(),
@@ -723,7 +736,13 @@ abstract class AppRouter {
       GoRoute(
         name: kMyTripsName,
         path: kMyTripsView,
-        pageBuilder: (context, state) => MaterialPage(child: MyTripsView()),
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider.value(
+                value: myBookingCubit,
+                child: MyTripsView(),
+              ),
+            ),
       ),
       GoRoute(
         name: kMyPostsName,
@@ -1005,6 +1024,20 @@ abstract class AppRouter {
             ),
       ),
       GoRoute(
+        name: kCompletePaymentName,
+        path: kCompletePaymentView,
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: BlocProvider(
+                create:
+                    (context) => PaymentCubit(getIt.get<ReservationRepoImpl>()),
+                child: CompletePaymentView(
+                  bookingModel: state.extra as BookingModel,
+                ),
+              ),
+            ),
+      ),
+      GoRoute(
         name: kChangePasswordName,
         path: kChangePasswordView,
         pageBuilder:
@@ -1102,6 +1135,28 @@ abstract class AppRouter {
 
         pageBuilder: (context, state) => MaterialPage(child: AILoadingView()),
       ),
+      GoRoute(
+        name: kMyTripDetailsName,
+        path: kMyTripDetailsView,
+        pageBuilder:
+            (context, state) => MaterialPage(
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) => CancelReservationCubit(
+                          getIt.get<MyReservationRepoImpl>(),
+                        ),
+                  ),
+                  BlocProvider.value(value: myBookingCubit),
+                ],
+                child: MyTripDetailsView(
+                  myBookingModel: state.extra as MyBookingModel,
+                ),
+              ),
+            ),
+      ),
+
       GoRoute(
         name: kNotificationsName,
         path: kNotificationsView,

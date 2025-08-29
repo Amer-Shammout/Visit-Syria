@@ -69,6 +69,7 @@ class _MyReservationViewState extends State<MyReservationView> {
                     data: eventsCategories,
                     onTagSelected: (value, index) {
                       eventIndex = index;
+                      setState(() {});
                       BlocProvider.of<GetMyBookingCubit>(
                         context,
                       ).getMyBooking('event', eventsCategories[index]);
@@ -92,6 +93,7 @@ class _MyReservationViewState extends State<MyReservationView> {
                     data: flightCategories,
                     onTagSelected: (value, index) {
                       flightIndex = index;
+                      setState(() {});
                       BlocProvider.of<GetMyBookingCubit>(
                         context,
                       ).getMyBooking('flight', flightCategories[index]);

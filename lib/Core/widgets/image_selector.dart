@@ -53,7 +53,12 @@ class _ImageSelectorState extends State<ImageSelector> {
         children: [
           Stack(
             children: [
-              CustomImage(height: 324, borderRadius: 24, image: _currentImage),
+              CustomImage(
+                height: 324,
+                borderRadius: 24,
+                image: _currentImage,
+                isAsset: widget.isAsset,
+              ),
               Positioned(
                 right: 16,
                 left: 16,
@@ -97,7 +102,7 @@ class _ImageSelectorState extends State<ImageSelector> {
                         });
                       },
                       child: CustomSelectorImage(
-                        isAsset:widget.isAsset,
+                        isAsset: widget.isAsset,
                         isSelected: _currentIndex == index,
                         image: widget.images[index],
                       ),

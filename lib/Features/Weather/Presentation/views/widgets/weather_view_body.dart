@@ -17,6 +17,7 @@ class WeatherViewBody extends StatefulWidget {
 
 class _WeatherViewBodyState extends State<WeatherViewBody> {
   int selectDayIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,42 +32,64 @@ class _WeatherViewBodyState extends State<WeatherViewBody> {
                 flex: 2,
                 child: AspectRatio(
                   aspectRatio: 1,
-                  child: SvgPicture.asset(
-                    getWeatherState(
-                      widget.weatherForWeek[selectDayIndex].conditionType!,
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 500),
+                    transitionBuilder: (
+                      Widget child,
+                      Animation<double> animation,
+                    ) {
+                      return ScaleTransition(scale: animation, child: child);
+                    },
+                    child: SvgPicture.asset(
+                      key: ValueKey<int>(selectDayIndex),
+                      getWeatherState(
+                        widget.weatherForWeek[selectDayIndex].conditionType!,
+                      ),
+                      fit: BoxFit.contain,
+                      width: double.infinity,
+                      height: double.infinity,
                     ),
-                    fit: BoxFit.fill,
                   ),
                 ),
               ),
               Flexible(child: SizedBox(width: 100)),
               Expanded(
                 flex: 2,
-                child: Column(
-                  children: [
-                    Text(
-                      widget.weatherForWeek[selectDayIndex].conditionType!,
-                      style: AppStyles.fontsRegular20(
-                        context,
-                      ).copyWith(color: AppColors.graySwatch[800]),
-                    ),
-                    SizedBox(height: AppSpacing.s16),
-                    FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        textDirection: TextDirection.ltr,
-                        '${widget.weatherForWeek[selectDayIndex].tempC}\u00B0',
-                        style: AppStyles.fontsBold64(context),
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder: (
+                    Widget child,
+                    Animation<double> animation,
+                  ) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+                  child: Column(
+                    key: ValueKey<int>(selectDayIndex),
+                    children: [
+                      Text(
+                        widget.weatherForWeek[selectDayIndex].conditionType!,
+                        style: AppStyles.fontsRegular20(
+                          context,
+                        ).copyWith(color: AppColors.graySwatch[800]),
                       ),
-                    ),
-                    SizedBox(height: AppSpacing.s12),
-                    Text(
-                      widget.weatherForWeek[selectDayIndex].dayName!,
-                      style: AppStyles.fontsBold14(
-                        context,
-                      ).copyWith(color: AppColors.titleTextColor),
-                    ),
-                  ],
+                      SizedBox(height: AppSpacing.s16),
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          textDirection: TextDirection.ltr,
+                          '${widget.weatherForWeek[selectDayIndex].tempC}\u00B0',
+                          style: AppStyles.fontsBold64(context),
+                        ),
+                      ),
+                      SizedBox(height: AppSpacing.s12),
+                      Text(
+                        widget.weatherForWeek[selectDayIndex].dayName!,
+                        style: AppStyles.fontsBold14(
+                          context,
+                        ).copyWith(color: AppColors.titleTextColor),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

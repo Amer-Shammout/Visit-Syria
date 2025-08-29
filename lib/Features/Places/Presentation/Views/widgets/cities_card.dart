@@ -22,6 +22,7 @@ class CitiesCard extends StatelessWidget {
               height: 220,
               borderRadius: 24,
               image: cityModel.images[0],
+              isAsset: true,
             ),
             Positioned(
               bottom: 12,

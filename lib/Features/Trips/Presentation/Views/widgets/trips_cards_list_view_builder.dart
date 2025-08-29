@@ -19,7 +19,9 @@ class TripsCardsListViewBuilder extends StatelessWidget {
     return BlocBuilder<GetTripsByCategoryCubit, GetTripsByCategoryState>(
       builder: (context, state) {
         if (state is GetTripsByCategorySuccess) {
-          return CustomSaveMultiBlocListener(child: TripsCardsListView(trips: state.trips));
+          return CustomSaveMultiBlocListener(
+            child: TripsCardsListView(trips: state.trips),
+          );
         } else if (state is GetTripsByCategoryEmpty) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,

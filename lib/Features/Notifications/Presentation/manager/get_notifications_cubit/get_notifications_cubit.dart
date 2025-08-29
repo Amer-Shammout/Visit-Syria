@@ -29,6 +29,6 @@ class GetNotificationsCubit extends Cubit<GetNotificationsState> {
 
   void removeNotification(String id) {
     _notifications.removeWhere((n) => n.id == id);
-    emit(GetNotificationsSuccess(notification: _notifications)); 
+    emit(GetNotificationsSuccess(notification: _notifications));
   }
 }

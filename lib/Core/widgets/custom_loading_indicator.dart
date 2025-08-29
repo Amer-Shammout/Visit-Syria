@@ -3,7 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 
 class CustomLoadingIndicator extends StatelessWidget {
-  const CustomLoadingIndicator({super.key, this.size = 80});
+  const CustomLoadingIndicator({super.key, this.size = 100});
 
   final double size;
 

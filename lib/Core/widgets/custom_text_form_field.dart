@@ -121,6 +121,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       alignment: AlignmentDirectional.centerStart,
       children: [
         TextFormField(
+          inputFormatters: widget.inputFormatter,
           controller: _effectiveController,
           onFieldSubmitted: widget.onFieldSubmitted,
           enableInteractiveSelection: widget.enableInteractiveSelection,

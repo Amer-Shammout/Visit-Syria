@@ -86,13 +86,18 @@ class _PassportSectionState extends State<PassportSection> {
       return 'الرجاء إدخال رقم الجواز';
     }
 
-    // تحقق أن الرقم يبدأ بحرف N ويتبعه 8 أرقام كمثال
-    final regex = RegExp(r'^N\d{8}$');
-    if (!regex.hasMatch(value)) {
-      return 'رقم الجواز غير صالح';
+    // الطول لازم يكون بين 6 و 12 خانة
+    if (value.length < 6 || value.length > 12) {
+      return 'رقم الجواز يجب أن يتكون من 6 إلى 12 خانة';
     }
 
-    return null;
+    // لازم يبدأ بحروف (0–3 حروف) وبعدهم أرقام
+    final regex = RegExp(r'^[A-Za-z]{0,3}[0-9]+$');
+    if (!regex.hasMatch(value)) {
+      return 'رقم الجواز يجب أن يبدأ بحروف (اختياري) ثم أرقام فقط';
+    }
+
+    return null; // صحيح ✅
   }
 
   @override
@@ -104,17 +109,27 @@ class _PassportSectionState extends State<PassportSection> {
               widget.reservationModel.info![widget.index].passportNumber,
           hint:
               widget.reservationModel.info![widget.index].passportNumber != null
-                  ? " "
+                  ? ""
                   : "N12345678",
           label: "رقم الجواز",
           validator: _passportNumberValidator,
           onChanged: (passportNo) {
-            widget.reservationModel.info![widget.index].passportNumber =
-                passportNo;
+            if (passportNo.isEmpty) {
+              widget.reservationModel.info![widget.index].passportNumber = null;
+            } else {
+              widget.reservationModel.info![widget.index].passportNumber =
+                  passportNo;
+            }
           },
           onSaved: (passportNo) {
-            widget.reservationModel.info![widget.index].passportNumber =
-                passportNo;
+            if (passportNo == null) {
+              widget.reservationModel.info![widget.index].passportNumber = null;
+            } else if (passportNo.isEmpty) {
+              widget.reservationModel.info![widget.index].passportNumber = null;
+            } else {
+              widget.reservationModel.info![widget.index].passportNumber =
+                  passportNo;
+            }
           },
         ),
         const SizedBox(height: AppSpacing.s16),

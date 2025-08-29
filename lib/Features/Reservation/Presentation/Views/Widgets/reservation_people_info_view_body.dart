@@ -55,7 +55,9 @@ class _ReservationPeopleInfoViewBodyState
     info.nationality = profile?.country ?? info.nationality;
     info.birthDate = profile?.dateOfBirth ?? info.birthDate;
     info.gender = profile?.gender ?? info.gender;
-    info.phone = profile?.phone?.toString() ?? info.phone;
+    log(info.gender.toString());
+    info.phone = profile?.phone?.toString().substring(4) ?? info.phone;
+    log(info.phone.toString());
     info.countryCode = profile?.countryCode?.toString() ?? info.countryCode;
     log("${info.countryCode}");
     info.isoCode =
@@ -64,6 +66,8 @@ class _ReservationPeopleInfoViewBodyState
               info.countryCode!.substring(1),
             ).isoCode
             : null;
+
+    log(info.isoCode.toString());
   }
 
   void _removeItem(int index) {
@@ -137,7 +141,7 @@ class _ReservationPeopleInfoViewBodyState
                         formKey: widget.reservationModel.formKeys![index],
                         isAutoValidate:
                             widget.reservationModel.isAutoValidate![index],
-                        initiallyExpanded: false,
+
                         index: index,
                         reservationModel: widget.reservationModel,
                       ),
@@ -238,47 +242,6 @@ class _ReservationPeopleInfoViewBodyState
                             widget.reservationModel,
                           );
                         }
-
-                        // String type = '';
-                        // int id = 0;
-                        // if (widget.reservationModel.tripModel != null) {
-                        //   type = 'trip';
-                        //   id = widget.reservationModel.tripModel!.id!;
-                        // }
-                        // if (widget.reservationModel.eventModel != null) {
-                        //   type = 'event';
-                        //   id = widget.reservationModel.eventModel!.id!;
-                        // }
-                        // int tickets = widget.reservationModel.tickets!;
-                        // List<Passenger> passengers = [];
-                        // for (var i = 0; i < tickets; i++) {
-                        //   Passenger passenger = Passenger(
-                        //     firstName:
-                        //         widget.reservationModel.info![i].firstName,
-                        //     lastName: widget.reservationModel.info![i].lastName,
-                        //     birthDate:
-                        //         widget.reservationModel.info![i].birthDate,
-                        //     email: widget.reservationModel.info![i].email,
-                        //     gender: widget.reservationModel.info![i].gender,
-                        //     nationality:
-                        //         widget.reservationModel.info![i].nationality,
-                        //     phone: widget.reservationModel.info![i].phone,
-                        //     countryCode:
-                        //         widget.reservationModel.info![i].countryCode,
-                        //   );
-                        //   passengers.add(passenger);
-                        // }
-                        // EventAndTripsBookingModel reserve =
-                        //     EventAndTripsBookingModel(
-                        //       type: type,
-                        //       id: id,
-                        //       numberOfTickets: tickets,
-                        //       passengers: passengers,
-                        //     );
-                        // await BlocProvider.of<EventAndTripsBookingCubit>(
-                        //   context,
-                        // ).bookEventOrTrip(reserve);
-                        // log(reserve.toString());
                       } else {
                         setState(() {});
                       }

@@ -8,7 +8,7 @@ class NotificationsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar2(title: "الإشعارات",),
+      appBar: CustomAppBar2(title: "الإشعارات"),
       body: NotificationsViewBody(),
     );
   }

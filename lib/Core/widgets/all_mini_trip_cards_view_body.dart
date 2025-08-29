@@ -7,6 +7,7 @@ import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_model.dart
 class AllMiniTripCardsViewBody extends StatelessWidget {
   const AllMiniTripCardsViewBody({super.key, required this.trips});
   final List<TripModel> trips;
+
   @override
   Widget build(BuildContext context) {
     return GridView.builder(

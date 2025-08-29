@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/constants/text_constant.dart';
@@ -9,6 +10,7 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_button.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
+import 'package:visit_syria/Features/Home/Presentation/Manager/home_cubit/home_cubit.dart';
 
 class PaymentSuccessViewBody extends StatelessWidget {
   const PaymentSuccessViewBody({super.key});
@@ -37,12 +39,14 @@ class PaymentSuccessViewBody extends StatelessWidget {
             ),
             SizedBox(height: AppSpacing.s64),
             CustomButton(
+              borderRadius: 12,
               width: double.infinity,
               onPressed: () {
                 GoRouter.of(context).goNamed(AppRouter.kAppRootName);
+                BlocProvider.of<HomeCubit>(context).fetchHomeData();
               },
               title: 'تم',
-              textStyle: AppStyles.fontsBold14(
+              textStyle: AppStyles.fontsBold16(
                 context,
               ).copyWith(color: AppColors.whiteColor),
             ),

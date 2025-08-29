@@ -7,6 +7,8 @@ class PaymentInfoViewBody extends StatelessWidget {
   final BookingModel bookingModel;
   @override
   Widget build(BuildContext context) {
-    return PaymentInfoForm(bookingModel: bookingModel);
+    return SingleChildScrollView(
+      child: PaymentInfoForm(bookingModel: bookingModel),
+    );
   }
 }

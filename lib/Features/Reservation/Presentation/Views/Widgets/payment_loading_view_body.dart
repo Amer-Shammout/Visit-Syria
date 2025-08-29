@@ -25,11 +25,14 @@ class PaymentLoadingViewBody extends StatelessWidget {
             CustomSection(
               title: kPaymentLoadingTitle,
               hasSeeAll: false,
-              section: Text(
-                kPaymentLoadingDescription,
-                style: AppStyles.fontsRegular14(
-                  context,
-                ).copyWith(color: AppColors.bodyTextColor),
+              section: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  kPaymentLoadingDescription,
+                  style: AppStyles.fontsRegular14(
+                    context,
+                  ).copyWith(color: AppColors.bodyTextColor),
+                ),
               ),
             ),
             SizedBox(height: AppSpacing.s64),

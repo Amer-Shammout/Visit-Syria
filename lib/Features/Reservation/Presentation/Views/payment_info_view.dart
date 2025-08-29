@@ -7,6 +7,8 @@ class PaymentInfoView extends StatelessWidget {
   final BookingModel bookingModel;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: PaymentInfoViewBody(bookingModel: bookingModel));
+    return Scaffold(
+      body: SafeArea(child: PaymentInfoViewBody(bookingModel: bookingModel)),
+    );
   }
 }

@@ -7,22 +7,21 @@ import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_button.dart';
 import 'package:visit_syria/Core/widgets/trip_general_info.dart';
-import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_model.dart';
 
 class MiniTripCardDetails extends StatelessWidget {
-  const MiniTripCardDetails({super.key, required this.tripModel});
-  final TripModel tripModel;
+  const MiniTripCardDetails({super.key, required this.data});
+  final Map<String, dynamic> data;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        MiniTripCardGeneralInfo(tripModel: tripModel),
+        MiniTripCardGeneralInfo(tripModel: data['trip']),
         SizedBox(height: AppSpacing.s16),
         CustomButton(
           onPressed: () {
             GoRouter.of(
               context,
-            ).pushNamed(AppRouter.kTripDetailsName, extra: tripModel);
+            ).pushNamed(AppRouter.kTripDetailsName, extra: data);
           },
           title: 'استكشاف',
           textStyle: AppStyles.fontsBold14(

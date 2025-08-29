@@ -28,7 +28,12 @@ class SimilarBlogsCard extends StatelessWidget {
             PositionedDirectional(
               end: 12,
               top: 12,
-              child: CustomBookmarkButton(isActive: articleModel!.isSaved!,id: articleModel!.id.toString(),type: 'article',model: articleModel,),
+              child: CustomBookmarkButton(
+                isActive: articleModel!.isSaved!,
+                id: articleModel!.id.toString(),
+                type: 'article',
+                model: articleModel,
+              ),
             ),
             Positioned(
               bottom: 12,

@@ -24,9 +24,9 @@ class TripModel extends Equatable {
   final TripPath? tripPath;
   final List<Timeline>? timelines;
   final Company? company;
-   bool? isSaved;
+  bool? isSaved;
 
-   TripModel({
+  TripModel({
     this.id,
     this.name,
     this.description,

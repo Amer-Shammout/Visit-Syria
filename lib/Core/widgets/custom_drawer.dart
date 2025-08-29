@@ -93,7 +93,7 @@ class CustomDrawer extends StatelessWidget {
           context,
         ).pushNamed(AppRouter.kHotelsAndResturantsName);
       case 3:
-        return null;
+        return GoRouter.of(context).pushNamed(AppRouter.kAIHomeTripsName);
       default:
         return GoRouter.of(context).pushNamed(AppRouter.kSettingsName);
     }

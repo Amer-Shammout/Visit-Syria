@@ -51,6 +51,7 @@ class FlightModel extends Equatable {
     'price_total': priceTotal,
     'currency': currency,
     'traveler_count': travelerCount,
+    'travel_class': travelClass,
     'price_per_passenger': pricePerPassenger,
     'seats_remaining': seatsRemaining,
     'departure': departureModel?.toJson(),

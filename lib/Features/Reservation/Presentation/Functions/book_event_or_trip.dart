@@ -73,11 +73,13 @@ Future<void> bookFlight(
   }
   FlightBookingModel reserve = FlightBookingModel(
     flightData: reservationModel.flightModel,
-    numberOfAdults: reservationModel.numberOfAdults,
-    numberOfChildren: reservationModel.numberOfChildren,
-    numberOfInfants: reservationModel.numberOfInfants,
+    numberOfAdults: reservationModel.passengers!.adults,
+    numberOfChildren: reservationModel.passengers!.children,
+    numberOfInfants: reservationModel.passengers!.infants,
     passengers: passengers,
   );
-  await BlocProvider.of<FlightBookingCubit>(context).bookFlight(reserve);
+  log(reservationModel.flightModel!.toJson().toString());
+  log(reservationModel.flightModel!.travelClass.toString());
   log(reserve.toString());
+  await BlocProvider.of<FlightBookingCubit>(context).bookFlight(reserve);
 }

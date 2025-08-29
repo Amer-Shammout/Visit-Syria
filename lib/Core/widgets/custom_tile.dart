@@ -29,27 +29,32 @@ class CustomTile extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    tileModel.icon,
-                    width: 32,
-                    height: 32,
-                    colorFilter: ColorFilter.mode(
-                      AppColors.primary,
-                      BlendMode.srcATop,
+              Expanded(
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      tileModel.icon,
+                      width: 32,
+                      height: 32,
+                      colorFilter: ColorFilter.mode(
+                        AppColors.primary,
+                        BlendMode.srcATop,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: AppSpacing.s8),
-                  Text(
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    tileModel.title,
-                    style: AppStyles.fontsRegular16(
-                      context,
-                    ).copyWith(color: AppColors.titleTextColor),
-                  ),
-                ],
+                    SizedBox(width: AppSpacing.s8),
+                    Expanded(
+                      child: Text(
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        tileModel.title,
+                        style: AppStyles.fontsRegular16(context).copyWith(
+                          color: AppColors.titleTextColor,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               SvgPicture.asset(
                 Assets.iconsArrow,

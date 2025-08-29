@@ -12,14 +12,14 @@ class CustomCompanyLogo extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(360),
       child: CachedNetworkImage(
-              imageUrl: image!,
-              fit: BoxFit.cover,
-              errorWidget:
-                  (context, url, error) => Container(
-                    color: AppColors.graySwatch,
-                    child: Icon(Icons.error, color: Colors.red),
-                  ),
+        imageUrl: image!,
+        fit: BoxFit.cover,
+        errorWidget:
+            (context, url, error) => Container(
+              color: AppColors.graySwatch,
+              child: Icon(Icons.error, color: AppColors.primary),
             ),
+      ),
     );
   }
 }

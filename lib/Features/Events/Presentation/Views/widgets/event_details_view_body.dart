@@ -30,12 +30,7 @@ class EventDetailsViewBody extends StatelessWidget {
                 model: event,
                 id: event.id.toString(),
                 isSaved: event.isSaved,
-                images: [
-                  Assets.imagesTest,
-                  Assets.imagesAzemPalace,
-                  Assets.imagesIdlib,
-                  Assets.imagesRasafe,
-                ],
+                images: event.media!,
                 title: event.name ?? "",
               ),
               SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s16)),

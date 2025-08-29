@@ -15,7 +15,7 @@ class TourismCompanyCardHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CustomCompanyLogo(size: 48),
+        CustomCompanyLogo(size: 48,image: company.image,),
         SizedBox(height: AppSpacing.s8),
         Text(
           company.nameOfCompany!,

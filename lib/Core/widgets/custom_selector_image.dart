@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
@@ -7,11 +8,12 @@ class CustomSelectorImage extends StatelessWidget {
   const CustomSelectorImage({
     super.key,
     required this.isSelected,
-    required this.image,
+    required this.image, required this.isAsset,
   });
 
   final bool isSelected;
   final String image;
+  final bool isAsset;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,10 @@ class CustomSelectorImage extends StatelessWidget {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            image: DecorationImage(image: AssetImage(image), fit: BoxFit.fill),
+            image: DecorationImage(
+              image: isAsset ? AssetImage(image) : CachedNetworkImageProvider(image),
+              fit: BoxFit.fill,
+            ),
           ),
           foregroundDecoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),

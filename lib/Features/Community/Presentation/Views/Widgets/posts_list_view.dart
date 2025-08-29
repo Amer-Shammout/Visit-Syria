@@ -7,12 +7,13 @@ class PostsListView extends StatelessWidget {
     super.key,
     required this.posts,
     required this.displayStatus,
-    this.isMyPost = false,
+    this.isMyPost = false, this.action,
   });
 
   final List<dynamic> posts;
   final bool displayStatus;
   final bool isMyPost;
+  final VoidCallback? action;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,7 @@ class PostsListView extends StatelessWidget {
               postModel: posts[index],
               displayStatus: displayStatus,
               isMyPost: isMyPost,
+              action:action
             ),
         separatorBuilder: (context, index) => SizedBox(height: AppSpacing.s16),
         itemCount: posts.length,

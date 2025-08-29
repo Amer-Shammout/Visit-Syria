@@ -11,9 +11,10 @@ import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/ribbon_labe
 import 'package:visit_syria/Features/Places/Data/Models/place_model/place_model.dart';
 
 class PlacesCard extends StatelessWidget {
-  const PlacesCard({super.key, this.place});
+  const PlacesCard({super.key, this.place, this.action});
 
   final PlaceModel? place;
+  final VoidCallback? action;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class PlacesCard extends StatelessWidget {
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-            CustomImage(height: 220, borderRadius: 24),
+            CustomImage(height: 220, borderRadius: 24,image: place!.images![0],),
             PositionedDirectional(
               end: 12,
               top: 12,
@@ -33,6 +34,7 @@ class PlacesCard extends StatelessWidget {
                   return BlocBuilder<SetSaveCubit, SetSaveState>(
                     builder: (context, state) {
                       return CustomBookmarkButton(
+                        action: action,
                         type: 'place',
                         model: place,
                         isActive: place?.isSaved,
@@ -84,13 +86,13 @@ class CustomBookmarkButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomIconButton(
       inActiveIcon: Assets.iconsBookmarkStroke,
-      onTap: () {
+      onTap: () async {
         if (isActive) {
-          BlocProvider.of<DeleteSaveCubit>(
+          await BlocProvider.of<DeleteSaveCubit>(
             context,
           ).deleteSave(id: id, type: type, model: model);
         } else {
-          BlocProvider.of<SetSaveCubit>(
+          await BlocProvider.of<SetSaveCubit>(
             context,
           ).setSave(id: id, type: type, model: model);
         }

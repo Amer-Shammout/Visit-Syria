@@ -9,10 +9,12 @@ class PlacesGridView extends StatelessWidget {
     super.key,
     this.scrollPhysics = const BouncingScrollPhysics(),
     this.places,
+    this.action,
   });
 
   final ScrollPhysics scrollPhysics;
   final List<dynamic>? places;
+  final VoidCallback? action;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class PlacesGridView extends StatelessWidget {
                     AppRouter.kPlaceDetailsName,
                     extra: places?[index],
                   ),
-              child: PlacesCard(place: places?[index]),
+              child: PlacesCard(place: places?[index],action: action,),
             ),
         itemCount: places?.length ?? 16,
       ),

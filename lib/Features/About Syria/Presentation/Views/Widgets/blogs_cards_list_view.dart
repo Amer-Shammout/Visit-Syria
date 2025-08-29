@@ -6,9 +6,10 @@ import 'package:visit_syria/Core/widgets/scale_on_tap.dart';
 import 'package:visit_syria/Features/About%20Syria/Presentation/Views/Widgets/blogs_card.dart';
 
 class BlogsCardsListView extends StatelessWidget {
-  const BlogsCardsListView({super.key, this.articles});
+  const BlogsCardsListView({super.key, this.articles, this.action});
 
   final List<dynamic>? articles;
+  final VoidCallback? action;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class BlogsCardsListView extends StatelessWidget {
                     AppRouter.kBlogDetailsName,
                     extra: articles?[index],
                   ),
-              child: BlogsCard(articleModel: articles?[index]),
+              child: BlogsCard(articleModel: articles?[index], action: action),
             ),
         separatorBuilder: (context, index) => SizedBox(height: AppSpacing.s16),
         itemCount: articles?.length ?? 6,

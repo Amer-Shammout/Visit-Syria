@@ -91,8 +91,8 @@ class VisitSyriaApp extends StatelessWidget {
         BlocProvider(
           create:
               (context) => GetArticlesByTagCubit(
-                getIt.get<AboutSyriaRepoImpl>()..getArticlesByTag(tag: "الكل"),
-              ),
+                getIt.get<AboutSyriaRepoImpl>(),
+              )..fetchArticles( "الكل"),
         ),
       ],
 

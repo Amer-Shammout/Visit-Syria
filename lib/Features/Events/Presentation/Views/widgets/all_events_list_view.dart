@@ -5,9 +5,10 @@ import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/events_card.dart';
 
 class AllEventsListView extends StatelessWidget {
-  const AllEventsListView({super.key, required this.events});
+  const AllEventsListView({super.key, required this.events, this.action});
 
   final List<dynamic> events;
+  final VoidCallback? action;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class AllEventsListView extends StatelessWidget {
                 () => GoRouter.of(
                   context,
                 ).pushNamed(AppRouter.kEventDetailsName, extra: events[index]),
-            child: EventCard(event: events[index]),
+            child: EventCard(event: events[index], action: action),
           ),
       clipBehavior: Clip.none,
       itemCount: events.length,

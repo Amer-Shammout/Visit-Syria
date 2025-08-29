@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
-import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_colors.dart';
 import 'package:visit_syria/Core/utils/styles/app_fonts.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
@@ -32,12 +31,7 @@ class PlaceDetailsViewBody extends StatelessWidget {
             type: 'place',
             id: place.id.toString(),
             isSaved: place.isSaved,
-            images: [
-              Assets.imagesTest,
-              Assets.imagesAzemPalace,
-              Assets.imagesIdlib,
-              Assets.imagesRasafe,
-            ],
+            images: place.images!,
             title: place.name != null ? place.name! : "باب شرقي",
             rate: place.rating,
           ),

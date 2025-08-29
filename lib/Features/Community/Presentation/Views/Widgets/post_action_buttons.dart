@@ -17,10 +17,12 @@ class PostActionButtons extends StatelessWidget {
     super.key,
     required this.postModel,
     this.isMyPost = false,
+    this.action,
   });
 
   final PostModel postModel;
   final bool isMyPost;
+  final VoidCallback? action;
 
   @override
   Widget build(BuildContext context) {
@@ -81,16 +83,18 @@ class PostActionButtons extends StatelessWidget {
               return BlocBuilder<SetSaveCubit, SetSaveState>(
                 builder: (context, state) {
                   return PostActionButton(
-                    onTap: () {
+                    onTap: () async {
                       if (postModel.status == "Approved") {
                         if (postModel.isSaved!) {
-                          BlocProvider.of<DeleteSaveCubit>(context).deleteSave(
+                          await BlocProvider.of<DeleteSaveCubit>(
+                            context,
+                          ).deleteSave(
                             id: postModel.id.toString(),
                             type: 'post',
                             model: postModel,
                           );
                         } else {
-                          BlocProvider.of<SetSaveCubit>(context).setSave(
+                          await BlocProvider.of<SetSaveCubit>(context).setSave(
                             id: postModel.id.toString(),
                             type: 'post',
                             model: postModel,
@@ -101,6 +105,8 @@ class PostActionButtons extends StatelessWidget {
                               context,
                             ).fetchPosts("الكل")
                             : null;
+
+                        action != null ? action!() : null;
                       } else {
                         showFailureSnackBar(
                           "لم يتم قبول المنشور بعد!",

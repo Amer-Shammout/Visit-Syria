@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
-import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/custom_description.dart';
 import 'package:visit_syria/Core/widgets/custom_section.dart';
@@ -40,7 +39,7 @@ class _BlogDetailsViewBodyState extends State<BlogDetailsViewBody> {
             type: "article",
             id: widget.articleModel!.id.toString(),
             isSaved: widget.articleModel!.isSaved!,
-            images: [Assets.imagesDaraa],
+            images: [widget.articleModel!.imageUrl!],
             title:
                 widget.articleModel?.title ??
                 "دمشق: أقدم مدينة مأهولة في التاريخ",

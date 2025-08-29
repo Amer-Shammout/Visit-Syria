@@ -34,7 +34,7 @@ class TripsCardImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        CustomImage(height: imageHeight, borderRadius: 20),
+        CustomImage(height: imageHeight, borderRadius: 20,image: model.images![0],),
         Positioned(
           left: positionedVal,
           right: positionedVal,

@@ -1,9 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/utils/styles/shadows.dart';
 
 class PostImage extends StatelessWidget {
-  const PostImage({super.key});
+  const PostImage({super.key, required this.image});
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,9 @@ class PostImage extends StatelessWidget {
         boxShadow: [Shadows.commonShadow],
         borderRadius: BorderRadius.circular(12),
         image: DecorationImage(
-          image: AssetImage(Assets.imagesAzemPalace),
+          image: CachedNetworkImageProvider(
+            "https://example.com/images/daraa.jpg",
+          ),
           fit: BoxFit.cover,
         ),
       ),

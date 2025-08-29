@@ -31,7 +31,7 @@ class SavedEventsListViewBuilder extends StatelessWidget {
             text: "لا يوجد أحداث محفوظة!",
           );
         } else if (state is GetSavesSuccess) {
-          return AllEventsListView(events: state.items,);
+          return AllEventsListView(events: state.items,action: () => BlocProvider.of<GetSavesCubit>(context).getSaves(type: SearchTypes.event),);
         } else {
           return Center(child: CustomLoadingIndicator());
         }

@@ -54,11 +54,14 @@ class TodayWeatherCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      weather.dayName!,
-                      style: AppStyles.fontsRegular14(
-                        context,
-                      ).copyWith(color: AppColors.graySwatch[800]),
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        weather.dayName!,
+                        style: AppStyles.fontsRegular14(
+                          context,
+                        ).copyWith(color: AppColors.graySwatch[800]),
+                      ),
                     ),
                     SizedBox(height: AppSpacing.s4),
                     Text(

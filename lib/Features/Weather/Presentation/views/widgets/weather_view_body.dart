@@ -51,10 +51,13 @@ class _WeatherViewBodyState extends State<WeatherViewBody> {
                       ).copyWith(color: AppColors.graySwatch[800]),
                     ),
                     SizedBox(height: AppSpacing.s16),
-                    Text(
-                      textDirection: TextDirection.ltr,
-                      '${widget.weatherForWeek[selectDayIndex].tempC}\u00B0',
-                      style: AppStyles.fontsBold64(context),
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        textDirection: TextDirection.ltr,
+                        '${widget.weatherForWeek[selectDayIndex].tempC}\u00B0',
+                        style: AppStyles.fontsBold64(context),
+                      ),
                     ),
                     SizedBox(height: AppSpacing.s12),
                     Text(

@@ -17,29 +17,26 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> fetchHomeData() async {
     emit(state.copyWith(isLoading: true, errorMessage: null));
 
-    // try {
+    try {
     final results = await Future.wait([
       homeRepo.getTopRatedPlaces(),
-      // homeRepo.getWeatherToday(),
+      homeRepo.getWeatherToday(),
       homeRepo.getAllEvents(),
       homeRepo.getOffers(),
     ]);
 
-    // كاست للأنواع الصحيحة
     final topRatedResult = results[0] as Either<Failure, List<PlaceModel>>;
-    // final weatherResult  = results[1] as Either<Failure, List<WeatherModel>>;
-    final eventsResult = results[1] as Either<Failure, List<EventModel>>;
-    final offersTripsResult = results[2] as Either<Failure, List<TripModel>>;
+    final weatherResult = results[1] as Either<Failure, List<WeatherModel>>;
+    final eventsResult = results[2] as Either<Failure, List<EventModel>>;
+    final offersTripsResult = results[3] as Either<Failure, List<TripModel>>;
 
-    // جمع كل النتائج في لائحة
     final allResults = [
       topRatedResult,
-      // weatherResult,
+      weatherResult,
       eventsResult,
       offersTripsResult,
     ];
 
-    // التحقق من وجود أي فشل
     for (final result in allResults) {
       if (result.isLeft()) {
         final failure = result.swap().getOrElse(
@@ -48,23 +45,22 @@ class HomeCubit extends Cubit<HomeState> {
         emit(
           state.copyWith(isLoading: false, errorMessage: failure.errMessage),
         );
-        return; // إيقاف التنفيذ عند أول خطأ
+        return;
       }
     }
 
-    // إذا نجحوا الكل
     emit(
       state.copyWith(
         isLoading: false,
         errorMessage: null,
         topRatedPlaces: topRatedResult.getOrElse(() => <PlaceModel>[]),
-        // weathers: weatherResult.getOrElse(() => <WeatherModel>[]),
+        weathers: weatherResult.getOrElse(() => <WeatherModel>[]),
         events: eventsResult.getOrElse(() => <EventModel>[]),
         offersTrips: offersTripsResult.getOrElse(() => <TripModel>[]),
       ),
     );
-    // } catch (e) {
-    //   emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
-    // }
+    } catch (e) {
+      emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
+    }
   }
 }

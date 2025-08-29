@@ -50,9 +50,11 @@ class _AIGenerateTripViewBodyState extends State<AIGenerateTripViewBody> {
     return BlocListener<GenerateAiTripCubit, GenerateAiTripState>(
       listener: (context, state) {
         if (state is GenerateAiTripSuccess) {
-          GoRouter.of(
-            context,
-          ).goNamed(AppRouter.kAITripDetailsName, extra: state.aiTripModel);
+          state.aiTripModel.showButton = true;
+          GoRouter.of(context).goNamed(
+            AppRouter.kAiTripResultDetailsName,
+            extra: state.aiTripModel,
+          );
         }
         if (state is GenerateAiTripFailure) {
           GoRouter.of(context).pop();

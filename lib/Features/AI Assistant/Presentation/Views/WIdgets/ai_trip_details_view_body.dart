@@ -70,6 +70,7 @@ class AITripDetailsViewBody extends StatelessWidget {
                     )
                     : SizedBox.shrink(),
           ),
+          SliverToBoxAdapter(child: SizedBox(height: AppSpacing.s24)),
         ],
       ),
     );

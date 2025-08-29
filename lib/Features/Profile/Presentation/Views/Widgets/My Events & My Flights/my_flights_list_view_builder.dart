@@ -1,13 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visit_syria/Core/utils/assets.dart';
 import 'package:visit_syria/Core/widgets/custom_error_and_empty_state_body.dart';
 import 'package:visit_syria/Core/widgets/custom_loading_indicator.dart';
 import 'package:visit_syria/Features/Profile/Presentation/Manager/get_my_booking_cubit/get_my_booking_cubit.dart';
-import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/My%20Trips/my_trips_cards_list_view.dart';
+import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/My%20Events%20&%20My%20Flights/my_flights_list_view.dart';
 
-class MyTripsViewBuilder extends StatelessWidget {
-  const MyTripsViewBuilder({super.key, required this.category});
+class MyFlightsListViewBuilder extends StatelessWidget {
+  const MyFlightsListViewBuilder({super.key, required this.category});
   final String category;
   @override
   Widget build(BuildContext context) {
@@ -15,8 +17,8 @@ class MyTripsViewBuilder extends StatelessWidget {
       builder: (context, state) {
         if (state is GetMyBookingEmpty) {
           return CustomErrorAndEmptyStateBody(
-            illustration: Assets.illustrationsEmptyTrips,
-            text: 'لا يوجد رحلات محجوزة حالياً',
+            illustration: Assets.illustrationsFlightsSearch,
+            text: 'لا يوجد رحلات طيران محجوزة حالياً',
           );
         }
         if (state is GetMyBookingFailure) {
@@ -27,15 +29,15 @@ class MyTripsViewBuilder extends StatelessWidget {
             onTap: () async {
               await BlocProvider.of<GetMyBookingCubit>(
                 context,
-              ).getMyBooking('trip', category);
+              ).getMyBooking('flight', category);
             },
           );
         }
         if (state is GetMyBookingSuccess) {
+          log(category);
           state.getMyBookingModel.bookings![0].category = category;
-          return MyTripsCardsListView(
-            bookings: state.getMyBookingModel.bookings!,
-          );
+          log(state.getMyBookingModel.bookings![0].category!);
+          return MyFlightsListView(bookings: state.getMyBookingModel.bookings!);
         }
         return Center(child: CustomLoadingIndicator());
       },

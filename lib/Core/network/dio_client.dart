@@ -12,7 +12,7 @@ class DioClient {
   //final String _baseUrl = 'http://10.48.88.141:8000/api/';
   //George's URL:
   //final String _baseUrl = 'http://192.168.127.241:8000/api/';
-  final String _baseUrl = "https://c023b6dca1f8.ngrok-free.app/api/";
+  final String _baseUrl = "https://92095634e9f2.ngrok-free.app/api/";
   // DioClient()
   //   : _dio = Dio(
   //       BaseOptions(

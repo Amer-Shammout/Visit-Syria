@@ -3,12 +3,13 @@ import 'package:go_router/go_router.dart';
 import 'package:visit_syria/Core/utils/app_router.dart';
 import 'package:visit_syria/Core/utils/styles/app_spacing.dart';
 import 'package:visit_syria/Core/widgets/scale_on_tap.dart';
+import 'package:visit_syria/Features/Home/Presentation/Views/Widgets/events_card.dart';
 import 'package:visit_syria/Features/Profile/Data/Models/my_booking_model/my_booking_model.dart';
-import 'package:visit_syria/Features/Profile/Presentation/Views/Widgets/My%20Trips/my_trip_card.dart';
 
-class MyTripsCardsListView extends StatelessWidget {
-  const MyTripsCardsListView({super.key, required this.bookings});
+class MyEventsListView extends StatelessWidget {
+  const MyEventsListView({super.key, required this.bookings});
   final List<MyBookingModel> bookings;
+
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
@@ -18,11 +19,12 @@ class MyTripsCardsListView extends StatelessWidget {
           (context, index) => ScaleOnTap(
             onTap: () {
               bookings[index].category = bookings[0].category;
-              GoRouter.of(
-                context,
-              ).pushNamed(AppRouter.kMyTripDetailsName, extra: bookings[index]);
+              GoRouter.of(context).pushNamed(
+                AppRouter.kMyEventsDetailsName,
+                extra: bookings[index],
+              );
             },
-            child: MyTripCard(myBookingModel: bookings[index]),
+            child: EventCard(event: bookings[index].info, isSmall: false),
           ),
       separatorBuilder: (context, index) => SizedBox(height: AppSpacing.s16),
       itemCount: bookings.length,

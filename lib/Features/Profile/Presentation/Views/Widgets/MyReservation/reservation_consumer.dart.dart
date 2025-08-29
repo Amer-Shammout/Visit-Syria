@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -13,9 +15,11 @@ class ReservationConsumer extends StatelessWidget {
     super.key,
     required this.widget,
     required this.type,
+    required this.category,
   });
   final Widget widget;
   final String type;
+  final String category;
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +32,11 @@ class ReservationConsumer extends StatelessWidget {
           showFailureSnackBar(state.message, context);
         }
         if (state is CancelReservationSuccess) {
+          log(category);
           showSuccessSnackBar('تم إلغاء الحجز بنجاح!', context);
           BlocProvider.of<GetMyBookingCubit>(
             context,
-          ).getMyBooking(type, 'الكل');
+          ).getMyBooking(type, category);
           BlocProvider.of<HomeCubit>(context).fetchHomeData();
           GoRouter.of(context).pop();
         }
@@ -40,7 +45,7 @@ class ReservationConsumer extends StatelessWidget {
         return ModalProgressHUD(
           progressIndicator: CustomLoadingIndicator(),
           inAsyncCall: state is CancelReservationLoading,
-          child: Scaffold(body: widget),
+          child: widget,
         );
       },
     );

@@ -1,7 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:visit_syria/Features/Events/data/Models/event_model/event_model.dart';
-import 'package:visit_syria/Features/Flights%20Reservation/Data/Models/flight_model/flight_model.dart';
-import 'package:visit_syria/Features/Trips/Data/Model/trip_model/trip_model.dart';
 
 class ResultBooking extends Equatable {
   final int? id;

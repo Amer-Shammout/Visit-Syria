@@ -150,3 +150,33 @@ class NotStartedFAB extends StatelessWidget {
     );
   }
 }
+
+class CustomMyFlightFAB extends StatelessWidget {
+  const CustomMyFlightFAB({super.key, required this.myBookingModel});
+  final MyBookingModel myBookingModel;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
+        boxShadow: [Shadows.aiBootContainerShadow],
+        color: AppColors.whiteColor,
+      ),
+      child:
+          myBookingModel.bookingInfo!.isPaid! == false
+              ? Padding(
+                padding: const EdgeInsets.all(16),
+                child: NotCompletedFAB(
+                  id: myBookingModel.bookingInfo!.id!,
+                  price: double.parse(myBookingModel.bookingInfo!.price!),
+                ),
+              )
+              : SizedBox.shrink(),
+    );
+  }
+}

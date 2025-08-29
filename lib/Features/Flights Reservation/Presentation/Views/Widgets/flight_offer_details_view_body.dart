@@ -89,15 +89,18 @@ class _FlightOfferDetailsViewBodyState
           bottom: 0,
           right: 0,
           left: 0,
-          child: CustomFloatingActionButton(
-            type: PriceStateEnum.common,
-            price: widget.flightOffer.priceTotal.toString(),
-            onPressed: () {
-              GoRouter.of(context).pushNamed(
-                AppRouter.kReservationPeopleInoName,
-                extra: reservationModel,
-              );
-            },
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: CustomFloatingActionButton(
+              type: PriceStateEnum.common,
+              price: widget.flightOffer.priceTotal.toString(),
+              onPressed: () {
+                GoRouter.of(context).pushNamed(
+                  AppRouter.kReservationPeopleInoName,
+                  extra: reservationModel,
+                );
+              },
+            ),
           ),
         ),
       ],

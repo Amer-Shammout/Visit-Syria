@@ -8,8 +8,8 @@ import 'booking_info.dart';
 class MyBookingModel extends Equatable {
   final dynamic info;
   final BookingInfo? bookingInfo;
-
-  const MyBookingModel({this.info, this.bookingInfo});
+  String? category;
+  MyBookingModel({this.info, this.bookingInfo});
 
   factory MyBookingModel.fromJson(Map<String, dynamic> json, String type) {
     return MyBookingModel(

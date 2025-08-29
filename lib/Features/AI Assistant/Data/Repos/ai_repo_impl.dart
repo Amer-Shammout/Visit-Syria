@@ -47,7 +47,7 @@ class AIRepoImpl extends AIRepo {
             ),
             data: aiPrefferncesModel.toJson(),
           ),
-      parse: (data) => AiTripModel.fromJson(data),
+      parse: (data) => AiTripModel.fromJson(data['data']),
     );
   }
 }

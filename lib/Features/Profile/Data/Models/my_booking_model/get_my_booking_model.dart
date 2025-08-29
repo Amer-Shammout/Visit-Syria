@@ -4,8 +4,8 @@ import 'package:visit_syria/Features/Profile/Data/Models/my_booking_model/my_boo
 class GetMyBookingModel extends Equatable {
   final String? message;
   final List<MyBookingModel>? bookings;
-
-  const GetMyBookingModel({this.message, this.bookings});
+  String? category;
+  GetMyBookingModel({this.message, this.bookings});
 
   factory GetMyBookingModel.fromJson(Map<String, dynamic> json, String type) {
     return GetMyBookingModel(
